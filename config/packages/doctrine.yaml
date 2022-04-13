@@ -1,0 +1,92 @@
+# config/packages/doctrine.yaml
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                # configure these for your database server
+                url: '%env(resolve:NUEVOBACK)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
+            premiumpay:
+                # configure these for your database server
+                url: '%env(resolve:PREMIUMPAY)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
+            ggms:
+                # configure these for your database server
+                url: '%env(resolve:GGMS)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
+            cuotas:
+                # configure these for your database server
+                url: '%env(resolve:CUOTAS)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    Main:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity/Main'
+                        prefix: 'App\Entity\Main'
+                        alias: Main
+            premiumpay:
+                connection: premiumpay
+                mappings:
+                    Premiumpay:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity/Premiumpay'
+                        prefix: 'App\Entity\Premiumpay'
+                        alias: Premiumpay
+            ggms:
+                connection: ggms
+                mappings:
+                    Ggms:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity/Ggms'
+                        prefix: 'App\Entity\Ggms'
+                        alias: Ggms
+            cuotas:
+                connection: cuotas
+                mappings:
+                    Cuotas:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity/Cuotas'
+                        prefix: 'App\Entity\Cuotas'
+                        alias: Cuotas
+when@test:
+    doctrine:
+        dbal:
+            # "TEST_TOKEN" is typically set by ParaTest
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system
