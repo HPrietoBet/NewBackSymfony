@@ -24,6 +24,7 @@ class HomeController extends AbstractController
     public function __construct($lang = 'en',  ManagerRegistry $doctrine){
         $this->lang = $lang;
         $this->em = $doctrine;
+
     }
     /**
      * @Route("/home", name="app_home")

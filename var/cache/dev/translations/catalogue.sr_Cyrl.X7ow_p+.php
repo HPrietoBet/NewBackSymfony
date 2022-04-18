@@ -329,6 +329,11 @@ $catalogueEn = new MessageCatalogue('en', array (
   array (
     'Dashboard' => 'Dashboard',
     'Users' => 'Users',
+    'Email' => 'Email',
+    'Login Form' => 'Login Form',
+    'Password' => 'Password',
+    'Reset Password' => 'Reset Password',
+    'Login' => 'LogIn',
   ),
 ));
 $catalogueSr->addFallbackCatalogue($catalogueEn);

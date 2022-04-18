@@ -151,7 +151,6 @@
       <parameter key="default">doctrine.orm.default_entity_manager</parameter>
       <parameter key="premiumpay">doctrine.orm.premiumpay_entity_manager</parameter>
       <parameter key="ggms">doctrine.orm.ggms_entity_manager</parameter>
-      <parameter key="cuotas">doctrine.orm.cuotas_entity_manager</parameter>
     </parameter>
     <parameter key="doctrine.default_entity_manager">default</parameter>
     <parameter key="doctrine.dbal.connection_factory.types" type="collection"/>
@@ -159,7 +158,6 @@
       <parameter key="default">doctrine.dbal.default_connection</parameter>
       <parameter key="premiumpay">doctrine.dbal.premiumpay_connection</parameter>
       <parameter key="ggms">doctrine.dbal.ggms_connection</parameter>
-      <parameter key="cuotas">doctrine.dbal.cuotas_connection</parameter>
     </parameter>
     <parameter key="doctrine.default_connection">default</parameter>
     <parameter key="doctrine.orm.configuration.class">Doctrine\ORM\Configuration</parameter>
@@ -361,6 +359,20 @@
       <argument type="service" id="doctrine"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.GNc8e5B.App\Controller\HomeController"/>
+      </call>
+    </service>
+    <service id="App\Controller\LoginController" class="App\Controller\LoginController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\LoginController"/>
+      </call>
+    </service>
+    <service id="App\Controller\SecurityController" class="App\Controller\SecurityController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\SecurityController"/>
       </call>
     </service>
     <service id="App\Repository\Ggms\ApiConnectionsRepository" class="App\Repository\Ggms\ApiConnectionsRepository" autowire="true" autoconfigure="true">
@@ -807,6 +819,9 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Security\AppCustomAuthenticator" class="App\Security\AppCustomAuthenticator" autowire="true" autoconfigure="true">
+      <argument type="service" id="router.default"/>
+    </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -1166,8 +1181,6 @@
         <argument>cache.doctrine.orm.premiumpay.query</argument>
         <argument>cache.doctrine.orm.ggms.result</argument>
         <argument>cache.doctrine.orm.ggms.query</argument>
-        <argument>cache.doctrine.orm.cuotas.result</argument>
-        <argument>cache.doctrine.orm.cuotas.query</argument>
         <argument>cache.webpack_encore</argument>
         <argument>cache.security_expression_language</argument>
       </argument>
@@ -1208,8 +1221,6 @@
         <argument>cache.doctrine.orm.premiumpay.query</argument>
         <argument>cache.doctrine.orm.ggms.result</argument>
         <argument>cache.doctrine.orm.ggms.query</argument>
-        <argument>cache.doctrine.orm.cuotas.result</argument>
-        <argument>cache.doctrine.orm.cuotas.query</argument>
         <argument>cache.webpack_encore</argument>
         <argument>cache.security_expression_language</argument>
       </argument>
@@ -1238,8 +1249,6 @@
         <argument>cache.doctrine.orm.premiumpay.query</argument>
         <argument>cache.doctrine.orm.ggms.result</argument>
         <argument>cache.doctrine.orm.ggms.query</argument>
-        <argument>cache.doctrine.orm.cuotas.result</argument>
-        <argument>cache.doctrine.orm.cuotas.query</argument>
         <argument>cache.webpack_encore</argument>
         <argument>cache.security_expression_language</argument>
       </argument>
@@ -1905,8 +1914,6 @@
         <argument key="cache.doctrine.orm.premiumpay.query" type="service" id="cache.doctrine.orm.premiumpay.query" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.ggms.result" type="service" id="cache.doctrine.orm.ggms.result" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.ggms.query" type="service" id="cache.doctrine.orm.ggms.query" on-invalid="ignore_uninitialized"/>
-        <argument key="cache.doctrine.orm.cuotas.result" type="service" id="cache.doctrine.orm.cuotas.result" on-invalid="ignore_uninitialized"/>
-        <argument key="cache.doctrine.orm.cuotas.query" type="service" id="cache.doctrine.orm.cuotas.query" on-invalid="ignore_uninitialized"/>
         <argument key="cache.webpack_encore" type="service" id="cache.webpack_encore" on-invalid="ignore_uninitialized"/>
         <argument key="cache.security_expression_language" type="service" id="cache.security_expression_language" on-invalid="ignore_uninitialized"/>
       </argument>
@@ -3625,13 +3632,11 @@
         <argument type="service" id="doctrine.orm.default_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.premiumpay_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.ggms_entity_manager.property_info_extractor"/>
-        <argument type="service" id="doctrine.orm.cuotas_entity_manager.property_info_extractor"/>
       </argument>
       <argument type="iterator">
         <argument type="service" id="doctrine.orm.default_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.premiumpay_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.ggms_entity_manager.property_info_extractor"/>
-        <argument type="service" id="doctrine.orm.cuotas_entity_manager.property_info_extractor"/>
         <argument type="service" id="property_info.phpstan_extractor"/>
         <argument type="service" id="property_info.php_doc_extractor"/>
         <argument type="service" id="property_info.reflection_extractor"/>
@@ -3643,7 +3648,6 @@
         <argument type="service" id="doctrine.orm.default_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.premiumpay_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.ggms_entity_manager.property_info_extractor"/>
-        <argument type="service" id="doctrine.orm.cuotas_entity_manager.property_info_extractor"/>
         <argument type="service" id="property_info.reflection_extractor"/>
       </argument>
       <argument type="iterator">
@@ -3937,9 +3941,6 @@
       </call>
       <call method="addLoader">
         <argument type="service" id="doctrine.orm.ggms_entity_manager.validator_loader"/>
-      </call>
-      <call method="addLoader">
-        <argument type="service" id="doctrine.orm.cuotas_entity_manager.validator_loader"/>
       </call>
       <factory class="Symfony\Component\Validator\Validation" method="createValidatorBuilder"/>
     </service>
@@ -4459,14 +4460,6 @@
         <argument type="service" id="cache.doctrine.orm.ggms.query"/>
       </call>
       <call method="addInstance">
-        <argument>cache.doctrine.orm.cuotas.result</argument>
-        <argument type="service" id="cache.doctrine.orm.cuotas.result"/>
-      </call>
-      <call method="addInstance">
-        <argument>cache.doctrine.orm.cuotas.query</argument>
-        <argument type="service" id="cache.doctrine.orm.cuotas.query"/>
-      </call>
-      <call method="addInstance">
         <argument>cache.webpack_encore</argument>
         <argument type="service" id="cache.webpack_encore"/>
       </call>
@@ -4538,7 +4531,7 @@
     <service id="doctrine.dbal.logger.chain" class="Doctrine\DBAL\Logging\LoggerChain">
       <argument type="collection">
         <argument type="service" id="doctrine.dbal.logger"/>
-        <argument type="service" id="doctrine.dbal.logger.profiling.cuotas"/>
+        <argument type="service" id="doctrine.dbal.logger.profiling.ggms"/>
       </argument>
     </service>
     <service id="doctrine.dbal.logger.profiling" class="Doctrine\DBAL\Logging\DebugStack" abstract="true"/>
@@ -4563,10 +4556,6 @@
       <call method="addLogger">
         <argument>ggms</argument>
         <argument type="service" id="doctrine.dbal.logger.profiling.ggms"/>
-      </call>
-      <call method="addLogger">
-        <argument>cuotas</argument>
-        <argument type="service" id="doctrine.dbal.logger.profiling.cuotas"/>
       </call>
     </service>
     <service id="doctrine.dbal.connection_factory" class="Doctrine\Bundle\DoctrineBundle\ConnectionFactory">
@@ -4800,66 +4789,11 @@
       <argument type="collection"/>
       <factory service="doctrine.dbal.connection_factory" method="createConnection"/>
     </service>
-    <service id="doctrine.dbal.cuotas_connection.configuration" class="Doctrine\DBAL\Configuration">
-      <call method="setSQLLogger">
-        <argument type="service" id="doctrine.dbal.logger.chain.cuotas"/>
-      </call>
-      <call method="setMiddlewares">
-        <argument type="collection">
-          <argument type="service">
-            <service class="Doctrine\DBAL\Logging\Middleware">
-              <argument type="service" id="monolog.logger.doctrine"/>
-            </service>
-          </argument>
-        </argument>
-      </call>
-    </service>
-    <service id="doctrine.dbal.logger.profiling.cuotas" class="Doctrine\DBAL\Logging\DebugStack"/>
-    <service id="doctrine.dbal.logger.chain.cuotas" class="Doctrine\DBAL\Logging\LoggerChain">
-      <argument type="collection">
-        <argument type="service" id="doctrine.dbal.logger"/>
-        <argument type="service" id="doctrine.dbal.logger.profiling.cuotas"/>
-      </argument>
-    </service>
-    <service id="doctrine.dbal.cuotas_connection.event_manager" class="Symfony\Bridge\Doctrine\ContainerAwareEventManager">
-      <argument type="service" id=".service_locator.kI75Do3"/>
-      <argument type="collection">
-        <argument>doctrine.orm.messenger.doctrine_schema_subscriber</argument>
-        <argument>doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber</argument>
-        <argument>doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber</argument>
-        <argument>doctrine.orm.listeners.doctrine_token_provider_schema_subscriber</argument>
-        <argument type="collection">
-          <argument type="collection">
-            <argument>loadClassMetadata</argument>
-          </argument>
-          <argument>doctrine.orm.cuotas_listeners.attach_entity_listeners</argument>
-        </argument>
-      </argument>
-    </service>
-    <service id="doctrine.dbal.cuotas_connection" class="Doctrine\DBAL\Connection" public="true">
-      <argument type="collection">
-        <argument key="url">%env(resolve:CUOTAS)%</argument>
-        <argument key="driver">pdo_mysql</argument>
-        <argument key="charset">utf8mb4</argument>
-        <argument key="host">localhost</argument>
-        <argument key="port">null</argument>
-        <argument key="user">root</argument>
-        <argument key="password">null</argument>
-        <argument key="driverOptions" type="collection"/>
-        <argument key="serverVersion" type="string">5.7</argument>
-        <argument key="defaultTableOptions" type="collection"/>
-      </argument>
-      <argument type="service" id="doctrine.dbal.cuotas_connection.configuration"/>
-      <argument type="service" id="doctrine.dbal.cuotas_connection.event_manager"/>
-      <argument type="collection"/>
-      <factory service="doctrine.dbal.connection_factory" method="createConnection"/>
-    </service>
     <service id="doctrine.dbal.logging_middleware" class="Doctrine\DBAL\Logging\Middleware" abstract="true">
       <tag name="monolog.logger" channel="doctrine"/>
       <tag name="doctrine.middleware" connection="default"/>
       <tag name="doctrine.middleware" connection="premiumpay"/>
       <tag name="doctrine.middleware" connection="ggms"/>
-      <tag name="doctrine.middleware" connection="cuotas"/>
       <argument type="service" id="monolog.logger.doctrine"/>
     </service>
     <service id="messenger.middleware.doctrine_transaction" class="Symfony\Bridge\Doctrine\Messenger\DoctrineTransactionMiddleware" abstract="true">
@@ -5334,95 +5268,6 @@
     <service id="doctrine.orm.ggms_entity_manager.validator_loader" class="Symfony\Bridge\Doctrine\Validator\DoctrineLoader">
       <tag name="validator.auto_mapper" priority="-100"/>
       <argument type="service" id="doctrine.orm.ggms_entity_manager"/>
-      <argument>null</argument>
-    </service>
-    <service id="doctrine.orm.cuotas_configuration" class="Doctrine\ORM\Configuration">
-      <tag name="doctrine.orm.configuration"/>
-      <call method="setEntityNamespaces">
-        <argument type="collection">
-          <argument key="Cuotas">App\Entity\Cuotas</argument>
-        </argument>
-      </call>
-      <call method="setMetadataCache">
-        <argument type="service" id="cache.doctrine.orm.cuotas.metadata"/>
-      </call>
-      <call method="setQueryCache">
-        <argument type="service" id="cache.doctrine.orm.cuotas.query"/>
-      </call>
-      <call method="setResultCache">
-        <argument type="service" id="cache.doctrine.orm.cuotas.result"/>
-      </call>
-      <call method="setMetadataDriverImpl">
-        <argument type="service" id=".doctrine.orm.cuotas_metadata_driver"/>
-      </call>
-      <call method="setProxyDir">
-        <argument>/home/Betandeal/PhpstormProjects/newback/var/cache/dev/doctrine/orm/Proxies</argument>
-      </call>
-      <call method="setProxyNamespace">
-        <argument>Proxies</argument>
-      </call>
-      <call method="setAutoGenerateProxyClasses">
-        <argument>false</argument>
-      </call>
-      <call method="setClassMetadataFactoryName">
-        <argument>Doctrine\Bundle\DoctrineBundle\Mapping\ClassMetadataFactory</argument>
-      </call>
-      <call method="setDefaultRepositoryClassName">
-        <argument>Doctrine\ORM\EntityRepository</argument>
-      </call>
-      <call method="setNamingStrategy">
-        <argument type="service" id="doctrine.orm.naming_strategy.default"/>
-      </call>
-      <call method="setQuoteStrategy">
-        <argument type="service" id="doctrine.orm.quote_strategy.default"/>
-      </call>
-      <call method="setEntityListenerResolver">
-        <argument type="service" id="doctrine.orm.cuotas_entity_listener_resolver"/>
-      </call>
-      <call method="setRepositoryFactory">
-        <argument type="service" id="doctrine.orm.container_repository_factory"/>
-      </call>
-    </service>
-    <service id="doctrine.orm.cuotas_annotation_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AnnotationDriver">
-      <argument type="service" id="annotations.cached_reader"/>
-      <argument type="collection">
-        <argument>/home/Betandeal/PhpstormProjects/newback/src/Entity/Cuotas</argument>
-      </argument>
-    </service>
-    <service id="cache.doctrine.orm.cuotas.metadata" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
-    <service id="cache.doctrine.orm.cuotas.result" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
-      <tag name="cache.pool"/>
-      <argument type="service" id="cache.doctrine.orm.cuotas.result.recorder_inner"/>
-    </service>
-    <service id="cache.doctrine.orm.cuotas.query" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
-      <tag name="cache.pool"/>
-      <argument type="service" id="cache.doctrine.orm.cuotas.query.recorder_inner"/>
-    </service>
-    <service id="doctrine.orm.cuotas_entity_listener_resolver" class="Doctrine\Bundle\DoctrineBundle\Mapping\ContainerEntityListenerResolver">
-      <argument type="service" id="service_container"/>
-    </service>
-    <service id="doctrine.orm.cuotas_listeners.attach_entity_listeners" class="Doctrine\ORM\Tools\AttachEntityListenersListener">
-      <tag name="doctrine.event_listener" event="loadClassMetadata" connection="cuotas"/>
-    </service>
-    <service id="doctrine.orm.cuotas_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
-      <argument type="collection"/>
-      <argument type="collection"/>
-    </service>
-    <service id="doctrine.orm.cuotas_entity_manager" class="Doctrine\ORM\EntityManager" public="true" lazy="true">
-      <argument type="service" id="doctrine.dbal.cuotas_connection"/>
-      <argument type="service" id="doctrine.orm.cuotas_configuration"/>
-      <factory class="Doctrine\ORM\EntityManager" method="create"/>
-      <configurator service="doctrine.orm.cuotas_manager_configurator" method="configure"/>
-    </service>
-    <service id="doctrine.orm.cuotas_entity_manager.property_info_extractor" class="Symfony\Bridge\Doctrine\PropertyInfo\DoctrineExtractor">
-      <tag name="property_info.list_extractor" priority="-1001"/>
-      <tag name="property_info.type_extractor" priority="-999"/>
-      <tag name="property_info.access_extractor" priority="-999"/>
-      <argument type="service" id="doctrine.orm.cuotas_entity_manager"/>
-    </service>
-    <service id="doctrine.orm.cuotas_entity_manager.validator_loader" class="Symfony\Bridge\Doctrine\Validator\DoctrineLoader">
-      <tag name="validator.auto_mapper" priority="-100"/>
-      <argument type="service" id="doctrine.orm.cuotas_entity_manager"/>
       <argument>null</argument>
     </service>
     <service id="doctrine.migrations.dependency_factory" class="Doctrine\Migrations\DependencyFactory">
@@ -6289,6 +6134,14 @@
       <argument type="service" id="request_stack" on-invalid="null"/>
       <argument type="service" id="router.default" on-invalid="null"/>
       <argument type="service" id="security.token_storage" on-invalid="null"/>
+      <call method="registerListener">
+        <argument>main</argument>
+        <argument>app_logout</argument>
+        <argument>logout</argument>
+        <argument>_csrf_token</argument>
+        <argument>null</argument>
+        <argument>null</argument>
+      </call>
     </service>
     <service id="security.user.provider.missing" class="Symfony\Component\Security\Core\User\MissingUserProvider" abstract="true">
       <argument type="abstract">firewall</argument>
@@ -6378,6 +6231,7 @@
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
         <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+        <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
       </argument>
       <argument type="abstract">Provider Key</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -6541,7 +6395,7 @@
     </service>
     <service id="security.listener.user_provider" class="Symfony\Component\Security\Http\EventListener\UserProviderListener">
       <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\CheckPassportEvent" priority="1024" method="checkPassport"/>
-      <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+      <argument type="service" id="security.user_providers"/>
     </service>
     <service id="security.listener.user_provider.abstract" class="Symfony\Component\Security\Http\EventListener\UserProviderListener" abstract="true">
       <argument type="abstract">user provider</argument>
@@ -6670,7 +6524,10 @@
       <argument type="service" id=".service_locator.zJyh7qS"/>
       <argument type="service" id=".service_locator.jlyTfzM"/>
       <argument type="collection">
-        <argument key="main" type="collection"/>
+        <argument key="main" type="collection">
+          <argument type="service" id="App\Security\AppCustomAuthenticator"/>
+          <argument type="service" id="security.authenticator.form_login.main"/>
+        </argument>
       </argument>
       <argument>true</argument>
       <call method="setName">
@@ -6682,6 +6539,18 @@
     </service>
     <service id="security.user.provider.concrete.users_in_memory" class="Symfony\Component\Security\Core\User\InMemoryUserProvider">
       <argument type="collection"/>
+    </service>
+    <service id="security.user.provider.concrete.app_user_provider" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider">
+      <argument type="service" id="doctrine"/>
+      <argument>App\Entity\Main\LoginAdmin</argument>
+      <argument>username</argument>
+      <argument>null</argument>
+    </service>
+    <service id="security.user_providers" class="Symfony\Component\Security\Core\User\ChainUserProvider">
+      <argument type="iterator">
+        <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+        <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
+      </argument>
     </service>
     <service id="security.firewall.map.config.dev" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
       <argument>dev</argument>
@@ -6712,17 +6581,20 @@
       <argument>null</argument>
       <argument>true</argument>
       <argument>false</argument>
-      <argument>security.user.provider.concrete.users_in_memory</argument>
+      <argument>security.user.provider.concrete.app_user_provider</argument>
       <argument>main</argument>
+      <argument>security.authenticator.form_login.main</argument>
       <argument>null</argument>
       <argument>null</argument>
-      <argument>null</argument>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument>form_login</argument>
+        <argument>App\Security\AppCustomAuthenticator</argument>
+      </argument>
       <argument>null</argument>
     </service>
     <service id="security.listener.main.user_provider" class="Symfony\Component\Security\Http\EventListener\UserProviderListener">
       <tag name="kernel.event_listener" dispatcher="security.event_dispatcher.main" event="Symfony\Component\Security\Http\Event\CheckPassportEvent" priority="2048" method="checkPassport"/>
-      <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+      <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
     </service>
     <service id="security.event_dispatcher.main" class="Symfony\Component\EventDispatcher\EventDispatcher">
       <tag name="security.event_dispatcher.main">event_dispatcher.dispatcher</tag>
@@ -6739,6 +6611,22 @@
         <argument type="collection">
           <argument type="service_closure" id="security.listener.session.main"/>
           <argument>onSuccessfulLogin</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Security\Http\Event\LogoutEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="security.logout.listener.default.main"/>
+          <argument>onLogout</argument>
+        </argument>
+        <argument>64</argument>
+      </call>
+      <call method="addListener">
+        <argument>Symfony\Component\Security\Http\Event\LogoutEvent</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="security.logout.listener.session.main"/>
+          <argument>onLogout</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -6805,6 +6693,7 @@
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
         <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+        <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
       </argument>
       <argument>main</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -6819,9 +6708,79 @@
       <tag name="kernel.event_subscriber" dispatcher="security.event_dispatcher.main"/>
       <argument type="service" id="security.authentication.session_strategy"/>
     </service>
+    <service id="security.logout_listener.main" class="Symfony\Component\Security\Http\Firewall\LogoutListener">
+      <argument type="service" id="security.token_storage"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument type="service" id="security.event_dispatcher.main"/>
+      <argument type="collection">
+        <argument key="csrf_parameter">_csrf_token</argument>
+        <argument key="csrf_token_id">logout</argument>
+        <argument key="logout_path">app_logout</argument>
+      </argument>
+    </service>
+    <service id="security.logout.listener.default.main" class="Symfony\Component\Security\Http\EventListener\DefaultLogoutListener">
+      <tag name="kernel.event_subscriber" dispatcher="security.event_dispatcher.main"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument>/</argument>
+    </service>
+    <service id="security.logout.listener.session.main" class="Symfony\Component\Security\Http\EventListener\SessionLogoutListener">
+      <tag name="kernel.event_subscriber" dispatcher="security.event_dispatcher.main"/>
+    </service>
+    <service id="security.authenticator.form_login.main" class="Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator">
+      <argument type="service" id="security.http_utils"/>
+      <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
+      <argument type="service" id="security.authentication.success_handler.main.form_login"/>
+      <argument type="service" id="security.authentication.failure_handler.main.form_login"/>
+      <argument type="collection">
+        <argument key="login_path">login</argument>
+        <argument key="check_path">login</argument>
+        <argument key="use_forward">false</argument>
+        <argument key="require_previous_session">false</argument>
+        <argument key="username_parameter">_username</argument>
+        <argument key="password_parameter">_password</argument>
+        <argument key="csrf_parameter">_csrf_token</argument>
+        <argument key="csrf_token_id">authenticate</argument>
+        <argument key="enable_csrf">false</argument>
+        <argument key="post_only">true</argument>
+        <argument key="form_only">false</argument>
+      </argument>
+    </service>
+    <service id="security.authentication.success_handler.main.form_login" class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler">
+      <argument type="service" id="security.http_utils"/>
+      <argument type="collection"/>
+      <call method="setOptions">
+        <argument type="collection">
+          <argument key="login_path">login</argument>
+          <argument key="always_use_default_target_path">false</argument>
+          <argument key="default_target_path">/</argument>
+          <argument key="target_path_parameter">_target_path</argument>
+          <argument key="use_referer">false</argument>
+        </argument>
+      </call>
+      <call method="setFirewallName">
+        <argument>main</argument>
+      </call>
+    </service>
+    <service id="security.authentication.failure_handler.main.form_login" class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler">
+      <argument type="service" id="http_kernel"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument type="collection"/>
+      <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+      <call method="setOptions">
+        <argument type="collection">
+          <argument key="login_path">login</argument>
+          <argument key="failure_path">null</argument>
+          <argument key="failure_forward">false</argument>
+          <argument key="failure_path_parameter">_failure_path</argument>
+        </argument>
+      </call>
+    </service>
     <service id="security.authenticator.manager.main" class="Symfony\Component\Security\Http\Authentication\AuthenticatorManager">
       <tag name="monolog.logger" channel="security"/>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument type="service" id="App\Security\AppCustomAuthenticator"/>
+        <argument type="service" id="security.authenticator.form_login.main"/>
+      </argument>
       <argument type="service" id="security.token_storage"/>
       <argument type="service" id="security.event_dispatcher.main"/>
       <argument>main</argument>
@@ -6842,7 +6801,7 @@
       <argument type="service" id="security.authentication.trust_resolver"/>
       <argument type="service" id="security.http_utils"/>
       <argument>main</argument>
-      <argument>null</argument>
+      <argument type="service" id="security.authenticator.form_login.main"/>
       <argument>null</argument>
       <argument>null</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -6856,7 +6815,7 @@
         <argument type="service" id="security.access_listener"/>
       </argument>
       <argument type="service" id="security.exception_listener.main"/>
-      <argument>null</argument>
+      <argument type="service" id="security.logout_listener.main"/>
       <argument type="service" id="security.firewall.map.config.main"/>
       <argument type="service" id="security.untracked_token_storage"/>
     </service>
@@ -7002,12 +6961,6 @@
           <argument type="collection">
             <argument>App\Entity\Ggms</argument>
             <argument type="service" id="doctrine.orm.ggms_annotation_metadata_driver"/>
-          </argument>
-        </argument>
-        <argument key="cuotas" type="collection">
-          <argument type="collection">
-            <argument>App\Entity\Cuotas</argument>
-            <argument type="service" id="doctrine.orm.cuotas_annotation_metadata_driver"/>
           </argument>
         </argument>
       </argument>
@@ -7222,6 +7175,12 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\LoginController" class="App\Controller\LoginController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\LoginController" class="App\Controller\LoginController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\LoginController" class="App\Controller\LoginController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Ggms\ApiConnectionsRepository" class="App\Repository\Ggms\ApiConnectionsRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\Ggms\ApiConnectionsRepository" class="App\Repository\Ggms\ApiConnectionsRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Ggms\CampaniasBonosRepository" class="App\Repository\Ggms\CampaniasBonosRepository" autowire="true" abstract="true"/>
@@ -7759,15 +7718,25 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
-    <service id=".service_locator.zxMugcL" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.UDgw6Ol" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
+      </argument>
+    </service>
+    <service id=".service_locator.avbJiaE" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Controller\LoginController::index" type="service_closure" id=".service_locator.UDgw6Ol"/>
+        <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.UDgw6Ol"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="App\Kernel::terminate" type="service_closure" id=".service_locator.KfwZsne"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::terminate" type="service_closure" id=".service_locator.KfwZsne"/>
+        <argument key="App\Controller\LoginController:index" type="service_closure" id=".service_locator.UDgw6Ol"/>
+        <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.UDgw6Ol"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel:terminate" type="service_closure" id=".service_locator.KfwZsne"/>
@@ -7940,16 +7909,6 @@
         <argument key="doctrine.orm.messenger.doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.messenger.doctrine_schema_subscriber"/>
       </argument>
     </service>
-    <service id=".service_locator.kI75Do3" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="doctrine.orm.cuotas_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.cuotas_listeners.attach_entity_listeners"/>
-        <argument key="doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber"/>
-        <argument key="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber"/>
-        <argument key="doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber"/>
-        <argument key="doctrine.orm.messenger.doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.messenger.doctrine_schema_subscriber"/>
-      </argument>
-    </service>
     <service id=".service_locator.iWZ2OXA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8085,10 +8044,6 @@
       <argument type="service" id=".doctrine.orm.ggms_metadata_driver.inner"/>
       <argument type="service" id=".service_locator.KLVvNIq"/>
     </service>
-    <service id=".doctrine.orm.cuotas_metadata_driver" class="Doctrine\Bundle\DoctrineBundle\Mapping\MappingDriver">
-      <argument type="service" id=".doctrine.orm.cuotas_metadata_driver.inner"/>
-      <argument type="service" id=".service_locator.KLVvNIq"/>
-    </service>
     <service id="doctrine.dbal.logging_middleware.default" class="Doctrine\DBAL\Logging\Middleware">
       <argument type="service" id="monolog.logger.doctrine"/>
     </service>
@@ -8096,9 +8051,6 @@
       <argument type="service" id="monolog.logger.doctrine"/>
     </service>
     <service id="doctrine.dbal.logging_middleware.ggms" class="Doctrine\DBAL\Logging\Middleware">
-      <argument type="service" id="monolog.logger.doctrine"/>
-    </service>
-    <service id="doctrine.dbal.logging_middleware.cuotas" class="Doctrine\DBAL\Logging\Middleware">
       <argument type="service" id="monolog.logger.doctrine"/>
     </service>
     <service id="debug.security.voter.security.access.authenticated_voter" class="Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter">
@@ -8358,6 +8310,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.GNc8e5B" method="withContext"/>
     </service>
+    <service id=".service_locator.GNc8e5B.App\Controller\LoginController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\LoginController"/>
+      <argument>App\Controller\LoginController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.GNc8e5B" method="withContext"/>
+    </service>
+    <service id=".service_locator.GNc8e5B.App\Controller\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\SecurityController"/>
+      <argument>App\Controller\SecurityController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.GNc8e5B" method="withContext"/>
+    </service>
     <service id=".service_locator.J4b.DPX" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8532,12 +8496,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.zxMugcL"/>
+      <argument type="service" id=".service_locator.avbJiaE"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.zxMugcL"/>
+      <argument type="service" id=".service_locator.avbJiaE"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8574,12 +8538,6 @@
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.ggms_annotation_metadata_driver"/>
         <argument>App\Entity\Ggms</argument>
-      </call>
-    </service>
-    <service id=".doctrine.orm.cuotas_metadata_driver.inner" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain">
-      <call method="addDriver">
-        <argument type="service" id="doctrine.orm.cuotas_annotation_metadata_driver"/>
-        <argument>App\Entity\Cuotas</argument>
       </call>
     </service>
     <service id=".errored..service_locator.KfwZsne.Symfony\Component\HttpFoundation\Response" class="Symfony\Component\HttpFoundation\Response"/>
@@ -9333,8 +9291,6 @@
     <service id="cache.doctrine.orm.premiumpay.query.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.doctrine.orm.ggms.result.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.doctrine.orm.ggms.query.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
-    <service id="cache.doctrine.orm.cuotas.result.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
-    <service id="cache.doctrine.orm.cuotas.query.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.webpack_encore.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <argument>LF+zx-Mh4M</argument>
       <argument>0</argument>
@@ -9477,7 +9433,6 @@
     <service id="Doctrine\DBAL\Connection $defaultConnection" alias="doctrine.dbal.default_connection"/>
     <service id="Doctrine\DBAL\Connection $premiumpayConnection" alias="doctrine.dbal.premiumpay_connection"/>
     <service id="Doctrine\DBAL\Connection $ggmsConnection" alias="doctrine.dbal.ggms_connection"/>
-    <service id="Doctrine\DBAL\Connection $cuotasConnection" alias="doctrine.dbal.cuotas_connection"/>
     <service id="Doctrine\ORM\EntityManagerInterface" alias="doctrine.orm.default_entity_manager"/>
     <service id="doctrine.orm.metadata.annotation_reader" alias="annotations.cached_reader"/>
     <service id="doctrine.orm.entity_manager" alias="doctrine.orm.default_entity_manager" public="true"/>
@@ -9496,11 +9451,6 @@
     <service id="doctrine.orm.ggms_query_cache" alias="cache.doctrine.orm.ggms.query"/>
     <service id="Doctrine\ORM\EntityManagerInterface $ggmsEntityManager" alias="doctrine.orm.ggms_entity_manager"/>
     <service id="doctrine.orm.ggms_entity_manager.event_manager" alias="doctrine.dbal.ggms_connection.event_manager"/>
-    <service id="doctrine.orm.cuotas_metadata_cache" alias="cache.doctrine.orm.cuotas.metadata"/>
-    <service id="doctrine.orm.cuotas_result_cache" alias="cache.doctrine.orm.cuotas.result"/>
-    <service id="doctrine.orm.cuotas_query_cache" alias="cache.doctrine.orm.cuotas.query"/>
-    <service id="Doctrine\ORM\EntityManagerInterface $cuotasEntityManager" alias="doctrine.orm.cuotas_entity_manager"/>
-    <service id="doctrine.orm.cuotas_entity_manager.event_manager" alias="doctrine.dbal.cuotas_connection.event_manager"/>
     <service id="doctrine.migrations.metadata_storage" alias="doctrine.migrations.storage.table_storage"/>
     <service id="Twig_Environment" alias="twig"/>
     <service id="Twig\Environment" alias="twig"/>
@@ -9535,8 +9485,6 @@
       <deprecated package="symfony/security-bundle" version="5.3">The "%alias_id%" alias is deprecated, use the new authenticator system instead.</deprecated>
     </service>
     <service id="security.firewall" alias="debug.security.firewall"/>
-    <service id="security.user_providers" alias="security.user.provider.concrete.users_in_memory"/>
-    <service id="Symfony\Component\Security\Core\User\UserProviderInterface" alias="security.user.provider.concrete.users_in_memory"/>
     <service id="security.authentication.session_strategy.main" alias="security.authentication.session_strategy"/>
     <service id="security.user_checker.main" alias="security.user_checker"/>
     <service id="security.firewall.context_locator" alias=".service_locator.zJyh7qS"/>
@@ -9547,7 +9495,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.zxMugcL"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.avbJiaE"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -9572,13 +9520,12 @@
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~uzTQ0Gb"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
-    <service id=".service_locator.YxNo8ZP" alias=".service_locator.zxMugcL"/>
+    <service id=".service_locator.kio7L1t" alias=".service_locator.avbJiaE"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
     <service id=".service_locator.Ib3T.ji" alias=".service_locator.tSSdB3w"/>
     <service id=".service_locator.mO1tZh8" alias=".service_locator.tchtdZx"/>
-    <service id=".service_locator.c1bnkdg" alias=".service_locator.kI75Do3"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.W9y3dzm" alias=".service_locator.GNc8e5B"/>
     <service id="validator" alias="debug.validator" public="true"/>
@@ -9604,9 +9551,9 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id="doctrine.orm.premiumpay_metadata_driver" alias=".doctrine.orm.premiumpay_metadata_driver"/>
     <service id="doctrine.orm.ggms_metadata_driver" alias=".doctrine.orm.ggms_metadata_driver"/>
-    <service id="doctrine.orm.cuotas_metadata_driver" alias=".doctrine.orm.cuotas_metadata_driver"/>
     <service id=".service_locator._5g_Wvc" alias=".service_locator.KfwZsne"/>
     <service id=".service_locator.JBAFp66" alias=".service_locator.KfbR3DY"/>
+    <service id=".service_locator.kXCVHeG" alias=".service_locator.UDgw6Ol"/>
     <service id=".service_locator.Wd_D6Iy" alias=".service_locator.GNc8e5B"/>
     <service id=".service_locator.L0rFhJm" alias=".service_locator.GVyCdgr"/>
     <service id=".service_locator.9YCWxeJ" alias=".service_locator.dw8O4oN"/>

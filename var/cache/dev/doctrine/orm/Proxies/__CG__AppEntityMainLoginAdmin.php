@@ -500,4 +500,26 @@ class LoginAdmin extends \App\Entity\Main\LoginAdmin implements \Doctrine\ORM\Pr
         return parent::setActivo($activo);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function getSalt()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSalt', []);
+
+        return parent::getSalt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function eraseCredentials()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'eraseCredentials', []);
+
+        return parent::eraseCredentials();
+    }
+
 }

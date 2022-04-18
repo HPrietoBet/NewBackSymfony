@@ -3,14 +3,15 @@
 namespace App\Entity\Main;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * LoginAdmin
  *
  * @ORM\Table(name="login_admin")
  * @ORM\Entity(repositoryClass="App\Repository\Main\LoginAdminRepository")
  */
-class LoginAdmin
+
+class LoginAdmin implements UserInterface
 {
     /**
      * @var int
@@ -292,5 +293,12 @@ class LoginAdmin
         return $this;
     }
 
+    public function getSalt(){
+
+    }
+
+    public function eraseCredentials(){
+
+    }
 
 }
