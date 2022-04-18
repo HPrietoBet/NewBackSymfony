@@ -1,0 +1,31 @@
+<?php //App%255CEntity%255CMain%255CFacturacionConsolidada%2524balance
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'balance',
+            ],
+            'type' => [
+                'decimal',
+            ],
+            'precision' => [
+                10,
+            ],
+            'scale' => [
+                2,
+            ],
+            'nullable' => [
+                true,
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+); }];

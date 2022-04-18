@@ -1,0 +1,53 @@
+<?php //App%255CEntity%255CMain%255CCasasapuestasrelaccion
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Table'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Table')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Index'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Index')),
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone ($p['Doctrine\\ORM\\Mapping\\UniqueConstraint'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\UniqueConstraint')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'casasapuestasrelaccion',
+                'ix_rel_back_id',
+                'ix_rel_cuotas_id',
+                'unq_cuotas_back',
+            ],
+            'indexes' => [
+                [
+                    $o[1],
+                    $o[2],
+                ],
+            ],
+            'uniqueConstraints' => [
+                [
+                    $o[3],
+                ],
+            ],
+            'columns' => [
+                1 => [
+                    'rel_campania_id',
+                ],
+                [
+                    'rel_cuotas_casa_id',
+                ],
+                [
+                    'rel_cuotas_casa_id',
+                    'rel_campania_id',
+                ],
+            ],
+            'repositoryClass' => [
+                4 => 'App\\Repository\\Main\\CasasApuestasRelacionRepository',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[4],
+    ],
+    []
+); }];

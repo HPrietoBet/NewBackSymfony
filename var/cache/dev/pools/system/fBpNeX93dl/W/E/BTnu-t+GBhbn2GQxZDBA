@@ -1,0 +1,53 @@
+<?php //App%255CEntity%255CPremiumpay%255CPaymentsUsers
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Table'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Table')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Index'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Index')),
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone ($p['Doctrine\\ORM\\Mapping\\UniqueConstraint'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\UniqueConstraint')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'payments_users',
+                'ix_pu_id',
+                'ix_userid',
+                'unq_pu_id_user_id',
+            ],
+            'indexes' => [
+                [
+                    $o[1],
+                    $o[2],
+                ],
+            ],
+            'uniqueConstraints' => [
+                [
+                    $o[3],
+                ],
+            ],
+            'columns' => [
+                1 => [
+                    'pa_pu_id',
+                ],
+                [
+                    'pu_iduser_premiumpay',
+                ],
+                [
+                    'pa_pu_id',
+                    'pu_iduser_premiumpay',
+                ],
+            ],
+            'repositoryClass' => [
+                4 => 'App\\Repository\\Premiumpay\\PaymentsUsersRepository',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[4],
+    ],
+    []
+); }];
