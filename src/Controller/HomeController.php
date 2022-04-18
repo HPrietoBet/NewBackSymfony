@@ -30,7 +30,6 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        // peticion test
         $users = $this->em->getRepository(User::class)->find(3);
         echo $users->getNombre();
         return $this->render('home/index.html.twig', [
