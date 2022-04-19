@@ -38,7 +38,6 @@ class PasswordCredentials implements CredentialsInterface
         if (null === $this->password) {
             throw new LogicException('The credentials are erased as another listener already verified these credentials.');
         }
-
         return $this->password;
     }
 

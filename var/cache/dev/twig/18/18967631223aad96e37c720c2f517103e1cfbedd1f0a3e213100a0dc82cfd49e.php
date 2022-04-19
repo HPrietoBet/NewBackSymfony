@@ -170,10 +170,7 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div class=\"card-body\">
                                 <div class=\"row no-gutters align-items-center\">
                                     <div class=\"col mr-2\">
-                                        <div class=\"text-xs font-weight-bold text-info text-uppercase mb-1\">";
-        // line 82
-        echo twig_escape_filter($this->env, (isset($context["test"]) || array_key_exists("test", $context) ? $context["test"] : (function () { throw new RuntimeError('Variable "test" does not exist.', 82, $this->source); })()), "html", null, true);
-        echo "
+                                        <div class=\"text-xs font-weight-bold text-info text-uppercase mb-1\">
                                         </div>
                                         <div class=\"row no-gutters align-items-center\">
                                             <div class=\"col-auto\">
@@ -514,25 +511,6 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
     <i class=\"fas fa-angle-up\"></i>
 </a>
 
-<!-- Logout Modal-->
-<div class=\"modal fade\" id=\"logoutModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"
-     aria-hidden=\"true\">
-    <div class=\"modal-dialog\" role=\"document\">
-        <div class=\"modal-content\">
-            <div class=\"modal-header\">
-                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Ready to Leave?</h5>
-                <button class=\"close\" type=\"button\" data-dismiss=\"modal\" aria-label=\"Close\">
-                    <span aria-hidden=\"true\">×</span>
-                </button>
-            </div>
-            <div class=\"modal-body\">Select \"Logout\" below if you are ready to end your current session.</div>
-            <div class=\"modal-footer\">
-                <button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\">Cancel</button>
-                <a class=\"btn btn-primary\" href=\"login.html\">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 ";
         
@@ -555,7 +533,7 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
 
     public function getDebugInfo()
     {
-        return array (  506 => 409,  504 => 408,  175 => 82,  125 => 34,  123 => 33,  111 => 23,  109 => 22,  98 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  503 => 409,  501 => 408,  125 => 34,  123 => 33,  111 => 23,  109 => 22,  98 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -641,7 +619,7 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div class=\"card-body\">
                                 <div class=\"row no-gutters align-items-center\">
                                     <div class=\"col mr-2\">
-                                        <div class=\"text-xs font-weight-bold text-info text-uppercase mb-1\">{{ test }}
+                                        <div class=\"text-xs font-weight-bold text-info text-uppercase mb-1\">
                                         </div>
                                         <div class=\"row no-gutters align-items-center\">
                                             <div class=\"col-auto\">
@@ -979,25 +957,6 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
     <i class=\"fas fa-angle-up\"></i>
 </a>
 
-<!-- Logout Modal-->
-<div class=\"modal fade\" id=\"logoutModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"
-     aria-hidden=\"true\">
-    <div class=\"modal-dialog\" role=\"document\">
-        <div class=\"modal-content\">
-            <div class=\"modal-header\">
-                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Ready to Leave?</h5>
-                <button class=\"close\" type=\"button\" data-dismiss=\"modal\" aria-label=\"Close\">
-                    <span aria-hidden=\"true\">×</span>
-                </button>
-            </div>
-            <div class=\"modal-body\">Select \"Logout\" below if you are ready to end your current session.</div>
-            <div class=\"modal-footer\">
-                <button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\">Cancel</button>
-                <a class=\"btn btn-primary\" href=\"login.html\">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 {% endblock %}
 ", "home/index.html.twig", "/home/Betandeal/PhpstormProjects/newback/templates/home/index.html.twig");

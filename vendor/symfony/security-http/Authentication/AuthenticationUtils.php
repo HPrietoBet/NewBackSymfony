@@ -28,6 +28,7 @@ class AuthenticationUtils
     public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
+
     }
 
     /**

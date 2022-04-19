@@ -34,8 +34,8 @@ abstract class AbstractAuthenticator implements AuthenticatorInterface
         if (self::class !== (new \ReflectionMethod($this, 'createAuthenticatedToken'))->getDeclaringClass()->getName() && self::class === (new \ReflectionMethod($this, 'createToken'))->getDeclaringClass()->getName()) {
             return $this->createAuthenticatedToken($passport, $firewallName);
         }
-
-        return new PostAuthenticationToken($passport->getUser(), $firewallName, $passport->getUser()->getRoles());
+        $token =  new PostAuthenticationToken($passport->getUser(), $firewallName, array($passport->getUser()->getRoles()));
+        return $token;
     }
 
     /**

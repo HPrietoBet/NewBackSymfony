@@ -101,8 +101,11 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
             <div class=\"dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in\"
                  aria-labelledby=\"alertsDropdown\">
                 <h6 class=\"dropdown-header bg-danger border-danger\">
-                    Alerts Center
-                </h6>
+                    ";
+        // line 62
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Alerts Center", [], "messages");
+        // line 63
+        echo "                </h6>
                 <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
                     <div class=\"mr-3\">
                         <div class=\"icon-circle bg-primary\">
@@ -212,7 +215,10 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
         <li class=\"nav-item dropdown no-arrow\">
             <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\"
                data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">Douglas McGee</span>
+                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">";
+        // line 173
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 173, $this->source); })()), "username", [], "any", false, false, false, 173), "html", null, true);
+        echo "</span>
                 <img class=\"img-profile rounded-circle\"
                      src=\"img/undraw_profile.svg\">
             </a>
@@ -232,16 +238,51 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                     Activity Log
                 </a>
                 <div class=\"dropdown-divider\"></div>
-                <a class=\"dropdown-item\" href=\"#\" data-toggle=\"modal\" data-target=\"#logoutModal\">
+                <a class=\"dropdown-item\" href=\"logout\" data-toggle=\"modal\" data-target=\"#logoutModal\">
                     <i class=\"fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400\"></i>
-                    Logout
-                </a>
+                    ";
+        // line 195
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Logout", [], "messages");
+        // line 196
+        echo "                </a>
             </div>
         </li>
 
     </ul>
 
 </nav>
+<!-- Logout Modal-->
+<div class=\"modal fade\" id=\"logoutModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"
+     aria-hidden=\"true\">
+    <div class=\"modal-dialog\" role=\"document\">
+        <div class=\"modal-content\">
+            <div class=\"modal-header\">
+                <h5 class=\"modal-title\" id=\"exampleModalLabel\">";
+        // line 209
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Ready to Leave?", [], "messages");
+        echo "</h5>
+                <button class=\"close\" type=\"button\" data-dismiss=\"modal\" aria-label=\"Close\">
+                    <span aria-hidden=\"true\">×</span>
+                </button>
+            </div>
+            <div class=\"modal-body\">";
+        // line 214
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Select \"Logout\" below if you are ready to end your current session.", [], "messages");
+        echo "</div>
+            <div class=\"modal-footer\">
+                <button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\">";
+        // line 216
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Cancel", [], "messages");
+        echo "</button>
+                <a class=\"btn btn-primary\" href=\"logout\">";
+        // line 217
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Logout", [], "messages");
+        echo "</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- End of Topbar -->";
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
@@ -256,9 +297,14 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
         return "header.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  43 => 1,);
+        return array (  279 => 217,  275 => 216,  270 => 214,  262 => 209,  247 => 196,  245 => 195,  220 => 173,  108 => 63,  106 => 62,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -324,7 +370,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
             <div class=\"dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in\"
                  aria-labelledby=\"alertsDropdown\">
                 <h6 class=\"dropdown-header bg-danger border-danger\">
-                    Alerts Center
+                    {% trans %}Alerts Center{% endtrans %}
                 </h6>
                 <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
                     <div class=\"mr-3\">
@@ -435,7 +481,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
         <li class=\"nav-item dropdown no-arrow\">
             <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\"
                data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">Douglas McGee</span>
+                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">{{ user.username }}</span>
                 <img class=\"img-profile rounded-circle\"
                      src=\"img/undraw_profile.svg\">
             </a>
@@ -455,9 +501,9 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                     Activity Log
                 </a>
                 <div class=\"dropdown-divider\"></div>
-                <a class=\"dropdown-item\" href=\"#\" data-toggle=\"modal\" data-target=\"#logoutModal\">
+                <a class=\"dropdown-item\" href=\"logout\" data-toggle=\"modal\" data-target=\"#logoutModal\">
                     <i class=\"fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400\"></i>
-                    Logout
+                    {%trans%}Logout{%endtrans%}
                 </a>
             </div>
         </li>
@@ -465,6 +511,26 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
     </ul>
 
 </nav>
+<!-- Logout Modal-->
+<div class=\"modal fade\" id=\"logoutModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"
+     aria-hidden=\"true\">
+    <div class=\"modal-dialog\" role=\"document\">
+        <div class=\"modal-content\">
+            <div class=\"modal-header\">
+                <h5 class=\"modal-title\" id=\"exampleModalLabel\">{%trans%}Ready to Leave?{%endtrans%}</h5>
+                <button class=\"close\" type=\"button\" data-dismiss=\"modal\" aria-label=\"Close\">
+                    <span aria-hidden=\"true\">×</span>
+                </button>
+            </div>
+            <div class=\"modal-body\">{%trans%}Select \"Logout\" below if you are ready to end your current session.{%endtrans%}</div>
+            <div class=\"modal-footer\">
+                <button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\">{%trans%}Cancel{%endtrans%}</button>
+                <a class=\"btn btn-primary\" href=\"logout\">{%trans%}Logout{%endtrans%}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- End of Topbar -->", "header.html.twig", "/home/Betandeal/PhpstormProjects/newback/templates/header.html.twig");
     }
 }

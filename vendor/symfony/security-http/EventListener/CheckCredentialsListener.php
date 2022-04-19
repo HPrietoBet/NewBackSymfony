@@ -54,6 +54,8 @@ class CheckCredentialsListener implements EventSubscriberInterface
             // Use the password hasher to validate the credentials
             $user = $passport->getUser();
 
+
+
             if (!$user instanceof PasswordAuthenticatedUserInterface) {
                 trigger_deprecation('symfony/security-http', '5.3', 'Not implementing the "%s" interface in class "%s" while using password-based authentication is deprecated.', PasswordAuthenticatedUserInterface::class, get_debug_type($user));
             }
@@ -61,11 +63,13 @@ class CheckCredentialsListener implements EventSubscriberInterface
             /** @var PasswordCredentials $badge */
             $badge = $passport->getBadge(PasswordCredentials::class);
 
+
             if ($badge->isResolved()) {
                 return;
             }
 
             $presentedPassword = $badge->getPassword();
+
             if ('' === $presentedPassword) {
                 throw new BadCredentialsException('The presented password cannot be empty.');
             }
@@ -85,11 +89,14 @@ class CheckCredentialsListener implements EventSubscriberInterface
                     throw new BadCredentialsException('The presented password is invalid.');
                 }
             } else {
-                if (!$this->hasherFactory->getPasswordHasher($user)->verify($user->getPassword(), $presentedPassword, $salt)) {
+                //var_export(array($user->getPasswordId(), $presentedPassword, $salt));die();
+                if($user->getPasswordId() != $presentedPassword){
                     throw new BadCredentialsException('The presented password is invalid.');
                 }
-            }
+                /*if (!$this->hasherFactory->getPasswordHasher($user)->verify($user->getPasswordId(), $presentedPassword, $salt)) {
 
+                }*/
+            }
             $badge->markResolved();
 
             if (!$passport->hasBadge(PasswordUpgradeBadge::class)) {
