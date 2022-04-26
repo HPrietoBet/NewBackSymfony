@@ -327,7 +327,7 @@ class EstadisticasApi extends \App\Entity\Main\EstadisticasApi implements \Doctr
     /**
      * {@inheritDoc}
      */
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFecha', []);
@@ -338,7 +338,7 @@ class EstadisticasApi extends \App\Entity\Main\EstadisticasApi implements \Doctr
     /**
      * {@inheritDoc}
      */
-    public function setFecha(\DateTimeInterface $fecha): \App\Entity\Main\EstadisticasApi
+    public function setFecha(string $fecha): \App\Entity\Main\EstadisticasApi
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFecha', [$fecha]);

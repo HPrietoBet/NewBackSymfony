@@ -8,16 +8,27 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
-        '/access' => [[['_route' => 'app_access', '_controller' => 'App\\Controller\\AccessController::index'], null, null, null, false, false, null]],
+        '/campanias' => [[['_route' => 'app_campanias', '_controller' => 'App\\Controller\\CampaniasController::index'], null, null, null, false, false, null]],
+        '/campanias/get' => [[['_route' => 'app_campanias_get', '_controller' => 'App\\Controller\\CampaniasController::getCampaigns'], null, null, null, false, false, null]],
+        '/facturacion-datos' => [[['_route' => 'app_facturacion_datos', '_controller' => 'App\\Controller\\FacturacionDatosController::index'], null, null, null, false, false, null]],
+        '/facturacion-datos/save' => [[['_route' => 'app_facturacion_datos_save', '_controller' => 'App\\Controller\\FacturacionDatosController::save'], null, null, null, false, false, null]],
         '/home' => [
             [['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null],
             [['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null],
         ],
+        '/home/charts' => [[['_route' => 'app_home_charts', '_controller' => 'App\\Controller\\HomeController::charts'], null, null, null, false, false, null]],
         '/login' => [
             [['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, ['GET' => 0, 'POST' => 1], null, false, false, null],
             [['_route' => 'login', '_controller' => 'App\\Controller\\SecurityController::index'], null, null, null, false, false, null],
         ],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
+        '/users/admin' => [[['_route' => 'app_super_users', '_controller' => 'App\\Controller\\SuperUsersController::index'], null, null, null, false, false, null]],
+        '/user/admin/save' => [[['_route' => 'app_super_users_save', '_controller' => 'App\\Controller\\SuperUsersController::save'], null, null, null, false, false, null]],
+        '/users/bookies' => [[['_route' => 'app_users_bookies', '_controller' => 'App\\Controller\\UsersBookiesController::index'], null, null, null, false, false, null]],
+        '/user/bookie/save' => [[['_route' => 'app_users_bookies_save', '_controller' => 'App\\Controller\\UsersBookiesController::save'], null, null, null, false, false, null]],
+        '/user/bookie/delete' => [[['_route' => 'app_users_bookies_delete', '_controller' => 'App\\Controller\\UsersBookiesController::delete'], null, null, null, false, false, null]],
+        '/users' => [[['_route' => 'app_users', '_controller' => 'App\\Controller\\UsersController::index'], null, null, null, false, false, null]],
+        '/user/save' => [[['_route' => 'app_users_save', '_controller' => 'App\\Controller\\UsersController::save'], null, null, null, false, false, null]],
         '/_profiler' => [[['_route' => '_profiler_home', '_controller' => 'web_profiler.controller.profiler::homeAction'], null, null, null, true, false, null]],
         '/_profiler/search' => [[['_route' => '_profiler_search', '_controller' => 'web_profiler.controller.profiler::searchAction'], null, null, null, false, false, null]],
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],

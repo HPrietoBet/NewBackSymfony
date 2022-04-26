@@ -57,9 +57,9 @@ class LoginBookies
     private $campanias;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="ultimo_login", type="datetime", nullable=false, options={"default"="0000-00-00 00:00:00"})
+     * @ORM\Column(name="ultimo_login", type="string", nullable=false, options={"default"="0000-00-00 00:00:00"})
      */
     private $ultimoLogin = '0000-00-00 00:00:00';
 
@@ -142,12 +142,12 @@ class LoginBookies
         return $this;
     }
 
-    public function getUltimoLogin(): ?\DateTimeInterface
+    public function getUltimoLogin(): ?string
     {
         return $this->ultimoLogin;
     }
 
-    public function setUltimoLogin(\DateTimeInterface $ultimoLogin): self
+    public function setUltimoLogin(string $ultimoLogin): self
     {
         $this->ultimoLogin = $ultimoLogin;
 

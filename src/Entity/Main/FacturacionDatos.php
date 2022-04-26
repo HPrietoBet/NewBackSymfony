@@ -162,16 +162,16 @@ class FacturacionDatos
     private $control;
 
     /**
-     * @var \DateTime
+     * @var string|null
      *
-     * @ORM\Column(name="fecha_alta", type="date", nullable=false)
+     * @ORM\Column(name="fecha_alta", type="string", nullable=false)
      */
     private $fechaAlta;
 
     /**
-     * @var \DateTime
+     * @var string|null
      *
-     * @ORM\Column(name="fecha_caducidad", type="date", nullable=false)
+     * @ORM\Column(name="fecha_caducidad", type="string", nullable=false)
      */
     private $fechaCaducidad;
 
@@ -490,24 +490,24 @@ class FacturacionDatos
         return $this;
     }
 
-    public function getFechaAlta(): ?\DateTimeInterface
+    public function getFechaAlta():  ?string
     {
         return $this->fechaAlta;
     }
 
-    public function setFechaAlta(\DateTimeInterface $fechaAlta): self
+    public function setFechaAlta($fechaAlta): self
     {
         $this->fechaAlta = $fechaAlta;
 
         return $this;
     }
 
-    public function getFechaCaducidad(): ?\DateTimeInterface
+    public function getFechaCaducidad(): ?string
     {
         return $this->fechaCaducidad;
     }
 
-    public function setFechaCaducidad(\DateTimeInterface $fechaCaducidad): self
+    public function setFechaCaducidad($fechaCaducidad): self
     {
         $this->fechaCaducidad = $fechaCaducidad;
 

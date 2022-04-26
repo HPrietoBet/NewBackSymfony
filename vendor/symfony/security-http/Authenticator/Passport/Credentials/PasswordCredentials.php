@@ -31,6 +31,7 @@ class PasswordCredentials implements CredentialsInterface
     public function __construct(string $password)
     {
         $this->password = $password;
+
     }
 
     public function getPassword(): string

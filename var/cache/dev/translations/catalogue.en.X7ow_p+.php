@@ -170,6 +170,9 @@ $catalogue = new MessageCatalogue('en', array (
     'Password' => 'Password',
     'Reset Password' => 'Reset Password',
     'Login' => 'LogIn',
+    'Commisions generated' => 'Commisions generated',
+    'Players' => 'Players',
+    'Active Campaigns' => 'Active Campaigns',
   ),
 ));
 

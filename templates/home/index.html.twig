@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}{{title}}{% endblock %}
 
 {% block body %}
 <body id="page-top">
@@ -26,14 +26,6 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> {% trans %}Symfony is great{% endtrans %}
-                    </a>
-                </div>
-
                 <!-- Content Row -->
                 <div class="row">
 
@@ -44,8 +36,9 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Players</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                            {%trans%}Players{%endtrans%}
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalplayers}}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -62,8 +55,9 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            Active Campaigns</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                            {%trans%}Active Campaigns{%endtrans%}
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ countercampaigns }}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-ad fa-2x text-gray-300"></i>
@@ -80,16 +74,17 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                            {%trans%}Commisions generated{%endtrans%}
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{totalmoney.now}}</div>
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm mr-2">
                                                     <div class="progress-bar bg-info" role="progressbar"
-                                                         style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
+                                                         style="width: {{totalmoney.percent}}%" aria-valuenow="{{totalmoney.now}}" aria-valuemin="0"
+                                                         aria-valuemax="{{totalmoney.to}}"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,57 +101,24 @@
 
                 <div class="row">
                     <!-- Content Column -->
-                    <div class="col-lg-4 mb-4">
-                        <!-- Project Card Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Alerts</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="col-lg-12 mb-4">
-                                    <div class="card bg-danger text-white shadow">
-                                        <div class="card-body">
-                                            <b>20</b> Active campaigns without codes
-                                            <div class="text-white-50 small">We have to create new codes for <a href="#" class="text-gray-100">this campaigns</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <div class="card bg-warning text-white shadow">
-                                        <div class="card-body">
-                                            <b>85</b> Users asking for campaigns
-                                            <div class="text-white-50 small">Pending for check <a href="#" class="text-gray-100">this users</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <div class="card bg-success text-white shadow">
-                                        <div class="card-body">
-                                            <b>> 15.000.000 €</b> in comisions
-                                            <div class="text-white-50 small">We increase to 15.000.000 € in comisions.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Area Chart -->
-                    <div class="col-lg-4">
+
+                    <div class="col-lg-6">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">New Users</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">{% trans %}New Users{% endtrans %}</h6>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="myAreaChart_1"></canvas>
-                                </div>
+                                <div id="table_users"></div>
+                                <script>
+
+                                </script>
                             </div>
                         </div>
                     </div>
                     <!-- Area Chart -->
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="card shadow mb-4">
                             <!-- Card Header - Dropdown -->
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -164,9 +126,11 @@
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="myAreaChart_1"></canvas>
-                                </div>
+                                <div id="table_cash"></div>
+                                <script>
+
+
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -184,12 +148,12 @@
                             <div class="card-body">
                                 <div class="col-lg-4 d-inline-block">
                                     <div class="input-group date" data-provide="datepicker">
-                                        <input type="date" class="form-control">
+                                        <input type="date" id="date_init" class="form-control" value="{{defaultdates.init}}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4   d-inline-block">
                                     <div class="input-group date" data-provide="datepicker">
-                                        <input type="date" class="form-control">
+                                        <input type="date" id="date_end" class="form-control" value="{{defaultdates.end}}">
                                     </div>
                                 </div>
                                 <div class="col-lg-3  d-inline-block float-right">
@@ -208,25 +172,12 @@
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                         aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
+                                    <canvas id="comisionesChart"></canvas>
+                                    <i class="fa fa-spinner fa-spin"></i>
                                 </div>
                             </div>
                         </div>
@@ -237,25 +188,12 @@
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">PremiumPay €</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                         aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
+                                    <canvas id="ppay_eur"></canvas>
+                                    <i class="fa fa-spinner fa-spin"></i>
                                 </div>
                             </div>
                         </div>
@@ -266,30 +204,17 @@
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">PremiumPay COP</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                         aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
+                                    <canvas id="ppay_cop"></canvas>
+                                    <i class="fa fa-spinner fa-spin"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 mb-4">
+                    <!--div class="col-lg-6 mb-4">
                         <div class="card bg-primary text-white shadow">
                             <div class="card-body">
                                 Primary
@@ -353,11 +278,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div-->
 
-                <div class="row">
+                <!--div class="row">
 
-                    <!-- Illustrations -->
+
                     <div class="col-lg-6 mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Your preferred navigation</h6>
@@ -382,7 +307,7 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- Approach -->
+
                     <div class="col-lg-6 shadow mb-4" >
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
@@ -396,8 +321,8 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
+                </div >
+            </div-->
 
         </div>
         <!-- /.container-fluid -->
@@ -418,4 +343,14 @@
 </a>
 
 </body>
+    <script>
+        var users_str =  '{{ lastusers | raw }}';
+        var responsables_json = JSON.parse('{{ responsables | raw }}');
+        var data_str =  '{{ lastcashactions | raw }}';
+        var comisiones_chart = JSON.parse('{{ comisionesgraph | raw }}');
+        var eur_chart = JSON.parse('{{ eurppaygraph | raw }}');
+        var cop_chart = JSON.parse('{{ copppaygraph | raw }}');
+    </script>
+
+    <script src="js/home.js" type="application/javascript"></script>
 {% endblock %}

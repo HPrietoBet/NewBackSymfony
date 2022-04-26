@@ -73,4 +73,24 @@ class EstadisticasAPIRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function countAll(){
+        return  $this->createQueryBuilder('st')->select('sum(st.cpaGenerados)')->getQuery()->getSingleScalarResult();
+    }
+
+    public function getSumMoney(){
+        return  $this->createQueryBuilder('st')->select('SUM(st.comisionGenerada)')->getQuery()->getSingleScalarResult() ?? 0;
+    }
+
+    public function getChartInfo($chartDates){
+        $datos =   $this->createQueryBuilder('st')->select(['st.fecha fecha', 'SUM(st.comisionGenerada) comisiones', 'sum(st.cpaGenerados) jugadores'])
+                ->where('st.fecha BETWEEN :from AND :to')
+                ->setParameter('from', $chartDates['init'])
+                ->setParameter('to',$chartDates['end'])
+                ->groupBy('st.fecha')
+                ->getQuery()
+                ->getResult() ?? 0;
+        return $datos;
+
+    }
 }

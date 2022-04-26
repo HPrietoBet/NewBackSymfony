@@ -43,7 +43,7 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
         echo "<ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion\" id=\"accordionSidebar\">
 
     <!-- Sidebar - Brand -->
-    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\" href=\"index.html\">
+    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\" href=\"/home\">
         <div class=\"sidebar-brand-icon rotate-n-15\">
             <i class=\"fas fa-laugh-wink\"></i>
         </div>
@@ -55,7 +55,7 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Nav Item - Dashboard -->
     <li class=\"nav-item active\">
-        <a class=\"nav-link\" href=\"index.html\">
+        <a class=\"nav-link\" href=\"/home\">
             <i class=\"fas fa-fw fa-tachometer-alt\"></i>
             <span>";
         // line 18
@@ -82,17 +82,17 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
         <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">
             <div class=\"bg-white py-2 collapse-inner rounded\">
                 <h6 class=\"collapse-header\">Users Types:</h6>
-                <a class=\"collapse-item\" href=\"buttons.html\">Admin</a>
-                <a class=\"collapse-item\" href=\"cards.html\">Affiliates</a>
-                <a class=\"collapse-item\" href=\"cards.html\">Bookies</a>
-                <a class=\"collapse-item\" href=\"cards.html\">PremiumPay</a>
+                <a class=\"collapse-item\" href=\"/users/admin\">Admin</a>
+                <a class=\"collapse-item\" href=\"/users/list\">Users</a>
+                <a class=\"collapse-item\" href=\"/users/bookies\">Bookies</a>
+                <a class=\"collapse-item\" href=\"/users/premiumpay\">PremiumPay</a>
             </div>
         </div>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/users/terms-and-conditions\">
             <i class=\"fas fa-fw fa-file\"></i>
             <span>Terms & Conditions</span></a>
     </li>
@@ -101,22 +101,22 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Heading -->
     <div class=\"sidebar-heading\">
-        Bethouses
+        Clients
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/clients\">
             <i class=\"fas fa-fw fa-business-time\"></i>
-            <span>Bethouses</span></a>
+            <span>Clients</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/clients/editor\">
             <i class=\"fas fa-fw fa-code\"></i>
-            <span>Bethouses Editor</span></a>
+            <span>Clients Editor</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/categories\">
             <i class=\"fas fa-fw fa-list-alt\"></i>
             <span>Categories</span></a>
     </li>
@@ -131,17 +131,17 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/campaigns/list\">
             <i class=\"fas fa-fw fa-ad\"></i>
             <span>Campaigns List</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/campaigns/list-active\">
             <i class=\"fas fa-fw fa-user-cog\"></i>
             <span>Active Campaigns</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/campaigns/marketing\">
             <i class=\"fas fa-fw fa-adversal\"></i>
             <span>Marketing Campaigns</span></a>
     </li>
@@ -156,27 +156,27 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/stats\">
             <i class=\"fas fa-fw fa-chart-area\"></i>
             <span>Stats</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/stats/api\">
             <i class=\"fas fa-fw fa-chart-line\"></i>
             <span>Api Stats</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/stats/syncronize\">
             <i class=\"fas fa-fw fa-cogs\"></i>
             <span>Stats Sync</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/stats/comparer\">
             <i class=\"fas fa-fw fa-chart-bar\"></i>
             <span>Compare Stats</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/competency\">
             <i class=\"fas fa-fw fa-buysellads\"></i>
             <span>Competency</span></a>
     </li>
@@ -191,12 +191,12 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/invoicing-and-cash\">
             <i class=\"fas fa-fw fa-cash-register\"></i>
             <span>Invoicing & Cash</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/accounting\">
             <i class=\"fas fa-fw fa-euro-sign\"></i>
             <span>General Accounting</span></a>
 
@@ -210,9 +210,9 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
         <div id=\"collapsePpay\" class=\"collapse\" aria-labelledby=\"headingUtilities\"
              data-parent=\"#accordionSidebar\">
             <div class=\"bg-white py-2 collapse-inner rounded\">
-                <a class=\"collapse-item\" href=\"utilities-color.html\">List</a>
-                <a class=\"collapse-item\" href=\"utilities-border.html\">Payments</a>
-                <a class=\"collapse-item\" href=\"utilities-border.html\">Accounting</a>
+                <a class=\"collapse-item\" href=\"/premiumpay\">List</a>
+                <a class=\"collapse-item\" href=\"/premiumpay/payments\">Payments</a>
+                <a class=\"collapse-item\" href=\"/premiumpay/Accounting\">Accounting</a>
             </div>
         </div>
     </li>
@@ -227,39 +227,32 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/site-creator\">
             <i class=\"fas fa-fw fa-internet-explorer\"></i>
             <span>SiteCreator</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/news\">
             <i class=\"fas fa-fw fa-newspaper\"></i>
             <span>News</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/faqs\">
             <i class=\"fas fa-fw fa-question-circle\"></i>
             <span>FAQ's</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/languages\">
             <i class=\"fas fa-fw fa-language\"></i>
             <span>Languages</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/countries\">
             <i class=\"fas fa-fw fa-globe\"></i>
             <span>Countries</span></a>
     </li>
     <!-- Divider -->
-    <hr class=\"sidebar-divider d-none d-md-block\">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class=\"text-center d-none d-md-inline\">
-        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>
-    </div>
-
-    <!-- Sidebar Message -->
+  <!-- Sidebar Message -->
 </ul>";
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
@@ -289,7 +282,7 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
         return new Source("<ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion\" id=\"accordionSidebar\">
 
     <!-- Sidebar - Brand -->
-    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\" href=\"index.html\">
+    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\" href=\"/home\">
         <div class=\"sidebar-brand-icon rotate-n-15\">
             <i class=\"fas fa-laugh-wink\"></i>
         </div>
@@ -301,7 +294,7 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Nav Item - Dashboard -->
     <li class=\"nav-item active\">
-        <a class=\"nav-link\" href=\"index.html\">
+        <a class=\"nav-link\" href=\"/home\">
             <i class=\"fas fa-fw fa-tachometer-alt\"></i>
             <span>{% trans %}Dashboard{% endtrans %}</span></a>
     </li>
@@ -325,17 +318,17 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
         <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">
             <div class=\"bg-white py-2 collapse-inner rounded\">
                 <h6 class=\"collapse-header\">Users Types:</h6>
-                <a class=\"collapse-item\" href=\"buttons.html\">Admin</a>
-                <a class=\"collapse-item\" href=\"cards.html\">Affiliates</a>
-                <a class=\"collapse-item\" href=\"cards.html\">Bookies</a>
-                <a class=\"collapse-item\" href=\"cards.html\">PremiumPay</a>
+                <a class=\"collapse-item\" href=\"/users/admin\">Admin</a>
+                <a class=\"collapse-item\" href=\"/users/list\">Users</a>
+                <a class=\"collapse-item\" href=\"/users/bookies\">Bookies</a>
+                <a class=\"collapse-item\" href=\"/users/premiumpay\">PremiumPay</a>
             </div>
         </div>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/users/terms-and-conditions\">
             <i class=\"fas fa-fw fa-file\"></i>
             <span>Terms & Conditions</span></a>
     </li>
@@ -344,22 +337,22 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Heading -->
     <div class=\"sidebar-heading\">
-        Bethouses
+        Clients
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/clients\">
             <i class=\"fas fa-fw fa-business-time\"></i>
-            <span>Bethouses</span></a>
+            <span>Clients</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/clients/editor\">
             <i class=\"fas fa-fw fa-code\"></i>
-            <span>Bethouses Editor</span></a>
+            <span>Clients Editor</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/categories\">
             <i class=\"fas fa-fw fa-list-alt\"></i>
             <span>Categories</span></a>
     </li>
@@ -374,17 +367,17 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/campaigns/list\">
             <i class=\"fas fa-fw fa-ad\"></i>
             <span>Campaigns List</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/campaigns/list-active\">
             <i class=\"fas fa-fw fa-user-cog\"></i>
             <span>Active Campaigns</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/campaigns/marketing\">
             <i class=\"fas fa-fw fa-adversal\"></i>
             <span>Marketing Campaigns</span></a>
     </li>
@@ -399,27 +392,27 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/stats\">
             <i class=\"fas fa-fw fa-chart-area\"></i>
             <span>Stats</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/stats/api\">
             <i class=\"fas fa-fw fa-chart-line\"></i>
             <span>Api Stats</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/stats/syncronize\">
             <i class=\"fas fa-fw fa-cogs\"></i>
             <span>Stats Sync</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/stats/comparer\">
             <i class=\"fas fa-fw fa-chart-bar\"></i>
             <span>Compare Stats</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/competency\">
             <i class=\"fas fa-fw fa-buysellads\"></i>
             <span>Competency</span></a>
     </li>
@@ -434,12 +427,12 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/invoicing-and-cash\">
             <i class=\"fas fa-fw fa-cash-register\"></i>
             <span>Invoicing & Cash</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/accounting\">
             <i class=\"fas fa-fw fa-euro-sign\"></i>
             <span>General Accounting</span></a>
 
@@ -453,9 +446,9 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
         <div id=\"collapsePpay\" class=\"collapse\" aria-labelledby=\"headingUtilities\"
              data-parent=\"#accordionSidebar\">
             <div class=\"bg-white py-2 collapse-inner rounded\">
-                <a class=\"collapse-item\" href=\"utilities-color.html\">List</a>
-                <a class=\"collapse-item\" href=\"utilities-border.html\">Payments</a>
-                <a class=\"collapse-item\" href=\"utilities-border.html\">Accounting</a>
+                <a class=\"collapse-item\" href=\"/premiumpay\">List</a>
+                <a class=\"collapse-item\" href=\"/premiumpay/payments\">Payments</a>
+                <a class=\"collapse-item\" href=\"/premiumpay/Accounting\">Accounting</a>
             </div>
         </div>
     </li>
@@ -470,39 +463,32 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/site-creator\">
             <i class=\"fas fa-fw fa-internet-explorer\"></i>
             <span>SiteCreator</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/news\">
             <i class=\"fas fa-fw fa-newspaper\"></i>
             <span>News</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/faqs\">
             <i class=\"fas fa-fw fa-question-circle\"></i>
             <span>FAQ's</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/languages\">
             <i class=\"fas fa-fw fa-language\"></i>
             <span>Languages</span></a>
     </li>
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"charts.html\">
+        <a class=\"nav-link\" href=\"/countries\">
             <i class=\"fas fa-fw fa-globe\"></i>
             <span>Countries</span></a>
     </li>
     <!-- Divider -->
-    <hr class=\"sidebar-divider d-none d-md-block\">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class=\"text-center d-none d-md-inline\">
-        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>
-    </div>
-
-    <!-- Sidebar Message -->
+  <!-- Sidebar Message -->
 </ul>", "navegacion.html.twig", "/home/Betandeal/PhpstormProjects/newback/templates/navegacion.html.twig");
     }
 }

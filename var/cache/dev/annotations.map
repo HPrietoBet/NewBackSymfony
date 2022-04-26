@@ -2,7 +2,7 @@
   0 => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController',
   1 => 'App\\Controller\\AccessController',
   2 => 'App\\Controller\\HomeController',
-  3 => 'App\\Controller\\LoginController',
+  3 => 'App\\Controller\\SecurityController',
   4 => 'App\\Entity\\Ggms\\ApiConnections',
   5 => 'App\\Entity\\Ggms\\Campanias',
   6 => 'App\\Entity\\Ggms\\CampaniasBonos',

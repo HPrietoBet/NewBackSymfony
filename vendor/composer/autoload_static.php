@@ -581,7 +581,7 @@ class ComposerStaticInit71beac953fb58b7c75962cd19d7798b9
     public static $classMap = array (
         'App\\Controller\\AccessController' => __DIR__ . '/../..' . '/src/Controller/AccessController.php',
         'App\\Controller\\HomeController' => __DIR__ . '/../..' . '/src/Controller/HomeController.php',
-        'App\\Controller\\LoginController' => __DIR__ . '/../..' . '/src/Controller/LoginController.php',
+        'App\\Controller\\SecurityController' => __DIR__ . '/../..' . '/src/Controller/SecurityController.php',
         'App\\Entity\\Ggms\\ApiConnections' => __DIR__ . '/../..' . '/src/Entity/Ggms/ApiConnections.php',
         'App\\Entity\\Ggms\\Campanias' => __DIR__ . '/../..' . '/src/Entity/Ggms/Campanias.php',
         'App\\Entity\\Ggms\\CampaniasBonos' => __DIR__ . '/../..' . '/src/Entity/Ggms/CampaniasBonos.php',
@@ -805,6 +805,7 @@ class ComposerStaticInit71beac953fb58b7c75962cd19d7798b9
         'App\\Repository\\Premiumpay\\TokenTarjetasRepository' => __DIR__ . '/../..' . '/src/Repository/Premiumpay/TokenTarjetasRepository.php',
         'App\\Repository\\Premiumpay\\UserPremiumpayRepository' => __DIR__ . '/../..' . '/src/Repository/Premiumpay/UserPremiumpayRepository.php',
         'App\\Repository\\Premiumpay\\UserRepository' => __DIR__ . '/../..' . '/src/Repository/Premiumpay/UserRepository.php',
+        'App\\Security\\AppCustomAuthenticator' => __DIR__ . '/../..' . '/src/Security/AppCustomAuthenticator.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Collator' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/Resources/stubs/Collator.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',

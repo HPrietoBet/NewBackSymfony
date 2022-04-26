@@ -29,8 +29,8 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'stylesheets' => [$this, 'block_stylesheets'],
-            'javascripts' => [$this, 'block_javascripts'],
             'body' => [$this, 'block_body'],
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -57,20 +57,21 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
         // line 8
         echo "        ";
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 18
+        // line 30
         echo "
-        ";
-        // line 19
-        $this->displayBlock('javascripts', $context, $blocks);
-        // line 37
-        echo "    </head>
+
+    </head>
     <body>
         ";
-        // line 39
+        // line 34
         $this->displayBlock('body', $context, $blocks);
-        // line 40
+        // line 35
         echo "    </body>
-</html>
+    ";
+        // line 36
+        $this->displayBlock('javascripts', $context, $blocks);
+        // line 51
+        echo "</html>
 ";
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
@@ -110,50 +111,26 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 9
-        echo "            <link href=\"vendor/fontawesome-free/css/all.min.css\" rel=\"stylesheet\" type=\"text/css\">
+        echo "            <link href=\"/vendor/fontawesome-free/css/all.min.css\" rel=\"stylesheet\" type=\"text/css\">
             <link
                     href=\"https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i\"
                     rel=\"stylesheet\">
 
             <!-- Custom styles for this template-->
-            <link href=\"css/sb-admin-2.min.css\" rel=\"stylesheet\">
+            <link href=\"/css/sb-admin-2.min.css\" rel=\"stylesheet\">
+            <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css\">
+            <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css\" />
 
-        ";
-        
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
-
-        
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
-
-    }
-
-    // line 19
-    public function block_javascripts($context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
-
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
-
-        // line 20
-        echo "            <!-- Bootstrap core JavaScript-->
-            <script src=\"vendor/jquery/jquery.min.js\"></script>
-            <script src=\"vendor/bootstrap/js/bootstrap.bundle.min.js\"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src=\"/vendor/jquery/jquery.min.js\"></script>
+            <script src=\"/vendor/bootstrap/js/bootstrap.bundle.min.js\"></script>
 
             <!-- Core plugin JavaScript-->
-            <script src=\"vendor/jquery-easing/jquery.easing.min.js\"></script>
+            <script src=\"/vendor/jquery-easing/jquery.easing.min.js\"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src=\"js/sb-admin-2.min.js\"></script>
+            <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js\"></script>
+            <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js\"></script>
 
-            <!-- Page level plugins -->
-            <script src=\"vendor/chart.js/Chart.min.js\"></script>
-
-            <!-- Page level custom scripts -->
-            <script src=\"js/demo/chart-area-demo.js\"></script>
-            <script src=\"js/demo/chart-pie-demo.js\"></script>
         ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -163,7 +140,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
 
     }
 
-    // line 39
+    // line 34
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -181,6 +158,39 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
 
     }
 
+    // line 36
+    public function block_javascripts($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
+
+        // line 37
+        echo "
+        <!-- Custom scripts for all pages-->
+        <script src=\"/js/sb-admin-2.min.js\"></script>
+
+        <!-- Page level plugins -->
+        <script src=\"/vendor/chart.js/Chart.min.js\"></script>
+
+        <!-- Page level custom scripts -->
+        <script src=\"/js/demo/chart-area-demo.js\"></script>
+        <script src=\"/js/demo/chart-pie-demo.js\"></script>
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn3.devexpress.com/jslib/21.2.7/css/dx.material.blue.light.css\" />
+
+        <script type=\"text/javascript\" src=\"https://cdn3.devexpress.com/jslib/21.2.7/js/dx.all.js\"></script>
+    ";
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+    }
+
     public function getTemplateName()
     {
         return "base.html.twig";
@@ -188,7 +198,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
 
     public function getDebugInfo()
     {
-        return array (  167 => 39,  141 => 20,  131 => 19,  113 => 9,  103 => 8,  84 => 5,  72 => 40,  70 => 39,  66 => 37,  64 => 19,  61 => 18,  58 => 8,  53 => 5,  47 => 1,);
+        return array (  172 => 37,  162 => 36,  144 => 34,  114 => 9,  104 => 8,  85 => 5,  74 => 51,  72 => 36,  69 => 35,  67 => 34,  61 => 30,  58 => 8,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -201,38 +211,48 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
         <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>\">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            <link href=\"vendor/fontawesome-free/css/all.min.css\" rel=\"stylesheet\" type=\"text/css\">
+            <link href=\"/vendor/fontawesome-free/css/all.min.css\" rel=\"stylesheet\" type=\"text/css\">
             <link
                     href=\"https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i\"
                     rel=\"stylesheet\">
 
             <!-- Custom styles for this template-->
-            <link href=\"css/sb-admin-2.min.css\" rel=\"stylesheet\">
+            <link href=\"/css/sb-admin-2.min.css\" rel=\"stylesheet\">
+            <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css\">
+            <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css\" />
 
-        {% endblock %}
-
-        {% block javascripts %}
             <!-- Bootstrap core JavaScript-->
-            <script src=\"vendor/jquery/jquery.min.js\"></script>
-            <script src=\"vendor/bootstrap/js/bootstrap.bundle.min.js\"></script>
+            <script src=\"/vendor/jquery/jquery.min.js\"></script>
+            <script src=\"/vendor/bootstrap/js/bootstrap.bundle.min.js\"></script>
 
             <!-- Core plugin JavaScript-->
-            <script src=\"vendor/jquery-easing/jquery.easing.min.js\"></script>
+            <script src=\"/vendor/jquery-easing/jquery.easing.min.js\"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src=\"js/sb-admin-2.min.js\"></script>
+            <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js\"></script>
+            <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js\"></script>
 
-            <!-- Page level plugins -->
-            <script src=\"vendor/chart.js/Chart.min.js\"></script>
-
-            <!-- Page level custom scripts -->
-            <script src=\"js/demo/chart-area-demo.js\"></script>
-            <script src=\"js/demo/chart-pie-demo.js\"></script>
         {% endblock %}
+
+
     </head>
     <body>
         {% block body %}{% endblock %}
     </body>
+    {% block javascripts %}
+
+        <!-- Custom scripts for all pages-->
+        <script src=\"/js/sb-admin-2.min.js\"></script>
+
+        <!-- Page level plugins -->
+        <script src=\"/vendor/chart.js/Chart.min.js\"></script>
+
+        <!-- Page level custom scripts -->
+        <script src=\"/js/demo/chart-area-demo.js\"></script>
+        <script src=\"/js/demo/chart-pie-demo.js\"></script>
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn3.devexpress.com/jslib/21.2.7/css/dx.material.blue.light.css\" />
+
+        <script type=\"text/javascript\" src=\"https://cdn3.devexpress.com/jslib/21.2.7/js/dx.all.js\"></script>
+    {% endblock %}
 </html>
 ", "base.html.twig", "/home/Betandeal/PhpstormProjects/newback/templates/base.html.twig");
     }

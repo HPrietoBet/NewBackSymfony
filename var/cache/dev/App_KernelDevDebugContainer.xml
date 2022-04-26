@@ -151,6 +151,7 @@
       <parameter key="default">doctrine.orm.default_entity_manager</parameter>
       <parameter key="premiumpay">doctrine.orm.premiumpay_entity_manager</parameter>
       <parameter key="ggms">doctrine.orm.ggms_entity_manager</parameter>
+      <parameter key="old">doctrine.orm.old_entity_manager</parameter>
     </parameter>
     <parameter key="doctrine.default_entity_manager">default</parameter>
     <parameter key="doctrine.dbal.connection_factory.types" type="collection"/>
@@ -158,6 +159,7 @@
       <parameter key="default">doctrine.dbal.default_connection</parameter>
       <parameter key="premiumpay">doctrine.dbal.premiumpay_connection</parameter>
       <parameter key="ggms">doctrine.dbal.ggms_connection</parameter>
+      <parameter key="old">doctrine.dbal.old_connection</parameter>
     </parameter>
     <parameter key="doctrine.default_connection">default</parameter>
     <parameter key="doctrine.orm.configuration.class">Doctrine\ORM\Configuration</parameter>
@@ -345,11 +347,22 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
-    <service id="App\Controller\AccessController" class="App\Controller\AccessController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\CampaniasController" class="App\Controller\CampaniasController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument>en</argument>
+      <argument type="service" id="doctrine"/>
+      <argument type="service" id="security.token_storage"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\AccessController"/>
+        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\CampaniasController"/>
+      </call>
+    </service>
+    <service id="App\Controller\FacturacionDatosController" class="App\Controller\FacturacionDatosController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\FacturacionDatosController"/>
       </call>
     </service>
     <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
@@ -365,8 +378,37 @@
     <service id="App\Controller\SecurityController" class="App\Controller\SecurityController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.GNc8e5B.App\Controller\SecurityController"/>
+      </call>
+    </service>
+    <service id="App\Controller\SuperUsersController" class="App\Controller\SuperUsersController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument>en</argument>
+      <argument type="service" id="doctrine"/>
+      <argument type="service" id="security.token_storage"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\SuperUsersController"/>
+      </call>
+    </service>
+    <service id="App\Controller\UsersBookiesController" class="App\Controller\UsersBookiesController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument>en</argument>
+      <argument type="service" id="doctrine"/>
+      <argument type="service" id="security.token_storage"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\UsersBookiesController"/>
+      </call>
+    </service>
+    <service id="App\Controller\UsersController" class="App\Controller\UsersController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\UsersController"/>
       </call>
     </service>
     <service id="App\Repository\Ggms\ApiConnectionsRepository" class="App\Repository\Ggms\ApiConnectionsRepository" autowire="true" autoconfigure="true">
@@ -746,6 +788,114 @@
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\Main\VersionesIApuestasRepository" class="App\Repository\Main\VersionesIApuestasRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\ApiConnectionsRepository" class="App\Repository\Old\ApiConnectionsRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CampaniasBonosRepository" class="App\Repository\Old\CampaniasBonosRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CampaniasCodesRepository" class="App\Repository\Old\CampaniasCodesRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CampaniasEnlacesPosicionRepository" class="App\Repository\Old\CampaniasEnlacesPosicionRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CampaniasEnlacesRepository" class="App\Repository\Old\CampaniasEnlacesRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CampaniasOldRepository" class="App\Repository\Old\CampaniasOldRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CampaniasRepository" class="App\Repository\Old\CampaniasRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CampaniasUsuarioClicksRepository" class="App\Repository\Old\CampaniasUsuarioClicksRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CampaniasUsuarioRepository" class="App\Repository\Old\CampaniasUsuarioRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CasasAcuerdosOldRepository" class="App\Repository\Old\CasasAcuerdosOldRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CasasAcuerdosRepository" class="App\Repository\Old\CasasAcuerdosRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CasasDeApuestasAcuerdosBackRepository" class="App\Repository\Old\CasasDeApuestasAcuerdosBackRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CasasDeApuestasBackRepository" class="App\Repository\Old\CasasDeApuestasBackRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CasasOldRepository" class="App\Repository\Old\CasasOldRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CasasRepository" class="App\Repository\Old\CasasRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\CategoriasRepository" class="App\Repository\Old\CategoriasRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\FaqsRepository" class="App\Repository\Old\FaqsRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\NoticiasRepository" class="App\Repository\Old\NoticiasRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\PaisesRepository" class="App\Repository\Old\PaisesRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\ProyectosRepository" class="App\Repository\Old\ProyectosRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\ResponsablesRepository" class="App\Repository\Old\ResponsablesRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\StatsApiRepository" class="App\Repository\Old\StatsApiRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\StatsRepository" class="App\Repository\Old\StatsRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\UsuariosBetandealRepository" class="App\Repository\Old\UsuariosBetandealRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\UsuariosProyectosRepository" class="App\Repository\Old\UsuariosProyectosRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\UsuariosRepository" class="App\Repository\Old\UsuariosRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\Old\UsuariosTipoRepository" class="App\Repository\Old\UsuariosTipoRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -1175,6 +1325,8 @@
         <argument>cache.doctrine.orm.premiumpay.query</argument>
         <argument>cache.doctrine.orm.ggms.result</argument>
         <argument>cache.doctrine.orm.ggms.query</argument>
+        <argument>cache.doctrine.orm.old.result</argument>
+        <argument>cache.doctrine.orm.old.query</argument>
         <argument>cache.webpack_encore</argument>
         <argument>cache.security_expression_language</argument>
       </argument>
@@ -1215,6 +1367,8 @@
         <argument>cache.doctrine.orm.premiumpay.query</argument>
         <argument>cache.doctrine.orm.ggms.result</argument>
         <argument>cache.doctrine.orm.ggms.query</argument>
+        <argument>cache.doctrine.orm.old.result</argument>
+        <argument>cache.doctrine.orm.old.query</argument>
         <argument>cache.webpack_encore</argument>
         <argument>cache.security_expression_language</argument>
       </argument>
@@ -1243,6 +1397,8 @@
         <argument>cache.doctrine.orm.premiumpay.query</argument>
         <argument>cache.doctrine.orm.ggms.result</argument>
         <argument>cache.doctrine.orm.ggms.query</argument>
+        <argument>cache.doctrine.orm.old.result</argument>
+        <argument>cache.doctrine.orm.old.query</argument>
         <argument>cache.webpack_encore</argument>
         <argument>cache.security_expression_language</argument>
       </argument>
@@ -1908,6 +2064,8 @@
         <argument key="cache.doctrine.orm.premiumpay.query" type="service" id="cache.doctrine.orm.premiumpay.query" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.ggms.result" type="service" id="cache.doctrine.orm.ggms.result" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.ggms.query" type="service" id="cache.doctrine.orm.ggms.query" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.doctrine.orm.old.result" type="service" id="cache.doctrine.orm.old.result" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.doctrine.orm.old.query" type="service" id="cache.doctrine.orm.old.query" on-invalid="ignore_uninitialized"/>
         <argument key="cache.webpack_encore" type="service" id="cache.webpack_encore" on-invalid="ignore_uninitialized"/>
         <argument key="cache.security_expression_language" type="service" id="cache.security_expression_language" on-invalid="ignore_uninitialized"/>
       </argument>
@@ -3626,11 +3784,13 @@
         <argument type="service" id="doctrine.orm.default_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.premiumpay_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.ggms_entity_manager.property_info_extractor"/>
+        <argument type="service" id="doctrine.orm.old_entity_manager.property_info_extractor"/>
       </argument>
       <argument type="iterator">
         <argument type="service" id="doctrine.orm.default_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.premiumpay_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.ggms_entity_manager.property_info_extractor"/>
+        <argument type="service" id="doctrine.orm.old_entity_manager.property_info_extractor"/>
         <argument type="service" id="property_info.phpstan_extractor"/>
         <argument type="service" id="property_info.php_doc_extractor"/>
         <argument type="service" id="property_info.reflection_extractor"/>
@@ -3642,6 +3802,7 @@
         <argument type="service" id="doctrine.orm.default_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.premiumpay_entity_manager.property_info_extractor"/>
         <argument type="service" id="doctrine.orm.ggms_entity_manager.property_info_extractor"/>
+        <argument type="service" id="doctrine.orm.old_entity_manager.property_info_extractor"/>
         <argument type="service" id="property_info.reflection_extractor"/>
       </argument>
       <argument type="iterator">
@@ -3935,6 +4096,9 @@
       </call>
       <call method="addLoader">
         <argument type="service" id="doctrine.orm.ggms_entity_manager.validator_loader"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="doctrine.orm.old_entity_manager.validator_loader"/>
       </call>
       <factory class="Symfony\Component\Validator\Validation" method="createValidatorBuilder"/>
     </service>
@@ -4454,6 +4618,14 @@
         <argument type="service" id="cache.doctrine.orm.ggms.query"/>
       </call>
       <call method="addInstance">
+        <argument>cache.doctrine.orm.old.result</argument>
+        <argument type="service" id="cache.doctrine.orm.old.result"/>
+      </call>
+      <call method="addInstance">
+        <argument>cache.doctrine.orm.old.query</argument>
+        <argument type="service" id="cache.doctrine.orm.old.query"/>
+      </call>
+      <call method="addInstance">
         <argument>cache.webpack_encore</argument>
         <argument type="service" id="cache.webpack_encore"/>
       </call>
@@ -4525,7 +4697,7 @@
     <service id="doctrine.dbal.logger.chain" class="Doctrine\DBAL\Logging\LoggerChain">
       <argument type="collection">
         <argument type="service" id="doctrine.dbal.logger"/>
-        <argument type="service" id="doctrine.dbal.logger.profiling.ggms"/>
+        <argument type="service" id="doctrine.dbal.logger.profiling.old"/>
       </argument>
     </service>
     <service id="doctrine.dbal.logger.profiling" class="Doctrine\DBAL\Logging\DebugStack" abstract="true"/>
@@ -4550,6 +4722,10 @@
       <call method="addLogger">
         <argument>ggms</argument>
         <argument type="service" id="doctrine.dbal.logger.profiling.ggms"/>
+      </call>
+      <call method="addLogger">
+        <argument>old</argument>
+        <argument type="service" id="doctrine.dbal.logger.profiling.old"/>
       </call>
     </service>
     <service id="doctrine.dbal.connection_factory" class="Doctrine\Bundle\DoctrineBundle\ConnectionFactory">
@@ -4751,7 +4927,7 @@
       </argument>
     </service>
     <service id="doctrine.dbal.ggms_connection.event_manager" class="Symfony\Bridge\Doctrine\ContainerAwareEventManager">
-      <argument type="service" id=".service_locator.tchtdZx"/>
+      <argument type="service" id=".service_locator.3pQEahA"/>
       <argument type="collection">
         <argument>doctrine.orm.messenger.doctrine_schema_subscriber</argument>
         <argument>doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber</argument>
@@ -4762,6 +4938,12 @@
             <argument>loadClassMetadata</argument>
           </argument>
           <argument>doctrine.orm.ggms_listeners.attach_entity_listeners</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>loadClassMetadata</argument>
+          </argument>
+          <argument>doctrine.orm.old_listeners.attach_entity_listeners</argument>
         </argument>
       </argument>
     </service>
@@ -4783,11 +4965,60 @@
       <argument type="collection"/>
       <factory service="doctrine.dbal.connection_factory" method="createConnection"/>
     </service>
+    <service id="doctrine.dbal.old_connection.configuration" class="Doctrine\DBAL\Configuration">
+      <call method="setSQLLogger">
+        <argument type="service" id="doctrine.dbal.logger.chain.old"/>
+      </call>
+      <call method="setMiddlewares">
+        <argument type="collection">
+          <argument type="service">
+            <service class="Doctrine\DBAL\Logging\Middleware">
+              <argument type="service" id="monolog.logger.doctrine"/>
+            </service>
+          </argument>
+        </argument>
+      </call>
+    </service>
+    <service id="doctrine.dbal.logger.profiling.old" class="Doctrine\DBAL\Logging\DebugStack"/>
+    <service id="doctrine.dbal.logger.chain.old" class="Doctrine\DBAL\Logging\LoggerChain">
+      <argument type="collection">
+        <argument type="service" id="doctrine.dbal.logger"/>
+        <argument type="service" id="doctrine.dbal.logger.profiling.old"/>
+      </argument>
+    </service>
+    <service id="doctrine.dbal.old_connection.event_manager" class="Symfony\Bridge\Doctrine\ContainerAwareEventManager">
+      <argument type="service" id=".service_locator.IX_LvCk"/>
+      <argument type="collection">
+        <argument>doctrine.orm.messenger.doctrine_schema_subscriber</argument>
+        <argument>doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber</argument>
+        <argument>doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber</argument>
+        <argument>doctrine.orm.listeners.doctrine_token_provider_schema_subscriber</argument>
+      </argument>
+    </service>
+    <service id="doctrine.dbal.old_connection" class="Doctrine\DBAL\Connection" public="true">
+      <argument type="collection">
+        <argument key="url">%env(resolve:OLDBACK)%</argument>
+        <argument key="driver">pdo_mysql</argument>
+        <argument key="charset">utf8mb4</argument>
+        <argument key="host">localhost</argument>
+        <argument key="port">null</argument>
+        <argument key="user">root</argument>
+        <argument key="password">null</argument>
+        <argument key="driverOptions" type="collection"/>
+        <argument key="serverVersion" type="string">5.7</argument>
+        <argument key="defaultTableOptions" type="collection"/>
+      </argument>
+      <argument type="service" id="doctrine.dbal.old_connection.configuration"/>
+      <argument type="service" id="doctrine.dbal.old_connection.event_manager"/>
+      <argument type="collection"/>
+      <factory service="doctrine.dbal.connection_factory" method="createConnection"/>
+    </service>
     <service id="doctrine.dbal.logging_middleware" class="Doctrine\DBAL\Logging\Middleware" abstract="true">
       <tag name="monolog.logger" channel="doctrine"/>
       <tag name="doctrine.middleware" connection="default"/>
       <tag name="doctrine.middleware" connection="premiumpay"/>
       <tag name="doctrine.middleware" connection="ggms"/>
+      <tag name="doctrine.middleware" connection="old"/>
       <argument type="service" id="monolog.logger.doctrine"/>
     </service>
     <service id="messenger.middleware.doctrine_transaction" class="Symfony\Bridge\Doctrine\Messenger\DoctrineTransactionMiddleware" abstract="true">
@@ -4837,7 +5068,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.iWZ2OXA"/>
+      <argument type="service" id=".service_locator.sLCrGUA"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -5262,6 +5493,95 @@
     <service id="doctrine.orm.ggms_entity_manager.validator_loader" class="Symfony\Bridge\Doctrine\Validator\DoctrineLoader">
       <tag name="validator.auto_mapper" priority="-100"/>
       <argument type="service" id="doctrine.orm.ggms_entity_manager"/>
+      <argument>null</argument>
+    </service>
+    <service id="doctrine.orm.old_configuration" class="Doctrine\ORM\Configuration">
+      <tag name="doctrine.orm.configuration"/>
+      <call method="setEntityNamespaces">
+        <argument type="collection">
+          <argument key="Old">App\Entity\Old</argument>
+        </argument>
+      </call>
+      <call method="setMetadataCache">
+        <argument type="service" id="cache.doctrine.orm.old.metadata"/>
+      </call>
+      <call method="setQueryCache">
+        <argument type="service" id="cache.doctrine.orm.old.query"/>
+      </call>
+      <call method="setResultCache">
+        <argument type="service" id="cache.doctrine.orm.old.result"/>
+      </call>
+      <call method="setMetadataDriverImpl">
+        <argument type="service" id=".doctrine.orm.old_metadata_driver"/>
+      </call>
+      <call method="setProxyDir">
+        <argument>/home/Betandeal/PhpstormProjects/newback/var/cache/dev/doctrine/orm/Proxies</argument>
+      </call>
+      <call method="setProxyNamespace">
+        <argument>Proxies</argument>
+      </call>
+      <call method="setAutoGenerateProxyClasses">
+        <argument>false</argument>
+      </call>
+      <call method="setClassMetadataFactoryName">
+        <argument>Doctrine\Bundle\DoctrineBundle\Mapping\ClassMetadataFactory</argument>
+      </call>
+      <call method="setDefaultRepositoryClassName">
+        <argument>Doctrine\ORM\EntityRepository</argument>
+      </call>
+      <call method="setNamingStrategy">
+        <argument type="service" id="doctrine.orm.naming_strategy.default"/>
+      </call>
+      <call method="setQuoteStrategy">
+        <argument type="service" id="doctrine.orm.quote_strategy.default"/>
+      </call>
+      <call method="setEntityListenerResolver">
+        <argument type="service" id="doctrine.orm.old_entity_listener_resolver"/>
+      </call>
+      <call method="setRepositoryFactory">
+        <argument type="service" id="doctrine.orm.container_repository_factory"/>
+      </call>
+    </service>
+    <service id="doctrine.orm.old_annotation_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AnnotationDriver">
+      <argument type="service" id="annotations.cached_reader"/>
+      <argument type="collection">
+        <argument>/home/Betandeal/PhpstormProjects/newback/src/Entity/Old</argument>
+      </argument>
+    </service>
+    <service id="cache.doctrine.orm.old.metadata" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
+    <service id="cache.doctrine.orm.old.result" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+      <tag name="cache.pool"/>
+      <argument type="service" id="cache.doctrine.orm.old.result.recorder_inner"/>
+    </service>
+    <service id="cache.doctrine.orm.old.query" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+      <tag name="cache.pool"/>
+      <argument type="service" id="cache.doctrine.orm.old.query.recorder_inner"/>
+    </service>
+    <service id="doctrine.orm.old_entity_listener_resolver" class="Doctrine\Bundle\DoctrineBundle\Mapping\ContainerEntityListenerResolver">
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="doctrine.orm.old_listeners.attach_entity_listeners" class="Doctrine\ORM\Tools\AttachEntityListenersListener">
+      <tag name="doctrine.event_listener" event="loadClassMetadata" connection="ggms"/>
+    </service>
+    <service id="doctrine.orm.old_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
+      <argument type="collection"/>
+      <argument type="collection"/>
+    </service>
+    <service id="doctrine.orm.old_entity_manager" class="Doctrine\ORM\EntityManager" public="true" lazy="true">
+      <argument type="service" id="doctrine.dbal.ggms_connection"/>
+      <argument type="service" id="doctrine.orm.old_configuration"/>
+      <factory class="Doctrine\ORM\EntityManager" method="create"/>
+      <configurator service="doctrine.orm.old_manager_configurator" method="configure"/>
+    </service>
+    <service id="doctrine.orm.old_entity_manager.property_info_extractor" class="Symfony\Bridge\Doctrine\PropertyInfo\DoctrineExtractor">
+      <tag name="property_info.list_extractor" priority="-1001"/>
+      <tag name="property_info.type_extractor" priority="-999"/>
+      <tag name="property_info.access_extractor" priority="-999"/>
+      <argument type="service" id="doctrine.orm.old_entity_manager"/>
+    </service>
+    <service id="doctrine.orm.old_entity_manager.validator_loader" class="Symfony\Bridge\Doctrine\Validator\DoctrineLoader">
+      <tag name="validator.auto_mapper" priority="-100"/>
+      <argument type="service" id="doctrine.orm.old_entity_manager"/>
       <argument>null</argument>
     </service>
     <service id="doctrine.migrations.dependency_factory" class="Doctrine\Migrations\DependencyFactory">
@@ -6983,6 +7303,12 @@
             <argument type="service" id="doctrine.orm.ggms_annotation_metadata_driver"/>
           </argument>
         </argument>
+        <argument key="old" type="collection">
+          <argument type="collection">
+            <argument>App\Entity\Old</argument>
+            <argument type="service" id="doctrine.orm.old_annotation_metadata_driver"/>
+          </argument>
+        </argument>
       </argument>
     </service>
     <service id="maker.auto_command.abstract" class="Symfony\Bundle\MakerBundle\Command\MakerCommand" abstract="true">
@@ -7189,15 +7515,27 @@
     <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter">
       <argument type="service" id="argument_metadata_factory"/>
     </service>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AccessController" class="App\Controller\AccessController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AccessController" class="App\Controller\AccessController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\AccessController" class="App\Controller\AccessController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CampaniasController" class="App\Controller\CampaniasController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CampaniasController" class="App\Controller\CampaniasController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CampaniasController" class="App\Controller\CampaniasController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\FacturacionDatosController" class="App\Controller\FacturacionDatosController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\FacturacionDatosController" class="App\Controller\FacturacionDatosController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\FacturacionDatosController" class="App\Controller\FacturacionDatosController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SuperUsersController" class="App\Controller\SuperUsersController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SuperUsersController" class="App\Controller\SuperUsersController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\SuperUsersController" class="App\Controller\SuperUsersController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\UsersBookiesController" class="App\Controller\UsersBookiesController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\UsersBookiesController" class="App\Controller\UsersBookiesController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\UsersBookiesController" class="App\Controller\UsersBookiesController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\UsersController" class="App\Controller\UsersController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\UsersController" class="App\Controller\UsersController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\UsersController" class="App\Controller\UsersController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Ggms\ApiConnectionsRepository" class="App\Repository\Ggms\ApiConnectionsRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\Ggms\ApiConnectionsRepository" class="App\Repository\Ggms\ApiConnectionsRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Ggms\CampaniasBonosRepository" class="App\Repository\Ggms\CampaniasBonosRepository" autowire="true" abstract="true"/>
@@ -7388,6 +7726,60 @@
     <service id=".abstract.instanceof.App\Repository\Main\UsuarisAfiliadosSportRepository" class="App\Repository\Main\UsuarisAfiliadosSportRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Main\VersionesIApuestasRepository" class="App\Repository\Main\VersionesIApuestasRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\Main\VersionesIApuestasRepository" class="App\Repository\Main\VersionesIApuestasRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\ApiConnectionsRepository" class="App\Repository\Old\ApiConnectionsRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\ApiConnectionsRepository" class="App\Repository\Old\ApiConnectionsRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CampaniasBonosRepository" class="App\Repository\Old\CampaniasBonosRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CampaniasBonosRepository" class="App\Repository\Old\CampaniasBonosRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CampaniasCodesRepository" class="App\Repository\Old\CampaniasCodesRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CampaniasCodesRepository" class="App\Repository\Old\CampaniasCodesRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CampaniasEnlacesPosicionRepository" class="App\Repository\Old\CampaniasEnlacesPosicionRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CampaniasEnlacesPosicionRepository" class="App\Repository\Old\CampaniasEnlacesPosicionRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CampaniasEnlacesRepository" class="App\Repository\Old\CampaniasEnlacesRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CampaniasEnlacesRepository" class="App\Repository\Old\CampaniasEnlacesRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CampaniasOldRepository" class="App\Repository\Old\CampaniasOldRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CampaniasOldRepository" class="App\Repository\Old\CampaniasOldRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CampaniasRepository" class="App\Repository\Old\CampaniasRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CampaniasRepository" class="App\Repository\Old\CampaniasRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CampaniasUsuarioClicksRepository" class="App\Repository\Old\CampaniasUsuarioClicksRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CampaniasUsuarioClicksRepository" class="App\Repository\Old\CampaniasUsuarioClicksRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CampaniasUsuarioRepository" class="App\Repository\Old\CampaniasUsuarioRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CampaniasUsuarioRepository" class="App\Repository\Old\CampaniasUsuarioRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CasasAcuerdosOldRepository" class="App\Repository\Old\CasasAcuerdosOldRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CasasAcuerdosOldRepository" class="App\Repository\Old\CasasAcuerdosOldRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CasasAcuerdosRepository" class="App\Repository\Old\CasasAcuerdosRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CasasAcuerdosRepository" class="App\Repository\Old\CasasAcuerdosRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CasasDeApuestasAcuerdosBackRepository" class="App\Repository\Old\CasasDeApuestasAcuerdosBackRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CasasDeApuestasAcuerdosBackRepository" class="App\Repository\Old\CasasDeApuestasAcuerdosBackRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CasasDeApuestasBackRepository" class="App\Repository\Old\CasasDeApuestasBackRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CasasDeApuestasBackRepository" class="App\Repository\Old\CasasDeApuestasBackRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CasasOldRepository" class="App\Repository\Old\CasasOldRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CasasOldRepository" class="App\Repository\Old\CasasOldRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CasasRepository" class="App\Repository\Old\CasasRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CasasRepository" class="App\Repository\Old\CasasRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\CategoriasRepository" class="App\Repository\Old\CategoriasRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\CategoriasRepository" class="App\Repository\Old\CategoriasRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\FaqsRepository" class="App\Repository\Old\FaqsRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\FaqsRepository" class="App\Repository\Old\FaqsRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\NoticiasRepository" class="App\Repository\Old\NoticiasRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\NoticiasRepository" class="App\Repository\Old\NoticiasRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\PaisesRepository" class="App\Repository\Old\PaisesRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\PaisesRepository" class="App\Repository\Old\PaisesRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\ProyectosRepository" class="App\Repository\Old\ProyectosRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\ProyectosRepository" class="App\Repository\Old\ProyectosRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\ResponsablesRepository" class="App\Repository\Old\ResponsablesRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\ResponsablesRepository" class="App\Repository\Old\ResponsablesRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\StatsApiRepository" class="App\Repository\Old\StatsApiRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\StatsApiRepository" class="App\Repository\Old\StatsApiRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\StatsRepository" class="App\Repository\Old\StatsRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\StatsRepository" class="App\Repository\Old\StatsRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\UsuariosBetandealRepository" class="App\Repository\Old\UsuariosBetandealRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\UsuariosBetandealRepository" class="App\Repository\Old\UsuariosBetandealRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\UsuariosProyectosRepository" class="App\Repository\Old\UsuariosProyectosRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\UsuariosProyectosRepository" class="App\Repository\Old\UsuariosProyectosRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\UsuariosRepository" class="App\Repository\Old\UsuariosRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\UsuariosRepository" class="App\Repository\Old\UsuariosRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Old\UsuariosTipoRepository" class="App\Repository\Old\UsuariosTipoRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\Old\UsuariosTipoRepository" class="App\Repository\Old\UsuariosTipoRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Premiumpay\AdminUserRepository" class="App\Repository\Premiumpay\AdminUserRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\Premiumpay\AdminUserRepository" class="App\Repository\Premiumpay\AdminUserRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\Premiumpay\CountryRepository" class="App\Repository\Premiumpay\CountryRepository" autowire="true" abstract="true"/>
@@ -7735,23 +8127,41 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.T7xmfzk" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="doctrine" type="service_closure" id="doctrine"/>
+      </argument>
+    </service>
     <service id=".service_locator.UDgw6Ol" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.xvI9BD0" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.S.yh3be" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Controller\CampaniasController::getCampaigns" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\FacturacionDatosController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.UDgw6Ol"/>
+        <argument key="App\Controller\SuperUsersController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\UsersBookiesController::delete" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\UsersBookiesController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\UsersController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="App\Kernel::terminate" type="service_closure" id=".service_locator.KfwZsne"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::terminate" type="service_closure" id=".service_locator.KfwZsne"/>
+        <argument key="App\Controller\CampaniasController:getCampaigns" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\FacturacionDatosController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.UDgw6Ol"/>
+        <argument key="App\Controller\SuperUsersController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\UsersBookiesController:delete" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\UsersBookiesController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\UsersController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel:terminate" type="service_closure" id=".service_locator.KfwZsne"/>
@@ -7914,7 +8324,7 @@
         <argument key="doctrine.orm.premiumpay_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.premiumpay_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.tchtdZx" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.3pQEahA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="doctrine.orm.ggms_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.ggms_listeners.attach_entity_listeners"/>
@@ -7922,9 +8332,19 @@
         <argument key="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber"/>
         <argument key="doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber"/>
         <argument key="doctrine.orm.messenger.doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.messenger.doctrine_schema_subscriber"/>
+        <argument key="doctrine.orm.old_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.old_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.iWZ2OXA" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.IX_LvCk" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber"/>
+        <argument key="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber"/>
+        <argument key="doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber"/>
+        <argument key="doctrine.orm.messenger.doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.messenger.doctrine_schema_subscriber"/>
+      </argument>
+    </service>
+    <service id=".service_locator.sLCrGUA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\Ggms\ApiConnectionsRepository" type="service_closure" id="App\Repository\Ggms\ApiConnectionsRepository"/>
@@ -8022,6 +8442,33 @@
         <argument key="App\Repository\Main\UsuariosTerminosRepository" type="service_closure" id="App\Repository\Main\UsuariosTerminosRepository"/>
         <argument key="App\Repository\Main\UsuarisAfiliadosSportRepository" type="service_closure" id="App\Repository\Main\UsuarisAfiliadosSportRepository"/>
         <argument key="App\Repository\Main\VersionesIApuestasRepository" type="service_closure" id="App\Repository\Main\VersionesIApuestasRepository"/>
+        <argument key="App\Repository\Old\ApiConnectionsRepository" type="service_closure" id="App\Repository\Old\ApiConnectionsRepository"/>
+        <argument key="App\Repository\Old\CampaniasBonosRepository" type="service_closure" id="App\Repository\Old\CampaniasBonosRepository"/>
+        <argument key="App\Repository\Old\CampaniasCodesRepository" type="service_closure" id="App\Repository\Old\CampaniasCodesRepository"/>
+        <argument key="App\Repository\Old\CampaniasEnlacesPosicionRepository" type="service_closure" id="App\Repository\Old\CampaniasEnlacesPosicionRepository"/>
+        <argument key="App\Repository\Old\CampaniasEnlacesRepository" type="service_closure" id="App\Repository\Old\CampaniasEnlacesRepository"/>
+        <argument key="App\Repository\Old\CampaniasOldRepository" type="service_closure" id="App\Repository\Old\CampaniasOldRepository"/>
+        <argument key="App\Repository\Old\CampaniasRepository" type="service_closure" id="App\Repository\Old\CampaniasRepository"/>
+        <argument key="App\Repository\Old\CampaniasUsuarioClicksRepository" type="service_closure" id="App\Repository\Old\CampaniasUsuarioClicksRepository"/>
+        <argument key="App\Repository\Old\CampaniasUsuarioRepository" type="service_closure" id="App\Repository\Old\CampaniasUsuarioRepository"/>
+        <argument key="App\Repository\Old\CasasAcuerdosOldRepository" type="service_closure" id="App\Repository\Old\CasasAcuerdosOldRepository"/>
+        <argument key="App\Repository\Old\CasasAcuerdosRepository" type="service_closure" id="App\Repository\Old\CasasAcuerdosRepository"/>
+        <argument key="App\Repository\Old\CasasDeApuestasAcuerdosBackRepository" type="service_closure" id="App\Repository\Old\CasasDeApuestasAcuerdosBackRepository"/>
+        <argument key="App\Repository\Old\CasasDeApuestasBackRepository" type="service_closure" id="App\Repository\Old\CasasDeApuestasBackRepository"/>
+        <argument key="App\Repository\Old\CasasOldRepository" type="service_closure" id="App\Repository\Old\CasasOldRepository"/>
+        <argument key="App\Repository\Old\CasasRepository" type="service_closure" id="App\Repository\Old\CasasRepository"/>
+        <argument key="App\Repository\Old\CategoriasRepository" type="service_closure" id="App\Repository\Old\CategoriasRepository"/>
+        <argument key="App\Repository\Old\FaqsRepository" type="service_closure" id="App\Repository\Old\FaqsRepository"/>
+        <argument key="App\Repository\Old\NoticiasRepository" type="service_closure" id="App\Repository\Old\NoticiasRepository"/>
+        <argument key="App\Repository\Old\PaisesRepository" type="service_closure" id="App\Repository\Old\PaisesRepository"/>
+        <argument key="App\Repository\Old\ProyectosRepository" type="service_closure" id="App\Repository\Old\ProyectosRepository"/>
+        <argument key="App\Repository\Old\ResponsablesRepository" type="service_closure" id="App\Repository\Old\ResponsablesRepository"/>
+        <argument key="App\Repository\Old\StatsApiRepository" type="service_closure" id="App\Repository\Old\StatsApiRepository"/>
+        <argument key="App\Repository\Old\StatsRepository" type="service_closure" id="App\Repository\Old\StatsRepository"/>
+        <argument key="App\Repository\Old\UsuariosBetandealRepository" type="service_closure" id="App\Repository\Old\UsuariosBetandealRepository"/>
+        <argument key="App\Repository\Old\UsuariosProyectosRepository" type="service_closure" id="App\Repository\Old\UsuariosProyectosRepository"/>
+        <argument key="App\Repository\Old\UsuariosRepository" type="service_closure" id="App\Repository\Old\UsuariosRepository"/>
+        <argument key="App\Repository\Old\UsuariosTipoRepository" type="service_closure" id="App\Repository\Old\UsuariosTipoRepository"/>
         <argument key="App\Repository\Premiumpay\AdminUserRepository" type="service_closure" id="App\Repository\Premiumpay\AdminUserRepository"/>
         <argument key="App\Repository\Premiumpay\CountryRepository" type="service_closure" id="App\Repository\Premiumpay\CountryRepository"/>
         <argument key="App\Repository\Premiumpay\DBVersionRepository" type="service_closure" id="App\Repository\Premiumpay\DBVersionRepository"/>
@@ -8059,6 +8506,10 @@
       <argument type="service" id=".doctrine.orm.ggms_metadata_driver.inner"/>
       <argument type="service" id=".service_locator.KLVvNIq"/>
     </service>
+    <service id=".doctrine.orm.old_metadata_driver" class="Doctrine\Bundle\DoctrineBundle\Mapping\MappingDriver">
+      <argument type="service" id=".doctrine.orm.old_metadata_driver.inner"/>
+      <argument type="service" id=".service_locator.KLVvNIq"/>
+    </service>
     <service id="doctrine.dbal.logging_middleware.default" class="Doctrine\DBAL\Logging\Middleware">
       <argument type="service" id="monolog.logger.doctrine"/>
     </service>
@@ -8066,6 +8517,9 @@
       <argument type="service" id="monolog.logger.doctrine"/>
     </service>
     <service id="doctrine.dbal.logging_middleware.ggms" class="Doctrine\DBAL\Logging\Middleware">
+      <argument type="service" id="monolog.logger.doctrine"/>
+    </service>
+    <service id="doctrine.dbal.logging_middleware.old" class="Doctrine\DBAL\Logging\Middleware">
       <argument type="service" id="monolog.logger.doctrine"/>
     </service>
     <service id="debug.security.voter.security.access.authenticated_voter" class="Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter">
@@ -8313,9 +8767,15 @@
         <argument key="twig" type="service_closure" id="twig" on-invalid="ignore"/>
       </argument>
     </service>
-    <service id=".service_locator.GNc8e5B.App\Controller\AccessController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\AccessController"/>
-      <argument>App\Controller\AccessController</argument>
+    <service id=".service_locator.GNc8e5B.App\Controller\CampaniasController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CampaniasController"/>
+      <argument>App\Controller\CampaniasController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.GNc8e5B" method="withContext"/>
+    </service>
+    <service id=".service_locator.GNc8e5B.App\Controller\FacturacionDatosController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\FacturacionDatosController"/>
+      <argument>App\Controller\FacturacionDatosController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.GNc8e5B" method="withContext"/>
     </service>
@@ -8328,6 +8788,24 @@
     <service id=".service_locator.GNc8e5B.App\Controller\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SecurityController"/>
       <argument>App\Controller\SecurityController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.GNc8e5B" method="withContext"/>
+    </service>
+    <service id=".service_locator.GNc8e5B.App\Controller\SuperUsersController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\SuperUsersController"/>
+      <argument>App\Controller\SuperUsersController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.GNc8e5B" method="withContext"/>
+    </service>
+    <service id=".service_locator.GNc8e5B.App\Controller\UsersBookiesController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\UsersBookiesController"/>
+      <argument>App\Controller\UsersBookiesController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.GNc8e5B" method="withContext"/>
+    </service>
+    <service id=".service_locator.GNc8e5B.App\Controller\UsersController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\UsersController"/>
+      <argument>App\Controller\UsersController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.GNc8e5B" method="withContext"/>
     </service>
@@ -8505,12 +8983,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.xvI9BD0"/>
+      <argument type="service" id=".service_locator.S.yh3be"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.xvI9BD0"/>
+      <argument type="service" id=".service_locator.S.yh3be"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8547,6 +9025,12 @@
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.ggms_annotation_metadata_driver"/>
         <argument>App\Entity\Ggms</argument>
+      </call>
+    </service>
+    <service id=".doctrine.orm.old_metadata_driver.inner" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain">
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.old_annotation_metadata_driver"/>
+        <argument>App\Entity\Old</argument>
       </call>
     </service>
     <service id=".errored..service_locator.KfwZsne.Symfony\Component\HttpFoundation\Response" class="Symfony\Component\HttpFoundation\Response"/>
@@ -9300,6 +9784,8 @@
     <service id="cache.doctrine.orm.premiumpay.query.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.doctrine.orm.ggms.result.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.doctrine.orm.ggms.query.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
+    <service id="cache.doctrine.orm.old.result.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
+    <service id="cache.doctrine.orm.old.query.recorder_inner" class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
     <service id="cache.webpack_encore.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <argument>LF+zx-Mh4M</argument>
       <argument>0</argument>
@@ -9442,6 +9928,7 @@
     <service id="Doctrine\DBAL\Connection $defaultConnection" alias="doctrine.dbal.default_connection"/>
     <service id="Doctrine\DBAL\Connection $premiumpayConnection" alias="doctrine.dbal.premiumpay_connection"/>
     <service id="Doctrine\DBAL\Connection $ggmsConnection" alias="doctrine.dbal.ggms_connection"/>
+    <service id="Doctrine\DBAL\Connection $oldConnection" alias="doctrine.dbal.old_connection"/>
     <service id="Doctrine\ORM\EntityManagerInterface" alias="doctrine.orm.default_entity_manager"/>
     <service id="doctrine.orm.metadata.annotation_reader" alias="annotations.cached_reader"/>
     <service id="doctrine.orm.entity_manager" alias="doctrine.orm.default_entity_manager" public="true"/>
@@ -9460,6 +9947,11 @@
     <service id="doctrine.orm.ggms_query_cache" alias="cache.doctrine.orm.ggms.query"/>
     <service id="Doctrine\ORM\EntityManagerInterface $ggmsEntityManager" alias="doctrine.orm.ggms_entity_manager"/>
     <service id="doctrine.orm.ggms_entity_manager.event_manager" alias="doctrine.dbal.ggms_connection.event_manager"/>
+    <service id="doctrine.orm.old_metadata_cache" alias="cache.doctrine.orm.old.metadata"/>
+    <service id="doctrine.orm.old_result_cache" alias="cache.doctrine.orm.old.result"/>
+    <service id="doctrine.orm.old_query_cache" alias="cache.doctrine.orm.old.query"/>
+    <service id="Doctrine\ORM\EntityManagerInterface $oldEntityManager" alias="doctrine.orm.old_entity_manager"/>
+    <service id="doctrine.orm.old_entity_manager.event_manager" alias="doctrine.dbal.ggms_connection.event_manager"/>
     <service id="doctrine.migrations.metadata_storage" alias="doctrine.migrations.storage.table_storage"/>
     <service id="Twig_Environment" alias="twig"/>
     <service id="Twig\Environment" alias="twig"/>
@@ -9504,7 +9996,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.xvI9BD0"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.S.yh3be"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -9529,12 +10021,13 @@
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~uzTQ0Gb"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
-    <service id=".service_locator.fn4tINC" alias=".service_locator.xvI9BD0"/>
+    <service id=".service_locator.bTg6078" alias=".service_locator.S.yh3be"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
     <service id=".service_locator.Ib3T.ji" alias=".service_locator.tSSdB3w"/>
-    <service id=".service_locator.mO1tZh8" alias=".service_locator.tchtdZx"/>
+    <service id=".service_locator.EQA8iiC" alias=".service_locator.3pQEahA"/>
+    <service id=".service_locator.Tob_1lo" alias=".service_locator.IX_LvCk"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.W9y3dzm" alias=".service_locator.GNc8e5B"/>
     <service id="validator" alias="debug.validator" public="true"/>
@@ -9560,8 +10053,10 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id="doctrine.orm.premiumpay_metadata_driver" alias=".doctrine.orm.premiumpay_metadata_driver"/>
     <service id="doctrine.orm.ggms_metadata_driver" alias=".doctrine.orm.ggms_metadata_driver"/>
+    <service id="doctrine.orm.old_metadata_driver" alias=".doctrine.orm.old_metadata_driver"/>
     <service id=".service_locator._5g_Wvc" alias=".service_locator.KfwZsne"/>
     <service id=".service_locator.JBAFp66" alias=".service_locator.KfbR3DY"/>
+    <service id=".service_locator.T8.TLJR" alias=".service_locator.T7xmfzk"/>
     <service id=".service_locator.kXCVHeG" alias=".service_locator.UDgw6Ol"/>
     <service id=".service_locator.Wd_D6Iy" alias=".service_locator.GNc8e5B"/>
     <service id=".service_locator.L0rFhJm" alias=".service_locator.GVyCdgr"/>

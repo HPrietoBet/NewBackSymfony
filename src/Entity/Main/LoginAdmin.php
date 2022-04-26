@@ -93,9 +93,9 @@ class LoginAdmin implements UserInterface
     private $telefono;
 
     /**
-     * @var \DateTime|null
+     * @var string|null
      *
-     * @ORM\Column(name="ultimoacceso", type="datetime", nullable=true)
+     * @ORM\Column(name="ultimoacceso", type="string", nullable=true)
      */
     private $ultimoacceso;
 
@@ -245,12 +245,12 @@ class LoginAdmin implements UserInterface
         return $this;
     }
 
-    public function getUltimoacceso(): ?\DateTimeInterface
+    public function getUltimoacceso(): ?string
     {
         return $this->ultimoacceso;
     }
 
-    public function setUltimoacceso(?\DateTimeInterface $ultimoacceso): self
+    public function setUltimoacceso(?string $ultimoacceso): self
     {
         $this->ultimoacceso = $ultimoacceso;
 

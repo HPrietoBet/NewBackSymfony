@@ -95,7 +95,10 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                 <i class=\"fas fa-bell fa-fw\"></i>
                 <!-- Counter - Alerts -->
-                <span class=\"badge badge-danger badge-counter\">3+</span>
+                <span class=\"badge badge-danger badge-counter\">";
+        // line 56
+        echo twig_escape_filter($this->env, twig_length_filter($this->env, (isset($context["alerts"]) || array_key_exists("alerts", $context) ? $context["alerts"] : (function () { throw new RuntimeError('Variable "alerts" does not exist.', 56, $this->source); })())), "html", null, true);
+        echo "</span>
             </a>
             <!-- Dropdown - Alerts -->
             <div class=\"dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in\"
@@ -106,41 +109,37 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Alerts Center", [], "messages");
         // line 63
         echo "                </h6>
-                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
+                ";
+        // line 64
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["alerts"]) || array_key_exists("alerts", $context) ? $context["alerts"] : (function () { throw new RuntimeError('Variable "alerts" does not exist.', 64, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["alert"]) {
+            // line 65
+            echo "                <a class=\"dropdown-item d-flex align-items-center\" href=\"";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["alert"], "link", [], "any", false, false, false, 65), "html", null, true);
+            echo "\">
                     <div class=\"mr-3\">
                         <div class=\"icon-circle bg-primary\">
-                            <i class=\"fas fa-file-alt text-white\"></i>
+                            <i class=\"fas fa-";
+            // line 68
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["alert"], "type", [], "any", false, false, false, 68), "html", null, true);
+            echo " text-white\"></i>
                         </div>
                     </div>
                     <div>
-                        <div class=\"small text-gray-500\">December 12, 2019</div>
-                        <span class=\"font-weight-bold\">A new monthly report is ready to download!</span>
+                        <span class=\"font-weight-bold\">";
+            // line 72
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["alert"], "message", [], "any", false, false, false, 72), "html", null, true);
+            echo "</span>
                     </div>
                 </a>
-                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
-                    <div class=\"mr-3\">
-                        <div class=\"icon-circle bg-success\">
-                            <i class=\"fas fa-donate text-white\"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class=\"small text-gray-500\">December 7, 2019</div>
-                        \$290.29 has been deposited into your account!
-                    </div>
-                </a>
-                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
-                    <div class=\"mr-3\">
-                        <div class=\"icon-circle bg-warning\">
-                            <i class=\"fas fa-exclamation-triangle text-white\"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class=\"small text-gray-500\">December 2, 2019</div>
-                        Spending Alert: We've noticed unusually high spending for your account.
-                    </div>
-                </a>
-                <a class=\"dropdown-item text-center small text-gray-500\" href=\"#\">Show All Alerts</a>
-            </div>
+                ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['alert'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 76
+        echo "            </div>
         </li>
 
         <!-- Nav Item - Messages -->
@@ -159,7 +158,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                 </h6>
                 <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
                     <div class=\"dropdown-list-image mr-3\">
-                        <img class=\"rounded-circle\" src=\"img/undraw_profile_1.svg\"
+                        <img class=\"rounded-circle\" src=\"/img/undraw_profile_1.svg\"
                              alt=\"...\">
                         <div class=\"status-indicator bg-success\"></div>
                     </div>
@@ -171,7 +170,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                 </a>
                 <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
                     <div class=\"dropdown-list-image mr-3\">
-                        <img class=\"rounded-circle\" src=\"img/undraw_profile_2.svg\"
+                        <img class=\"rounded-circle\" src=\"/img/undraw_profile_2.svg\"
                              alt=\"...\">
                         <div class=\"status-indicator\"></div>
                     </div>
@@ -183,7 +182,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                 </a>
                 <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
                     <div class=\"dropdown-list-image mr-3\">
-                        <img class=\"rounded-circle\" src=\"img/undraw_profile_3.svg\"
+                        <img class=\"rounded-circle\" src=\"/img/undraw_profile_3.svg\"
                              alt=\"...\">
                         <div class=\"status-indicator bg-warning\"></div>
                     </div>
@@ -215,16 +214,22 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
         <li class=\"nav-item dropdown no-arrow\">
             <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\"
                data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">";
-        // line 173
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 173, $this->source); })()), "username", [], "any", false, false, false, 173), "html", null, true);
+                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small font-weight-bold\">";
+        // line 151
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 151, $this->source); })()), "user", [], "any", false, false, false, 151), "html", null, true);
         echo "</span>
                 <img class=\"img-profile rounded-circle\"
-                     src=\"img/undraw_profile.svg\">
+                     src=\"/img/undraw_profile.svg\">
             </a>
             <!-- Dropdown - User Information -->
             <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in\"
                  aria-labelledby=\"userDropdown\">
+                <span class=\"dropdown-item\">
+                    <small class=\"font-weight-bold\">";
+        // line 159
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 159, $this->source); })()), "roles", [], "any", false, false, false, 159), "html", null, true);
+        echo "</small>
+                </span>
                 <a class=\"dropdown-item\" href=\"#\">
                     <i class=\"fas fa-user fa-sm fa-fw mr-2 text-gray-400\"></i>
                     Profile
@@ -238,12 +243,12 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                     Activity Log
                 </a>
                 <div class=\"dropdown-divider\"></div>
-                <a class=\"dropdown-item\" href=\"logout\" data-toggle=\"modal\" data-target=\"#logoutModal\">
+                <a class=\"dropdown-item\" href=\"/logout\" data-toggle=\"modal\" data-target=\"#logoutModal\">
                     <i class=\"fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400\"></i>
                     ";
-        // line 195
+        // line 176
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Logout", [], "messages");
-        // line 196
+        // line 177
         echo "                </a>
             </div>
         </li>
@@ -258,7 +263,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
         <div class=\"modal-content\">
             <div class=\"modal-header\">
                 <h5 class=\"modal-title\" id=\"exampleModalLabel\">";
-        // line 209
+        // line 190
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Ready to Leave?", [], "messages");
         echo "</h5>
                 <button class=\"close\" type=\"button\" data-dismiss=\"modal\" aria-label=\"Close\">
@@ -266,16 +271,16 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                 </button>
             </div>
             <div class=\"modal-body\">";
-        // line 214
+        // line 195
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Select \"Logout\" below if you are ready to end your current session.", [], "messages");
         echo "</div>
             <div class=\"modal-footer\">
                 <button class=\"btn btn-secondary\" type=\"button\" data-dismiss=\"modal\">";
-        // line 216
+        // line 197
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Cancel", [], "messages");
         echo "</button>
                 <a class=\"btn btn-primary\" href=\"logout\">";
-        // line 217
+        // line 198
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Logout", [], "messages");
         echo "</a>
             </div>
@@ -304,7 +309,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
 
     public function getDebugInfo()
     {
-        return array (  279 => 217,  275 => 216,  270 => 214,  262 => 209,  247 => 196,  245 => 195,  220 => 173,  108 => 63,  106 => 62,  43 => 1,);
+        return array (  284 => 198,  280 => 197,  275 => 195,  267 => 190,  252 => 177,  250 => 176,  230 => 159,  219 => 151,  142 => 76,  132 => 72,  125 => 68,  118 => 65,  114 => 64,  111 => 63,  109 => 62,  100 => 56,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -364,7 +369,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                 <i class=\"fas fa-bell fa-fw\"></i>
                 <!-- Counter - Alerts -->
-                <span class=\"badge badge-danger badge-counter\">3+</span>
+                <span class=\"badge badge-danger badge-counter\">{{alerts|length}}</span>
             </a>
             <!-- Dropdown - Alerts -->
             <div class=\"dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in\"
@@ -372,40 +377,18 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                 <h6 class=\"dropdown-header bg-danger border-danger\">
                     {% trans %}Alerts Center{% endtrans %}
                 </h6>
-                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
+                {%for alert in alerts %}
+                <a class=\"dropdown-item d-flex align-items-center\" href=\"{{alert.link}}\">
                     <div class=\"mr-3\">
                         <div class=\"icon-circle bg-primary\">
-                            <i class=\"fas fa-file-alt text-white\"></i>
+                            <i class=\"fas fa-{{alert.type}} text-white\"></i>
                         </div>
                     </div>
                     <div>
-                        <div class=\"small text-gray-500\">December 12, 2019</div>
-                        <span class=\"font-weight-bold\">A new monthly report is ready to download!</span>
+                        <span class=\"font-weight-bold\">{{alert.message}}</span>
                     </div>
                 </a>
-                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
-                    <div class=\"mr-3\">
-                        <div class=\"icon-circle bg-success\">
-                            <i class=\"fas fa-donate text-white\"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class=\"small text-gray-500\">December 7, 2019</div>
-                        \$290.29 has been deposited into your account!
-                    </div>
-                </a>
-                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
-                    <div class=\"mr-3\">
-                        <div class=\"icon-circle bg-warning\">
-                            <i class=\"fas fa-exclamation-triangle text-white\"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class=\"small text-gray-500\">December 2, 2019</div>
-                        Spending Alert: We've noticed unusually high spending for your account.
-                    </div>
-                </a>
-                <a class=\"dropdown-item text-center small text-gray-500\" href=\"#\">Show All Alerts</a>
+                {%endfor%}
             </div>
         </li>
 
@@ -425,7 +408,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                 </h6>
                 <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
                     <div class=\"dropdown-list-image mr-3\">
-                        <img class=\"rounded-circle\" src=\"img/undraw_profile_1.svg\"
+                        <img class=\"rounded-circle\" src=\"/img/undraw_profile_1.svg\"
                              alt=\"...\">
                         <div class=\"status-indicator bg-success\"></div>
                     </div>
@@ -437,7 +420,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                 </a>
                 <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
                     <div class=\"dropdown-list-image mr-3\">
-                        <img class=\"rounded-circle\" src=\"img/undraw_profile_2.svg\"
+                        <img class=\"rounded-circle\" src=\"/img/undraw_profile_2.svg\"
                              alt=\"...\">
                         <div class=\"status-indicator\"></div>
                     </div>
@@ -449,7 +432,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                 </a>
                 <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">
                     <div class=\"dropdown-list-image mr-3\">
-                        <img class=\"rounded-circle\" src=\"img/undraw_profile_3.svg\"
+                        <img class=\"rounded-circle\" src=\"/img/undraw_profile_3.svg\"
                              alt=\"...\">
                         <div class=\"status-indicator bg-warning\"></div>
                     </div>
@@ -481,13 +464,16 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
         <li class=\"nav-item dropdown no-arrow\">
             <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\"
                data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">{{ user.username }}</span>
+                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small font-weight-bold\">{{ user.user }}</span>
                 <img class=\"img-profile rounded-circle\"
-                     src=\"img/undraw_profile.svg\">
+                     src=\"/img/undraw_profile.svg\">
             </a>
             <!-- Dropdown - User Information -->
             <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in\"
                  aria-labelledby=\"userDropdown\">
+                <span class=\"dropdown-item\">
+                    <small class=\"font-weight-bold\">{{user.roles}}</small>
+                </span>
                 <a class=\"dropdown-item\" href=\"#\">
                     <i class=\"fas fa-user fa-sm fa-fw mr-2 text-gray-400\"></i>
                     Profile
@@ -501,7 +487,7 @@ class __TwigTemplate_7e506480fcbaea422fe95cdf58f28bc8e19b81fde3e11a34360a8372c8e
                     Activity Log
                 </a>
                 <div class=\"dropdown-divider\"></div>
-                <a class=\"dropdown-item\" href=\"logout\" data-toggle=\"modal\" data-target=\"#logoutModal\">
+                <a class=\"dropdown-item\" href=\"/logout\" data-toggle=\"modal\" data-target=\"#logoutModal\">
                     <i class=\"fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400\"></i>
                     {%trans%}Logout{%endtrans%}
                 </a>

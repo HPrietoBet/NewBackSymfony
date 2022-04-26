@@ -44,7 +44,7 @@ class __TwigTemplate_af001060ad11983bf94d1d9cbbe3a5c1b445a7971c1af46447c06f83c56
 <footer class=\"sticky-footer bg-white\">
     <div class=\"container my-auto\">
         <div class=\"copyright text-center my-auto\">
-            <span>Copyright &copy; Your Website 2021</span>
+            <span>Copyright &copy; BetAnDeal 2022</span>
         </div>
     </div>
 </footer>
@@ -74,7 +74,7 @@ class __TwigTemplate_af001060ad11983bf94d1d9cbbe3a5c1b445a7971c1af46447c06f83c56
 <footer class=\"sticky-footer bg-white\">
     <div class=\"container my-auto\">
         <div class=\"copyright text-center my-auto\">
-            <span>Copyright &copy; Your Website 2021</span>
+            <span>Copyright &copy; BetAnDeal 2022</span>
         </div>
     </div>
 </footer>

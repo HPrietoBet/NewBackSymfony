@@ -305,7 +305,7 @@ class LoginBookies extends \App\Entity\Main\LoginBookies implements \Doctrine\OR
     /**
      * {@inheritDoc}
      */
-    public function getUltimoLogin(): ?\DateTimeInterface
+    public function getUltimoLogin(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUltimoLogin', []);
@@ -316,7 +316,7 @@ class LoginBookies extends \App\Entity\Main\LoginBookies implements \Doctrine\OR
     /**
      * {@inheritDoc}
      */
-    public function setUltimoLogin(\DateTimeInterface $ultimoLogin): \App\Entity\Main\LoginBookies
+    public function setUltimoLogin(string $ultimoLogin): \App\Entity\Main\LoginBookies
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUltimoLogin', [$ultimoLogin]);

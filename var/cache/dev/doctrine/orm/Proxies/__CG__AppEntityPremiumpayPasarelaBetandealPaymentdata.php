@@ -569,7 +569,7 @@ class PasarelaBetandealPaymentdata extends \App\Entity\Premiumpay\PasarelaBetand
     /**
      * {@inheritDoc}
      */
-    public function getDatepayment(): ?\DateTimeInterface
+    public function getDatepayment(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDatepayment', []);
@@ -580,7 +580,7 @@ class PasarelaBetandealPaymentdata extends \App\Entity\Premiumpay\PasarelaBetand
     /**
      * {@inheritDoc}
      */
-    public function setDatepayment(\DateTimeInterface $datepayment): \App\Entity\Premiumpay\PasarelaBetandealPaymentdata
+    public function setDatepayment(string $datepayment): \App\Entity\Premiumpay\PasarelaBetandealPaymentdata
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDatepayment', [$datepayment]);

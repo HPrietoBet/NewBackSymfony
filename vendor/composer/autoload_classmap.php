@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Controller\\AccessController' => $baseDir . '/src/Controller/AccessController.php',
     'App\\Controller\\HomeController' => $baseDir . '/src/Controller/HomeController.php',
-    'App\\Controller\\LoginController' => $baseDir . '/src/Controller/LoginController.php',
+    'App\\Controller\\SecurityController' => $baseDir . '/src/Controller/SecurityController.php',
     'App\\Entity\\Ggms\\ApiConnections' => $baseDir . '/src/Entity/Ggms/ApiConnections.php',
     'App\\Entity\\Ggms\\Campanias' => $baseDir . '/src/Entity/Ggms/Campanias.php',
     'App\\Entity\\Ggms\\CampaniasBonos' => $baseDir . '/src/Entity/Ggms/CampaniasBonos.php',
@@ -232,6 +232,7 @@ return array(
     'App\\Repository\\Premiumpay\\TokenTarjetasRepository' => $baseDir . '/src/Repository/Premiumpay/TokenTarjetasRepository.php',
     'App\\Repository\\Premiumpay\\UserPremiumpayRepository' => $baseDir . '/src/Repository/Premiumpay/UserPremiumpayRepository.php',
     'App\\Repository\\Premiumpay\\UserRepository' => $baseDir . '/src/Repository/Premiumpay/UserRepository.php',
+    'App\\Security\\AppCustomAuthenticator' => $baseDir . '/src/Security/AppCustomAuthenticator.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Collator' => $vendorDir . '/symfony/polyfill-intl-icu/Resources/stubs/Collator.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',

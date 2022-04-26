@@ -141,9 +141,9 @@ class PasarelaBetandealPaymentdata
     private $ippayment;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="datepayment", type="datetime", nullable=false)
+     * @ORM\Column(name="datepayment", type="string", nullable=false)
      */
     private $datepayment;
 
@@ -485,12 +485,12 @@ class PasarelaBetandealPaymentdata
         return $this;
     }
 
-    public function getDatepayment(): ?\DateTimeInterface
+    public function getDatepayment(): ?string
     {
         return $this->datepayment;
     }
 
-    public function setDatepayment(\DateTimeInterface $datepayment): self
+    public function setDatepayment(string $datepayment): self
     {
         $this->datepayment = $datepayment;
 

@@ -11,6 +11,7 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Controller;
 
+use App\Entity\Main\Campanias;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Container\ContainerInterface;
 use Psr\Link\LinkInterface;
@@ -60,7 +61,14 @@ abstract class AbstractController implements ServiceSubscriberInterface
     /**
      * @var ContainerInterface
      */
+    private $minCodes = 10;
+    public $em;
     protected $container;
+
+
+    public function __construct( ManagerRegistry $doctrine){
+        $this->em = $doctrine;
+    }
 
     /**
      * @required
@@ -473,5 +481,33 @@ abstract class AbstractController implements ServiceSubscriberInterface
         }
 
         $request->attributes->set('_links', $linkProvider->withLink($link));
+    }
+
+    public function getAlerts($minCodes){
+        // ira al controlador padre
+        $campaigns_without_codes = $this->em->getRepository(Campanias::class)->campanias_codigos_agotados($this->minCodes);
+        $alerts = array();
+        if(!empty($campaigns_without_codes)){
+            $alerts[] = array('message' => count($campaigns_without_codes). ' Without codes or close to finish them.', 'link'=> '/campaigns/no-codes', 'type' => 'ad');
+        }
+        return $alerts;
+    }
+
+    public function getSpecificFields($data, $fields = false ){
+        if(empty($fields)){
+            return $data;
+        }
+        $returned_data = array();
+        $x = 0;
+        foreach($data as $item){
+            foreach($item as $key=>$value){
+                if(in_array($key, $fields)){
+                    $returned_data[$x][$key]=$value;
+
+                }
+            }
+            $x++;
+        }
+        return $returned_data;
     }
 }

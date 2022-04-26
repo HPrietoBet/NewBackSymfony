@@ -73,4 +73,11 @@ class UsuariosAfiliadosPagosRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function countAll(){
+        return  $this->createQueryBuilder('uap')->select('SUM(uap.jugadores)')->getQuery()->getSingleScalarResult() ?? 0;
+    }
+
+    public function getSumMoney(){
+        return  $this->createQueryBuilder('uap')->select('SUM(uap.importePago)')->getQuery()->getSingleScalarResult() ?? 0;
+    }
 }

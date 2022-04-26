@@ -415,7 +415,7 @@ class LoginAdmin extends \App\Entity\Main\LoginAdmin implements \Doctrine\ORM\Pr
     /**
      * {@inheritDoc}
      */
-    public function getUltimoacceso(): ?\DateTimeInterface
+    public function getUltimoacceso(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUltimoacceso', []);
@@ -426,7 +426,7 @@ class LoginAdmin extends \App\Entity\Main\LoginAdmin implements \Doctrine\ORM\Pr
     /**
      * {@inheritDoc}
      */
-    public function setUltimoacceso(?\DateTimeInterface $ultimoacceso): \App\Entity\Main\LoginAdmin
+    public function setUltimoacceso(?string $ultimoacceso): \App\Entity\Main\LoginAdmin
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUltimoacceso', [$ultimoacceso]);

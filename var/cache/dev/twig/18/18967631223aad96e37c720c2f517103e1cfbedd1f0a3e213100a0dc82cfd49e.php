@@ -65,7 +65,7 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Hello HomeController!";
+        echo twig_escape_filter($this->env, (isset($context["title"]) || array_key_exists("title", $context) ? $context["title"] : (function () { throw new RuntimeError('Variable "title" does not exist.', 3, $this->source); })()), "html", null, true);
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -114,17 +114,6 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
             <!-- Begin Page Content -->
             <div class=\"container-fluid\">
 
-                <!-- Page Heading -->
-                <div class=\"d-sm-flex align-items-center justify-content-between mb-4\">
-                    <h1 class=\"h3 mb-0 text-gray-800\">Dashboard</h1>
-                    <a href=\"#\" class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\"><i
-                                class=\"fas fa-download fa-sm text-white-50\"></i> ";
-        // line 33
-        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Symfony is great", [], "messages");
-        // line 34
-        echo "                    </a>
-                </div>
-
                 <!-- Content Row -->
                 <div class=\"row\">
 
@@ -135,8 +124,15 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                                 <div class=\"row no-gutters align-items-center\">
                                     <div class=\"col mr-2\">
                                         <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">
-                                            Players</div>
-                                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\$40,000</div>
+                                            ";
+        // line 39
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Players", [], "messages");
+        // line 40
+        echo "                                        </div>
+                                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">";
+        // line 41
+        echo twig_escape_filter($this->env, (isset($context["totalplayers"]) || array_key_exists("totalplayers", $context) ? $context["totalplayers"] : (function () { throw new RuntimeError('Variable "totalplayers" does not exist.', 41, $this->source); })()), "html", null, true);
+        echo "</div>
                                     </div>
                                     <div class=\"col-auto\">
                                         <i class=\"fas fa-users fa-2x text-gray-300\"></i>
@@ -153,8 +149,15 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                                 <div class=\"row no-gutters align-items-center\">
                                     <div class=\"col mr-2\">
                                         <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">
-                                            Active Campaigns</div>
-                                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\$215,000</div>
+                                            ";
+        // line 58
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Active Campaigns", [], "messages");
+        // line 59
+        echo "                                        </div>
+                                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">";
+        // line 60
+        echo twig_escape_filter($this->env, (isset($context["countercampaigns"]) || array_key_exists("countercampaigns", $context) ? $context["countercampaigns"] : (function () { throw new RuntimeError('Variable "countercampaigns" does not exist.', 60, $this->source); })()), "html", null, true);
+        echo "</div>
                                     </div>
                                     <div class=\"col-auto\">
                                         <i class=\"fas fa-ad fa-2x text-gray-300\"></i>
@@ -171,16 +174,31 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                                 <div class=\"row no-gutters align-items-center\">
                                     <div class=\"col mr-2\">
                                         <div class=\"text-xs font-weight-bold text-info text-uppercase mb-1\">
-                                        </div>
+                                            ";
+        // line 77
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Commisions generated", [], "messages");
+        // line 78
+        echo "                                        </div>
                                         <div class=\"row no-gutters align-items-center\">
                                             <div class=\"col-auto\">
-                                                <div class=\"h5 mb-0 mr-3 font-weight-bold text-gray-800\">50%</div>
+                                                <div class=\"h5 mb-0 mr-3 font-weight-bold text-gray-800\">";
+        // line 81
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["totalmoney"]) || array_key_exists("totalmoney", $context) ? $context["totalmoney"] : (function () { throw new RuntimeError('Variable "totalmoney" does not exist.', 81, $this->source); })()), "now", [], "any", false, false, false, 81), "html", null, true);
+        echo "</div>
                                             </div>
                                             <div class=\"col\">
                                                 <div class=\"progress progress-sm mr-2\">
                                                     <div class=\"progress-bar bg-info\" role=\"progressbar\"
-                                                         style=\"width: 50%\" aria-valuenow=\"50\" aria-valuemin=\"0\"
-                                                         aria-valuemax=\"100\"></div>
+                                                         style=\"width: ";
+        // line 86
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["totalmoney"]) || array_key_exists("totalmoney", $context) ? $context["totalmoney"] : (function () { throw new RuntimeError('Variable "totalmoney" does not exist.', 86, $this->source); })()), "percent", [], "any", false, false, false, 86), "html", null, true);
+        echo "%\" aria-valuenow=\"";
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["totalmoney"]) || array_key_exists("totalmoney", $context) ? $context["totalmoney"] : (function () { throw new RuntimeError('Variable "totalmoney" does not exist.', 86, $this->source); })()), "now", [], "any", false, false, false, 86), "html", null, true);
+        echo "\" aria-valuemin=\"0\"
+                                                         aria-valuemax=\"";
+        // line 87
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["totalmoney"]) || array_key_exists("totalmoney", $context) ? $context["totalmoney"] : (function () { throw new RuntimeError('Variable "totalmoney" does not exist.', 87, $this->source); })()), "to", [], "any", false, false, false, 87), "html", null, true);
+        echo "\"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -197,57 +215,27 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
 
                 <div class=\"row\">
                     <!-- Content Column -->
-                    <div class=\"col-lg-4 mb-4\">
-                        <!-- Project Card Example -->
-                        <div class=\"card shadow mb-4\">
-                            <div class=\"card-header py-3\">
-                                <h6 class=\"m-0 font-weight-bold text-primary\">Alerts</h6>
-                            </div>
-                            <div class=\"card-body\">
-                                <div class=\"col-lg-12 mb-4\">
-                                    <div class=\"card bg-danger text-white shadow\">
-                                        <div class=\"card-body\">
-                                            <b>20</b> Active campaigns without codes
-                                            <div class=\"text-white-50 small\">We have to create new codes for <a href=\"#\" class=\"text-gray-100\">this campaigns</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=\"col-lg-12 mb-4\">
-                                    <div class=\"card bg-warning text-white shadow\">
-                                        <div class=\"card-body\">
-                                            <b>85</b> Users asking for campaigns
-                                            <div class=\"text-white-50 small\">Pending for check <a href=\"#\" class=\"text-gray-100\">this users</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=\"col-lg-12 mb-4\">
-                                    <div class=\"card bg-success text-white shadow\">
-                                        <div class=\"card-body\">
-                                            <b>> 15.000.000 €</b> in comisions
-                                            <div class=\"text-white-50 small\">We increase to 15.000.000 € in comisions.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Area Chart -->
-                    <div class=\"col-lg-4\">
+
+                    <div class=\"col-lg-6\">
                         <div class=\"card shadow mb-4\">
                             <!-- Card Header - Dropdown -->
                             <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
-                                <h6 class=\"m-0 font-weight-bold text-primary\">New Users</h6>
+                                <h6 class=\"m-0 font-weight-bold text-primary\">";
+        // line 109
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("New Users", [], "messages");
+        echo "</h6>
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
-                                <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart_1\"></canvas>
-                                </div>
+                                <div id=\"table_users\"></div>
+                                <script>
+
+                                </script>
                             </div>
                         </div>
                     </div>
                     <!-- Area Chart -->
-                    <div class=\"col-lg-4\">
+                    <div class=\"col-lg-6\">
                         <div class=\"card shadow mb-4\">
                             <!-- Card Header - Dropdown -->
                             <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
@@ -255,9 +243,11 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
-                                <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart_1\"></canvas>
-                                </div>
+                                <div id=\"table_cash\"></div>
+                                <script>
+
+
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -275,12 +265,18 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div class=\"card-body\">
                                 <div class=\"col-lg-4 d-inline-block\">
                                     <div class=\"input-group date\" data-provide=\"datepicker\">
-                                        <input type=\"date\" class=\"form-control\">
+                                        <input type=\"date\" id=\"date_init\" class=\"form-control\" value=\"";
+        // line 151
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["defaultdates"]) || array_key_exists("defaultdates", $context) ? $context["defaultdates"] : (function () { throw new RuntimeError('Variable "defaultdates" does not exist.', 151, $this->source); })()), "init", [], "any", false, false, false, 151), "html", null, true);
+        echo "\">
                                     </div>
                                 </div>
                                 <div class=\"col-lg-4   d-inline-block\">
                                     <div class=\"input-group date\" data-provide=\"datepicker\">
-                                        <input type=\"date\" class=\"form-control\">
+                                        <input type=\"date\" id=\"date_end\" class=\"form-control\" value=\"";
+        // line 156
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["defaultdates"]) || array_key_exists("defaultdates", $context) ? $context["defaultdates"] : (function () { throw new RuntimeError('Variable "defaultdates" does not exist.', 156, $this->source); })()), "end", [], "any", false, false, false, 156), "html", null, true);
+        echo "\">
                                     </div>
                                 </div>
                                 <div class=\"col-lg-3  d-inline-block float-right\">
@@ -299,25 +295,12 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div
                                     class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
                                 <h6 class=\"m-0 font-weight-bold text-primary\">Earnings Overview</h6>
-                                <div class=\"dropdown no-arrow\">
-                                    <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\"
-                                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        <i class=\"fas fa-ellipsis-v fa-sm fa-fw text-gray-400\"></i>
-                                    </a>
-                                    <div class=\"dropdown-menu dropdown-menu-right shadow animated--fade-in\"
-                                         aria-labelledby=\"dropdownMenuLink\">
-                                        <div class=\"dropdown-header\">Dropdown Header:</div>
-                                        <a class=\"dropdown-item\" href=\"#\">Action</a>
-                                        <a class=\"dropdown-item\" href=\"#\">Another action</a>
-                                        <div class=\"dropdown-divider\"></div>
-                                        <a class=\"dropdown-item\" href=\"#\">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
                                 <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart\"></canvas>
+                                    <canvas id=\"comisionesChart\"></canvas>
+                                    <i class=\"fa fa-spinner fa-spin\"></i>
                                 </div>
                             </div>
                         </div>
@@ -328,25 +311,12 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div
                                     class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
                                 <h6 class=\"m-0 font-weight-bold text-primary\">PremiumPay €</h6>
-                                <div class=\"dropdown no-arrow\">
-                                    <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\"
-                                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        <i class=\"fas fa-ellipsis-v fa-sm fa-fw text-gray-400\"></i>
-                                    </a>
-                                    <div class=\"dropdown-menu dropdown-menu-right shadow animated--fade-in\"
-                                         aria-labelledby=\"dropdownMenuLink\">
-                                        <div class=\"dropdown-header\">Dropdown Header:</div>
-                                        <a class=\"dropdown-item\" href=\"#\">Action</a>
-                                        <a class=\"dropdown-item\" href=\"#\">Another action</a>
-                                        <div class=\"dropdown-divider\"></div>
-                                        <a class=\"dropdown-item\" href=\"#\">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
                                 <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart\"></canvas>
+                                    <canvas id=\"ppay_eur\"></canvas>
+                                    <i class=\"fa fa-spinner fa-spin\"></i>
                                 </div>
                             </div>
                         </div>
@@ -357,30 +327,17 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div
                                     class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
                                 <h6 class=\"m-0 font-weight-bold text-primary\">PremiumPay COP</h6>
-                                <div class=\"dropdown no-arrow\">
-                                    <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\"
-                                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        <i class=\"fas fa-ellipsis-v fa-sm fa-fw text-gray-400\"></i>
-                                    </a>
-                                    <div class=\"dropdown-menu dropdown-menu-right shadow animated--fade-in\"
-                                         aria-labelledby=\"dropdownMenuLink\">
-                                        <div class=\"dropdown-header\">Dropdown Header:</div>
-                                        <a class=\"dropdown-item\" href=\"#\">Action</a>
-                                        <a class=\"dropdown-item\" href=\"#\">Another action</a>
-                                        <div class=\"dropdown-divider\"></div>
-                                        <a class=\"dropdown-item\" href=\"#\">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
                                 <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart\"></canvas>
+                                    <canvas id=\"ppay_cop\"></canvas>
+                                    <i class=\"fa fa-spinner fa-spin\"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class=\"col-lg-6 mb-4\">
+                    <!--div class=\"col-lg-6 mb-4\">
                         <div class=\"card bg-primary text-white shadow\">
                             <div class=\"card-body\">
                                 Primary
@@ -444,11 +401,11 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             </div>
                         </div>
                     </div>
-                </div>
+                </div-->
 
-                <div class=\"row\">
+                <!--div class=\"row\">
 
-                    <!-- Illustrations -->
+
                     <div class=\"col-lg-6 mb-4\">
                         <div class=\"card-header py-3\">
                             <h6 class=\"m-0 font-weight-bold text-primary\">Your preferred navigation</h6>
@@ -473,7 +430,7 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             </ul>
                         </div>
                     </div>
-                    <!-- Approach -->
+
                     <div class=\"col-lg-6 shadow mb-4\" >
                         <div class=\"card-header py-3\">
                             <h6 class=\"m-0 font-weight-bold text-primary\">Development Approach</h6>
@@ -487,8 +444,8 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                         </div>
                     </div>
 
-                </div>
-            </div>
+                </div >
+            </div-->
 
         </div>
         <!-- /.container-fluid -->
@@ -497,9 +454,9 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
     <!-- End of Main Content -->
 </div>
 ";
-        // line 408
-        $this->loadTemplate("footer.html.twig", "home/index.html.twig", 408)->display($context);
-        // line 409
+        // line 333
+        $this->loadTemplate("footer.html.twig", "home/index.html.twig", 333)->display($context);
+        // line 334
         echo "</div>
 <!-- End of Content Wrapper -->
 
@@ -512,6 +469,34 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
 </a>
 
 </body>
+    <script>
+        var users_str =  '";
+        // line 347
+        echo (isset($context["lastusers"]) || array_key_exists("lastusers", $context) ? $context["lastusers"] : (function () { throw new RuntimeError('Variable "lastusers" does not exist.', 347, $this->source); })());
+        echo "';
+        var responsables_json = JSON.parse('";
+        // line 348
+        echo (isset($context["responsables"]) || array_key_exists("responsables", $context) ? $context["responsables"] : (function () { throw new RuntimeError('Variable "responsables" does not exist.', 348, $this->source); })());
+        echo "');
+        var data_str =  '";
+        // line 349
+        echo (isset($context["lastcashactions"]) || array_key_exists("lastcashactions", $context) ? $context["lastcashactions"] : (function () { throw new RuntimeError('Variable "lastcashactions" does not exist.', 349, $this->source); })());
+        echo "';
+        var comisiones_chart = JSON.parse('";
+        // line 350
+        echo (isset($context["comisionesgraph"]) || array_key_exists("comisionesgraph", $context) ? $context["comisionesgraph"] : (function () { throw new RuntimeError('Variable "comisionesgraph" does not exist.', 350, $this->source); })());
+        echo "');
+        var eur_chart = JSON.parse('";
+        // line 351
+        echo (isset($context["eurppaygraph"]) || array_key_exists("eurppaygraph", $context) ? $context["eurppaygraph"] : (function () { throw new RuntimeError('Variable "eurppaygraph" does not exist.', 351, $this->source); })());
+        echo "');
+        var cop_chart = JSON.parse('";
+        // line 352
+        echo (isset($context["copppaygraph"]) || array_key_exists("copppaygraph", $context) ? $context["copppaygraph"] : (function () { throw new RuntimeError('Variable "copppaygraph" does not exist.', 352, $this->source); })());
+        echo "');
+    </script>
+
+    <script src=\"js/home.js\" type=\"application/javascript\"></script>
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -533,14 +518,14 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
 
     public function getDebugInfo()
     {
-        return array (  503 => 409,  501 => 408,  125 => 34,  123 => 33,  111 => 23,  109 => 22,  98 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  495 => 352,  491 => 351,  487 => 350,  483 => 349,  479 => 348,  475 => 347,  460 => 334,  458 => 333,  278 => 156,  270 => 151,  225 => 109,  200 => 87,  194 => 86,  186 => 81,  181 => 78,  179 => 77,  159 => 60,  156 => 59,  154 => 58,  134 => 41,  131 => 40,  129 => 39,  111 => 23,  109 => 22,  98 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}{{title}}{% endblock %}
 
 {% block body %}
 <body id=\"page-top\">
@@ -566,14 +551,6 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
             <!-- Begin Page Content -->
             <div class=\"container-fluid\">
 
-                <!-- Page Heading -->
-                <div class=\"d-sm-flex align-items-center justify-content-between mb-4\">
-                    <h1 class=\"h3 mb-0 text-gray-800\">Dashboard</h1>
-                    <a href=\"#\" class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\"><i
-                                class=\"fas fa-download fa-sm text-white-50\"></i> {% trans %}Symfony is great{% endtrans %}
-                    </a>
-                </div>
-
                 <!-- Content Row -->
                 <div class=\"row\">
 
@@ -584,8 +561,9 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                                 <div class=\"row no-gutters align-items-center\">
                                     <div class=\"col mr-2\">
                                         <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">
-                                            Players</div>
-                                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\$40,000</div>
+                                            {%trans%}Players{%endtrans%}
+                                        </div>
+                                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">{{totalplayers}}</div>
                                     </div>
                                     <div class=\"col-auto\">
                                         <i class=\"fas fa-users fa-2x text-gray-300\"></i>
@@ -602,8 +580,9 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                                 <div class=\"row no-gutters align-items-center\">
                                     <div class=\"col mr-2\">
                                         <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">
-                                            Active Campaigns</div>
-                                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\$215,000</div>
+                                            {%trans%}Active Campaigns{%endtrans%}
+                                        </div>
+                                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">{{ countercampaigns }}</div>
                                     </div>
                                     <div class=\"col-auto\">
                                         <i class=\"fas fa-ad fa-2x text-gray-300\"></i>
@@ -620,16 +599,17 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                                 <div class=\"row no-gutters align-items-center\">
                                     <div class=\"col mr-2\">
                                         <div class=\"text-xs font-weight-bold text-info text-uppercase mb-1\">
+                                            {%trans%}Commisions generated{%endtrans%}
                                         </div>
                                         <div class=\"row no-gutters align-items-center\">
                                             <div class=\"col-auto\">
-                                                <div class=\"h5 mb-0 mr-3 font-weight-bold text-gray-800\">50%</div>
+                                                <div class=\"h5 mb-0 mr-3 font-weight-bold text-gray-800\">{{totalmoney.now}}</div>
                                             </div>
                                             <div class=\"col\">
                                                 <div class=\"progress progress-sm mr-2\">
                                                     <div class=\"progress-bar bg-info\" role=\"progressbar\"
-                                                         style=\"width: 50%\" aria-valuenow=\"50\" aria-valuemin=\"0\"
-                                                         aria-valuemax=\"100\"></div>
+                                                         style=\"width: {{totalmoney.percent}}%\" aria-valuenow=\"{{totalmoney.now}}\" aria-valuemin=\"0\"
+                                                         aria-valuemax=\"{{totalmoney.to}}\"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -646,57 +626,24 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
 
                 <div class=\"row\">
                     <!-- Content Column -->
-                    <div class=\"col-lg-4 mb-4\">
-                        <!-- Project Card Example -->
-                        <div class=\"card shadow mb-4\">
-                            <div class=\"card-header py-3\">
-                                <h6 class=\"m-0 font-weight-bold text-primary\">Alerts</h6>
-                            </div>
-                            <div class=\"card-body\">
-                                <div class=\"col-lg-12 mb-4\">
-                                    <div class=\"card bg-danger text-white shadow\">
-                                        <div class=\"card-body\">
-                                            <b>20</b> Active campaigns without codes
-                                            <div class=\"text-white-50 small\">We have to create new codes for <a href=\"#\" class=\"text-gray-100\">this campaigns</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=\"col-lg-12 mb-4\">
-                                    <div class=\"card bg-warning text-white shadow\">
-                                        <div class=\"card-body\">
-                                            <b>85</b> Users asking for campaigns
-                                            <div class=\"text-white-50 small\">Pending for check <a href=\"#\" class=\"text-gray-100\">this users</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=\"col-lg-12 mb-4\">
-                                    <div class=\"card bg-success text-white shadow\">
-                                        <div class=\"card-body\">
-                                            <b>> 15.000.000 €</b> in comisions
-                                            <div class=\"text-white-50 small\">We increase to 15.000.000 € in comisions.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Area Chart -->
-                    <div class=\"col-lg-4\">
+
+                    <div class=\"col-lg-6\">
                         <div class=\"card shadow mb-4\">
                             <!-- Card Header - Dropdown -->
                             <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
-                                <h6 class=\"m-0 font-weight-bold text-primary\">New Users</h6>
+                                <h6 class=\"m-0 font-weight-bold text-primary\">{% trans %}New Users{% endtrans %}</h6>
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
-                                <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart_1\"></canvas>
-                                </div>
+                                <div id=\"table_users\"></div>
+                                <script>
+
+                                </script>
                             </div>
                         </div>
                     </div>
                     <!-- Area Chart -->
-                    <div class=\"col-lg-4\">
+                    <div class=\"col-lg-6\">
                         <div class=\"card shadow mb-4\">
                             <!-- Card Header - Dropdown -->
                             <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
@@ -704,9 +651,11 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
-                                <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart_1\"></canvas>
-                                </div>
+                                <div id=\"table_cash\"></div>
+                                <script>
+
+
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -724,12 +673,12 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div class=\"card-body\">
                                 <div class=\"col-lg-4 d-inline-block\">
                                     <div class=\"input-group date\" data-provide=\"datepicker\">
-                                        <input type=\"date\" class=\"form-control\">
+                                        <input type=\"date\" id=\"date_init\" class=\"form-control\" value=\"{{defaultdates.init}}\">
                                     </div>
                                 </div>
                                 <div class=\"col-lg-4   d-inline-block\">
                                     <div class=\"input-group date\" data-provide=\"datepicker\">
-                                        <input type=\"date\" class=\"form-control\">
+                                        <input type=\"date\" id=\"date_end\" class=\"form-control\" value=\"{{defaultdates.end}}\">
                                     </div>
                                 </div>
                                 <div class=\"col-lg-3  d-inline-block float-right\">
@@ -748,25 +697,12 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div
                                     class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
                                 <h6 class=\"m-0 font-weight-bold text-primary\">Earnings Overview</h6>
-                                <div class=\"dropdown no-arrow\">
-                                    <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\"
-                                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        <i class=\"fas fa-ellipsis-v fa-sm fa-fw text-gray-400\"></i>
-                                    </a>
-                                    <div class=\"dropdown-menu dropdown-menu-right shadow animated--fade-in\"
-                                         aria-labelledby=\"dropdownMenuLink\">
-                                        <div class=\"dropdown-header\">Dropdown Header:</div>
-                                        <a class=\"dropdown-item\" href=\"#\">Action</a>
-                                        <a class=\"dropdown-item\" href=\"#\">Another action</a>
-                                        <div class=\"dropdown-divider\"></div>
-                                        <a class=\"dropdown-item\" href=\"#\">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
                                 <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart\"></canvas>
+                                    <canvas id=\"comisionesChart\"></canvas>
+                                    <i class=\"fa fa-spinner fa-spin\"></i>
                                 </div>
                             </div>
                         </div>
@@ -777,25 +713,12 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div
                                     class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
                                 <h6 class=\"m-0 font-weight-bold text-primary\">PremiumPay €</h6>
-                                <div class=\"dropdown no-arrow\">
-                                    <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\"
-                                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        <i class=\"fas fa-ellipsis-v fa-sm fa-fw text-gray-400\"></i>
-                                    </a>
-                                    <div class=\"dropdown-menu dropdown-menu-right shadow animated--fade-in\"
-                                         aria-labelledby=\"dropdownMenuLink\">
-                                        <div class=\"dropdown-header\">Dropdown Header:</div>
-                                        <a class=\"dropdown-item\" href=\"#\">Action</a>
-                                        <a class=\"dropdown-item\" href=\"#\">Another action</a>
-                                        <div class=\"dropdown-divider\"></div>
-                                        <a class=\"dropdown-item\" href=\"#\">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
                                 <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart\"></canvas>
+                                    <canvas id=\"ppay_eur\"></canvas>
+                                    <i class=\"fa fa-spinner fa-spin\"></i>
                                 </div>
                             </div>
                         </div>
@@ -806,30 +729,17 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             <div
                                     class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">
                                 <h6 class=\"m-0 font-weight-bold text-primary\">PremiumPay COP</h6>
-                                <div class=\"dropdown no-arrow\">
-                                    <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\"
-                                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        <i class=\"fas fa-ellipsis-v fa-sm fa-fw text-gray-400\"></i>
-                                    </a>
-                                    <div class=\"dropdown-menu dropdown-menu-right shadow animated--fade-in\"
-                                         aria-labelledby=\"dropdownMenuLink\">
-                                        <div class=\"dropdown-header\">Dropdown Header:</div>
-                                        <a class=\"dropdown-item\" href=\"#\">Action</a>
-                                        <a class=\"dropdown-item\" href=\"#\">Another action</a>
-                                        <div class=\"dropdown-divider\"></div>
-                                        <a class=\"dropdown-item\" href=\"#\">Something else here</a>
-                                    </div>
-                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class=\"card-body\">
                                 <div class=\"chart-area\">
-                                    <canvas id=\"myAreaChart\"></canvas>
+                                    <canvas id=\"ppay_cop\"></canvas>
+                                    <i class=\"fa fa-spinner fa-spin\"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class=\"col-lg-6 mb-4\">
+                    <!--div class=\"col-lg-6 mb-4\">
                         <div class=\"card bg-primary text-white shadow\">
                             <div class=\"card-body\">
                                 Primary
@@ -893,11 +803,11 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             </div>
                         </div>
                     </div>
-                </div>
+                </div-->
 
-                <div class=\"row\">
+                <!--div class=\"row\">
 
-                    <!-- Illustrations -->
+
                     <div class=\"col-lg-6 mb-4\">
                         <div class=\"card-header py-3\">
                             <h6 class=\"m-0 font-weight-bold text-primary\">Your preferred navigation</h6>
@@ -922,7 +832,7 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                             </ul>
                         </div>
                     </div>
-                    <!-- Approach -->
+
                     <div class=\"col-lg-6 shadow mb-4\" >
                         <div class=\"card-header py-3\">
                             <h6 class=\"m-0 font-weight-bold text-primary\">Development Approach</h6>
@@ -936,8 +846,8 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
                         </div>
                     </div>
 
-                </div>
-            </div>
+                </div >
+            </div-->
 
         </div>
         <!-- /.container-fluid -->
@@ -958,6 +868,16 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
 </a>
 
 </body>
+    <script>
+        var users_str =  '{{ lastusers | raw }}';
+        var responsables_json = JSON.parse('{{ responsables | raw }}');
+        var data_str =  '{{ lastcashactions | raw }}';
+        var comisiones_chart = JSON.parse('{{ comisionesgraph | raw }}');
+        var eur_chart = JSON.parse('{{ eurppaygraph | raw }}');
+        var cop_chart = JSON.parse('{{ copppaygraph | raw }}');
+    </script>
+
+    <script src=\"js/home.js\" type=\"application/javascript\"></script>
 {% endblock %}
 ", "home/index.html.twig", "/home/Betandeal/PhpstormProjects/newback/templates/home/index.html.twig");
     }

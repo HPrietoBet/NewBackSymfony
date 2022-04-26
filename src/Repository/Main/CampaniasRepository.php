@@ -73,4 +73,44 @@ class CampaniasRepository extends ServiceEntityRepository
         ;
     }
     */
+    // agotadas
+    public function campanias_codigos_agotados($numCodes){
+        $campanias_codes = $this->createQueryBuilder('c')
+            ->select('c.id, c.titcamp, count(cc.id) totales')
+            ->leftJoin('App\Entity\Main\CampaniasCodes', 'cc', 'WITH', 'c.id = cc.idcampania')
+            ->where('c.tipo = :manual')
+            ->andWhere('c.actcamp = :activa')
+            ->setParameters(['manual'=>'manual', 'activa'=>1])
+            ->groupBy('c.id')
+            ->getQuery()->getArrayResult();
+
+        $campanias_codes_usados = $this->createQueryBuilder('c')
+            ->select('c.id, c.titcamp, count(cc.id) usados')
+            ->leftJoin('App\Entity\Main\CampaniasCodes', 'cc', 'WITH', 'c.id = cc.idcampania')
+            ->where('c.tipo = :manual')
+            ->andWhere('c.actcamp = :activa')
+            ->andWhere('cc.activo = :activos')
+            ->setParameters(['manual'=>'manual', 'activa'=>1, 'activos' => 1])
+            ->groupBy('c.id')
+            ->getQuery()->getArrayResult();
+
+        $codigos_agotados = array();
+        foreach($campanias_codes as $campania){
+            $codigos_campanias[$campania['id']] = $campania;
+        }
+        foreach($campanias_codes_usados as $campania){
+            $codigos_campanias_usados_contador[$campania['id']] = $campania;
+        }
+        foreach($codigos_campanias as $campania){
+
+                $codigos_campanias[$campania['id']]['usados'] = $codigos_campanias_usados_contador[$campania['id']]['usados'] ?? 0;
+                $codigos_campanias[$campania['id']]['restantes'] =$codigos_campanias[$campania['id']]['totales'] - $codigos_campanias[$campania['id']]['usados'];
+                if($codigos_campanias[$campania['id']]['restantes'] < $numCodes){
+                    $codigos_agotados[] = $codigos_campanias[$campania['id']];
+                }
+        }
+        return $codigos_agotados;
+    }
+
+
 }

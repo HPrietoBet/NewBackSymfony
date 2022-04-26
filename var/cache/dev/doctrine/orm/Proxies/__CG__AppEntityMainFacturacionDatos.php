@@ -635,7 +635,7 @@ class FacturacionDatos extends \App\Entity\Main\FacturacionDatos implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function getFechaAlta(): ?\DateTimeInterface
+    public function getFechaAlta(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFechaAlta', []);
@@ -646,7 +646,7 @@ class FacturacionDatos extends \App\Entity\Main\FacturacionDatos implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function setFechaAlta(\DateTimeInterface $fechaAlta): \App\Entity\Main\FacturacionDatos
+    public function setFechaAlta($fechaAlta): \App\Entity\Main\FacturacionDatos
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFechaAlta', [$fechaAlta]);
@@ -657,7 +657,7 @@ class FacturacionDatos extends \App\Entity\Main\FacturacionDatos implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function getFechaCaducidad(): ?\DateTimeInterface
+    public function getFechaCaducidad(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFechaCaducidad', []);
@@ -668,7 +668,7 @@ class FacturacionDatos extends \App\Entity\Main\FacturacionDatos implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function setFechaCaducidad(\DateTimeInterface $fechaCaducidad): \App\Entity\Main\FacturacionDatos
+    public function setFechaCaducidad($fechaCaducidad): \App\Entity\Main\FacturacionDatos
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFechaCaducidad', [$fechaCaducidad]);

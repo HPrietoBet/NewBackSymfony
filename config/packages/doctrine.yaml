@@ -21,6 +21,12 @@ doctrine:
                 driver: 'pdo_mysql'
                 server_version: '5.7'
                 charset: utf8mb4
+            old:
+                # configure these for your database server
+                url: '%env(resolve:OLDBACK)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
     orm:
         default_entity_manager: default
         entity_managers:
@@ -51,6 +57,15 @@ doctrine:
                         dir: '%kernel.project_dir%/src/Entity/Ggms'
                         prefix: 'App\Entity\Ggms'
                         alias: Ggms
+            old:
+                connection: ggms
+                mappings:
+                    Old:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity/Old'
+                        prefix: 'App\Entity\Old'
+                        alias: Old
 when@test:
     doctrine:
         dbal:
