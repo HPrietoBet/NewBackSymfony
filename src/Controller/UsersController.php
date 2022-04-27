@@ -9,17 +9,55 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class UsersController extends AbstractController
 {
+    private $version;
+    private $user;
+    private $lang;
+    public $em;
+    private $userToken;
+    private $serializer;
+
+    protected $tokenStorage;
+
+    public function __construct($lang = 'en',  ManagerRegistry $doctrine, TokenStorageInterface $tokenStorage) {
+
+        $this->lang = $lang;
+        $this->em = $doctrine;
+        $this->userToken = $tokenStorage->getToken();
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+
+        $this->serializer = new Serializer($normalizers, $encoders);
+    }
+
     /**
-     * @Route("/users", name="app_users")
+     * @Route("/users/list", name="app_users")
      */
     public function index(): Response
     {
-        return $this->render('users/index.html.twig', [
-            'controller_name' => 'UsersController',
-        ]);
+        // CHEQUEO LOGADO DE USUARIO //
+        if(empty($this->userToken)){
+            return  $this->redirectToRoute('login');
+        }
+        $this->user = $this->userToken->getUser();
+        // CHEQUEO LOGADO DE USUARIO //
+
+        $alerts = $this->getAlerts(10);
+
+        return $this->render('users/index.html.twig',
+            [
+                'title' => 'Affiliates',
+                'user' => $this->user,
+                'alerts' =>$alerts,
+
+            ]
+        );
     }
 
     /**

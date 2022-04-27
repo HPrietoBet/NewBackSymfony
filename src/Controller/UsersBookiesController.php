@@ -110,6 +110,8 @@ class UsersBookiesController extends AbstractController
 
         if(isset($newData["ultimoLogin"])){
             $userObj->setUltimoLogin($newData['ultimoLogin']);
+        }else{
+            $userObj->setUltimoLogin(date('Y-m-d H:i:s'));
         }
 
         if(isset($newData["username"])){

@@ -1,9 +1,9 @@
 $(function() {
 
-    var users_json = JSON.parse(userbookies);
+    var users_json = JSON.parse(users);
     var campaigns_json = JSON.parse(campanias);
 
-    $("#table_bookies").dxDataGrid({
+    $("#table_users").dxDataGrid({
         dataSource: users_json,
         keyExpr: "id",
         showBorders: true,
@@ -17,7 +17,7 @@ $(function() {
             allowUpdating: true,
             mode: 'popup',
             popup: {
-                title: 'Bookie Info',
+                title: 'Affiliate Info',
                 showTitle: true,
             },
             useIcons: true,
