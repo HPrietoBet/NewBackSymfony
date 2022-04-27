@@ -117,7 +117,7 @@ $(function() {
             {dataField: "adminLoginPassword", dataType:"adminLoginPassword", visible: false},
             {dataField: "avatar", dataType:"avatar", visible: false},
             {dataField: "comisionPay", dataType:"comisionPay", visible: false},
-            {dataField: "country", dataType:"country", visible: true,
+            {dataField: "country", dataType:"country", visible: true, allowEditing: false,
                 cellTemplate(container, options) {
 
                     let country = '';
@@ -261,7 +261,7 @@ $(function() {
                     displayExpr: 'name',
                 }},
             {dataField: "plainpassword", dataType:"plainpassword", visible: false},
-            {dataField: "prefijo", dataType:"prefijo", visible: false},
+            {dataField: "prefijo", dataType:"prefijo", visible: false, allowEditing: false,},
             {dataField: "premiumpay", dataType:"premiumpay", visible: false, lookup:{
                     dataSource: {
                         store: {
@@ -364,13 +364,6 @@ $(function() {
                         colCount: 2,
                         colSpan: 2,
                         items: ['id', 'idUsuFac', 'nombre', 'nombreCompletoPago', 'nombreEmpresa', 'email', 'telefono', 'nif', 'tipo', 'direccion', 'poblacion', 'cpostal', 'provincia', 'pais'],
-                    },
-                    {
-                        itemType: 'group',
-                        colCount: 2,
-                        colSpan: 2,
-                        caption: 'Bank Account Info',
-                        items: ['nombreCompletoPago', 'numcuentabanco', 'transferenciaDirrecionBanco',  'transferenciaSwift'],
                     },
                 ],
             }
@@ -580,6 +573,7 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                     backgroundColor: "#36b9cc",
                     hoverBackgroundColor: "#36b9cc",
                     borderColor: "#36b9cc",
+                    order: 2,
                     data: comisiones_chart.comisiones
                 }, {
                     label: "Players",
@@ -588,7 +582,12 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                     backgroundColor: "#1cc88a",
                     hoverBackgroundColor: "#1cc88a",
                     borderColor: "#1cc88a",
-                    type: 'bar',
+                    order: 1,
+                    type: 'line',
+                    fill: false,
+                    pointStyle: 'circle',
+                    pointRadius: 4,
+                    pointHoverRadius: 8,
                     data: comisiones_chart.players,
                 }],
         },
@@ -661,23 +660,14 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                             display: true,
                             labelString: 'Players'
                         },
+                        type: 'linear',
                         ticks: {
+                            beginAtZero: true,
                             steps: 100,
                             stepValue: 50,
-                            min: 0,
-                            max: 5000,
-                            maxTicksLimit: 5,
-                            padding: 10,
-                            callback: function(value, index, values) {
-                                return  number_format(value);
-                            }
                         },
                         gridLines: {
-                            color: "rgb(234, 236, 244)",
-                            zeroLineColor: "rgb(234, 236, 244)",
-                            drawBorder: false,
-                            borderDash: [2],
-                            zeroLineBorderDash: [2]
+                           display: false
                         }
                     }],
             },
@@ -732,6 +722,7 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                 {
                     label: "Sell",
                     spanGaps: true,
+                    order: 2,
                     yAxisID: 'A',
                     backgroundColor: "#36b9cc",
                     hoverBackgroundColor: "#36b9cc",
@@ -744,7 +735,12 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                     backgroundColor: "#1cc88a",
                     hoverBackgroundColor: "#1cc88a",
                     borderColor: "#1cc88a",
-                    type: 'bar',
+                    order: 1,
+                    type: 'line',
+                    fill: false,
+                    pointStyle: 'circle',
+                    pointRadius: 4,
+                    pointHoverRadius: 8,
                     data: eur_chart.transactions,
                 }],
         },
@@ -802,27 +798,19 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                     {
                         id: 'B',
                         position: 'right',
+                        type: 'linear',
+                        ticks: {
+                            beginAtZero: true,
+                            steps: 100,
+                            stepValue: 50,
+                        },
+                        gridLines: {
+                            display: false
+                        },
                         scaleLabel: {
                             display: true,
                             labelString: 'Transactions'
-                        },
-                        ticks: {
-                            steps: 100,
-                            stepValue: 50,
-                            min: 0,
-                            max: eur_chart.maxTransactions,
-                            maxTicksLimit: 10,
-                            padding: 10,
-                            callback: function(value, index, values) {
-                                return  number_format(value);
-                            }
-                        },
-                        gridLines: {
-                            color: "rgb(234, 236, 244)",
-                            zeroLineColor: "rgb(234, 236, 244)",
-                            drawBorder: false,
-                            borderDash: [2],
-                            zeroLineBorderDash: [2]
+
                         }
                     }],
             },
@@ -876,6 +864,7 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                 {
                     label: "Sell",
                     spanGaps: true,
+                    order: 2,
                     yAxisID: 'A',
                     backgroundColor: "#36b9cc",
                     hoverBackgroundColor: "#36b9cc",
@@ -888,7 +877,12 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                     backgroundColor: "#1cc88a",
                     hoverBackgroundColor: "#1cc88a",
                     borderColor: "#1cc88a",
-                    type: 'bar',
+                    order: 1,
+                    type: 'line',
+                    fill: false,
+                    pointStyle: 'circle',
+                    pointRadius: 4,
+                    pointHoverRadius: 8,
                     data: cop_chart.transactions,
                 }],
         },
@@ -946,27 +940,19 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                     {
                         id: 'B',
                         position: 'right',
+                        type: 'linear',
+                        ticks: {
+                            beginAtZero: true,
+                            steps: 100,
+                            stepValue: 50,
+                        },
+                        gridLines: {
+                            display: false
+                        },
                         scaleLabel: {
                             display: true,
                             labelString: 'Transactions'
-                        },
-                        ticks: {
-                            steps: 100,
-                            stepValue: 50,
-                            min: 0,
-                            max: cop_chart.maxTransactions,
-                            maxTicksLimit: 10,
-                            padding: 10,
-                            callback: function(value, index, values) {
-                                return  number_format(value);
-                            }
-                        },
-                        gridLines: {
-                            color: "rgb(234, 236, 244)",
-                            zeroLineColor: "rgb(234, 236, 244)",
-                            drawBorder: false,
-                            borderDash: [2],
-                            zeroLineBorderDash: [2]
+
                         }
                     }],
             },

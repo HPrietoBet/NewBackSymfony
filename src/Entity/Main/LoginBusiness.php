@@ -183,9 +183,9 @@ class LoginBusiness
     private $plainpassword;
 
     /**
-     * @var \DateTime|null
+     * @var string|null
      *
-     * @ORM\Column(name="last_login", type="datetime", nullable=true)
+     * @ORM\Column(name="last_login", type="string", nullable=true)
      */
     private $lastLogin;
 
@@ -239,9 +239,9 @@ class LoginBusiness
     private $adminLogin = '0';
 
     /**
-     * @var \DateTime|null
+     * @var string|null
      *
-     * @ORM\Column(name="admin_login_expires", type="datetime", nullable=true)
+     * @ORM\Column(name="admin_login_expires", type="string", nullable=true)
      */
     private $adminLoginExpires;
 
@@ -603,12 +603,12 @@ class LoginBusiness
         return $this;
     }
 
-    public function getLastLogin(): ?\DateTimeInterface
+    public function getLastLogin(): ?string
     {
         return $this->lastLogin;
     }
 
-    public function setLastLogin(?\DateTimeInterface $lastLogin): self
+    public function setLastLogin(?string $lastLogin): self
     {
         $this->lastLogin = $lastLogin;
 
@@ -699,12 +699,12 @@ class LoginBusiness
         return $this;
     }
 
-    public function getAdminLoginExpires(): ?\DateTimeInterface
+    public function getAdminLoginExpires(): ?string
     {
         return $this->adminLoginExpires;
     }
 
-    public function setAdminLoginExpires(?\DateTimeInterface $adminLoginExpires): self
+    public function setAdminLoginExpires(?string $adminLoginExpires): self
     {
         $this->adminLoginExpires = $adminLoginExpires;
 
