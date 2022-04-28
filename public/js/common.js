@@ -39,5 +39,21 @@ function setComponent(type , cellInfo, cellElement, dataArray) {
 
             break;
     }
+}
 
+function prepareDataForm(data) {
+    var dataend = [];
+    var datavalues = [];
+    for (i = 0; i < data.length; i++) {
+        fieldName = data[i].name.replace('form[', '');
+        fieldName = fieldName.replace(']', '');
+        dataend[fieldName] = []
+    }
+    for (i = 0; i < data.length; i++) {
+        fieldName = data[i].name.replace('form[', '');
+        fieldName = fieldName.replace(']', '');
+        dataend[fieldName].push(data[i].value);
+    }
+    var dataJson = Object.assign({}, dataend);
+    return dataJson;
 }

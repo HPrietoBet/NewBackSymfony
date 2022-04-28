@@ -453,7 +453,7 @@
 {%- endblock widget_attributes -%}
 
 {%- block widget_container_attributes -%}
-    {%- if id is not empty %}id="{{ id }}"{% endif -%}
+    {%- if id is not empty %}id="{{ id }}" class="row"{% endif -%}
     {{ block('attributes') }}
 {%- endblock widget_container_attributes -%}
 

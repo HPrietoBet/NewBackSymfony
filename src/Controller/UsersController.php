@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Main\LoginAdmin;
 use App\Entity\Main\LoginBusiness;
+use App\Entity\Main\UsuarioComentarios;
 use App\Entity\Main\UsuariosFuentes;
 use Doctrine\ORM\Query\Expr\Select;
 use Doctrine\Persistence\ManagerRegistry;
@@ -21,9 +22,12 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Lib\iApuestas;
 
 class UsersController extends AbstractController
 {
+    const PASSADMIN = 'Betandeal2020';
+
     private $version;
     private $user;
     private $lang;
@@ -127,16 +131,11 @@ class UsersController extends AbstractController
         }
 
         if(isset($newData["adminLogin"])){
-            $active = (empty($newData['adminLogin']) || $newData['adminLogin'] == 'false')? 0: 1;
+            $expires_date = date('Y-m-d H:i:s' , strtotime( date('Y-m-d H:i:s'). ' + 30 minute'));
+            $active = (empty($newData['adminLogin']) || $newData['adminLogin'] == 'false')? false: true;
             $userObj->setAdminLogin($active);
-        }
-
-        if(isset($newData["adminLoginExpires"])){
-            $userObj->setAdminLoginExpires($newData['adminLoginExpires']);
-        }
-
-        if(isset($newData["adminLoginPassword"])){
-            $userObj->setAdminLoginPassword($newData['adminLoginPassword']);
+            $userObj->setAdminLoginPassword(sha1(self::PASSADMIN));
+            $userObj->setAdminLoginExpires($expires_date);
         }
 
         if(isset($newData["avatar"])){
@@ -154,6 +153,7 @@ class UsersController extends AbstractController
         if(isset($newData["enlacesIapuestas"])){
             $active = (empty($newData['enlacesIapuestas']) || $newData['enlacesIapuestas'] == 'false')? 0: 1;
             $userObj->setEnlacesIapuestas($active);
+            $this->prepareIApuestas($id, $active);
         }
 
         if(isset($newData["facebook"])){
@@ -295,6 +295,19 @@ class UsersController extends AbstractController
         $doctrine->getManager()->persist($userObj);
         $doctrine->getManager()->flush();
 
+        if(isset($newData['comentarios'])){
+            $commentsObj =  new UsuarioComentarios();
+            $commentsObj->setIdUsuario($id);
+            $commentsObj->setFecha(date('Y-m-d H:i:s'));
+            $commentsObj->setComentario($newData['comentarios']);
+            $commentsObj->setUsuario($userObj->getUsername());
+
+            $doctrine->getManager()->persist($commentsObj);
+            $doctrine->getManager()->flush();
+
+        }
+
+
         return $this->json(array('success'=> 1, 'msg'=> 'user saved'));
 
     }
@@ -326,25 +339,32 @@ class UsersController extends AbstractController
             if($filter['activo'] == 0) $filter['activo'] = 0;
             if($filter['activo'] == 2) unset($filter['activo']);
 
-
-
-       // var_export($filter);
         unset($filter['_token']);
         $users = $this->em->getRepository(LoginBusiness::class)->findBy($filter);
         $users_array = $this->serializer->normalize($users);
         $users_end = array();
         $users_ids = array();
         foreach ($users_array as $last_user){
+            /* fuentes de trafico */
             $user_traffic = $this->em->getRepository(UsuariosFuentes::class)->findBy(array('idUsuario'=>$last_user['id']));
             unset($last_user['roles']);
             $last_user['trafficType'] = $this->serializer->normalize($user_traffic)[0]['tipo'] ?? '' ;
             $last_user['trafficUrl'] = $this->serializer->normalize($user_traffic)[0]['url'] ?? '';
+
+            /* comentarios */
+            $user_comments = $this->em->getRepository(UsuarioComentarios::class)->findBy(['idUsuario' => $last_user['id']]);
+            $user_comments = $this->serializer->normalize($user_comments);
+            $last_user['comentarios_anteriores']= '';
+            foreach($user_comments as $comment){
+                $last_user['comentarios_anteriores'].= $comment['fecha']. ' | '.$comment['comentario'].PHP_EOL.PHP_EOL;
+            }
+            $last_user['comentario'] = '';
+
             $users_end[] = $last_user;
+
 
         }
         return $this->json(array('success'=> 1, 'msg'=> 'finded users', 'data'=> $users_end));
-
-
 
         $last_user_array = $this->serializer->normalize($last_users);
 
@@ -362,6 +382,11 @@ class UsersController extends AbstractController
         }else{
             return $responsables_array;
         }
+    }
+
+    private function prepareIApuestas($id, $active){
+        $libIApuestas = new iApuestas($this->em);
+        $libIApuestas->prepareIApuestas($id, $active);
     }
 
 }

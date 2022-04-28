@@ -1,22 +1,9 @@
 $(function() {
-/*
-*/
+
   $('#form_search_users').on ('click', function (e) {
       e.preventDefault();
-        var data = $('#advanced_search').serializeArray()
-        var dataend = [];
-        var datavalues = [];
-        for(i = 0; i<data.length; i++){
-            fieldName =data[i].name.replace('form[', '');
-            fieldName = fieldName.replace(']', '');
-            dataend[fieldName] = []
-        }
-        for(i = 0; i<data.length; i++) {
-            fieldName =data[i].name.replace('form[', '');
-            fieldName = fieldName.replace(']', '');
-          dataend[fieldName].push(data[i].value);
-        }
-        var dataJson =  Object.assign({}, dataend);
+      var data = $('#advanced_search').serializeArray()
+      var dataJson = prepareDataForm(data);
 
       $.ajax({
           type: "POST",
@@ -78,9 +65,38 @@ function setTable(data){
                     },
                     {
                         itemType: 'group',
+                        colCount: 1,
+                        caption: 'iApuestas',
+                        items:['enlacesIapuestas']
+                    },
+                    {
+                        itemType: 'group',
                         colCount: 2,
                         caption: 'Landing Actions',
                         items: ['landingcreator', 'linksDirectos', 'linksDirectosItalia'],
+                    },
+                    {
+                        itemType: 'group',
+                        colCount: 1,
+                        colSpan: 2,
+                        caption: 'Comments',
+                        items: [{
+                            dataField: 'comentarios',
+                            caption: 'New Comment',
+                            editorType: 'dxTextArea',
+                            colSpan: 2,
+                            editorOptions: {
+                                height: 50,
+                            },
+                        }, {
+                            dataField: 'comentarios_anteriores',
+                            caption: 'Previous Comments',
+                            editorType: 'dxTextArea',
+                            colSpan: 2,
+                            editorOptions: {
+                                height: 300,
+                            },
+                        }],
                     },
 
                 ],
@@ -159,7 +175,21 @@ function setTable(data){
                         .appendTo(container);
                 },
             },
-            {dataField: "enlacesIapuestas", dataType:"enlacesIapuestas", visible: false},
+            {dataField: "enlacesIapuestas", dataType:"enlacesIapuestas", visible: false,  lookup: {
+                    dataSource: {
+                        store: {
+                            type: 'array',
+                            data: [
+                                {id: false, name: 'No Active'},
+                                {id: true, name: 'Active'},
+                            ],
+                            key: "landingcreator"
+                        },
+                    },
+                    valueExpr: 'id',
+                    displayExpr: 'name',
+                },
+            },
             {dataField: "facebook", dataType:"facebook", visible: false},
             {dataField: "fuentesTrafico", dataType:"fuentesTrafico", visible: false},
             {dataField: "husoHorario", dataType:"husoHorario", visible: false},
@@ -321,6 +351,8 @@ function setTable(data){
             {dataField: "username", dataType:"username", visible: true, allowEditing: false, minWidth:150},
             {dataField: "trafficType", dataType:"Fuente Tipo", visible: true, allowEditing: false, minWidth:100},
             {dataField: "trafficUrl", dataType:"Url", visible: true, allowEditing: false, minWidth:150},
+            {dataField: "comentarios_anteriores", caption:"Comentarios anteriores", visible: false, allowEditing: false},
+            {dataField: "comentarios", caption:"Nuevo Comentario", visible: false, allowEditing: true, },
             {dataField: "verCpas", dataType:"verCpas", visible: false, lookup:{
                     dataSource: {
                         store: {

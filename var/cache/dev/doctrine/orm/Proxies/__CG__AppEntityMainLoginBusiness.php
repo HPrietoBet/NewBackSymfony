@@ -701,7 +701,7 @@ class LoginBusiness extends \App\Entity\Main\LoginBusiness implements \Doctrine\
     /**
      * {@inheritDoc}
      */
-    public function getLastLogin(): ?\DateTimeInterface
+    public function getLastLogin(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLastLogin', []);
@@ -712,7 +712,7 @@ class LoginBusiness extends \App\Entity\Main\LoginBusiness implements \Doctrine\
     /**
      * {@inheritDoc}
      */
-    public function setLastLogin(?\DateTimeInterface $lastLogin): \App\Entity\Main\LoginBusiness
+    public function setLastLogin(?string $lastLogin): \App\Entity\Main\LoginBusiness
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLastLogin', [$lastLogin]);
@@ -877,7 +877,7 @@ class LoginBusiness extends \App\Entity\Main\LoginBusiness implements \Doctrine\
     /**
      * {@inheritDoc}
      */
-    public function getAdminLoginExpires(): ?\DateTimeInterface
+    public function getAdminLoginExpires(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAdminLoginExpires', []);
@@ -888,7 +888,7 @@ class LoginBusiness extends \App\Entity\Main\LoginBusiness implements \Doctrine\
     /**
      * {@inheritDoc}
      */
-    public function setAdminLoginExpires(?\DateTimeInterface $adminLoginExpires): \App\Entity\Main\LoginBusiness
+    public function setAdminLoginExpires(?string $adminLoginExpires): \App\Entity\Main\LoginBusiness
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAdminLoginExpires', [$adminLoginExpires]);

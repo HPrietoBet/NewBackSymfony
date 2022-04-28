@@ -22,9 +22,9 @@ class CampaniasUsuario
     private $idCampaniaUsuario;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="fecha_alta", type="date", nullable=false)
+     * @ORM\Column(name="fecha_alta", type="string", nullable=false)
      */
     private $fechaAlta;
 
@@ -106,9 +106,9 @@ class CampaniasUsuario
     private $solicitada = '0';
 
     /**
-     * @var bool|null
+     * @var int|null
      *
-     * @ORM\Column(name="pendiente", type="boolean", nullable=true)
+     * @ORM\Column(name="pendiente", type="integer", nullable=true)
      */
     private $pendiente = '0';
 
@@ -138,12 +138,12 @@ class CampaniasUsuario
         return $this->idCampaniaUsuario;
     }
 
-    public function getFechaAlta(): ?\DateTimeInterface
+    public function getFechaAlta(): ?string
     {
         return $this->fechaAlta;
     }
 
-    public function setFechaAlta(\DateTimeInterface $fechaAlta): self
+    public function setFechaAlta(string $fechaAlta): self
     {
         $this->fechaAlta = $fechaAlta;
 
@@ -282,12 +282,12 @@ class CampaniasUsuario
         return $this;
     }
 
-    public function getPendiente(): ?bool
+    public function getPendiente(): ?int
     {
         return $this->pendiente;
     }
 
-    public function setPendiente(?bool $pendiente): self
+    public function setPendiente(?int $pendiente): self
     {
         $this->pendiente = $pendiente;
 
