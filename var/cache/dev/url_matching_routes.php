@@ -30,6 +30,7 @@ return [
         '/users/list' => [[['_route' => 'app_users', '_controller' => 'App\\Controller\\UsersController::index'], null, null, null, false, false, null]],
         '/user/save' => [[['_route' => 'app_users_save', '_controller' => 'App\\Controller\\UsersController::save'], null, null, null, false, false, null]],
         '/users/get' => [[['_route' => 'app_users_get', '_controller' => 'App\\Controller\\UsersController::getusersBy'], null, null, null, false, false, null]],
+        '/users/terms-and-conditions' => [[['_route' => 'app_users_terms_get', '_controller' => 'App\\Controller\\UsersController::usersTermsLIst'], null, null, null, false, false, null]],
         '/_profiler' => [[['_route' => '_profiler_home', '_controller' => 'web_profiler.controller.profiler::homeAction'], null, null, null, true, false, null]],
         '/_profiler/search' => [[['_route' => '_profiler_search', '_controller' => 'web_profiler.controller.profiler::searchAction'], null, null, null, false, false, null]],
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],

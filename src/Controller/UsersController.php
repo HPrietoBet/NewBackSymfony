@@ -7,6 +7,7 @@ use App\Entity\Main\LoginBusiness;
 use App\Entity\Main\UsuarioComentarios;
 use App\Entity\Main\UsuariosAceptarterminos;
 use App\Entity\Main\UsuariosFuentes;
+use App\Repository\Main\UsuariosTerminosRepository;
 use Doctrine\ORM\Query\Expr\Select;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -393,5 +394,40 @@ class UsersController extends AbstractController
         $libIApuestas = new iApuestas($this->em);
         $libIApuestas->prepareIApuestas($id, $active);
     }
+
+    /**
+     * @Route("/users/terms-and-conditions", name="app_users_terms_get")
+     */
+    public function usersTermsLIst(): Response
+    {
+        // CHEQUEO LOGADO DE USUARIO //
+        if(empty($this->userToken)){
+            return  $this->redirectToRoute('login');
+        }
+        $this->user = $this->userToken->getUser();
+        // CHEQUEO LOGADO DE USUARIO //
+        $alerts = $this->getAlerts(10);
+
+        $responsables_search = $this->getResponsables($filter= true);
+
+        $userEntity = new LoginBusiness();
+
+        $usersTerms  = $this->getUsersTerms();
+
+        return $this->render('users/terms.html.twig',
+            [
+                'title' => 'Affiliates Terms and Conditions',
+                'user' => $this->user,
+                'alerts' =>$alerts,
+                'users' => json_encode($usersTerms),
+            ]
+        );
+    }
+
+    public function getUsersTerms(){
+        return $this->em->getRepository(UsuariosAceptarterminos::class)->getUsersTerms();
+
+    }
+
 
 }

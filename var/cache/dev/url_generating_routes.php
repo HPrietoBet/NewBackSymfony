@@ -19,6 +19,7 @@ return [
     'app_users' => [[], ['_controller' => 'App\\Controller\\UsersController::index'], [], [['text', '/users/list']], [], [], []],
     'app_users_save' => [[], ['_controller' => 'App\\Controller\\UsersController::save'], [], [['text', '/user/save']], [], [], []],
     'app_users_get' => [[], ['_controller' => 'App\\Controller\\UsersController::getusersBy'], [], [['text', '/users/get']], [], [], []],
+    'app_users_terms_get' => [[], ['_controller' => 'App\\Controller\\UsersController::usersTermsLIst'], [], [['text', '/users/terms-and-conditions']], [], [], []],
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], [], []],
     '_wdt' => [['token'], ['_controller' => 'web_profiler.controller.profiler::toolbarAction'], [], [['variable', '/', '[^/]++', 'token', true], ['text', '/_wdt']], [], [], []],
     '_profiler_home' => [[], ['_controller' => 'web_profiler.controller.profiler::homeAction'], [], [['text', '/_profiler/']], [], [], []],

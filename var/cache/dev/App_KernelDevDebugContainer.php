@@ -16,6 +16,6 @@ if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerFVT2Rgb\App_KernelDevDebugContainer([
     'container.build_hash' => 'FVT2Rgb',
-    'container.build_id' => '4952f3aa',
-    'container.build_time' => 1651560465,
+    'container.build_id' => '6ac123b9',
+    'container.build_time' => 1651562147,
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerFVT2Rgb');

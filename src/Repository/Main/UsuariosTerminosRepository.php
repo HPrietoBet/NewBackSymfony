@@ -2,6 +2,8 @@
 
 namespace App\Repository\Main;
 
+use App\Entity\Main\LoginAdmin;
+use App\Entity\Main\LoginBusiness;
 use App\Entity\Main\UsuariosAceptarterminos;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -72,5 +74,16 @@ class UsuariosTerminosRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+*/
+    public function getUsersTerms()
+    {
+        return $this->createQueryBuilder('ua')
+            ->select('ua.id, lb.username, ua.fecha, ua.aceptaTerminos, ua.aceptaPolitica, la.user')
+            ->join(LoginBusiness::class, 'lb', 'WITH', 'lb.id = ua.idUsuario')
+            ->leftJoin(LoginAdmin::class, 'la', 'WITH', 'la.id = lb.responsable')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
+
 }

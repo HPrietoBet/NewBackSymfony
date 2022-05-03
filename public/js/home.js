@@ -598,6 +598,11 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                     $('.fa-spinner').hide();
                 }
             },
+            elements: {
+                line: {
+                    tension: 0
+                }
+            },
             interaction: {
                 mode: 'nearest',
                 axis: 'x',
@@ -754,6 +759,11 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                     bottom: 0
                 }
             },
+            elements: {
+                line: {
+                    tension: 0
+                }
+            },
             scales: {
                 xAxes: [{
                     time: {
@@ -894,6 +904,11 @@ function setCharts(comisiones_chart, eur_chart, cop_chart){
                     right: 25,
                     top: 25,
                     bottom: 0
+                }
+            },
+            elements: {
+                line: {
+                    tension: 0
                 }
             },
             scales: {

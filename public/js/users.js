@@ -20,7 +20,68 @@ $(function() {
           }
       })
   })
+   var users_data_json = JSON.parse(users);
+   userTermsTable(users_data_json)
 });
+
+function userTermsTable(users_data){
+    console.log(users_data);
+    $("#table_usersterms").dxDataGrid({
+        dataSource: users_data,
+        keyExpr: "id",
+        showBorders: true,
+        showColumnLines: false,
+        showRowLines: true,
+        searchPanel: {
+            visible: true,
+            width: 300,
+            placeholder: 'Search...',
+        },
+        headerFilter: {
+            visible: true,
+            allowSearch: true
+        },
+        rowAlternationEnabled: true,
+        editing: {
+            allowUpdating: false,
+            mode: 'popup',
+            popup: {
+                title: 'Afilliate Terms and Policy Info',
+                showTitle: true,
+            },
+            useIcons: true,
+        },
+        export: {
+            enabled: true
+        },
+        onExporting: function(e) {
+            var workbook = new ExcelJS.Workbook();
+            var worksheet = workbook.addWorksheet('Users Terms and Conditions');
+            DevExpress.excelExporter.exportDataGrid({
+                worksheet: worksheet,
+                component: e.component,
+                customizeCell: function(options) {
+                    var excelCell = options;
+                    excelCell.font = { name: 'Arial', size: 12 };
+                    excelCell.alignment = { horizontal: 'left' };
+                }
+            }).then(function() {
+                workbook.xlsx.writeBuffer().then(function(buffer) {
+                    saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'UsersTermsAndConditions.xlsx');
+                });
+            });
+            e.cancel = true;
+        },
+        columns: [
+            {dataField: "id", caption:"Id", visible: false},
+            {dataField: "username", caption:"User"},
+            {dataField: "fecha", caption:"Date"},
+            {dataField: "aceptaPolitica", caption:"Privacy Policy"},
+            {dataField: "aceptaTerminos", caption:"Terms and Conditions"},
+            {dataField: "user", caption:"Responsible"},
+        ]
+    });
+}
 
 function setTable(data){
     var responsables_json = JSON.parse(responsables);
