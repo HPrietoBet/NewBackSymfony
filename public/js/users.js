@@ -2,6 +2,9 @@ $(function() {
 
   $('#form_search_users').on ('click', function (e) {
       e.preventDefault();
+      var _btn =$(this);
+      
+      _btn.attr('disabled', true);
       var data = $('#advanced_search').serializeArray()
       var dataJson = prepareDataForm(data);
 
@@ -11,6 +14,8 @@ $(function() {
           data: {data: dataJson},
           url: '/users/get',
           success: function (resp) {
+              _btn.attr('disabled', false);
+              _btn.find('i').remove();
               setTable(resp.data);
           }
       })
@@ -27,6 +32,13 @@ function setTable(data){
         showBorders: true,
         showColumnLines: false,
         showRowLines: true,
+        filterRow: {
+            visible: true,
+            applyFilter: 'auto',
+        },
+        headerFilter: {
+            visible: true,
+        },
         rowAlternationEnabled: true,
         editing: {
             allowUpdating: true,
@@ -42,6 +54,7 @@ function setTable(data){
                         itemType: 'group',
                         caption: 'User Info',
                         colCount: 2,
+                        colSpan: 4,
                         items: ['id', 'user', 'username', 'country', 'lang', 'prefijo', 'telefono', 'nivelUser'],
                     },
                     {
@@ -61,7 +74,7 @@ function setTable(data){
                         itemType: 'group',
                         colCount: 2,
                         caption: 'Account Actions',
-                        items: ['activo', 'adminLogin', 'mostrarAdminlogin', 'responsable'],
+                        items: ['activo', 'adminLogin', 'mostrarAdminlogin', 'responsable', 'terminos', 'politica'],
                     },
                     {
                         itemType: 'group',
@@ -366,7 +379,37 @@ function setTable(data){
                     },
                     valueExpr: 'id',
                     displayExpr: 'name',
-                }},
+                }
+            },
+            {dataField: "terminos", caption:"Terms and Conditions", visible: true, allowEditing: false, lookup: {
+                    dataSource: {
+                        store: {
+                            type: 'array',
+                            data: [
+                                {id: false, name: 'No'},
+                                {id: true, name: 'Yes'},
+                            ],
+                            key: "terminos"
+                        },
+                    },
+                    valueExpr: 'id',
+                    displayExpr: 'name',
+                },},
+            {dataField: "politica", caption:"Privacy Policy", visible: true,  allowEditing: false,  lookup: {
+                    dataSource: {
+                        store: {
+                            type: 'array',
+                            data: [
+                                {id: false, name: 'No'},
+                                {id: true, name: 'Yes'},
+                            ],
+                            key: "politica"
+                        },
+                    },
+                    valueExpr: 'id',
+                    displayExpr: 'name',
+                },},
+
         ], onRowUpdating: function (e) {
             const deferred = $.Deferred();
             const promptPromise = DevExpress.ui.dialog.confirm("Are you sure?", "Save new data");

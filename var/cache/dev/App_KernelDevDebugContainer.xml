@@ -413,6 +413,9 @@
         <argument type="service" id=".service_locator.GNc8e5B.App\Controller\UsersController"/>
       </call>
     </service>
+    <service id="App\Lib\iApuestas" class="App\Lib\iApuestas" autowire="true" autoconfigure="true">
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\Ggms\ApiConnectionsRepository" class="App\Repository\Ggms\ApiConnectionsRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>

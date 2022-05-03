@@ -217,7 +217,7 @@ class UsuarioComentarios extends \App\Entity\Main\UsuarioComentarios implements 
     /**
      * {@inheritDoc}
      */
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFecha', []);
@@ -228,7 +228,7 @@ class UsuarioComentarios extends \App\Entity\Main\UsuarioComentarios implements 
     /**
      * {@inheritDoc}
      */
-    public function setFecha(\DateTimeInterface $fecha): \App\Entity\Main\UsuarioComentarios
+    public function setFecha(string $fecha): \App\Entity\Main\UsuarioComentarios
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFecha', [$fecha]);

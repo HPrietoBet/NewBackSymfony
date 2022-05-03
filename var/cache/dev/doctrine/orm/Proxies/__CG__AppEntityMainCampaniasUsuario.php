@@ -195,7 +195,7 @@ class CampaniasUsuario extends \App\Entity\Main\CampaniasUsuario implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function getFechaAlta(): ?\DateTimeInterface
+    public function getFechaAlta(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFechaAlta', []);
@@ -206,7 +206,7 @@ class CampaniasUsuario extends \App\Entity\Main\CampaniasUsuario implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function setFechaAlta(\DateTimeInterface $fechaAlta): \App\Entity\Main\CampaniasUsuario
+    public function setFechaAlta(string $fechaAlta): \App\Entity\Main\CampaniasUsuario
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFechaAlta', [$fechaAlta]);
@@ -459,7 +459,7 @@ class CampaniasUsuario extends \App\Entity\Main\CampaniasUsuario implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function getPendiente(): ?bool
+    public function getPendiente(): ?int
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPendiente', []);
@@ -470,7 +470,7 @@ class CampaniasUsuario extends \App\Entity\Main\CampaniasUsuario implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function setPendiente(?bool $pendiente): \App\Entity\Main\CampaniasUsuario
+    public function setPendiente(?int $pendiente): \App\Entity\Main\CampaniasUsuario
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPendiente', [$pendiente]);

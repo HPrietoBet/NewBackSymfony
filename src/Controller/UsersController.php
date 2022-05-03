@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Main\LoginAdmin;
 use App\Entity\Main\LoginBusiness;
 use App\Entity\Main\UsuarioComentarios;
+use App\Entity\Main\UsuariosAceptarterminos;
 use App\Entity\Main\UsuariosFuentes;
 use Doctrine\ORM\Query\Expr\Select;
 use Doctrine\Persistence\ManagerRegistry;
@@ -77,10 +78,9 @@ class UsersController extends AbstractController
             $users_search[$user] = $user;
         }
 
-
         $filterform = $this->createFormBuilder($userEntity)
             ->add('id', ChoiceType::class, array('choices'=>$ids_search, 'attr'=>array('class' => 'col form-control selectpicker  ', 'multiple'=>true, 'expanded' => true, 'data-live-search'=>true), 'label'=>'Id'))
-            ->add('username', ChoiceType::class,array('choices'=>$users_search, 'attr'=>array('class' => 'col form-control selectpicker  ', 'multiple'=>true, 'data-live-search'=>true), 'label'=>'Username'))
+            ->add('username', ChoiceType::class,array('choices'=>$users_search, 'attr'=>array('class' => 'form-control selectpicker', 'multiple'=>true, 'data-live-search'=>true, 'data-actions-box'=>true, 'expanded'=>true), 'label'=>'Username'))
             ->add('activo', ChoiceType::class, array('choices'=>array('Todos'=> 2, 'Active'=> true, 'Not Active'=>false), 'attr'=>array('class'=>'form-control selectpicker',), 'label'=>'Active?'))
             ->add('responsable', ChoiceType::class, array('choices'=>$responsables_search, 'attr'=>array('class' => 'col form-control selectpicker  ', 'multiple'=>true, 'data-live-search'=>true), 'label'=>'Responsible'))
             ->add('lang', LanguageType::class, array('attr'=>array('class' => 'form-control selectpicker ', 'multiple'=>true, 'data-live-search'=>true), 'label'=>'Language'))
@@ -359,6 +359,11 @@ class UsersController extends AbstractController
                 $last_user['comentarios_anteriores'].= $comment['fecha']. ' | '.$comment['comentario'].PHP_EOL.PHP_EOL;
             }
             $last_user['comentario'] = '';
+
+            $users_terms = $this->em->getRepository(UsuariosAceptarterminos::class)->findOneBy(['idUsuario' => $last_user['id']]);
+            $users_terms = $this->serializer->normalize($users_terms);
+            $last_user['politica'] = $users_terms['aceptaPolitica'] ?? false;
+            $last_user['terminos'] =  $users_terms['aceptaTerminos'] ?? false;
 
             $users_end[] = $last_user;
 
