@@ -3,6 +3,9 @@
 namespace App\Repository\Main;
 
 use App\Entity\Main\CasasDeApuestas;
+use App\Entity\Main\CasasDeApuestasAcuerdos;
+use App\Entity\Main\CasasDeApuestasComentarios;
+use App\Entity\Main\CategoriasCampania;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -73,4 +76,46 @@ class CasasDeApuestasRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getAllAboutClient(){
+        return $this->createQueryBuilder('c')
+                ->select('c.activoFeedCuotas,
+                    c.activoFeedStreaming,
+                    c.baseline,
+                    c.bono,
+                    c.contacto,
+                    c.currency,
+                    c.datosFacturacion,
+                    c.feedCuotas,
+                    c.feedStreaming,
+                    c.idCasPais,
+                    c.idCasa,
+                    c.idCat,
+                    c.idPaginaHtml,
+                    c.imgcasa,
+                    c.impuestos,
+                    c.logoCustom,
+                    c.actcasa,
+                    c.metodoCobro,
+                    c.paisOrder,
+                    c.password,
+                    c.procedimientoPago,
+                    c.requiereFactura,
+                    c.responsable,
+                    c.titcasa,
+                    c.url,
+                    c.usuario,
+                    cda.cpa,
+                    cda.cpaMoneda,
+                    cda.rs,
+                    cda.fee,
+                    cda.feeMoneda,
+                    cda.acuerdoActivo,
+                    cc.titcat,
+                    cc.actcat')
+                ->join(CasasDeApuestasAcuerdos::class,'cda', 'WITH', 'c.idCasa = cda.idCasa')
+                ->join(CategoriasCampania::class, 'cc' , 'WITH','cc.idCat = c.idCat')
+                ->getQuery()
+                ->getArrayResult();
+    }
 }

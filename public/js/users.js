@@ -178,7 +178,7 @@ function setTable(data){
         },
         columns: [
             {dataField: "id", dataType:"id", visible: true, allowEditing: false},
-            {dataField: "aceptaPremiumpay", dataType:"aceptaPremiumpay", visible: false, lookup:{
+            {dataField: "premiumpay", dataType:"Premiumpay", visible: false, lookup:{
                     dataSource: {
                         store: {
                             type: 'array',
@@ -186,7 +186,7 @@ function setTable(data){
                                 { id: false, name: 'No Active' },
                                 { id: true, name: 'Active' },
                             ],
-                            key: "aceptaPremiumpay"
+                            key: "premiumpay"
                         },
                     },
                     valueExpr: 'id',
@@ -257,7 +257,7 @@ function setTable(data){
                                 {id: false, name: 'No Active'},
                                 {id: true, name: 'Active'},
                             ],
-                            key: "landingcreator"
+                            key: "enlacesIapuestas"
                         },
                     },
                     valueExpr: 'id',
@@ -336,7 +336,7 @@ function setTable(data){
                                 { id: false, name: 'No Active' },
                                 { id: true, name: 'Active' },
                             ],
-                            key: "mostrarAdminlogin"
+                            key: "marketing"
                         },
                     },
                     valueExpr: 'id',

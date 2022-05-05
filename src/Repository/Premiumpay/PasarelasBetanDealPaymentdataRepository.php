@@ -74,14 +74,17 @@ class PasarelasBetanDealPaymentdataRepository extends ServiceEntityRepository
     }
     */
 
-    public function getChartInfo($chartDates, $currency){
+    public function getChartInfo($chartDates, $currency = 'EUR', $visible = true){
         $currencies = $currency=='EUR' ? array('EUR', '€'): array($currency);
+        $visible = empty($visible)? 0: 1;
         $datos =   $this->createQueryBuilder('pd')->select(['pd.datepayment fecha', 'SUM(pd.quantity) ventas', 'count(pd.idtransaccion) transacciones'])
                 ->where('pd.datepayment BETWEEN :from AND :to')
                 ->andWhere('pd.currency IN (:currency)')
+                ->andWhere('pd.visible = :visible')
                 ->setParameter('from', $chartDates['init'])
                 ->setParameter('to',$chartDates['end'])
                 ->setParameter('currency', $currencies)
+                ->setParameter('visible', $visible)
                 ->groupBy('pd.datepayment')
                 ->getQuery()
                 ->getResult() ?? 0;
