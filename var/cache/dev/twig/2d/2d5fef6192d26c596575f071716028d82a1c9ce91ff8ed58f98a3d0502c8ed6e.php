@@ -85,7 +85,6 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
                 <a class=\"collapse-item\" href=\"/users/admin\">Admin</a>
                 <a class=\"collapse-item\" href=\"/users/list\">Users</a>
                 <a class=\"collapse-item\" href=\"/users/bookies\">Bookies</a>
-                <a class=\"collapse-item\" href=\"/users/premiumpay\">PremiumPay</a>
             </div>
         </div>
     </li>
@@ -121,9 +120,9 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <span>Categories</span></a>
     </li>
 
+
     <!-- Divider -->
     <hr class=\"sidebar-divider\">
-
     <!-- Heading -->
     <div class=\"sidebar-heading\">
         Campaigns
@@ -201,21 +200,6 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <span>General Accounting</span></a>
 
     </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapsePpay\"
-           aria-expanded=\"true\" aria-controls=\"collapsePpay\">
-            <i class=\"fas fa-fw fa-paypal\"></i>
-            <span>PremiumPay</span>
-        </a>
-        <div id=\"collapsePpay\" class=\"collapse\" aria-labelledby=\"headingUtilities\"
-             data-parent=\"#accordionSidebar\">
-            <div class=\"bg-white py-2 collapse-inner rounded\">
-                <a class=\"collapse-item\" href=\"/premiumpay\">List</a>
-                <a class=\"collapse-item\" href=\"/premiumpay/payments\">Payments</a>
-                <a class=\"collapse-item\" href=\"/premiumpay/Accounting\">Accounting</a>
-            </div>
-        </div>
-    </li>
 
     <!-- Divider -->
     <hr class=\"sidebar-divider\">
@@ -252,6 +236,39 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <span>Countries</span></a>
     </li>
     <!-- Divider -->
+
+    <!-- Divider -->
+    <hr class=\"sidebar-divider\">
+
+    <!-- Heading -->
+    <div class=\"sidebar-heading\">
+        PremiumPay
+    </div>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/users/premiumpay\">
+            <i class=\"fas fa-fw fa-ad\"></i>
+            <span>Users</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/getaways/list\">
+            <i class=\"fas fa-fw fa-user-cog\"></i>
+            <span>Getaways</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/payments/list\">
+            <i class=\"fas fa-fw fa-adversal\"></i>
+            <span>Payments</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/accounting\">
+            <i class=\"fas fa-fw fa-adversal\"></i>
+            <span>Accounting</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/payments/actions\">
+            <i class=\"fas fa-fw fa-adversal\"></i>
+            <span>Actions</span></a>
+    </li>
   <!-- Sidebar Message -->
 </ul>";
         
@@ -321,7 +338,6 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
                 <a class=\"collapse-item\" href=\"/users/admin\">Admin</a>
                 <a class=\"collapse-item\" href=\"/users/list\">Users</a>
                 <a class=\"collapse-item\" href=\"/users/bookies\">Bookies</a>
-                <a class=\"collapse-item\" href=\"/users/premiumpay\">PremiumPay</a>
             </div>
         </div>
     </li>
@@ -357,9 +373,9 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <span>Categories</span></a>
     </li>
 
+
     <!-- Divider -->
     <hr class=\"sidebar-divider\">
-
     <!-- Heading -->
     <div class=\"sidebar-heading\">
         Campaigns
@@ -437,21 +453,6 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <span>General Accounting</span></a>
 
     </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapsePpay\"
-           aria-expanded=\"true\" aria-controls=\"collapsePpay\">
-            <i class=\"fas fa-fw fa-paypal\"></i>
-            <span>PremiumPay</span>
-        </a>
-        <div id=\"collapsePpay\" class=\"collapse\" aria-labelledby=\"headingUtilities\"
-             data-parent=\"#accordionSidebar\">
-            <div class=\"bg-white py-2 collapse-inner rounded\">
-                <a class=\"collapse-item\" href=\"/premiumpay\">List</a>
-                <a class=\"collapse-item\" href=\"/premiumpay/payments\">Payments</a>
-                <a class=\"collapse-item\" href=\"/premiumpay/Accounting\">Accounting</a>
-            </div>
-        </div>
-    </li>
 
     <!-- Divider -->
     <hr class=\"sidebar-divider\">
@@ -488,6 +489,39 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <span>Countries</span></a>
     </li>
     <!-- Divider -->
+
+    <!-- Divider -->
+    <hr class=\"sidebar-divider\">
+
+    <!-- Heading -->
+    <div class=\"sidebar-heading\">
+        PremiumPay
+    </div>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/users/premiumpay\">
+            <i class=\"fas fa-fw fa-ad\"></i>
+            <span>Users</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/getaways/list\">
+            <i class=\"fas fa-fw fa-user-cog\"></i>
+            <span>Getaways</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/payments/list\">
+            <i class=\"fas fa-fw fa-adversal\"></i>
+            <span>Payments</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/accounting\">
+            <i class=\"fas fa-fw fa-adversal\"></i>
+            <span>Accounting</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/payments/actions\">
+            <i class=\"fas fa-fw fa-adversal\"></i>
+            <span>Actions</span></a>
+    </li>
   <!-- Sidebar Message -->
 </ul>", "navegacion.html.twig", "/home/Betandeal/PhpstormProjects/newback/templates/navegacion.html.twig");
     }

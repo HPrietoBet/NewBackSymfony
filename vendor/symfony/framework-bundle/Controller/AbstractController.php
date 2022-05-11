@@ -12,6 +12,7 @@
 namespace Symfony\Bundle\FrameworkBundle\Controller;
 
 use App\Entity\Main\Campanias;
+use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Container\ContainerInterface;
 use Psr\Link\LinkInterface;
@@ -510,4 +511,29 @@ abstract class AbstractController implements ServiceSubscriberInterface
         }
         return $returned_data;
     }
+
+    public function getCurrencies(){
+        return array(
+            'EUR'=>'EUR',
+            'USD'=>'USD',
+            'MXN'=>'MXN',
+            'COP'=>'COP',
+            'GBP'=>'GBP',
+            'BRL'=>'BRL',
+        );
+    }
+
+    public function getIvas(){
+        return array(
+            '0%'=>'0.00',
+            '0.5%'=>'0.50',
+            '19%'=>'19.00',
+            '21%'=>'21.00',
+        );
+    }
+
+    public function slugify($string){
+        return (new Slugify())->slugify($string);
+    }
+
 }

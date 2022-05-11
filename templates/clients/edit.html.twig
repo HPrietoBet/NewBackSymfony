@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        {% include 'navegacion.html.twig' %}
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- header -->
+                {% include 'header.html.twig' %}
+                <!-- End of header -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col col-md-12 mb-2">
+                            <ul class="nav nav-pills nav-fill">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="client-tab" data-toggle="tab" data-target="#client"  role="tab" aria-controls="client" aria-selected="true">Client Info</a>
+                                </li>
+                                {%if isNew == 0 %}
+                                <li class="nav-item">
+                                    <a class="nav-link" id="comments-tab" data-toggle="tab" data-target="#comment" role="tab" aria-controls="comments" aria-selected="false">Comments</a>
+                                </li>
+                                {%endif%}
+                            </ul>
+                        </div>
+                        <!-- Content Column -->
+                        <div class="col-lg-12 tab-content">
+                            <div id="client" class="tab-pane fade in active show">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">{% trans %}Client Information{% endtrans %} {{client.titcasa}}</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        {% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %}
+                                        {{ form_start(form, {'attr': {'id': 'info_client', 'class': 'col-md-12'}}) }}
+                                        {%if isNew == 0 %}
+                                            <div class="col-md-12"><img id="img" width="120" src="/img/clients/{{client.imgcasa}}"></div>
+                                            <hr class="sidebar-divider">
+                                        {%endif%}
+                                        {{ form_widget(form) }}
+                                        {{ form_end(form) }}
+                                        <p class="msg text-success client-msg"></p>
+                                    </div>
+
+                                </div>
+                            {%if isNew == 1 %}
+                            </div>
+                            {%endif%}
+                            {%if isNew == 0 %}
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">{% trans %}Deal information{% endtrans %} {{client.titcasa}}</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        {% form_theme formDeal 'bootstrap_5_horizontal_layout.html.twig' %}
+                                        {{ form_start(formDeal, {'attr': {'id': 'deal_client', 'class': 'col-md-12'}}) }}
+                                        {{ form_widget(formDeal) }}
+                                        {{ form_end(formDeal) }}
+                                        <p class="msg text-success deal-msg"></p>
+                                    </div>
+                                </div>
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">{% trans %}Invoicing Information{% endtrans %} {{client.titcasa}}</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        {% form_theme formInvoice 'bootstrap_5_horizontal_layout.html.twig' %}
+                                        {{ form_start(formInvoice, {'attr': {'id': 'invoice_client', 'class': 'col-md-12'}}) }}
+                                        {{ form_widget(formInvoice) }}
+                                        {{ form_end(formInvoice) }}
+                                        <p class="msg text-success invoice-msg"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="comment" class="tab-pane fade">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">{% trans %}Comments{% endtrans %} {{client.titcasa}}</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        {% form_theme formComments 'bootstrap_5_horizontal_layout.html.twig' %}
+                                        {{ form_start(formComments, {'attr': {'id': 'comment_client', 'class': 'col-md-12'}}) }}
+                                        {{ form_widget(formComments) }}
+                                        {{ form_end(formComments) }}
+                                        <p class="msg text-success comment-msg"></p>
+                                        <div class="comments">
+                                        {% for comment in comments %}
+                                        <div class="col-md-12 client_comment" data-item="{{ comment.id }}">
+                                            <i class=" fa fa-times-circle  text-danger delete-comment float-right"></i>
+                                            <p class="up"><sup>{{ comment.fecha }} {% trans %}by{% endtrans %} {{ comment.usuario }}</sup></p>
+                                            <p class="comment"><i class="fa fa-quote-left"></i> {{ comment.comentario }} <i class="fa fa-quote-right"></i></p>
+
+                                        </div>
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    {% include 'footer.html.twig' %}
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <div class="modal fade" tabindex="-1" id="modal_flags"  role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{% trans %}All Countries{% endtrans %}</h5>
+                    <a  data-dismiss="modal" aria-label="Close"><i class="fa fa-times-circle"></i></a>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </body>
+    <script>
+        {%if isNew ==0 %}
+        let countries_txt=  '{{client.idCasPais|raw}}';
+        let countries = countries_txt.split(',');
+        countries_array = countries.map(name => name.toUpperCase())
+        $('#form_idCasPais').selectpicker('val', countries_array);
+        {%endif%}
+    </script>
+    <script src="/js/common.js" type="application/javascript"></script>
+    <script src="/js/clients_edit.js" type="application/javascript"></script>
+{% endblock %}

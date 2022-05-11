@@ -46,7 +46,7 @@ class UsersController extends AbstractController
         $this->userToken = $tokenStorage->getToken();
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
-
+        $this->user = $this->userToken->getUser();
         $this->serializer = new Serializer($normalizers, $encoders);
     }
 
@@ -55,11 +55,12 @@ class UsersController extends AbstractController
      */
     public function index(): Response
     {
+
         // CHEQUEO LOGADO DE USUARIO //
         if(empty($this->userToken)){
             return  $this->redirectToRoute('login');
         }
-        $this->user = $this->userToken->getUser();
+
         // CHEQUEO LOGADO DE USUARIO //
         $alerts = $this->getAlerts(10);
 
@@ -297,11 +298,12 @@ class UsersController extends AbstractController
         $doctrine->getManager()->flush();
 
         if(isset($newData['comentarios'])){
+
             $commentsObj =  new UsuarioComentarios();
             $commentsObj->setIdUsuario($id);
             $commentsObj->setFecha(date('Y-m-d H:i:s'));
             $commentsObj->setComentario($newData['comentarios']);
-            $commentsObj->setUsuario($userObj->getUsername());
+            $commentsObj->setUsuario($this->user->getUsername());
 
             $doctrine->getManager()->persist($commentsObj);
             $doctrine->getManager()->flush();
@@ -357,7 +359,7 @@ class UsersController extends AbstractController
             $user_comments = $this->serializer->normalize($user_comments);
             $last_user['comentarios_anteriores']= '';
             foreach($user_comments as $comment){
-                $last_user['comentarios_anteriores'].= $comment['fecha']. ' | '.$comment['comentario'].PHP_EOL.PHP_EOL;
+                $last_user['comentarios_anteriores'].= $comment['fecha']. ' | '.$comment['comentario']. ' | '.$comment['usuario'].PHP_EOL.PHP_EOL;
             }
             $last_user['comentario'] = '';
 

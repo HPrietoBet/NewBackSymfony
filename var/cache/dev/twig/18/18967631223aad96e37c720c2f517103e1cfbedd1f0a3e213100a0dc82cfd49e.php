@@ -468,31 +468,32 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
     <i class=\"fas fa-angle-up\"></i>
 </a>
 
+
 </body>
     <script>
         var users_str =  '";
-        // line 347
-        echo (isset($context["lastusers"]) || array_key_exists("lastusers", $context) ? $context["lastusers"] : (function () { throw new RuntimeError('Variable "lastusers" does not exist.', 347, $this->source); })());
+        // line 348
+        echo (isset($context["lastusers"]) || array_key_exists("lastusers", $context) ? $context["lastusers"] : (function () { throw new RuntimeError('Variable "lastusers" does not exist.', 348, $this->source); })());
         echo "';
         var responsables_json = JSON.parse('";
-        // line 348
-        echo (isset($context["responsables"]) || array_key_exists("responsables", $context) ? $context["responsables"] : (function () { throw new RuntimeError('Variable "responsables" does not exist.', 348, $this->source); })());
+        // line 349
+        echo (isset($context["responsables"]) || array_key_exists("responsables", $context) ? $context["responsables"] : (function () { throw new RuntimeError('Variable "responsables" does not exist.', 349, $this->source); })());
         echo "');
         var data_str =  '";
-        // line 349
-        echo (isset($context["lastcashactions"]) || array_key_exists("lastcashactions", $context) ? $context["lastcashactions"] : (function () { throw new RuntimeError('Variable "lastcashactions" does not exist.', 349, $this->source); })());
+        // line 350
+        echo (isset($context["lastcashactions"]) || array_key_exists("lastcashactions", $context) ? $context["lastcashactions"] : (function () { throw new RuntimeError('Variable "lastcashactions" does not exist.', 350, $this->source); })());
         echo "';
         var comisiones_chart = JSON.parse('";
-        // line 350
-        echo (isset($context["comisionesgraph"]) || array_key_exists("comisionesgraph", $context) ? $context["comisionesgraph"] : (function () { throw new RuntimeError('Variable "comisionesgraph" does not exist.', 350, $this->source); })());
+        // line 351
+        echo (isset($context["comisionesgraph"]) || array_key_exists("comisionesgraph", $context) ? $context["comisionesgraph"] : (function () { throw new RuntimeError('Variable "comisionesgraph" does not exist.', 351, $this->source); })());
         echo "');
         var eur_chart = JSON.parse('";
-        // line 351
-        echo (isset($context["eurppaygraph"]) || array_key_exists("eurppaygraph", $context) ? $context["eurppaygraph"] : (function () { throw new RuntimeError('Variable "eurppaygraph" does not exist.', 351, $this->source); })());
+        // line 352
+        echo (isset($context["eurppaygraph"]) || array_key_exists("eurppaygraph", $context) ? $context["eurppaygraph"] : (function () { throw new RuntimeError('Variable "eurppaygraph" does not exist.', 352, $this->source); })());
         echo "');
         var cop_chart = JSON.parse('";
-        // line 352
-        echo (isset($context["copppaygraph"]) || array_key_exists("copppaygraph", $context) ? $context["copppaygraph"] : (function () { throw new RuntimeError('Variable "copppaygraph" does not exist.', 352, $this->source); })());
+        // line 353
+        echo (isset($context["copppaygraph"]) || array_key_exists("copppaygraph", $context) ? $context["copppaygraph"] : (function () { throw new RuntimeError('Variable "copppaygraph" does not exist.', 353, $this->source); })());
         echo "');
     </script>
 
@@ -518,7 +519,7 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
 
     public function getDebugInfo()
     {
-        return array (  495 => 352,  491 => 351,  487 => 350,  483 => 349,  479 => 348,  475 => 347,  460 => 334,  458 => 333,  278 => 156,  270 => 151,  225 => 109,  200 => 87,  194 => 86,  186 => 81,  181 => 78,  179 => 77,  159 => 60,  156 => 59,  154 => 58,  134 => 41,  131 => 40,  129 => 39,  111 => 23,  109 => 22,  98 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  496 => 353,  492 => 352,  488 => 351,  484 => 350,  480 => 349,  476 => 348,  460 => 334,  458 => 333,  278 => 156,  270 => 151,  225 => 109,  200 => 87,  194 => 86,  186 => 81,  181 => 78,  179 => 77,  159 => 60,  156 => 59,  154 => 58,  134 => 41,  131 => 40,  129 => 39,  111 => 23,  109 => 22,  98 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -866,6 +867,7 @@ class __TwigTemplate_ecf103a70a95ef1e61a9b12e0f78a9832983795f3ca0a4ac32e84e81465
 <a class=\"scroll-to-top rounded\" href=\"#page-top\">
     <i class=\"fas fa-angle-up\"></i>
 </a>
+
 
 </body>
     <script>

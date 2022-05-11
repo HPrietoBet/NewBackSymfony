@@ -116,7 +116,7 @@ function setTable(data){
                         caption: 'User Info',
                         colCount: 2,
                         colSpan: 4,
-                        items: ['id', 'user', 'username', 'country', 'lang', 'prefijo', 'telefono', 'nivelUser'],
+                        items: ['id', 'user', 'username', 'lang', 'prefijo', 'telefono', 'nivelUser'],
                     },
                     {
                         itemType: 'group',
@@ -238,17 +238,7 @@ function setTable(data){
             {dataField: "adminLoginPassword", dataType:"adminLoginPassword", visible: false},
             {dataField: "avatar", dataType:"avatar", visible: false},
             {dataField: "comisionPay", dataType:"comisionPay", visible: false},
-            {dataField: "country", dataType:"country", visible: true,
-                cellTemplate(container, options) {
-                    let country = '';
-                    if(options.data.lang.toUpperCase() == 'EN')  country = 'GB';
-                    else if(options.data.lang.toUpperCase() == 'PT') country = 'BR';
-                    else country = options.data.lang;
-                    $('<div>')
-                        .append($('<img>', { src: '/img/flat/24/'+country.toUpperCase()+'.png' }))
-                        .appendTo(container);
-                },
-            },
+
             {dataField: "enlacesIapuestas", dataType:"enlacesIapuestas", visible: false,  lookup: {
                     dataSource: {
                         store: {

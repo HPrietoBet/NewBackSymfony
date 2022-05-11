@@ -10,6 +10,14 @@ return [
     [ // $staticRoutes
         '/campanias' => [[['_route' => 'app_campanias', '_controller' => 'App\\Controller\\CampaniasController::index'], null, null, null, false, false, null]],
         '/campanias/get' => [[['_route' => 'app_campanias_get', '_controller' => 'App\\Controller\\CampaniasController::getCampaigns'], null, null, null, false, false, null]],
+        '/clients' => [[['_route' => 'app_clients', '_controller' => 'App\\Controller\\ClientsController::index'], null, null, null, false, false, null]],
+        '/clients/upload' => [[['_route' => 'app_clients_upload_logo', '_controller' => 'App\\Controller\\ClientsController::uploadLogo'], null, null, null, false, false, null]],
+        '/client/save' => [[['_route' => 'app_clients_save', '_controller' => 'App\\Controller\\ClientsController::save'], null, null, null, false, false, null]],
+        '/client/comment/delete' => [[['_route' => 'app_clients_comment_delete', '_controller' => 'App\\Controller\\ClientsController::deleteCommentClient'], null, null, null, false, false, null]],
+        '/client/new' => [[['_route' => 'app_client_new', '_controller' => 'App\\Controller\\ClientsController::newClient'], null, null, null, false, false, null]],
+        '/client/comment/add' => [[['_route' => 'app_client_comment_add', '_controller' => 'App\\Controller\\ClientsController::addComment'], null, null, null, false, false, null]],
+        '/client/invoice/save' => [[['_route' => 'app_client_invoice_save', '_controller' => 'App\\Controller\\ClientsController::saveInvoice'], null, null, null, false, false, null]],
+        '/client/deal/save' => [[['_route' => 'app_client_deal_save', '_controller' => 'App\\Controller\\ClientsController::saveDeal'], null, null, null, false, false, null]],
         '/facturacion-datos' => [[['_route' => 'app_facturacion_datos', '_controller' => 'App\\Controller\\FacturacionDatosController::index'], null, null, null, false, false, null]],
         '/facturacion-datos/save' => [[['_route' => 'app_facturacion_datos_save', '_controller' => 'App\\Controller\\FacturacionDatosController::save'], null, null, null, false, false, null]],
         '/home' => [
@@ -39,31 +47,33 @@ return [
     ],
     [ // $regexpList
         0 => '{^(?'
+                .'|/client/edit/([^/]++)(*:28)'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:38)'
-                    .'|wdt/([^/]++)(*:57)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:66)'
+                    .'|wdt/([^/]++)(*:85)'
                     .'|profiler/([^/]++)(?'
                         .'|/(?'
-                            .'|search/results(*:102)'
-                            .'|router(*:116)'
+                            .'|search/results(*:130)'
+                            .'|router(*:144)'
                             .'|exception(?'
-                                .'|(*:136)'
-                                .'|\\.css(*:149)'
+                                .'|(*:164)'
+                                .'|\\.css(*:177)'
                             .')'
                         .')'
-                        .'|(*:159)'
+                        .'|(*:187)'
                     .')'
                 .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
-        38 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        57 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        102 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        116 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        159 => [
+        28 => [[['_route' => 'app_client_edit', '_controller' => 'App\\Controller\\ClientsController::editClient'], ['client'], null, null, false, true, null]],
+        66 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        85 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        130 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        144 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        164 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        177 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        187 => [
             [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

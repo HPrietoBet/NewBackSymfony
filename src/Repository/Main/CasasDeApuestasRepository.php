@@ -77,8 +77,9 @@ class CasasDeApuestasRepository extends ServiceEntityRepository
     }
     */
 
-    public function getAllAboutClient(){
-        return $this->createQueryBuilder('c')
+    public function getAllAboutClient($id = null){
+        if(empty($id)) {
+            return $this->createQueryBuilder('c')
                 ->select('c.activoFeedCuotas,
                     c.activoFeedStreaming,
                     c.baseline,
@@ -113,9 +114,53 @@ class CasasDeApuestasRepository extends ServiceEntityRepository
                     cda.acuerdoActivo,
                     cc.titcat,
                     cc.actcat')
-                ->join(CasasDeApuestasAcuerdos::class,'cda', 'WITH', 'c.idCasa = cda.idCasa')
-                ->join(CategoriasCampania::class, 'cc' , 'WITH','cc.idCat = c.idCat')
+                ->leftJoin(CasasDeApuestasAcuerdos::class, 'cda', 'WITH', 'c.idCasa = cda.idCasa')
+                ->leftJoin(CategoriasCampania::class, 'cc', 'WITH', 'cc.idCat = c.idCat')
                 ->getQuery()
                 ->getArrayResult();
+        }else{
+            return $this->createQueryBuilder('c')
+                ->select('c.activoFeedCuotas,
+                    c.activoFeedStreaming,
+                    c.baseline,
+                    c.bono,
+                    c.contacto,
+                    c.currency,
+                    c.datosFacturacion,
+                    c.feedCuotas,
+                    c.feedStreaming,
+                    c.idCasPais,
+                    c.idCasa,
+                    c.idCat,
+                    c.idPaginaHtml,
+                    c.imgcasa,
+                    c.impuestos,
+                    c.logoCustom,
+                    c.actcasa,
+                    c.metodoCobro,
+                    c.paisOrder,
+                    c.password,
+                    c.procedimientoPago,
+                    c.requiereFactura,
+                    c.responsable,
+                    c.titcasa,
+                    c.url,
+                    c.usuario,
+                    cda.cpa,
+                    cda.cpaMoneda,
+                    cda.rs,
+                    cda.fee,
+                    cda.feeMoneda,
+                    cda.acuerdoActivo,
+                    cc.titcat,
+                    cc.actcat'
+                )
+                ->leftJoin(CasasDeApuestasAcuerdos::class, 'cda', 'WITH', 'c.idCasa = cda.idCasa')
+                ->join(CategoriasCampania::class, 'cc', 'WITH', 'cc.idCat = c.idCat')
+                ->where('c.idCasa = :idClient')
+                ->setParameter('idClient', $id)
+                ->getQuery()
+                ->getOneOrNullResult();
+        }
     }
 }

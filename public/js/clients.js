@@ -1,13 +1,32 @@
 var url_base = 'img/clients/'
 $(function() {
-   console.log(responsables);
     setTable(clients);
     $('body').on('click', '.show-flags', function (e){
         var _flags = $(this).attr('data-info');
         createModalFlags(_flags);
-
+    })
+    $('body').on('click', '.dx-datagrid-addrow-button', function (e){
+        e.preventDefault();
+        document.location.href= '/client/new';
+        return;
     })
 
+    $('body').on('click', '.delete_comment', function (e){
+        e.preventDefault();
+        let id = $(this).parents('.client_comment').attr('data-item');
+        $.ajax({
+            url: "/client/comment/delete",
+            dataType: "json",
+            type: "post",
+            data: {idcomment: id},
+            success: function () {
+
+            },
+            error: function () {
+            },
+        });
+        $(this).parents('.client_comment').remove()
+    });
 });
 
 function createModalFlags(flags){
@@ -24,7 +43,7 @@ function setTable(data){
     var responsables_json = responsables;
     var clients_json = data;
     console.log(clients_json);
-    $("#table_clients").dxDataGrid({
+    var dx = $("#table_clients").dxDataGrid({
         dataSource: clients_json,
         keyExpr: "idCasa",
         showBorders: true,
@@ -33,15 +52,31 @@ function setTable(data){
         headerFilter: {
             visible:true
         },
+        /*toolbar: {
+            items:[
+                {
+                    location: 'after',
+                    widget: 'dxButton',
+                    options: {
+                        text: 'Add Client',
+                        width: 50,
+                        onClick(e) {
+                            document.location.href= '/client/new'
+                        },
+                    },
+                }
+            ]
+        },*/
         searchPanel: {
             visible: true,
             width: 300,
+            text: '',
             placeholder: 'Search...',
         },
         rowAlternationEnabled: true,
         editing: {
             allowAdding: true,
-            allowUpdating: true,
+            allowUpdating: false,
             mode: 'popup',
             popup: {
                 title: 'Client Info',
@@ -84,6 +119,7 @@ function setTable(data){
                             "fee",
                             "feeMoneda",
                             "acuerdoActivo",
+                            "baseline",
                         ],
                     },
                     {
@@ -100,7 +136,6 @@ function setTable(data){
                         colCount: 2,
                         caption: 'Others',
                         items: [
-                            "baseline",
                             "bono",
                             "activoFeedCuotas",
                             "activoFeedStreaming",
@@ -111,18 +146,6 @@ function setTable(data){
                     },
                     {
                         itemType: 'group',
-                        colCount: 1,
-                        caption: 'iApuestas',
-                        items:['enlacesIapuestas']
-                    },
-                    {
-                        itemType: 'group',
-                        colCount: 2,
-                        caption: 'Landing Actions',
-                        items: ['landingcreator', 'linksDirectos', 'linksDirectosItalia'],
-                    },
-                    {
-                        itemType: 'group',
                         colCount: 2,
                         caption: 'Invoicing Info',
                         items:[
@@ -130,7 +153,7 @@ function setTable(data){
                             "metodoCobro",
                             "procedimientoPago",
                             "requiereFactura",
-                            "impuestos,",
+                            "impuestos",
                             "currency",
                         ]
                     },
@@ -140,21 +163,17 @@ function setTable(data){
                         colSpan: 2,
                         caption: 'Comments',
                         items: [{
-                            dataField: 'comentarios',
+                            dataField: 'newcomments',
                             caption: 'New Comment',
+                            value: '',
                             editorType: 'dxTextArea',
                             colSpan: 2,
                             editorOptions: {
-                                height: 50,
+                                height: 100,
                             },
                         }, {
-                            dataField: 'comentarios_anteriores',
+                            dataField: 'comentariosAnteriores',
                             caption: 'Previous Comments',
-                            editorType: 'dxTextArea',
-                            colSpan: 2,
-                            editorOptions: {
-                                height: 300,
-                            },
                         }],
                     },
 
@@ -196,9 +215,30 @@ function setTable(data){
             },
             {dataField: "baseline", caption: "Baseline", visible: false,},
             {dataField: "bono", caption: "Bono", visible: false,},
+
             {dataField: "comments", caption: "Comments", visible: false,},
+            {dataField: "newcomments", caption: "Comments", visible: false,},
             {dataField: "contacto", caption: "Contact", visible: false,},
-            {dataField: "currency", caption: "Currency", visible: false,},
+            {dataField: "currency", caption: "Currency", visible: false,
+                lookup:{
+                    dataSource: {
+                        store: {
+                            type: 'array',
+                            data: [
+                                {id: 'EUR'},
+                                {id: 'USD'},
+                                {id: 'COP'},
+                                {id: 'MXN'},
+                                {id: 'GBP'},
+                                {id: 'BRL'},
+                            ],
+                            key: "currency"
+                        },
+                    },
+                    valueExpr: 'id',
+                    displayExpr: 'id',
+                }
+            },
             {dataField: "datosFacturacion", caption: "Invoicing Info", visible: false,},
             {dataField: "feedCuotas", caption: "Feed Odds", visible: false, lookup:{
                     dataSource: {
@@ -224,8 +264,9 @@ function setTable(data){
                         .append($('<img>', { src: url_base+options.value.replace('../','').split('/').slice(-1) , class: 'img-listado-casas'}))
                         .appendTo(container);
                 },
+                editCellTemplate: uploadLogo,
             },
-            {dataField: "idCasa", caption: "Id Client", visible: true,},
+            {dataField: "idCasa", caption: "Id Client", visible: true, dataType: 'number'},
             {dataField: "titcasa", caption: "Client", visible: true,},
             {dataField: "idCasPais", caption: "Countries", visible: true,
                 cellTemplate(container, options) {
@@ -250,13 +291,44 @@ function setTable(data){
                     }
                 },
             },
-            {dataField: "impuestos", caption: "IVA", visible: false,},
+            {dataField: "impuestos", caption: "IVA", visible: false,
+                lookup: {
+                    dataSource: {
+                        store: {
+                            type: 'array',
+                            data: [
+                                {id: 0, name: '0%'},
+                                {id: 0.5, name: '0,5%'},
+                                {id: 19, name: '19%'},
+                                {id: 21, name: '21%'},
+                            ],
+                            key: "impuestos"
+                        },
+                    },
+                    valueExpr: 'id',
+                    displayExpr: 'name',
+                }
+            },
             {dataField: "logoCustom", caption: "Custom Logo", visible: false,},
             {dataField: "metodoCobro", caption: "Payment method", visible: false,},
             {dataField: "usuario", caption: "User", visible: false,},
             {dataField: "password", caption: "Password", visible: false,},
             {dataField: "procedimientoPago", caption: "Payment process", visible: false,},
-            {dataField: "requiereFactura", caption: "Invoicing ¿?", visible: false,},
+            {dataField: "requiereFactura", caption: "Invoice Required", visible: false, lookup:{
+                dataSource: {
+                        store: {
+                            type: 'array',
+                                data: [
+                                {id: false, name: 'No'},
+                                {id: true, name: 'Yes'},
+                            ],
+                                key: "requiereFactura"
+                        },
+                    },
+                    valueExpr: 'id',
+                        displayExpr: 'name',
+                }
+            },
             {dataField: "responsable", caption: "Responsible", visible: false,
                 lookup: {
                     dataSource: responsables_json,
@@ -271,10 +343,48 @@ function setTable(data){
                 },
             },
             {dataField: "cpa", caption: "CPA", visible: false,},
-            {dataField: "cpaMoneda", caption: "CPA Currency", visible: false,},
+            {dataField: "cpaMoneda", caption: "CPA Currency", visible: false,
+                lookup:{
+                    dataSource: {
+                        store: {
+                            type: 'array',
+                            data: [
+                                {id: 'EUR'},
+                                {id: 'USD'},
+                                {id: 'COP'},
+                                {id: 'MXN'},
+                                {id: 'GBP'},
+                                {id: 'BRL'},
+                            ],
+                            key: "cpaMoneda"
+                        },
+                    },
+                    valueExpr: 'id',
+                    displayExpr: 'id',
+                }
+            },
             {dataField: "rs", caption: "RS", visible: false,},
             {dataField: "fee", caption: "FEE", visible: false,},
-            {dataField: "feeMoneda", caption: "FEE Currency", visible: false,},
+            {dataField: "feeMoneda", caption: "FEE Currency", visible: false,
+                lookup:{
+                    dataSource: {
+                        store: {
+                            type: 'array',
+                            data: [
+                                {id: 'EUR'},
+                                {id: 'USD'},
+                                {id: 'COP'},
+                                {id: 'MXN'},
+                                {id: 'GBP'},
+                                {id: 'BRL'},
+                            ],
+                            key: "feeMoneda"
+                        },
+                    },
+                    valueExpr: 'id',
+                    displayExpr: 'id',
+                }
+            },
             {dataField: "acuerdoActivo", caption: "Active Deal", visible: false,
                 lookup:{
                     dataSource: {
@@ -308,6 +418,15 @@ function setTable(data){
                     displayExpr: 'name',
                 }
             },
+            {dataField: "comentariosAnteriores", caption: "Previous Comments", visible: false,
+                editCellTemplate: showComments,
+            },
+            {dataField: "editUrl", caption: "Actions", visible: true, cellTemplate(container, options) {
+                    $('<div>')
+                        .append($('<a>', { href: options.value, target: '_self', html: '<i class="fas fa-edit"></i>'}))
+                        .appendTo(container);
+                },
+            },
         ], onRowUpdating: function (e) {
             const deferred = $.Deferred();
             const promptPromise = DevExpress.ui.dialog.confirm("Are you sure?", "Save new data");
@@ -332,5 +451,77 @@ function setTable(data){
             });
             e.cancel = deferred.promise();
         },
+        onSelected(e) {
+            e.event.preventDefault();
+            this.edit.emit(e.row.data);
+        }
     });
+
+    let backendURL = "/clients/upload"
+    function uploadLogo(cellElement, cellInfo) {
+        let buttonElement = document.createElement("div");
+        buttonElement.classList.add("retryButton");
+        let retryButton = $(buttonElement).dxButton({
+            text: "Retry",
+            visible: false,
+            onClick: function() {
+                for (var i = 0; i < fileUploader._files.length; i++) {
+                    delete fileUploader._files[i].uploadStarted;
+                }
+                fileUploader.upload();
+            }
+        }).dxButton("instance");
+
+        let fileUploaderElement = document.createElement("div");
+        let fileUploader = $(fileUploaderElement).dxFileUploader({
+            multiple: false,
+            accept: "image/*",
+            uploadMode: "instantly",
+            uploadUrl: backendURL,
+            onValueChanged: function(e) {
+                let reader = new FileReader();
+                reader.onload = function(args) {
+                    imageElement.setAttribute('src', args.target.result);
+                }
+                reader.readAsDataURL(e.value[0]); // convert to base64 string
+            },
+            onUploaded: function(e){
+                console.log(e.request.responseText);
+                cellInfo.setValue(e.request.responseText);
+                retryButton.option("visible", false);
+            },
+            onUploadError: function(e){
+                let xhttp = e.request;
+                if(xhttp.status === 400){
+                    e.message = e.error.responseText;
+                }
+                if(xhttp.readyState === 4 && xhttp.status === 0) {
+                    e.message = "Connection refused";
+                }
+                retryButton.option("visible", true);
+            }
+        }).dxFileUploader("instance");
+
+        let imageElement = document.createElement("a");
+        imageElement.classList.add("uploadedImage");
+        imageElement.setAttribute('href', url_base + cellInfo.value);
+        imageElement.setAttribute('target', '_blank');
+
+        cellElement.append(imageElement);
+        cellElement.append(fileUploaderElement);
+        cellElement.append(buttonElement);
+    }
+
+    function showComments(cellElement, cellInfo){
+        console.log(cellInfo);
+        for(i=0; i<cellInfo.row.data.comments.length; i++ ){
+            let commentElement = document.createElement("div");
+            commentElement.setAttribute('id', 'comment_'+cellInfo.row.data.comments[i].id)
+            commentElement.setAttribute('data-item', cellInfo.row.data.comments[i].id)
+            commentElement.setAttribute('class', 'client_comment');
+            commentElement.innerHTML = '<i class="delete_comment fa fa-times-circle text-danger float-right "></i> '+ cellInfo.row.data.comments[i].fecha+' | '+cellInfo.row.data.comments[i].comentario+' | '+cellInfo.row.data.comments[i].usuario
+            cellElement.append(commentElement);
+        }
+    }
+
 }
