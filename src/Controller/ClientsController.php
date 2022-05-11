@@ -122,7 +122,7 @@ class ClientsController extends AbstractController
     }
 
     public function getCategories(){
-        $categories =  $this->em->getRepository(CategoriasCampania::class)->findAll();
+        $categories =  $this->em->getRepository(CategoriasCampania::class)->findBy(['actcat'=>1]);
         $categories_array = $this->serializer->normalize($categories);
         return $categories_array;
     }
@@ -178,7 +178,7 @@ class ClientsController extends AbstractController
             $clientObj->setIdCat($newData['idCat']);
         }
 
-        if(isset($newData['newLogo'])){
+        if(isset($newData['newLogo']) && !empty($newData['newLogo'])){
             $clientObj->setImgcasa($newData['newLogo']);
         }
 
