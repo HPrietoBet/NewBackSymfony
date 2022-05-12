@@ -118,6 +118,7 @@
       <path value="$PROJECT_DIR$/vendor/fontawesome-free/metadata" />
       <path value="$PROJECT_DIR$/vendor/fontawesome-free/less" />
       <path value="$PROJECT_DIR$/vendor/fontawesome-free/webfonts" />
+      <path value="$PROJECT_DIR$/vendor/cocur/slugify" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
