@@ -1,12 +1,13 @@
 
-console.log( faqs);
+
 var faqs_json = JSON.parse(faqs);
+console.log(faqs_json)
 
 $(function() {
 
-    $("#table_competency").dxDataGrid({
+    $("#table_faqs").dxDataGrid({
         dataSource:  faqs_json,
-        keyExpr: "id",
+        keyExpr: "idAyuda",
         showBorders: true,
         showColumnLines: false,
         showRowLines: true,
@@ -18,7 +19,7 @@ $(function() {
             allowUpdating: true,
             mode: 'popup',
             popup: {
-                title: 'Competency Info',
+                title: 'FAQ´s Info',
                 showTitle: true,
             },
             useIcons: true,
@@ -28,104 +29,105 @@ $(function() {
                         itemType: 'group',
                         colSpan: 2,
                         colCount: 3,
-                        items: ['nombre', 'paises', 'esGlobal', 'logo', 'activo'],
+                        items: ['idAyuda', 'actayuda'],
                     },
                     {
                         itemType: 'group',
                         colCount: 1,
                         colSpan: 2,
-                        caption: 'Comments',
-                        items: [{
-                            dataField: 'comentario',
-                            caption: 'New Comment',
-                            editorType: 'dxTextArea',
-                            colSpan: 2,
-                            editorOptions: {
-                                height: 50,
+                        caption: 'Faq',
+                        items: [
+                            'titulo',
+                            {
+                                dataField: 'contenido',
+                                caption: 'New Comment',
+                                editorType: 'dxHtmlEditor',
+                                editorOptions: {
+                                    height: 190,
+                                    toolbar: {
+                                        items: ["bold", "italic", "underline"]
+                                    }
+                                },
+                                colSpan: 2,
                             },
-                        }, {
-                            dataField: 'lastcomentarios',
-                            caption: 'Previous Comments',
-                            editorType: 'dxTextArea',
-                            colSpan: 2,
-                            editorOptions: {
-                                height: 300,
+                            'tituloEn',
+                            {
+                                dataField: 'contenidoEn',
+                                caption: 'New Comment',
+                                editorType: 'dxHtmlEditor',
+                                editorOptions: {
+                                    height: 190,
+                                    toolbar: {
+                                        items: ["bold", "italic", "underline"]
+                                    }
+                                },
+                                colSpan: 2,
                             },
-                        }],
+                            'tituloPt',
+                            {
+                                dataField: 'contenidoPt',
+                                caption: 'New Comment',
+                                editorType: 'dxHtmlEditor',
+                                editorOptions: {
+                                    height: 190,
+                                    toolbar: {
+                                        items: ["bold", "italic", "underline"]
+                                    }
+                                },
+                                colSpan: 2,
+                            },
+                            'tituloIt',
+                            {
+                                dataField: 'contenidoIt',
+                                caption: 'New Comment',
+                                editorType: 'dxHtmlEditor',
+                                editorOptions: {
+                                    height: 190,
+                                    toolbar: {
+                                        items: ["bold", "italic", "underline"]
+                                    }
+                                },
+                                colSpan: 2,
+                            },
+                        ],
                     },
                 ],
             },
 
         },
         columns: [
-            {dataField: 'logo', caption: 'logo', visible: true,
-                cellTemplate(container, options) {
-                    $('<div>')
-                        .append($('<img>', { src: url_base+options.value , class: 'img-listado-casas'}))
-                        .appendTo(container);
-                },
-                editCellTemplate: uploadLogo,
-            },
-            {dataField: 'id', caption: 'id', visible: true, width: 50, allowEditing: false},
-            {dataField: 'nombre', caption: 'Name', visible: true},
-            {dataField: 'paises', caption: 'Country', visible: true,
-                lookup:
-                    {
-                        dataSource: countries_json,
-                        valueExpr: 'iso',
-                        displayExpr: 'name',
-                    },
-            },
-            {dataField: 'esGlobal', caption: 'Global', visible: true,
-                lookup:
-                {
+            {dataField: 'contenido', caption:'Content', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'contenidoDe', caption:'contenidoDe', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'contenidoEn', caption:'Content English', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'contenidoFr', caption:'contenidoFr', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'contenidoIt', caption:'Content Italian', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'contenidoPt', caption:'Content Portugese', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'idAyuda', caption:'idAyuda', visible: true, width:50, allowEditing: false},
+            {dataField: 'fecha', caption:'fecha', visible: false},
+            {dataField: 'idCasPais', caption:'idCasPais', visible: false},
+            {dataField: 'actayuda', caption:'Active', visible: true, width:150,
+                lookup:{
                     dataSource: {
                         store: {
                             type: 'array',
                             data: [
-                                { id: false, name: 'No Active' },
-                                { id: true, name: 'Active' },
+                                {id: true, name: 'Active'},
+                                {id: false, name: 'Not Active'},
                             ],
-                            key: "esGlobal",
-
-                        },
-                    },
-                    valueExpr: 'id',
-                    displayExpr: 'name',
-                },
-            },
-
-            {dataField: 'activo', caption: 'Active', visible: true, lookup:
-                {
-                    dataSource: {
-                        store: {
-                            type: 'array',
-                            data: [
-                                { id: false, name: 'No Active' },
-                                { id: true, name: 'Active' },
-                            ],
-                            key: "control"
+                            key: "actayuda"
                         },
                     },
                     valueExpr: 'id',
                     displayExpr: 'name',
                 }
             },
-            {dataField: 'comentario', caption: 'New Comment',  visible: false,},
-            {dataField: 'lastcomentarios', caption: 'Comments',  visible: false, allowEditing: false,
-                editCellTemplate(container, options) {
-                    var comp_comments = comments_json[options.data.id];
-                    for(i = 0; i<comp_comments.length; i++){
-                        console.log(comp_comments[i]);
-                        $('<div class="client_comment">')
-                            .append($('<small>', { text: comp_comments[i].fecha+' by '+ comp_comments[i].usuario}))
-                            .append($('<p>', {text: comp_comments[i].comentario, class: 'mt-2'}))
-                            .appendTo(container);
-                    }
-
-                }
-
-            }
+            {dataField: 'imagen', caption:'imagen', visible: false},
+            {dataField: 'titulo', caption:'Title', visible: true, validationRules: [{ type: "required" }]},
+            {dataField: 'tituloDe', caption:'tituloDe', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'tituloEn', caption:'Title English', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'tituloFr', caption:'tituloFr', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'tituloIt', caption:'Title Italian', visible: false, validationRules: [{ type: "required" }]},
+            {dataField: 'tituloPt', caption:'Title Portugese', visible: false, validationRules: [{ type: "required" }]},
         ], onRowUpdating: function (e) {
             const deferred = $.Deferred();
             const promptPromise = DevExpress.ui.dialog.confirm("Are you sure?", "Save new data");
@@ -133,7 +135,7 @@ $(function() {
                 if (dialogResult) {
                     console.log(e);
                     $.ajax({
-                        url: "/competency/save",
+                        url: "/faq/save",
                         dataType: "json",
                         type: "post",
                         data: {newData: e.newData, id: e.key, oldData: e.oldData},
@@ -158,7 +160,7 @@ $(function() {
                 if (dialogResult) {
                     console.log(e);
                     $.ajax({
-                        url: "/competency/save",
+                        url: "/faq/save",
                         dataType: "json",
                         type: "post",
                         data: {newData: e.data, id: e.key},
@@ -181,7 +183,7 @@ $(function() {
 
 });
 
-let backendURL = "/competency/upload"
+let backendURL = "/faq/upload"
 function uploadLogo(cellElement, cellInfo) {
     let buttonElement = document.createElement("div");
     buttonElement.classList.add("retryButton");

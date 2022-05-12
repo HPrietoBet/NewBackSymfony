@@ -70,7 +70,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
     ";
         // line 36
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 54
+        // line 55
         echo "</html>
 ";
         
@@ -130,7 +130,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
 
             <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js\"></script>
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js\"></script>
-
+            <script src=\"https://cdn3.devexpress.com/jslib/20.2.3/js/dx-quill.min.js\"></script>
         ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -185,6 +185,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js\"></script>
         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.1.1/exceljs.min.js\"></script>
         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js\"></script>
+
     ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -201,7 +202,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
 
     public function getDebugInfo()
     {
-        return array (  172 => 37,  162 => 36,  144 => 34,  114 => 9,  104 => 8,  85 => 5,  74 => 54,  72 => 36,  69 => 35,  67 => 34,  61 => 30,  58 => 8,  53 => 5,  47 => 1,);
+        return array (  172 => 37,  162 => 36,  144 => 34,  114 => 9,  104 => 8,  85 => 5,  74 => 55,  72 => 36,  69 => 35,  67 => 34,  61 => 30,  58 => 8,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -233,7 +234,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
 
             <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js\"></script>
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js\"></script>
-
+            <script src=\"https://cdn3.devexpress.com/jslib/20.2.3/js/dx-quill.min.js\"></script>
         {% endblock %}
 
 
@@ -258,6 +259,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js\"></script>
         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.1.1/exceljs.min.js\"></script>
         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js\"></script>
+
     {% endblock %}
 </html>
 ", "base.html.twig", "/home/Betandeal/PhpstormProjects/newback/templates/base.html.twig");

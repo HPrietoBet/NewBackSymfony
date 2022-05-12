@@ -21,6 +21,7 @@ return [
     'app_facturacion_datos' => [[], ['_controller' => 'App\\Controller\\FacturacionDatosController::index'], [], [['text', '/facturacion-datos']], [], [], []],
     'app_facturacion_datos_save' => [[], ['_controller' => 'App\\Controller\\FacturacionDatosController::save'], [], [['text', '/facturacion-datos/save']], [], [], []],
     'app_faq' => [[], ['_controller' => 'App\\Controller\\FaqController::index'], [], [['text', '/faqs']], [], [], []],
+    'app_faq_save' => [[], ['_controller' => 'App\\Controller\\FaqController::save'], [], [['text', '/faq/save']], [], [], []],
     'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/home']], [], [], []],
     'app_home_charts' => [[], ['_controller' => 'App\\Controller\\HomeController::charts'], [], [['text', '/home/charts']], [], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], [], []],
