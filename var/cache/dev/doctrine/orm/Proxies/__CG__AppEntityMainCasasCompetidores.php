@@ -239,7 +239,7 @@ class CasasCompetidores extends \App\Entity\Main\CasasCompetidores implements \D
     /**
      * {@inheritDoc}
      */
-    public function getPaises(): ?array
+    public function getPaises(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPaises', []);
@@ -250,7 +250,7 @@ class CasasCompetidores extends \App\Entity\Main\CasasCompetidores implements \D
     /**
      * {@inheritDoc}
      */
-    public function setPaises(array $paises): \App\Entity\Main\CasasCompetidores
+    public function setPaises(string $paises): \App\Entity\Main\CasasCompetidores
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPaises', [$paises]);

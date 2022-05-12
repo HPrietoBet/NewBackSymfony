@@ -3,6 +3,7 @@
 namespace App\Repository\Main;
 
 use App\Entity\Main\CasasCompetidores;
+use App\Entity\Main\CasasCompetidoresComentarios;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -73,4 +74,25 @@ class CasasComptenidoresRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllWithComments()
+    {
+        return $this->createQueryBuilder('c')
+            ->select(
+                'c.id,
+                c.nombre,
+                c.logo,
+                c.paises,
+                c.esGlobal,
+                c.activo,
+                cc.id as idComentario,
+                cc.fecha,
+                cc.usuario,
+                cc.comentario'
+            )
+            ->leftJoin(CasasCompetidoresComentarios::class, 'cc', 'WITH', 'c.id = cc.idCasa')
+            ->getQuery()
+            ->getArrayResult();
+
+    }
 }

@@ -359,6 +359,16 @@
         <argument type="service" id=".service_locator.DD_8mC_.App\Controller\CampaniasController"/>
       </call>
     </service>
+    <service id="App\Controller\CategoriesController" class="App\Controller\CategoriesController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument>en</argument>
+      <argument type="service" id="doctrine"/>
+      <argument type="service" id="security.token_storage"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.DD_8mC_.App\Controller\CategoriesController"/>
+      </call>
+    </service>
     <service id="App\Controller\ClientsController" class="App\Controller\ClientsController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -367,6 +377,16 @@
       <argument type="service" id="security.token_storage"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.DD_8mC_.App\Controller\ClientsController"/>
+      </call>
+    </service>
+    <service id="App\Controller\CompetencyController" class="App\Controller\CompetencyController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument>en</argument>
+      <argument type="service" id="doctrine"/>
+      <argument type="service" id="security.token_storage"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.DD_8mC_.App\Controller\CompetencyController"/>
       </call>
     </service>
     <service id="App\Controller\FacturacionDatosController" class="App\Controller\FacturacionDatosController" public="true" autowire="true" autoconfigure="true">
@@ -7541,9 +7561,15 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CampaniasController" class="App\Controller\CampaniasController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CampaniasController" class="App\Controller\CampaniasController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CampaniasController" class="App\Controller\CampaniasController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CategoriesController" class="App\Controller\CategoriesController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CategoriesController" class="App\Controller\CategoriesController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CategoriesController" class="App\Controller\CategoriesController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ClientsController" class="App\Controller\ClientsController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ClientsController" class="App\Controller\ClientsController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ClientsController" class="App\Controller\ClientsController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CompetencyController" class="App\Controller\CompetencyController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CompetencyController" class="App\Controller\CompetencyController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CompetencyController" class="App\Controller\CompetencyController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\FacturacionDatosController" class="App\Controller\FacturacionDatosController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\FacturacionDatosController" class="App\Controller\FacturacionDatosController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\FacturacionDatosController" class="App\Controller\FacturacionDatosController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -8172,16 +8198,19 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.YDYrIuK" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.xWt4EZv" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CampaniasController::getCampaigns" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\CategoriesController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController::addComment" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController::deleteCommentClient" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController::saveDeal" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController::saveInvoice" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController::uploadLogo" type="service_closure" id=".service_locator.5H4eKYU"/>
+        <argument key="App\Controller\CompetencyController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\CompetencyController::uploadLogo" type="service_closure" id=".service_locator.5H4eKYU"/>
         <argument key="App\Controller\FacturacionDatosController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.UDgw6Ol"/>
         <argument key="App\Controller\SuperUsersController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
@@ -8196,12 +8225,15 @@
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::terminate" type="service_closure" id=".service_locator.KfwZsne"/>
         <argument key="App\Controller\CampaniasController:getCampaigns" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\CategoriesController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController:addComment" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController:deleteCommentClient" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController:saveDeal" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController:saveInvoice" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ClientsController:uploadLogo" type="service_closure" id=".service_locator.5H4eKYU"/>
+        <argument key="App\Controller\CompetencyController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\CompetencyController:uploadLogo" type="service_closure" id=".service_locator.5H4eKYU"/>
         <argument key="App\Controller\FacturacionDatosController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.UDgw6Ol"/>
         <argument key="App\Controller\SuperUsersController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
@@ -8820,9 +8852,21 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.DD_8mC_" method="withContext"/>
     </service>
+    <service id=".service_locator.DD_8mC_.App\Controller\CategoriesController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CategoriesController"/>
+      <argument>App\Controller\CategoriesController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.DD_8mC_" method="withContext"/>
+    </service>
     <service id=".service_locator.DD_8mC_.App\Controller\ClientsController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ClientsController"/>
       <argument>App\Controller\ClientsController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.DD_8mC_" method="withContext"/>
+    </service>
+    <service id=".service_locator.DD_8mC_.App\Controller\CompetencyController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CompetencyController"/>
+      <argument>App\Controller\CompetencyController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.DD_8mC_" method="withContext"/>
     </service>
@@ -9036,12 +9080,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.YDYrIuK"/>
+      <argument type="service" id=".service_locator.xWt4EZv"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.YDYrIuK"/>
+      <argument type="service" id=".service_locator.xWt4EZv"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -10049,7 +10093,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.YDYrIuK"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.xWt4EZv"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -10075,7 +10119,7 @@
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~uzTQ0Gb"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.97VCsRb" alias=".service_locator.5H4eKYU"/>
-    <service id=".service_locator.RUfjO4z" alias=".service_locator.YDYrIuK"/>
+    <service id=".service_locator..jcnsZC" alias=".service_locator.xWt4EZv"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>

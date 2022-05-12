@@ -221,6 +221,11 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <span>News</span></a>
     </li>
     <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/news/public\">
+            <i class=\"fas fa-fw fa-newspaper\"></i>
+            <span>Public News</span></a>
+    </li>
+    <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/faqs\">
             <i class=\"fas fa-fw fa-question-circle\"></i>
             <span>FAQ's</span></a>
@@ -230,12 +235,6 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <i class=\"fas fa-fw fa-language\"></i>
             <span>Languages</span></a>
     </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/countries\">
-            <i class=\"fas fa-fw fa-globe\"></i>
-            <span>Countries</span></a>
-    </li>
-    <!-- Divider -->
 
     <!-- Divider -->
     <hr class=\"sidebar-divider\">
@@ -474,6 +473,11 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <span>News</span></a>
     </li>
     <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/news/public\">
+            <i class=\"fas fa-fw fa-newspaper\"></i>
+            <span>Public News</span></a>
+    </li>
+    <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/faqs\">
             <i class=\"fas fa-fw fa-question-circle\"></i>
             <span>FAQ's</span></a>
@@ -483,12 +487,6 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <i class=\"fas fa-fw fa-language\"></i>
             <span>Languages</span></a>
     </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/countries\">
-            <i class=\"fas fa-fw fa-globe\"></i>
-            <span>Countries</span></a>
-    </li>
-    <!-- Divider -->
 
     <!-- Divider -->
     <hr class=\"sidebar-divider\">

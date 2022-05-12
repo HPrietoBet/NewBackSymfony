@@ -36,9 +36,9 @@ class CasasCompetidores
     private $logo;
 
     /**
-     * @var array
+     * @var string
      *
-     * @ORM\Column(name="paises", type="json", nullable=false)
+     * @ORM\Column(name="paises", type="string", nullable=false)
      */
     private $paises;
 
@@ -85,12 +85,12 @@ class CasasCompetidores
         return $this;
     }
 
-    public function getPaises(): ?array
+    public function getPaises(): ?string
     {
         return $this->paises;
     }
 
-    public function setPaises(array $paises): self
+    public function setPaises(string $paises): self
     {
         $this->paises = $paises;
 

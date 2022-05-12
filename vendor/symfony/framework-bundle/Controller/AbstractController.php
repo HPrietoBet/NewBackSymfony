@@ -12,6 +12,7 @@
 namespace Symfony\Bundle\FrameworkBundle\Controller;
 
 use App\Entity\Main\Campanias;
+use App\Entity\Main\Country;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Container\ContainerInterface;
@@ -50,6 +51,10 @@ use Symfony\Component\WebLink\EventListener\AddLinkHeaderListener;
 use Symfony\Component\WebLink\GenericLinkProvider;
 use Symfony\Contracts\Service\ServiceSubscriberInterface;
 use Twig\Environment;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+
 
 
 /**
@@ -69,6 +74,9 @@ abstract class AbstractController implements ServiceSubscriberInterface
 
     public function __construct( ManagerRegistry $doctrine){
         $this->em = $doctrine;
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $this->serializer = new Serializer($normalizers, $encoders);
     }
 
     /**
@@ -534,6 +542,16 @@ abstract class AbstractController implements ServiceSubscriberInterface
 
     public function slugify($string){
         return (new Slugify())->slugify($string);
+    }
+
+    public function getCountries(){
+        $countries =  $this->em->getRepository(Country::class)->findAll();
+        $countries_array = array();
+        $countries_array[] = array('iso'=>'', 'name' => 'Is Global');
+        foreach($countries as $country){
+            $countries_array[]=array('iso'=>strtolower($country->getIso()), 'name' => strtolower($country->getIso()));
+        }
+        return $countries_array;
     }
 
 }

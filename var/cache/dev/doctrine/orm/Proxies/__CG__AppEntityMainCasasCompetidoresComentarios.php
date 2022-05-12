@@ -217,7 +217,7 @@ class CasasCompetidoresComentarios extends \App\Entity\Main\CasasCompetidoresCom
     /**
      * {@inheritDoc}
      */
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFecha', []);
@@ -228,7 +228,7 @@ class CasasCompetidoresComentarios extends \App\Entity\Main\CasasCompetidoresCom
     /**
      * {@inheritDoc}
      */
-    public function setFecha(\DateTimeInterface $fecha): \App\Entity\Main\CasasCompetidoresComentarios
+    public function setFecha(string $fecha): \App\Entity\Main\CasasCompetidoresComentarios
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFecha', [$fecha]);
