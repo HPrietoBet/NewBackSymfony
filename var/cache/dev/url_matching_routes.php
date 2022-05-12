@@ -24,6 +24,7 @@ return [
         '/competency/upload' => [[['_route' => 'app_clients_upload_logo', '_controller' => 'App\\Controller\\CompetencyController::uploadLogo'], null, null, null, false, false, null]],
         '/facturacion-datos' => [[['_route' => 'app_facturacion_datos', '_controller' => 'App\\Controller\\FacturacionDatosController::index'], null, null, null, false, false, null]],
         '/facturacion-datos/save' => [[['_route' => 'app_facturacion_datos_save', '_controller' => 'App\\Controller\\FacturacionDatosController::save'], null, null, null, false, false, null]],
+        '/faqs' => [[['_route' => 'app_faq', '_controller' => 'App\\Controller\\FaqController::index'], null, null, null, false, false, null]],
         '/home' => [
             [['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null],
             [['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null],

@@ -195,7 +195,7 @@ class Ayuda extends \App\Entity\Main\Ayuda implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFecha', []);
@@ -206,7 +206,7 @@ class Ayuda extends \App\Entity\Main\Ayuda implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setFecha(\DateTimeInterface $fecha): \App\Entity\Main\Ayuda
+    public function setFecha(string $fecha): \App\Entity\Main\Ayuda
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFecha', [$fecha]);

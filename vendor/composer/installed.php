@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'bd7a21962b6f1bcb8ffc9adf41caba6d0e292b43',
+        'reference' => '9868a128481caca85ff2603845378836676db5ca',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'bd7a21962b6f1bcb8ffc9adf41caba6d0e292b43',
+            'reference' => '9868a128481caca85ff2603845378836676db5ca',
             'dev_requirement' => false,
         ),
         'cocur/slugify' => array(
@@ -630,12 +630,12 @@
             'dev_requirement' => false,
         ),
         'symfony/maker-bundle' => array(
-            'pretty_version' => 'v1.38.0',
-            'version' => '1.38.0.0',
+            'pretty_version' => 'v1.42.0',
+            'version' => '1.42.0.0',
             'type' => 'symfony-bundle',
             'install_path' => __DIR__ . '/../symfony/maker-bundle',
             'aliases' => array(),
-            'reference' => '143024ab0e426285d3d9b7f6a3ce51e12a9d8ec5',
+            'reference' => 'fc9f6bcc0ef79fc9d0325c545ae0f030bb6c9d11',
             'dev_requirement' => true,
         ),
         'symfony/messenger' => array(

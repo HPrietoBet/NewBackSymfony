@@ -1,0 +1,42 @@
+<?php //App%255CEntity%255CMain%255CFacturasSimplificadas
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Table'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Table')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Index'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Index')),
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'facturas_simplificadas',
+                'ix_id_pasarela',
+                'ix_id_factura',
+            ],
+            'indexes' => [
+                [
+                    $o[1],
+                    $o[2],
+                ],
+            ],
+            'columns' => [
+                1 => [
+                    'id_pasarela',
+                ],
+                [
+                    'id_factura',
+                ],
+            ],
+            'repositoryClass' => [
+                3 => 'App\\Repository\\Main\\FacturasSimplificadasRepository',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[3],
+    ],
+    []
+); }];
