@@ -19,8 +19,6 @@ return [
         '/client/comment/add' => [[['_route' => 'app_client_comment_add', '_controller' => 'App\\Controller\\ClientsController::addComment'], null, null, null, false, false, null]],
         '/client/invoice/save' => [[['_route' => 'app_client_invoice_save', '_controller' => 'App\\Controller\\ClientsController::saveInvoice'], null, null, null, false, false, null]],
         '/client/deal/save' => [[['_route' => 'app_client_deal_save', '_controller' => 'App\\Controller\\ClientsController::saveDeal'], null, null, null, false, false, null]],
-        '/competency' => [[['_route' => 'app_competency', '_controller' => 'App\\Controller\\CompetencyController::index'], null, null, null, false, false, null]],
-        '/competency/save' => [[['_route' => 'app_competency_save', '_controller' => 'App\\Controller\\CompetencyController::save'], null, null, null, false, false, null]],
         '/competency/upload' => [[['_route' => 'app_clients_upload_logo', '_controller' => 'App\\Controller\\CompetencyController::uploadLogo'], null, null, null, false, false, null]],
         '/facturacion-datos' => [[['_route' => 'app_facturacion_datos', '_controller' => 'App\\Controller\\FacturacionDatosController::index'], null, null, null, false, false, null]],
         '/facturacion-datos/save' => [[['_route' => 'app_facturacion_datos_save', '_controller' => 'App\\Controller\\FacturacionDatosController::save'], null, null, null, false, false, null]],
@@ -31,6 +29,8 @@ return [
             [['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null],
         ],
         '/home/charts' => [[['_route' => 'app_home_charts', '_controller' => 'App\\Controller\\HomeController::charts'], null, null, null, false, false, null]],
+        '/news' => [[['_route' => 'app_competency', '_controller' => 'App\\Controller\\NewsController::index'], null, null, null, false, false, null]],
+        '/news/save' => [[['_route' => 'app_competency_save', '_controller' => 'App\\Controller\\NewsController::save'], null, null, null, false, false, null]],
         '/login' => [
             [['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, ['GET' => 0, 'POST' => 1], null, false, false, null],
             [['_route' => 'login', '_controller' => 'App\\Controller\\SecurityController::index'], null, null, null, false, false, null],

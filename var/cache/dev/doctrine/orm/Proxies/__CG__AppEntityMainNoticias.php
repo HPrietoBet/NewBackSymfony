@@ -195,7 +195,7 @@ class Noticias extends \App\Entity\Main\Noticias implements \Doctrine\ORM\Proxy\
     /**
      * {@inheritDoc}
      */
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFecha', []);
@@ -206,7 +206,7 @@ class Noticias extends \App\Entity\Main\Noticias implements \Doctrine\ORM\Proxy\
     /**
      * {@inheritDoc}
      */
-    public function setFecha(\DateTimeInterface $fecha): \App\Entity\Main\Noticias
+    public function setFecha(string $fecha): \App\Entity\Main\Noticias
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFecha', [$fecha]);
