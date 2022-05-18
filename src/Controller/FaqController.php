@@ -89,7 +89,7 @@ class FaqController extends AbstractController
         $id = $request->get('id');
 
         $FaqObj = $this->em->getRepository(Ayuda::class)->find($id);
-        if(empty($FaqObj)){
+        if(empty($FaqObj) or !$this->checkRealId($id)){
             $FaqObj = new Ayuda();
         }
 

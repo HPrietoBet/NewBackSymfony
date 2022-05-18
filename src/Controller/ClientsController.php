@@ -170,7 +170,8 @@ class ClientsController extends AbstractController
         $id = $request->get('id') ?? (int)$newData['idCasa'];
 
         $clientObj = $doctrine->getRepository(CasasDeApuestas::class)->find($id);
-        if(empty($clientObj)){
+        if(empty($clientObj) or !$this->checkRealId($id)){
+
             $clientObj = new CasasDeApuestas();
         }
 

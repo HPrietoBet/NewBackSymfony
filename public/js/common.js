@@ -4,32 +4,35 @@
     dataArray = jsonArray to compare array(id=>x,  show=> texto a mostrar)
  */
 
-function setComponent(type , cellInfo, cellElement, dataArray) {
+function setComponent(type , cellInfo, cellElement, dataArray, _id_component) {
+
     console.log(dataArray);
     console.log(type);
     console.log(cellInfo.value)
     switch (type){
         case 'select':
+            let a_values = [];
             if (cellInfo.value != undefined) {
                 a_values = cellInfo.value.split(',');
             }
             $('<div>')
                 .append($('<select>', {
-                    id: 'campaigns',
-                    name: 'campaigns[]',
+                    id: _id_component,
+                    name: _id_component+'[]',
                     class: 'selectpicker col-md-12',
                     multiple: true
                 }))
                 .appendTo(cellElement);
             for (i = 0; i < dataArray.length; i++) {
                 let select = "";
+                console.log()
                 if ($.inArray(dataArray[i].id.toString(), a_values) > -1) {
                     select = 'selected="selected"';
                 }
-                $('#campaigns').append('<option value="' + dataArray[i].id + '" ' + select + '>' + dataArray[i].show + '</option>')
+                $('#'+_id_component).append('<option value="' + dataArray[i].id + '" ' + select + '>' + dataArray[i].show + '</option>')
             }
             $('select').selectpicker();
-            $('body').on('change', '#campaigns', function (e) {
+            $('body').on('change', '#'+_id_component, function (e) {
                 cellInfo.value = $(this).val().join();
                 console.log(cellInfo.value)
                 cellInfo.setValue($(this).val().join());

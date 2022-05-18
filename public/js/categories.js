@@ -33,7 +33,7 @@ $(function() {
             }
         },
         columns: [
-            {dataField: "idCat", caption: "Id", visible : true, allowEditing: false, width:100},
+            {dataField: "idCat", caption: "Id", visible : true, allowEditing: false, width:100, dataType: 'number'},
             {dataField: "titcat", caption: "Category", visible : true,},
             {dataField: "actcat", caption: "Active", visible : true, lookup:{
                     dataSource: {

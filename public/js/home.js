@@ -56,7 +56,7 @@ $(function() {
             }
         },
         columns: [
-            {dataField: "id", dataType:"id", visible: true, allowEditing: false},
+            {dataField: "id", dataType:"id", visible: true, allowEditing: false,dataType: 'number'},
             {dataField: "aceptaPremiumpay", dataType:"aceptaPremiumpay", visible: false, lookup:{
                     dataSource: {
                         store: {

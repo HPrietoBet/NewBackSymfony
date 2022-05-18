@@ -86,7 +86,7 @@ class UsersBookiesController extends AbstractController
         $id = $request->get('id');
 
         $userObj = $doctrine->getRepository(LoginBookies::class)->find($id);
-        if(empty($userObj)){
+        if(empty($userObj) or !$this->checkRealId($id)){
             $userObj = new LoginBookies();
         }
 

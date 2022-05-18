@@ -87,7 +87,7 @@ class SuperUsersController extends AbstractController
         $id = $request->get('id');
 
         $userObj = $doctrine->getRepository(LoginAdmin::class)->find($id);
-        if(empty($userObj)){
+        if(empty($userObj) or !$this->checkRealId($id)){
             $userObj = new LoginAdmin();
         }
 

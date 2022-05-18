@@ -177,7 +177,7 @@ function setTable(data){
             }
         },
         columns: [
-            {dataField: "id", dataType:"id", visible: true, allowEditing: false},
+            {dataField: "id", dataType:"id", visible: true, allowEditing: false,dataType: 'number'},
             {dataField: "premiumpay", dataType:"Premiumpay", visible: false, lookup:{
                     dataSource: {
                         store: {

@@ -554,4 +554,16 @@ abstract class AbstractController implements ServiceSubscriberInterface
         return $countries_array;
     }
 
+    /**
+     * @param $id
+     * @param $matches
+     * @return void
+     */
+    public function checkRealId($id)
+    {
+        preg_match("/-/", $id, $matches);
+        if(empty($matches)) return true;
+        else return false;
+    }
+
 }

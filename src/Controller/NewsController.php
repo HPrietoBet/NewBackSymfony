@@ -41,7 +41,7 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @Route("/news", name="app_competency")
+     * @Route("/news", name="app_news")
      */
     public function index(): Response
     {
@@ -67,28 +67,29 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @Route("/news/save", name="app_competency_save")
+     * @Route("/news/save", name="app_news_save")
      */
 
     public function save(ManagerRegistry $doctrine, Request $request): Response
     {
         $newData = $request->get('newData');
+        $oldData = $request->get('oldData') ?? array('actnoticia'=> '', 'contenidoDe'=> '', 'contenidoEn'=> '', 'contenidoEs'=> '', 'contenidoFr'=> '', 'contenidoIt'=> '', 'contenidoPt'=> '', 'descriptionDe'=> '', 'descriptionEn'=> '', 'descriptionEs'=> '', 'descriptionFr'=> '', 'descriptionIt'=> '', 'descriptionPt'=> '', 'fecha'=> '', 'id'=> '', 'imagenDestacada'=> '', 'noticiasRelacionadas'=> '', 'paisesNoticia'=> '', 'titleAll'=> '', 'titleDe'=> '', 'titleEn'=> '', 'titleEs'=> '', 'titleFr'=> '', 'titleIt'=> '', 'titlePt'=> '', 'tituloDe'=> '', 'tituloEn'=> '', 'tituloEs'=> '', 'tituloFr'=> '', 'tituloIt'=> '', 'tituloPt'=> '', 'urlDe'=> '', 'urlEn'=> '', 'urlEs'=> '', 'urlFr'=> '', 'urlIt'=> '', 'urlPt'=> '',);
         $id = $request->get('id');
 
         $newsObj = $this->em->getRepository(Noticias::class)->find($id);
 
-        if(empty($newsObj) or !is_int($id)){
+        if(empty($newsObj) or !$this->checkRealId($id)){
             $newsObj = new Noticias();
         }
 
         $date= $newData['fecha'] ?? date('Y-m-d');
         $newsObj->setFecha($date);
 
-        $newsObj->setTitulo($newData['titulo'] ?? '');
-        $newsObj->setContenido($newData['contenido'] ?? '');
+        $newsObj->setTitulo($newData['titulo'] ?? $oldData['titulo']);
+        $newsObj->setContenido($newData['contenido'] ?? $oldData['contenido']);
 
-        $newsObj->setTituloEn($newData['tituloEn'] ?? '');
-        $newsObj->setContenidoEn($newData['contenidoEn'] ?? '');
+        $newsObj->setTituloEn($newData['tituloEn'] ?? $oldData['tituloEn']);
+        $newsObj->setContenidoEn($newData['contenidoEn'] ?? $oldData['contenidoEn']);
 
         $newsObj->setTituloDe( '');
         $newsObj->setContenidoDe( '');
@@ -96,11 +97,11 @@ class NewsController extends AbstractController
         $newsObj->setTituloFr( '');
         $newsObj->setContenidoFr( '');
 
-        $newsObj->setTituloIt($newData['tituloIt']  ?? '');
-        $newsObj->setContenidoIt($newData['contenidoIt']  ?? '');
+        $newsObj->setTituloIt($newData['tituloIt']  ?? $oldData['tituloIt']);
+        $newsObj->setContenidoIt($newData['contenidoIt']  ?? $oldData['contenidoIt']);
 
-        $newsObj->setTituloPt($newData['tituloPt'] ?? '');
-        $newsObj->setContenidoPt($newData['contenidoPt'] ?? '');
+        $newsObj->setTituloPt($newData['tituloPt'] ?? $oldData['tituloPt']);
+        $newsObj->setContenidoPt($newData['contenidoPt'] ?? $oldData['contenidoPt']);
 
         if(isset($newData['actnoticia'])){
             $active = (empty($newData['actnoticia']) || $newData['actnoticia'] == 'false')? 0: 1;

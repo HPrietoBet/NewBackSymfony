@@ -102,7 +102,7 @@ $(function() {
             {dataField: 'contenidoFr', caption:'contenidoFr', visible: false, validationRules: [{ type: "required" }]},
             {dataField: 'contenidoIt', caption:'Content Italian', visible: false, validationRules: [{ type: "required" }]},
             {dataField: 'contenidoPt', caption:'Content Portugese', visible: false, validationRules: [{ type: "required" }]},
-            {dataField: 'idAyuda', caption:'idAyuda', visible: true, width:50, allowEditing: false},
+            {dataField: 'idAyuda', caption:'idAyuda', visible: true, width:50, allowEditing: false,dataType: 'number'},
             {dataField: 'fecha', caption:'fecha', visible: false},
             {dataField: 'idCasPais', caption:'idCasPais', visible: false},
             {dataField: 'actayuda', caption:'Active', visible: true, width:150,

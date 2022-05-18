@@ -73,7 +73,7 @@ class CategoriesController extends AbstractController
         $id = $request->get('id');
 
         $CategoryObj = $this->em->getRepository(CategoriasCampania::class)->find($id);
-        if(empty($CategoryObj)){
+        if(empty($CategoryObj) or !$this->checkRealId($id)){
             $CategoryObj = new CategoriasCampania();
         }
 

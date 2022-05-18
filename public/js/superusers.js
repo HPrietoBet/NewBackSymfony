@@ -51,7 +51,7 @@ $(function() {
             }
         },
         columns: [
-            {dataField: "id", caption: "Id", visible : true, allowEditing: false},
+            {dataField: "id", caption: "Id", visible : true, allowEditing: false,dataType: 'number'},
             {dataField: "user", caption: "User", visible : true,
                 validationRules: [{ type: "required" }]
             },

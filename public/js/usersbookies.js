@@ -56,6 +56,7 @@ $(function() {
                 caption:"Id",
                 visible: true,
                 allowEditing: false,
+                dataType: 'number'
             },
             {dataField: "username",
                 caption:"Username",
@@ -102,8 +103,7 @@ $(function() {
                 caption:"Campañas",
                 visible: false,
                 editCellTemplate: function(cellElement, cellInfo) {
-                    setComponent('select', cellInfo,  cellElement, campaigns_json);
-
+                    setComponent('select', cellInfo,  cellElement, campaigns_json, 'campaigns');
                 },
             },
 

@@ -39,7 +39,7 @@ $(function() {
                                 editorOptions: {
                                     height: 200,
                                     toolbar: {
-                                        items: ["bold", "italic", "underline"]
+                                        items: ["bold", "italic", "underline", "link"]
                                     }
                                 }
                             },
@@ -51,7 +51,7 @@ $(function() {
                                 editorOptions: {
                                     height: 200,
                                     toolbar: {
-                                        items: ["bold", "italic", "underline"]
+                                        items: ["bold", "italic", "underline", "link"]
                                     }
                                 }
                             },
@@ -63,7 +63,7 @@ $(function() {
                                 editorOptions: {
                                     height: 200,
                                     toolbar: {
-                                        items: ["bold", "italic", "underline"]
+                                        items: ["bold", "italic", "underline", "link"]
                                     }
                                 }
                             },
@@ -75,7 +75,7 @@ $(function() {
                                 editorOptions: {
                                     height: 200,
                                     toolbar: {
-                                        items: ["bold", "italic", "underline"]
+                                        items: ["bold", "italic", "underline", "link"]
                                     }
                                 }
                             },
@@ -86,7 +86,7 @@ $(function() {
 
         },
         columns: [
-            {dataField: "idNoticia", caption:"News ID", visible: true, allowEditing:false, width: 100},
+            {dataField: "idNoticia", caption:"News ID", visible: true, allowEditing:false, width: 100,dataType: 'number'},
             {dataField: "fecha", caption:"Date", visible: true, width:200, dataType: 'date' },
             {dataField: "titleAll", caption:"Title Active", visible: true,},
             {dataField: "titulo", caption:"Title", visible: false, },

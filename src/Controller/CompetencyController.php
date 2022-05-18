@@ -81,7 +81,7 @@ class CompetencyController extends AbstractController
         $id = $request->get('id');
 
         $CompetencyObj = $this->em->getRepository(CasasCompetidores::class)->find($id);
-        if(empty($CompetencyObj)){
+        if(empty($CompetencyObj) or !$this->checkRealId($id)){
             $CompetencyObj = new CasasCompetidores();
         }
 
