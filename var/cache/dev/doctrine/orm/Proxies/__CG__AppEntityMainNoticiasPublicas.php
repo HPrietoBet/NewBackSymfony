@@ -195,7 +195,7 @@ class NoticiasPublicas extends \App\Entity\Main\NoticiasPublicas implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFecha', []);
@@ -206,7 +206,7 @@ class NoticiasPublicas extends \App\Entity\Main\NoticiasPublicas implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function setFecha(\DateTimeInterface $fecha): \App\Entity\Main\NoticiasPublicas
+    public function setFecha(string $fecha): \App\Entity\Main\NoticiasPublicas
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFecha', [$fecha]);

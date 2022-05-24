@@ -91,4 +91,22 @@ class PasarelasBetanDealPaymentdataRepository extends ServiceEntityRepository
         return $datos;
 
     }
+
+    public function getDataUser($userId, $dates,  $visible = true){
+        $visible = empty($visible)? 0: 1;
+        $datos =   $this->createQueryBuilder('pd')->select(['SUM(pd.quantity) money', 'pd.currency'])
+                ->where('pd.datepayment BETWEEN :from AND :to')
+                ->andWhere('pd.visible = :visible')
+                ->andWhere('pd.idtipster = :tipster')
+                ->setParameter('from', $dates[0]. ' 00:00:00')
+                ->setParameter('to',$dates[1]. ' 23:59:59')
+                ->setParameter('visible', $visible)
+                ->setParameter('tipster', $userId)
+                ->groupBy('pd.currency')
+                ->getQuery()
+                ->getResult() ?? 0;
+        return $datos;
+
+
+    }
 }

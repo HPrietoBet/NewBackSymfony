@@ -239,7 +239,7 @@ class CampaniasUsuarioClicks extends \App\Entity\Main\CampaniasUsuarioClicks imp
     /**
      * {@inheritDoc}
      */
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFecha', []);
@@ -250,7 +250,7 @@ class CampaniasUsuarioClicks extends \App\Entity\Main\CampaniasUsuarioClicks imp
     /**
      * {@inheritDoc}
      */
-    public function setFecha(\DateTimeInterface $fecha): \App\Entity\Main\CampaniasUsuarioClicks
+    public function setFecha(string $fecha): \App\Entity\Main\CampaniasUsuarioClicks
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFecha', [$fecha]);
@@ -261,7 +261,7 @@ class CampaniasUsuarioClicks extends \App\Entity\Main\CampaniasUsuarioClicks imp
     /**
      * {@inheritDoc}
      */
-    public function getFechaUltimoClick(): ?\DateTimeInterface
+    public function getFechaUltimoClick(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFechaUltimoClick', []);
@@ -272,7 +272,7 @@ class CampaniasUsuarioClicks extends \App\Entity\Main\CampaniasUsuarioClicks imp
     /**
      * {@inheritDoc}
      */
-    public function setFechaUltimoClick(?\DateTimeInterface $fechaUltimoClick): \App\Entity\Main\CampaniasUsuarioClicks
+    public function setFechaUltimoClick(?string $fechaUltimoClick): \App\Entity\Main\CampaniasUsuarioClicks
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFechaUltimoClick', [$fechaUltimoClick]);

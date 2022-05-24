@@ -2,6 +2,8 @@
 
 namespace App\Repository\Main;
 
+use App\Entity\Main\Campanias;
+use App\Entity\Main\CampaniasUsuario;
 use App\Entity\Main\EstadisticasApi;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -90,6 +92,65 @@ class EstadisticasAPIRepository extends ServiceEntityRepository
                 ->groupBy('st.fecha')
                 ->getQuery()
                 ->getResult() ?? 0;
+        return $datos;
+
+    }
+
+    public function getDataUser($userId, $dates){
+        $datos =   $this->createQueryBuilder('st')->select(['SUM(st.comisionGenerada) comisiones', 'sum(st.cpaGenerados) cpas', 'sum(st.registros) registros', 'sum(st.depositantesPrimeraVez) depositantes'])
+                ->leftJoin(CampaniasUsuario::class, 'cu', 'WITH', 'cu.idCampaniaUsuario = st.idCampaniaUsuario')
+                ->where('st.fecha BETWEEN :from AND :to')
+                ->andWhere('cu.idUsuario = :userid')
+                ->setParameter('from', $dates[0]. ' 00:00:00')
+                ->setParameter('to',$dates[1]. ' 23:59:59')
+                ->setParameter('userid', $userId)
+                ->getQuery()
+                ->getOneOrNullResult() ?? 0;
+        return $datos;
+
+    }
+
+    public function getDataClient($clientId, $dates){
+        $datos =   $this->createQueryBuilder('st')->select(['SUM(st.comisionGenerada) comisiones', 'sum(st.cpaGenerados) cpas', 'sum(st.registros) registros', 'sum(st.depositantesPrimeraVez) depositantes'])
+                ->leftJoin(CampaniasUsuario::class, 'cu', 'WITH', 'cu.idCampaniaUsuario = st.idCampaniaUsuario')
+                ->leftJoin(Campanias::class, 'c', 'WITH', 'c.id = cu.idCampania')
+                ->where('st.fecha BETWEEN :from AND :to')
+                ->andWhere('c.idCasa = :clientid')
+                ->setParameter('from', $dates[0]. ' 00:00:00')
+                ->setParameter('to',$dates[1]. ' 23:59:59')
+                ->setParameter('clientid', $clientId)
+                ->getQuery()
+                ->getOneOrNullResult() ?? 0;
+        return $datos;
+
+    }
+
+    public function getDataCountry($iso, $dates){
+        if(strlen($iso) > 2) {
+            $datos = $this->createQueryBuilder('st')->select(['SUM(st.comisionGenerada) comisiones', 'sum(st.cpaGenerados) cpas', 'sum(st.registros) registros', 'sum(st.depositantesPrimeraVez) depositantes'])
+                    ->leftJoin(CampaniasUsuario::class, 'cu', 'WITH', 'cu.idCampaniaUsuario = st.idCampaniaUsuario')
+                    ->leftJoin(Campanias::class, 'c', 'WITH', 'c.id = cu.idCampania')
+                    ->where('st.fecha BETWEEN :from AND :to')
+                    ->andWhere('LENGTH(c.paises) > :chars')
+                    ->setParameter('from', $dates[0] . ' 00:00:00')
+                    ->setParameter('to', $dates[1] . ' 23:59:59')
+                    ->setParameter('chars', 6)
+                    ->getQuery()
+                    ->getOneOrNullResult() ?? 0;
+        }else{
+            $datos = $this->createQueryBuilder('st')->select(['SUM(st.comisionGenerada) comisiones', 'sum(st.cpaGenerados) cpas', 'sum(st.registros) registros', 'sum(st.depositantesPrimeraVez) depositantes'])
+                    ->leftJoin(CampaniasUsuario::class, 'cu', 'WITH', 'cu.idCampaniaUsuario = st.idCampaniaUsuario')
+                    ->leftJoin(Campanias::class, 'c', 'WITH', 'c.id = cu.idCampania')
+                    ->where('st.fecha BETWEEN :from AND :to')
+                    ->andWhere('LENGTH(c.paises) <= :chars')
+                    ->andWhere('c.paises like :iso')
+                    ->setParameter('from', $dates[0] . ' 00:00:00')
+                    ->setParameter('to', $dates[1] . ' 23:59:59')
+                    ->setParameter('chars', 6)
+                    ->setParameter('iso', "%".$iso."%")
+                    ->getQuery()
+                    ->getOneOrNullResult() ?? 0;
+        }
         return $datos;
 
     }

@@ -36,16 +36,16 @@ class CampaniasUsuarioClicks
     private $ip;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     * @ORM\Column(name="fecha", type="string", nullable=false)
      */
     private $fecha;
 
     /**
-     * @var \DateTime|null
+     * @var string|null
      *
-     * @ORM\Column(name="fecha_ultimo_click", type="datetime", nullable=true)
+     * @ORM\Column(name="fecha_ultimo_click", type="string", nullable=true)
      */
     private $fechaUltimoClick;
 
@@ -92,24 +92,24 @@ class CampaniasUsuarioClicks
         return $this;
     }
 
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
         return $this->fecha;
     }
 
-    public function setFecha(\DateTimeInterface $fecha): self
+    public function setFecha(string $fecha): self
     {
         $this->fecha = $fecha;
 
         return $this;
     }
 
-    public function getFechaUltimoClick(): ?\DateTimeInterface
+    public function getFechaUltimoClick(): ?string
     {
         return $this->fechaUltimoClick;
     }
 
-    public function setFechaUltimoClick(?\DateTimeInterface $fechaUltimoClick): self
+    public function setFechaUltimoClick(?string $fechaUltimoClick): self
     {
         $this->fechaUltimoClick = $fechaUltimoClick;
 

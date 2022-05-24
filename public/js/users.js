@@ -1,5 +1,4 @@
 $(function() {
-
   $('#form_search_users').on ('click', function (e) {
       e.preventDefault();
       var _btn =$(this);

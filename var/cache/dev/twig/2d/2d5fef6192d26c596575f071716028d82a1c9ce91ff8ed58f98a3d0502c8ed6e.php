@@ -155,24 +155,25 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/stats\">
-            <i class=\"fas fa-fw fa-chart-area\"></i>
-            <span>Stats</span></a>
-    </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/stats/api\">
+        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseStats\"
+           aria-expanded=\"true\" aria-controls=\"collapseStats\">
             <i class=\"fas fa-fw fa-chart-line\"></i>
-            <span>Api Stats</span></a>
+            <span>Stats</span>
+        </a>
+
+        <div id=\"collapseStats\" class=\"collapse\" aria-labelledby=\"headingStats\" data-parent=\"#accordionSidebar\">
+            <div class=\"bg-white py-2 collapse-inner rounded\">
+                <a class=\"collapse-item\" href=\"/stats/users\">Users</a>
+                <a class=\"collapse-item\" href=\"/stats/clients\">Clients</a>
+                <a class=\"collapse-item\" href=\"/stats/countries\">Countries</a>
+                <a class=\"collapse-item\" href=\"/stats/clicks\">Clicks</a>
+            </div>
+        </div>
     </li>
     <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/stats/syncronize\">
             <i class=\"fas fa-fw fa-cogs\"></i>
             <span>Stats Sync</span></a>
-    </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/stats/comparer\">
-            <i class=\"fas fa-fw fa-chart-bar\"></i>
-            <span>Compare Stats</span></a>
     </li>
     <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/competency\">
@@ -230,12 +231,6 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <i class=\"fas fa-fw fa-question-circle\"></i>
             <span>FAQ's</span></a>
     </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/languages\">
-            <i class=\"fas fa-fw fa-language\"></i>
-            <span>Languages</span></a>
-    </li>
-
     <!-- Divider -->
     <hr class=\"sidebar-divider\">
 
@@ -407,24 +402,25 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/stats\">
-            <i class=\"fas fa-fw fa-chart-area\"></i>
-            <span>Stats</span></a>
-    </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/stats/api\">
+        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseStats\"
+           aria-expanded=\"true\" aria-controls=\"collapseStats\">
             <i class=\"fas fa-fw fa-chart-line\"></i>
-            <span>Api Stats</span></a>
+            <span>Stats</span>
+        </a>
+
+        <div id=\"collapseStats\" class=\"collapse\" aria-labelledby=\"headingStats\" data-parent=\"#accordionSidebar\">
+            <div class=\"bg-white py-2 collapse-inner rounded\">
+                <a class=\"collapse-item\" href=\"/stats/users\">Users</a>
+                <a class=\"collapse-item\" href=\"/stats/clients\">Clients</a>
+                <a class=\"collapse-item\" href=\"/stats/countries\">Countries</a>
+                <a class=\"collapse-item\" href=\"/stats/clicks\">Clicks</a>
+            </div>
+        </div>
     </li>
     <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/stats/syncronize\">
             <i class=\"fas fa-fw fa-cogs\"></i>
             <span>Stats Sync</span></a>
-    </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/stats/comparer\">
-            <i class=\"fas fa-fw fa-chart-bar\"></i>
-            <span>Compare Stats</span></a>
     </li>
     <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/competency\">
@@ -482,12 +478,6 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
             <i class=\"fas fa-fw fa-question-circle\"></i>
             <span>FAQ's</span></a>
     </li>
-    <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"/languages\">
-            <i class=\"fas fa-fw fa-language\"></i>
-            <span>Languages</span></a>
-    </li>
-
     <!-- Divider -->
     <hr class=\"sidebar-divider\">
 

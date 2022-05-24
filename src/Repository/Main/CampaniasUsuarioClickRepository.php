@@ -2,7 +2,11 @@
 
 namespace App\Repository\Main;
 
+use App\Entity\Main\Campanias;
+use App\Entity\Main\CampaniasCodes;
+use App\Entity\Main\CampaniasUsuario;
 use App\Entity\Main\CampaniasUsuarioClicks;
+use App\Entity\Main\LoginBusiness;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -73,4 +77,57 @@ class CampaniasUsuarioClickRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByUsingDates($idCampanias, $client, $dates)
+    {
+
+        $return = $this->createQueryBuilder('cuc')
+                    ->select('cuc.fecha, cc.codigo, c.titcamp, cu.idUsuario, lb.username,  cu.idCampaniaUsuario, cuc.clicksTotalesCampaniaUsuario ctotales, cuc.clicksUnicosCampaniaUsuario cuniques')
+                    ->leftJoin(CampaniasUsuario::class, 'cu', 'WITH', 'cu.idCampaniaUsuario = cuc.idCampania')
+                    ->leftJoin(Campanias::class, 'c' , 'WITH', 'c.id = cu.idCampania')
+                    ->leftJoin(CampaniasCodes::class, 'cc' , 'WITH', 'cc.idUsuario = cu.idCampaniaUsuario')
+                    ->leftJoin(LoginBusiness::class, 'lb', 'WITH', 'lb.id = cu.idUsuario')
+                    ->where('cuc.idCampania in (:idCampanias)')
+                    ->andWhere('c.idCasa = :client')
+                    ->andWhere('cuc.fecha >= :dateInit')
+                    ->andWhere('cuc.fecha < :dateEnd')
+                    ->setParameter('idCampanias', $idCampanias)
+                    ->setParameter('client', $client)
+                    ->setParameter('dateInit', $dates[0]. ' 00:00:00')
+                    ->setParameter('dateEnd', $dates[1]. ' 23:59:59')
+                    ->groupBy('cuc.idCampania, cuc.fecha')
+                    ->getQuery()
+                    ->getResult();
+
+        $returned_array = array();
+        $returned_end = array();
+        if(!empty($return)) {
+            foreach ($return as $item) {
+                $date_to_key = explode(':', $item['fecha'])[0];
+
+                if (empty($returned_array[$date_to_key][$item['idCampaniaUsuario']])) {
+                    $returned_array[$date_to_key][$item['idCampaniaUsuario']] = array(
+                        'fecha' => $date_to_key,
+                        'titcamp' => $item['titcamp'],
+                        'idUsuario' => $item['idUsuario'],
+                        'username' => $item['username'],
+                        'idCampaniaUsuario' => $item['idCampaniaUsuario'],
+                        'codigo' => $item['codigo'],
+                        'ctotales' => 0,
+                        'cuniques' => 0,
+                    );
+                }
+                    $returned_array[$date_to_key][$item['idCampaniaUsuario']]['ctotales'] += $item['ctotales'];
+                    $returned_array[$date_to_key][$item['idCampaniaUsuario']]['cuniques'] += $item['cuniques'];
+            }
+        }
+        foreach ($returned_array as $date => $value){
+            foreach($value as $campania => $val){
+                $returned_end[] = $val;
+            }
+        }
+        return $returned_end;
+
+        //return $returned_array;
+    }
 }

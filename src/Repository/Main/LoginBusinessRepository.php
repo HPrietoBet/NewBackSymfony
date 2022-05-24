@@ -2,6 +2,7 @@
 
 namespace App\Repository\Main;
 
+use App\Entity\Main\LoginAdmin;
 use App\Entity\Main\LoginBusiness;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -44,6 +45,19 @@ class LoginBusinessRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+
+    public function getInfoStats($users_array)
+    {
+        return $this->createQueryBuilder('l')
+            ->select('l.id, l.user, l.username, la.user responsable')
+            ->leftJoin(LoginAdmin::class,'la', 'WITH', 'l.responsable = la.id')
+            ->where('l.username in (:users)')
+            ->setParameter('users', $users_array)
+            ->getQuery()
+            ->getResult();
+    }
+
 
     // /**
     //  * @return LoginBusiness[] Returns an array of LoginBusiness objects

@@ -154,6 +154,13 @@ class FaqController extends AbstractController
             $FaqObj->setTituloPt($newData['tituloPt']);
         }
 
+        $FaqObj->setTituloDe('');
+        $FaqObj->setTituloFr('');
+        $FaqObj->setContenidoDe('');
+        $FaqObj->setContenidoFr('');
+
+        $FaqObj->setIdCasPais(1);
+
         $fecha = date('Y-m-d H:i:s');
         $FaqObj->setFecha($fecha);
 

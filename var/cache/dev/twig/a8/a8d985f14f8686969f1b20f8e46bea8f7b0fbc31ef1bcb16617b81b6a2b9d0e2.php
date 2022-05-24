@@ -57,20 +57,20 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
         // line 8
         echo "        ";
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 30
+        // line 39
         echo "
 
     </head>
     <body>
         ";
-        // line 34
+        // line 43
         $this->displayBlock('body', $context, $blocks);
-        // line 35
+        // line 44
         echo "    </body>
     ";
-        // line 36
+        // line 45
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 55
+        // line 64
         echo "</html>
 ";
         
@@ -120,6 +120,8 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
             <link href=\"/css/sb-admin-2.min.css\" rel=\"stylesheet\">
             <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css\">
             <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css\" />
+            <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css\" integrity=\"sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\" />
+            <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css\" />
 
             <!-- Bootstrap core JavaScript-->
             <script src=\"/vendor/jquery/jquery.min.js\"></script>
@@ -131,6 +133,13 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
             <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js\"></script>
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js\"></script>
             <script src=\"https://cdn3.devexpress.com/jslib/20.2.3/js/dx-quill.min.js\"></script>
+            <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js\"></script>
+            <script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/momentjs/latest/moment.min.js\"></script>
+            <script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js\"></script>
+
+
+
+
         ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -140,7 +149,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
 
     }
 
-    // line 34
+    // line 43
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -158,7 +167,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
 
     }
 
-    // line 36
+    // line 45
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -168,7 +177,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 37
+        // line 46
         echo "
         <!-- Custom scripts for all pages-->
         <script src=\"/js/sb-admin-2.min.js\"></script>
@@ -202,7 +211,7 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
 
     public function getDebugInfo()
     {
-        return array (  172 => 37,  162 => 36,  144 => 34,  114 => 9,  104 => 8,  85 => 5,  74 => 55,  72 => 36,  69 => 35,  67 => 34,  61 => 30,  58 => 8,  53 => 5,  47 => 1,);
+        return array (  181 => 46,  171 => 45,  153 => 43,  114 => 9,  104 => 8,  85 => 5,  74 => 64,  72 => 45,  69 => 44,  67 => 43,  61 => 39,  58 => 8,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -224,6 +233,8 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
             <link href=\"/css/sb-admin-2.min.css\" rel=\"stylesheet\">
             <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css\">
             <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css\" />
+            <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css\" integrity=\"sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\" />
+            <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css\" />
 
             <!-- Bootstrap core JavaScript-->
             <script src=\"/vendor/jquery/jquery.min.js\"></script>
@@ -235,6 +246,13 @@ class __TwigTemplate_f1418bb807e7efd5772dcca3cef6221db902a1c360ab5cd522e469e6950
             <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js\"></script>
             <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js\"></script>
             <script src=\"https://cdn3.devexpress.com/jslib/20.2.3/js/dx-quill.min.js\"></script>
+            <script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js\"></script>
+            <script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/momentjs/latest/moment.min.js\"></script>
+            <script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js\"></script>
+
+
+
+
         {% endblock %}
 
 
