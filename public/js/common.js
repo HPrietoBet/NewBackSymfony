@@ -90,35 +90,6 @@ function prepareDataForm(data) {
     return dataJson;
 }
 
-function prepareCardsForm(cellElement, cellInfo){
-    let user_campaigns;
-    $.ajax({
-        url:'user/campaigns/get',
-        data: {'userId': cellInfo.row.data.idUsuario},
-        method: 'post',
-        dataType: 'json',
-        success: function (resp){
-            user_campaigns = resp
-            let _val = JSON.parse(cellInfo.value)
-            if(cellInfo.row.data.esGeolocalizada == 1){
-               for(i= 0; i< _val.length; i+=2){
-                  $('<div>', {class:'client_comment half float-left align-center'})
-                      .append($('<img>', {src:'img/flat/24/'+_val[i].toUpperCase()+'.png', class:' float-left p-1'}))
-                      .append($('<h6>', {text:' '+user_campaigns[_val[i+1]].titcamp, class:'p-2'}))
-                       .appendTo(cellElement)
-               }
-            }else{
-                for(i= 0; i< _val.length; i++){
-                    $('<div>', {class:'client_comment half float-left align-center'})
-                        .append($('<h6>', {text:' '+user_campaigns[_val[i]].titcamp, class:'p-1'}))
-                        .appendTo(cellElement)
-                }
-
-            }
-        }
-    })
-
-}
 
 String.prototype.escapeSpecialChars = function() {
     return this.replace(/\\n/g, "\\n")

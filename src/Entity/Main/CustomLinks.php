@@ -18,6 +18,7 @@ class CustomLinks
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -57,9 +58,9 @@ class CustomLinks
     private $casas;
 
     /**
-     * @var \DateTime|null
+     * @var string|null
      *
-     * @ORM\Column(name="fecha", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="fecha", type="string", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $fecha = 'CURRENT_TIMESTAMP';
 
@@ -128,12 +129,12 @@ class CustomLinks
         return $this;
     }
 
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
         return $this->fecha;
     }
 
-    public function setFecha(?\DateTimeInterface $fecha): self
+    public function setFecha(?string $fecha): self
     {
         $this->fecha = $fecha;
 
