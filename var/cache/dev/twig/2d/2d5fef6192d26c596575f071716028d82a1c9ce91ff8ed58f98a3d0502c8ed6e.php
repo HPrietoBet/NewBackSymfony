@@ -213,8 +213,13 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
     </li>
     <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/site-creator\">
-            <i class=\"fas fa-fw fa-internet-explorer\"></i>
+            <i class=\"fas fa-fw fa-globe\"></i>
             <span>SiteCreator</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/custom-links\">
+            <i class=\"fas fa-fw fa-link\"></i>
+            <span>Custom Links</span></a>
     </li>
     <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/news\">
@@ -460,8 +465,13 @@ class __TwigTemplate_d3e86539a4f8b361befaaf6fcdb048b6e01a773bd9e587827c2f4f9798b
     </li>
     <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/site-creator\">
-            <i class=\"fas fa-fw fa-internet-explorer\"></i>
+            <i class=\"fas fa-fw fa-globe\"></i>
             <span>SiteCreator</span></a>
+    </li>
+    <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"/custom-links\">
+            <i class=\"fas fa-fw fa-link\"></i>
+            <span>Custom Links</span></a>
     </li>
     <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"/news\">

@@ -371,7 +371,7 @@ class CustomPages extends \App\Entity\Main\CustomPages implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFecha', []);
@@ -382,7 +382,7 @@ class CustomPages extends \App\Entity\Main\CustomPages implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function setFecha(\DateTimeInterface $fecha): \App\Entity\Main\CustomPages
+    public function setFecha(string $fecha): \App\Entity\Main\CustomPages
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFecha', [$fecha]);

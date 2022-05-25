@@ -5,14 +5,15 @@
  */
 
 function setComponent(type , cellInfo, cellElement, dataArray, _id_component) {
-
-    console.log(dataArray);
-    console.log(type);
-    console.log(cellInfo.value)
+    console.log(cellInfo.data);
+    let a_values = [];
     switch (type){
         case 'select':
-            let a_values = [];
-            if (cellInfo.value != undefined) {
+            if(Array.isArray(cellInfo.value)) {
+                cellInfo.value = cellInfo.value.join();
+            };
+
+            if (cellInfo.value != undefined && cellInfo.value != 0) {
                 a_values = cellInfo.value.split(',');
             }
             $('<div>')
@@ -20,12 +21,12 @@ function setComponent(type , cellInfo, cellElement, dataArray, _id_component) {
                     id: _id_component,
                     name: _id_component+'[]',
                     class: 'selectpicker col-md-12',
-                    multiple: true
+                    multiple: true,
+                    'data-live-search': true
                 }))
                 .appendTo(cellElement);
             for (i = 0; i < dataArray.length; i++) {
                 let select = "";
-                console.log()
                 if ($.inArray(dataArray[i].id.toString(), a_values) > -1) {
                     select = 'selected="selected"';
                 }
@@ -34,8 +35,36 @@ function setComponent(type , cellInfo, cellElement, dataArray, _id_component) {
             $('select').selectpicker();
             $('body').on('change', '#'+_id_component, function (e) {
                 cellInfo.value = $(this).val().join();
-                console.log(cellInfo.value)
                 cellInfo.setValue($(this).val().join());
+            })
+            break;
+        case 'selectNoMultiple':
+            if(Array.isArray(cellInfo.value)) {
+                cellInfo.value = cellInfo.value.join();
+            };
+
+            if (cellInfo.value != undefined && cellInfo.value != 0) {
+                a_values = cellInfo.value.toString().split(',');
+            }
+            $('<div>')
+                .append($('<select>', {
+                    id: _id_component,
+                    name: _id_component+'[]',
+                    class: 'selectpicker col-md-12',
+                    'data-live-search': true
+                }))
+                .appendTo(cellElement);
+            for (i = 0; i < dataArray.length; i++) {
+                let select = "";
+                if ($.inArray(dataArray[i].id.toString(), a_values) > -1) {
+                    select = 'selected="selected"';
+                }
+                $('#'+_id_component).append('<option value="' + dataArray[i].id + '" ' + select + '>' + dataArray[i].show + '</option>')
+            }
+            $('select').selectpicker();
+            $('body').on('change', '#'+_id_component, function (e) {
+                cellInfo.value = $(this).val()
+                cellInfo.setValue($(this).val());
             })
             break;
         default:
@@ -59,6 +88,36 @@ function prepareDataForm(data) {
     }
     var dataJson = Object.assign({}, dataend);
     return dataJson;
+}
+
+function prepareCardsForm(cellElement, cellInfo){
+    let user_campaigns;
+    $.ajax({
+        url:'user/campaigns/get',
+        data: {'userId': cellInfo.row.data.idUsuario},
+        method: 'post',
+        dataType: 'json',
+        success: function (resp){
+            user_campaigns = resp
+            let _val = JSON.parse(cellInfo.value)
+            if(cellInfo.row.data.esGeolocalizada == 1){
+               for(i= 0; i< _val.length; i+=2){
+                  $('<div>', {class:'client_comment half float-left align-center'})
+                      .append($('<img>', {src:'img/flat/24/'+_val[i].toUpperCase()+'.png', class:' float-left p-1'}))
+                      .append($('<h6>', {text:' '+user_campaigns[_val[i+1]].titcamp, class:'p-2'}))
+                       .appendTo(cellElement)
+               }
+            }else{
+                for(i= 0; i< _val.length; i++){
+                    $('<div>', {class:'client_comment half float-left align-center'})
+                        .append($('<h6>', {text:' '+user_campaigns[_val[i]].titcamp, class:'p-1'}))
+                        .appendTo(cellElement)
+                }
+
+            }
+        }
+    })
+
 }
 
 String.prototype.escapeSpecialChars = function() {

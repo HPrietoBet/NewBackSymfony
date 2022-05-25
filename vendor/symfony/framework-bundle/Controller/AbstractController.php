@@ -554,6 +554,18 @@ abstract class AbstractController implements ServiceSubscriberInterface
         return $countries_array;
     }
 
+    public function getCountriesSelector(){
+        $countries =  $this->em->getRepository(Country::class)->findAll();
+        $countries_selector = array();
+        foreach ($countries as $item) {
+            $countries_selector[]=array(
+                'id'=> strtolower($item->getIso()),
+                'show' =>  strtoupper($item->getIso()),
+            );
+        }
+            return $countries_selector;
+    }
+
     /**
      * @param $id
      * @param $matches

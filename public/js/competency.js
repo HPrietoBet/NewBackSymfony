@@ -106,7 +106,7 @@ $(function() {
                                 { id: false, name: 'No Active' },
                                 { id: true, name: 'Active' },
                             ],
-                            key: "control"
+                            key: "activo"
                         },
                     },
                     valueExpr: 'id',

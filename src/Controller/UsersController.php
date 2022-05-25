@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Main\CampaniasUsuario;
 use App\Entity\Main\LoginAdmin;
 use App\Entity\Main\LoginBusiness;
 use App\Entity\Main\UsuarioComentarios;
 use App\Entity\Main\UsuariosAceptarterminos;
 use App\Entity\Main\UsuariosFuentes;
 use App\Repository\Main\UsuariosTerminosRepository;
+use App\Repository\Premiumpay\PasarelasBetanDealPaymentdataRepository;
+use App\Repository\Premiumpay\PasarelasBetanDealRepository;
 use Doctrine\ORM\Query\Expr\Select;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -431,5 +434,32 @@ class UsersController extends AbstractController
 
     }
 
+    /**
+     * @Route("/user/campaigns/get", name="app_users_campaigns_get")
+     */
+    public function getCampaignsPerUser(Request $request){
+        $idUser = $request->request->get('userId');
+        $camps = $this->serializer->normalize($this->em->getRepository(CampaniasUsuario::class)->findByUserWithCampaign($idUser));
+        $camps_return = array();
 
+        foreach($camps as $item){
+            $camps_return[$item['idCampaniaUsuario']] = $item;
+        }
+        echo json_encode($camps_return) ;
+        die();
+    }
+    /**
+     * @Route("/user/pasarelas/get", name="app_users_pasarelas_get")
+     */
+    public function getPasarelasPerUser(Request $request){
+        $idUser = $request->request->get('userId');
+        $pasarelas = $this->serializer->normalize($this->em->getRepository(PasarelasBetanDealRepository::class)->findBy(['idpasarela'=>$idUser]));
+        $pasarelas_return = array();
+
+        foreach($pasarelas as $item){
+            $pasarelas_return_return[$item['id']] = $item;
+        }
+        echo json_encode($pasarelas_return) ;
+        die();
+    }
 }

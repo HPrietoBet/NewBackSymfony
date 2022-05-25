@@ -2,6 +2,7 @@
 
 namespace App\Repository\Main;
 
+use App\Entity\Main\Campanias;
 use App\Entity\Main\CampaniasUsuario;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -73,4 +74,8 @@ class CampaniasUsuarioRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByUserWithCampaign($idUser){
+        return $this->createQueryBuilder('cu')->select('c.titcamp, cu.idCampaniaUsuario, cu.activo')->join(Campanias::class, 'c', 'with', 'c.id = cu.idCampania')->where('cu.idUsuario = :userId')->setParameter('userId', $idUser)->getQuery()->getResult();
+    }
 }

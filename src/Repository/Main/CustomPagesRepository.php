@@ -2,7 +2,9 @@
 
 namespace App\Repository\Main;
 
+use App\Entity\Main\CustomLinks;
 use App\Entity\Main\CustomPages;
+use App\Entity\Main\LoginBusiness;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -73,4 +75,11 @@ class CustomPagesRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllInfo(){
+        return $this->createQueryBuilder('s')
+            ->leftJoin(LoginBusiness::class, 'lb', 'with', 's.idUsuario = lb.id')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -456,7 +456,9 @@
     <service id="App\Controller\SiteCreatorController" class="App\Controller\SiteCreatorController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument>en</argument>
       <argument type="service" id="doctrine"/>
+      <argument type="service" id="security.token_storage"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.DD_8mC_.App\Controller\SiteCreatorController"/>
       </call>
@@ -8287,7 +8289,7 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.grhWYkb" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.tn6btrk" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CampaniasController::getCampaigns" type="service_closure" id=".service_locator.T7xmfzk"/>
@@ -8306,6 +8308,8 @@
         <argument key="App\Controller\PublicNewsController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\PublicNewsController::uploadLogo" type="service_closure" id=".service_locator.5H4eKYU"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.UDgw6Ol"/>
+        <argument key="App\Controller\SiteCreatorController::save" type="service_closure" id=".service_locator.5H4eKYU"/>
+        <argument key="App\Controller\SiteCreatorController::uploadLogo" type="service_closure" id=".service_locator.5H4eKYU"/>
         <argument key="App\Controller\SuperUsersController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\UsersBookiesController::delete" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\UsersBookiesController::save" type="service_closure" id=".service_locator.T7xmfzk"/>
@@ -8333,6 +8337,8 @@
         <argument key="App\Controller\PublicNewsController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\PublicNewsController:uploadLogo" type="service_closure" id=".service_locator.5H4eKYU"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.UDgw6Ol"/>
+        <argument key="App\Controller\SiteCreatorController:save" type="service_closure" id=".service_locator.5H4eKYU"/>
+        <argument key="App\Controller\SiteCreatorController:uploadLogo" type="service_closure" id=".service_locator.5H4eKYU"/>
         <argument key="App\Controller\SuperUsersController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\UsersBookiesController:delete" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\UsersBookiesController:save" type="service_closure" id=".service_locator.T7xmfzk"/>
@@ -9213,12 +9219,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.grhWYkb"/>
+      <argument type="service" id=".service_locator.tn6btrk"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.grhWYkb"/>
+      <argument type="service" id=".service_locator.tn6btrk"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -10235,7 +10241,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.grhWYkb"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.tn6btrk"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -10261,7 +10267,7 @@
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~uzTQ0Gb"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.97VCsRb" alias=".service_locator.5H4eKYU"/>
-    <service id=".service_locator.r.O_A2K" alias=".service_locator.grhWYkb"/>
+    <service id=".service_locator.sxqAu95" alias=".service_locator.tn6btrk"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
