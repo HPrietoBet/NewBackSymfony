@@ -37,8 +37,6 @@ class SiteCreatorController extends AbstractController
             return $this->redirect('/login');
             die();
         }
-
-
         $this->userToken = $tokenStorage->getToken();
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];

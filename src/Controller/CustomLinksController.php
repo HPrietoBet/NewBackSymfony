@@ -36,7 +36,6 @@ class CustomLinksController extends AbstractController
             die();
         }
 
-
         $this->userToken = $tokenStorage->getToken();
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];

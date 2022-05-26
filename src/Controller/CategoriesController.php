@@ -34,8 +34,7 @@ class CategoriesController extends AbstractController
             return $this->redirect('/login');
             die();
         }
-
-        $encoders = [new JsonEncoder()];
+        $this->userToken = $tokenStorage->getToken();        $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
 
         $this->serializer = new Serializer($normalizers, $encoders);

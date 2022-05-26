@@ -46,11 +46,7 @@ class ClientsController extends AbstractController
 
         $this->lang = $lang;
         $this->em = $doctrine;
-        if(empty($tokenStorage->getToken())){
-            return $this->redirect('/login');
-            die();
-        }
-
+        $this->userToken = $tokenStorage->getToken()  ;
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
         if(!empty($this->userToken)){
