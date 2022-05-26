@@ -28,7 +28,11 @@ class CampaniasController extends AbstractController
     public function __construct($lang = 'en',  ManagerRegistry $doctrine, TokenStorageInterface $tokenStorage) {
         $this->lang = $lang;
         $this->em = $doctrine;
-        $this->userToken = $tokenStorage->getToken();
+        if(empty($tokenStorage->getToken())){
+            return $this->redirect('/login');
+            die();
+        }
+
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
         $this->serializer = new Serializer($normalizers, $encoders);

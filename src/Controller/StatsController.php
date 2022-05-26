@@ -43,7 +43,11 @@ class StatsController extends AbstractController
 
         $this->lang = $lang;
         $this->em = $doctrine;
-        $this->userToken = $tokenStorage->getToken();
+        if(empty($tokenStorage->getToken())){
+            return $this->redirect('/login');
+            die();
+        }
+
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
         $this->user = $this->userToken->getUser();
