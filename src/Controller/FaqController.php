@@ -56,7 +56,8 @@ class FaqController extends AbstractController
         return $this->render('faq/index.html.twig',
             [
                 'title' => 'Faqs',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'faqs' => addslashes(json_encode($faqs))
             ]

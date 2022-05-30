@@ -68,7 +68,8 @@ class PublicNewsController extends AbstractController
         return $this->render('public_news/index.html.twig',
             [
             'title' => 'Public News',
-            'user' => $this->user,
+                    'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
             'alerts' =>$alerts,
             'news' => addslashes(json_encode($news_array)),
             'news_select' => addslashes(json_encode($news_selector)),

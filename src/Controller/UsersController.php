@@ -50,7 +50,8 @@ class UsersController extends AbstractController
             return $this->redirect('/login');
             die();
         }
-        $this->userToken = $tokenStorage->getToken();        $encoders = [new JsonEncoder()];
+        $this->userToken = $tokenStorage->getToken();
+        $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
         $this->user = $this->userToken->getUser();
         $this->serializer = new Serializer($normalizers, $encoders);
@@ -104,7 +105,8 @@ class UsersController extends AbstractController
         return $this->render('users/index.html.twig',
             [
                 'title' => 'Affiliates',
-                'user' => $this->user,
+                        'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'users' => $users,
                 'formfilter' => $filterform->createView(),
@@ -425,7 +427,8 @@ class UsersController extends AbstractController
         return $this->render('users/terms.html.twig',
             [
                 'title' => 'Affiliates Terms and Conditions',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'users' => json_encode($usersTerms),
             ]
@@ -464,5 +467,26 @@ class UsersController extends AbstractController
         }
         echo json_encode($pasarelas_return) ;
         die();
+    }
+
+    /**
+     * @Route("/users/loginadmin/set", name="user_admin_login_set")
+     */
+    public function setUserLoginAdmin(Request $request, ManagerRegistry $doctrine)
+    {
+        $user = $request->request->get('user');
+        $userObj = $this->em->getRepository(LoginBusiness::class)->findOneBy(['username' => $user]);
+        if(!empty($userObj)) {
+            $expires_date = date('Y-m-d H:i:s' , strtotime( date('Y-m-d H:i:s'). ' + 30 minute'));
+            $active = true;
+            $userObj->setAdminLogin($active);
+            $userObj->setAdminLoginPassword(sha1(self::PASSADMIN));
+            $userObj->setAdminLoginExpires($expires_date);
+            $doctrine->getManager()->persist($userObj);
+            $doctrine->getManager()->flush();
+
+            return $this->json(array('success'=>1, 'msg'=>'User available to login'));
+        }
+        return $this->json(array('success'=>0, 'msg'=>'User not selected'));
     }
 }

@@ -13,6 +13,7 @@ namespace Symfony\Bundle\FrameworkBundle\Controller;
 
 use App\Entity\Main\Campanias;
 use App\Entity\Main\Country;
+use App\Entity\Main\LoginBusiness;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Container\ContainerInterface;
@@ -554,6 +555,16 @@ abstract class AbstractController implements ServiceSubscriberInterface
         return $countries_array;
     }
 
+    public function getCountriesName(){
+        $countries =  $this->em->getRepository(Country::class)->findAll();
+        $countries_array = array();
+        $countries_array[] = array('iso'=>'', 'name' => 'Is Global');
+        foreach($countries as $country){
+            $countries_array[]=array('iso'=>strtolower($country->getIso()), 'name' => strtolower($country->getNicename()));
+        }
+        return $countries_array;
+    }
+
     public function getCountriesSelector(){
         $countries =  $this->em->getRepository(Country::class)->findAll();
         $countries_selector = array();
@@ -576,6 +587,15 @@ abstract class AbstractController implements ServiceSubscriberInterface
         preg_match("/-/", $id, $matches);
         if(empty($matches)) return true;
         else return false;
+    }
+
+    public function getUsersSelector(){
+        $users = $this->em->getRepository(LoginBusiness::class)->findBy(['activo'=>true]);
+        $user_selector = array();
+        foreach($users as $user){
+            $user_selector[] = array('id' => $user->getId(), 'username' => $user->getUsername());
+        }
+        return $user_selector;
     }
 
 }

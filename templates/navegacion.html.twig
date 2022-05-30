@@ -146,9 +146,21 @@
 
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/invoicing-and-cash">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvoicing"
+           aria-expanded="true" aria-controls="collapseInvoicing">
             <i class="fas fa-fw fa-cash-register"></i>
-            <span>Invoicing & Cash</span></a>
+            <span>Invoicing & Cash</span>
+        </a>
+
+        <div id="collapseInvoicing" class="collapse" aria-labelledby="headingStats" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/invoicing/info">Invoicing Info</a>
+                <a class="collapse-item" href="/invoicing/payments">Payment Method</a>
+                <a class="collapse-item" href="/invoicing/commisions">Commisions</a>
+                <a class="collapse-item" href="/invoicing/invoices">Invoices</a>
+                <a class="collapse-item" href="/invoicing/transfers">Users Transfer</a>
+            </div>
+        </div>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/accounting">

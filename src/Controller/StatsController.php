@@ -113,7 +113,8 @@ class StatsController extends AbstractController
         return $this->render('stats/index.html.twig',
             [
                 'title' => 'Affiliates Stats',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'data' => json_encode($data),
                 'formfilter' => $filterform->createView(),
@@ -290,7 +291,8 @@ class StatsController extends AbstractController
         return $this->render('stats/index.html.twig',
             [
                 'title' => 'Clients Stats',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'data' => json_encode($data),
                 'formfilter' => $filterform->createView(),
@@ -433,7 +435,8 @@ class StatsController extends AbstractController
         return $this->render('stats/index.html.twig',
             [
                 'title' => 'Countries Stats',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'data' => json_encode($data),
                 'formfilter' => $filterform->createView(),
@@ -573,7 +576,8 @@ class StatsController extends AbstractController
         return $this->render('stats/index.html.twig',
             [
                 'title' => 'Clicks Stats',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'data' => json_encode($data),
                 'formfilter' => $filterform->createView(),

@@ -70,7 +70,8 @@ class UsersBookiesController extends AbstractController
         return $this->render('users_bookies/index.html.twig',
             [
                 'title' => 'Users Bookies',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'bookies' => json_encode($users_bookies_array),
                 'campaigns' => $campaigns_json,

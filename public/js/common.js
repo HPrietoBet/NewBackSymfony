@@ -1,3 +1,25 @@
+$(function (){
+    $('.userloginadmin').on('click', function (e){
+        e.preventDefault();
+        let userId = $(this).parents('form').find('.dropdown-toggle').attr('title');
+        let box = $(this).parents('form').find('.dropdown-toggle');
+        $.ajax({
+            url: '/users/loginadmin/set',
+            data: {user: userId},
+            dataType: 'json',
+            method: 'post',
+            success: function(resp){
+                console.log(resp);
+                if(resp.success==0){
+                    box.addClass('btn-danger').removeClass('btn-light').removeClass('btn-success');
+                }else{
+                    box.removeClass('btn-danger').removeClass('btn-light').addClass('btn-success');
+                }
+            }
+        })
+    })
+})
+
 /* type = select,checkbox, etc
     cellInfo (from table)
     cellElement (from table)

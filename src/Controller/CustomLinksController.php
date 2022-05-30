@@ -61,7 +61,8 @@ class CustomLinksController extends AbstractController
         return $this->render('custom_links/index.html.twig',
             [
                 'title' => 'Custom Links',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'customlinks' => addslashes(json_encode($links)),
                 'countries' => json_encode($countries),

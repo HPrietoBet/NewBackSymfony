@@ -59,7 +59,8 @@ class CategoriesController extends AbstractController
         return $this->render('categories/index.html.twig',
             [
                 'title' => 'Categories',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'categories' => json_encode($categories_array),
             ]

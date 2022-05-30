@@ -84,7 +84,8 @@ class ClientsController extends AbstractController
         return $this->render('clients/index.html.twig',
             [
                 'title' => 'Clients',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'clients' => json_encode($clients),
                 'responsables' => json_encode($this->getResponsables()),
@@ -374,7 +375,8 @@ class ClientsController extends AbstractController
         return $this->render('clients/edit.html.twig',
             [
                 'title' => $client['titcasa'],
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'form' => $form->createView(),
                 'formDeal' => $formDeal->createView(),
@@ -467,7 +469,8 @@ class ClientsController extends AbstractController
         return $this->render('clients/edit.html.twig',
             [
                 'title' => 'New Client',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'form' => $form->createView(),
                 'formDeal' => $formDeal->createView(),

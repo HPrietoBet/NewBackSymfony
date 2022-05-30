@@ -65,7 +65,8 @@ class CompetencyController extends AbstractController
         return $this->render('competency/index.html.twig',
             [
                 'title' => 'Competency',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'competency' => json_encode($competency_array),
                 'comments' => json_encode($competency_comments),

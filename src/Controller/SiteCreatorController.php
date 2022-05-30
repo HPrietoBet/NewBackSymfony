@@ -63,6 +63,7 @@ class SiteCreatorController extends AbstractController
             [
                 'title' => 'SiteCreator',
                 'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'sites' => addslashes(json_encode($sites)),
                 'countries' => json_encode($countries),

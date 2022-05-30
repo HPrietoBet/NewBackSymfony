@@ -87,7 +87,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig',
             [
                 'title' => 'Home',
-                'user' => $this->user,
+                        'user' => $this->user,
+        'usersselector' => $this->getUsersSelector(),
                 'lastusers' => $last_user_json,
                 'totalplayers' => $total_players,
                 'countercampaigns' => $active_campaigns_counter,
