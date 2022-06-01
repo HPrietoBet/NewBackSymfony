@@ -1,0 +1,3 @@
+Id Usuario;Nombre usuario;Nombre | Nombre Empresa;Total comisiones pendientes;Concepto
+4807;JJ ANALISTAS;;127169,89;PremiumPay March 2022
+3330;Carlos Ramos;;119368,22;PremiumPay March 2022

@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * @method ComisionesPendientesCajero|null find($id, $lockMode = null, $lockVersion = null)
@@ -73,4 +74,14 @@ class ComisionesPendientesCajeroRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function getTotalCommisions(){
+
+        $conn = $this->_em->getConnection();
+        $sql = 'SELECT id_usuario ,sum(importe) total, (select sum(importe) from comisiones_pendientes_cajero cpc2  where cpc2.id_usuario  = cpc.id_usuario and tipo_movimiento  =1 ) generadas, (select sum(importe) from comisiones_pendientes_cajero cpc2  where cpc2.id_usuario  = cpc.id_usuario and tipo_movimiento  !=1 )*-1 pagadas from comisiones_pendientes_cajero cpc group by id_usuario';
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute()->fetchAll();
+
+    }
 }

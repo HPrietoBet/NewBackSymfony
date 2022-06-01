@@ -590,7 +590,7 @@ abstract class AbstractController implements ServiceSubscriberInterface
     }
 
     public function getUsersSelector(){
-        $users = $this->em->getRepository(LoginBusiness::class)->findBy(['activo'=>true]);
+        $users = $this->em->getRepository(LoginBusiness::class)->findBy(array());
         $user_selector = array();
         foreach($users as $user){
             $user_selector[] = array('id' => $user->getId(), 'username' => $user->getUsername());

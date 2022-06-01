@@ -43,9 +43,9 @@ class Facturacion
     private $mesFac;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="fecha_fac", type="date", nullable=false)
+     * @ORM\Column(name="fecha_fac", type="string", nullable=false)
      */
     private $fechaFac;
 
@@ -153,12 +153,12 @@ class Facturacion
         return $this;
     }
 
-    public function getFechaFac(): ?\DateTimeInterface
+    public function getFechaFac(): ?string
     {
         return $this->fechaFac;
     }
 
-    public function setFechaFac(\DateTimeInterface $fechaFac): self
+    public function setFechaFac(string $fechaFac): self
     {
         $this->fechaFac = $fechaFac;
 

@@ -155,9 +155,9 @@ class FacturacionDatos
     private $dniFac;
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="control", type="boolean", nullable=false, options={"comment"="Nueva logica: 10 = OK, 11 = PENDIENTE, 12 = ERROR"})
+     * @ORM\Column(name="control", type="integer", nullable=false, options={"comment"="Nueva logica: 10 = OK, 11 = PENDIENTE, 12 = ERROR"})
      */
     private $control;
 
@@ -478,12 +478,12 @@ class FacturacionDatos
         return $this;
     }
 
-    public function getControl(): ?bool
+    public function getControl(): ?int
     {
         return $this->control;
     }
 
-    public function setControl(bool $control): self
+    public function setControl(int $control): self
     {
         $this->control = $control;
 

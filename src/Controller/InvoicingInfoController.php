@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Main\ComisionesPendientesCajero;
+use App\Entity\Main\Facturacion;
 use App\Entity\Main\FacturacionDatos;
-use App\Entity\Main\LoginBusiness;
 use App\Entity\Main\MetodosPagos;
+use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
+use MongoDB\Driver\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\Extension\Core\Type\LanguageType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +24,8 @@ use function Sodium\add;
 
 class InvoicingInfoController extends AbstractController
 {
+    const CSV_FOLDER = 'comisiones';
+
     private $version;
     private $user;
     private $lang;
@@ -152,13 +156,6 @@ class InvoicingInfoController extends AbstractController
      */
     public function payments(): Response
     {
-
-        // CHEQUEO LOGADO DE USUARIO //
-        if(empty($this->userToken)){
-            return  $this->redirectToRoute('login');
-        }
-
-        // CHEQUEO LOGADO DE USUARIO //
         $alerts = $this->getAlerts(10);
         $payments = $this->getPaymentPerUser();
 
@@ -189,4 +186,297 @@ class InvoicingInfoController extends AbstractController
         }
         return ($users_payments_returned);
     }
+
+
+
+    /**
+     * @Route("/invoicing/commisions", name="app_invoicing_commisions")
+     */
+    public function commisions(): Response
+    {
+        $alerts = $this->getAlerts(10);
+        $payments = $this->getPaymentPerUser();
+        $commisions = $this->getCommisions();
+        $users_selector = $this->getUsersSelector();
+        $totalcommisions = $this->getTotalCommisions($users_selector);
+
+
+        $formUpload = $this->getFormUpload();
+
+        return $this->render('invoicing_info/index_commisions.html.twig',
+            [
+                'title' => 'Users Commisions',
+                'user' => $this->user,
+                'usersselector' => $users_selector,
+                'alerts' =>$alerts,
+                'uploadForm' => $formUpload->createView(),
+                'infopayments' => addslashes(json_encode($payments)),
+                'commisions'=> addslashes(json_encode($commisions)),
+                'totalCommisions' => addslashes(json_encode($totalcommisions)),
+            ]
+        );
+    }
+
+    public function getFormUpload(){
+        $commisonsEntity = new ComisionesPendientesCajero();
+        $formUpload = $this->createFormBuilder($commisonsEntity)
+            ->add('file', FileType::class, array('attr'=>array('class' => 'form-control '), 'label' => 'Commisiones (CSV file)', 'mapped'=>false, 'constraints' => [
+                new File([
+                    'maxSize' => '1024k',
+                    'mimeTypes' => [
+                        'application/csv',
+                    ],
+                    'mimeTypesMessage' => 'Please upload a valid CSV document',
+                ])
+            ]))
+            ->add('upload_commisions', SubmitType::class, array('attr'=> array('class' => 'btn-primary btn-block')))
+            ->getForm();
+
+        return $formUpload;
+    }
+
+    /**
+     * @Route("/invoicing/commisions/upload", name="app_invoicing_commisions_upload")
+     */
+    public function upload(FileUploader $file, ManagerRegistry $doctrine, Request $request):Response
+    {
+        if(!empty($request->files->get('form')['file'])){
+            $uploadedFile = $request->files->get('form')['file'];
+            $allowed_extension = 'csv';
+            $fileExtension = explode('.', $uploadedFile->getClientOriginalName());
+
+            if(!in_array($allowed_extension, $fileExtension)) {
+                return $this->json(array('success'=>0, 'msg'=>'Invalid format file'));
+            }
+
+            $comisiones = $file->upload($uploadedFile, self::CSV_FOLDER);
+            return $this->json(array('success'=>1, 'msg'=>'File uploaded', 'file'=>$comisiones, 'data'=>$this->readFile($file->getuploadPath().'/'.self::CSV_FOLDER.'/'.$comisiones)));
+        }
+        return $this->json(array('success'=>0, 'msg'=>'File not uploaded'));
+    }
+
+    public function readFile($file){
+
+        $csv = array_map(function($v){return str_getcsv($v, ";");}, file($file));
+        unset($csv[0]);
+        $csv_returned = array();
+        foreach($csv as $item){
+            $csv_returned[]= array('iduser'=> $item[0],  'name'=>$item[1], 'money'=>$item[3], 'description'=>$item[4] );
+        }
+        return $csv_returned;
+
+    }
+
+    /**
+     * @Route("/invoicing/commisions/save", name="app_invoicing_commisions_save")
+     */
+    public function saveCommisions(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $data = $request->request->get('data');
+        if(empty($data)){
+            $data = $request->request->get('newData');
+            $id = $request->request->get('id');
+            $comObj = $this->em->getRepository(ComisionesPendientesCajero::class)->find($id);
+            if(empty($comObj) or !$this->checkRealId($id) ) {
+                $comObj =  ComisionesPendientesCajero();
+            }
+            if(isset($data['fecha'])) {
+                $comObj->setFecha($data['fecha']);
+            }
+            if(isset($data['idUsuario'])) {
+                $comObj->setIdUsuario($data['idUsuario']);
+            }
+
+            if(isset($data['concepto'])) {
+                $comObj->setConcepto($data['concepto']);
+            }
+            if(isset($data['importe'])) {
+                $comObj->setImporte(str_replace(',', '.', $data['importe']));
+            }
+            if(isset($data['tipoMovimiento'])){
+                $comObj->setTipoMovimiento($data['tipoMovimiento']);
+            }
+            $doctrine->getManager()->persist($comObj);
+            $doctrine->getManager()->flush();
+
+        }else{
+            $tipo = 1;
+            foreach($data as $item){
+                $comObj = new ComisionesPendientesCajero();
+                $comObj->setIdUsuario($item['iduser']);
+                $comObj->setFecha(date('Y-m-d'));
+                $comObj->setConcepto($item['description']);
+                $comObj->setImporte(str_replace(',', '.', $item['money']));
+                $comObj->setTipoMovimiento($tipo);
+                $doctrine->getManager()->persist($comObj);
+                $doctrine->getManager()->flush();
+
+            }
+        }
+
+
+        return $this->json(array('success'=>1, 'msg'=>'Commisions Saved'));
+    }
+
+    public function getCommisions($traspaso = false){
+        $commisions =  $this->serializer->normalize($this->em->getRepository(ComisionesPendientesCajero::class)->findBy(array(), array('fecha'=>'desc')));
+        $commisions_returned = array();
+        foreach($commisions as $item){
+            preg_match('/Traspaso/i', $item['concepto'], $matches);
+
+            if(empty($matches) && empty($traspaso)){
+                $commisions_returned[]=$item;
+            }
+            if(!empty($matches) && !empty($traspaso)){
+                $commisions_returned[]=$item;
+            }
+
+        }
+        return $commisions_returned;
+
+    }
+
+    /**
+     * @Route("/invoicing/transfers", name="app_invoicing_transfers")
+     */
+    public function usersMovements(): Response
+    {
+        $alerts = $this->getAlerts(10);
+        $payments = $this->getPaymentPerUser();
+        $users_selector = $this->getUsersSelector();
+        $commisions = $this->getCommisions(true);
+
+        return $this->render('invoicing_info/index_traspasos.html.twig',
+            [
+                'title' => 'Users Movements',
+                'user' => $this->user,
+                'usersselector' => $users_selector,
+                'alerts' =>$alerts,
+                'commisions'=> addslashes(json_encode($commisions)),
+            ]
+        );
+    }
+
+    public function getTotalCommisions($users_selector){
+        $totalcom = $this->em->getRepository(ComisionesPendientesCajero::class)->getTotalCommisions();
+
+        $totalcom_return = array();
+
+        foreach ($users_selector as $user){
+            $totalcom_return[$user['id']]['username'] = $user['username'];
+            $totalcom_return[$user['id']]['id'] =  $user['id'];
+        }
+
+        foreach($totalcom as $item){
+            $totalcom_return[$item['id_usuario']]['total'] = $item['total'];
+            $totalcom_return[$item['id_usuario']]['generadas'] = $item['generadas'];;
+            $totalcom_return[$item['id_usuario']]['pagadas'] = $item['pagadas'];
+        }
+
+        foreach($this->getInvoicingInfo() as $item){
+            $totalcom_return[$item['idUsuFac']]['nombre'] = empty($item['nombre']) ?$item['nombreEmpresa']: $item['nombre'] ;
+            $totalcom_return[$item['idUsuFac']]['control'] = $item['control'] != 1 || empty($item['control']) ? 0: 1 ;
+        }
+
+
+        $endReturn = array();
+        foreach($totalcom_return as $end){
+      $endReturn[] = array(
+                'control'=> empty($end['control'])  || $end['control'] != 1 ? 0: 1,
+                'generadas'=> empty($end['generadas']) ? 0: $end['generadas'],
+                'id'=> empty($end['id']) ? '': $end['id'],
+                'id_usuario'=> empty($end['id_usuario']) ? 0: $end['id_usuario'],
+                'nombre'=> empty($end['nombre']) ? '': $end['nombre'],
+                'pagadas'=> empty($end['pagadas']) ? 0: $end['pagadas'],
+                'total'=> empty($end['total']) ? 0: $end['total'],
+                'username'=> empty($end['username']) ? '': $end['username'],
+            );
+        }
+        return $endReturn;
+    }
+
+
+
+    /**
+     * @Route("/invoicing/invoices", name="app_invoicing_invoices")
+     */
+    public function usersInvoices(): Response
+    {
+        $alerts = $this->getAlerts(10);
+        $payments = $this->getPaymentPerUser();
+        $users_selector = $this->getUsersSelector();
+        $invoices = $this->getInvoices();
+
+        return $this->render('invoicing_info/index_invoices.html.twig',
+            [
+                'title' => 'Users Invoices',
+                'user' => $this->user,
+                'usersselector' => $users_selector,
+                'alerts' =>$alerts,
+                'invoices'=> addslashes(json_encode($invoices)),
+            ]
+        );
+    }
+
+    public function getInvoices(){
+        $invoices = $this->serializer->normalize($this->em->getRepository(Facturacion::class)->getFacturas());
+        $invoices_return = array();
+        foreach($invoices as $item){
+            $invoices_return[] = array(
+                'idfac' => $item['id_fac'],
+                'iduser' => $item['id'],
+                'user' => $item['user'],
+                'reffactura' => !empty($item['numero_factura']) ? $item['numero_factura'].'/'.$item['anio_fac'] : $item['numero_factura_internacional'].'/'.$item['anio_fac'],
+                'nombre' => !empty($item['nombre']) ?$item['nombre']: $item['nombre_empresa'],
+                'email' => $item['username'],
+                'fechafactura'=> $item['fecha_fac'],
+                'importe'=> $item['importe'],
+                'impuestos'=> $item['impuesto'].'%',
+                'factura' =>$item['archivo_fac'],
+                'pagada' => $item['estapagado']
+            );
+        }
+        //echo '<pre>'.print_r($invoices_return, true).'</pre>';die();
+
+        return $invoices_return;
+    }
+
+    /**
+     * @Route("/invoicing/invoice/save", name="app_invoicing_invoices_save")
+     */
+
+    public function saveInvoice(ManagerRegistry $doctirne, Request $request){
+        $newData = $request->request->get('newData');
+        $id = $request->request->get('id');
+
+        $facObj = $this->em->getRepository(Facturacion::class)->find($id);
+        if(!empty($facObj)){
+            if(isset($newData["fechafactura"])){
+                $facObj->setFechaFac($newData["fechafactura"]);
+            }
+
+            if(isset($newData["importe"])){
+                $facObj->setImporte($newData["importe"]);
+            }
+
+            if(isset($newData["pagada"])){
+                $facObj->setPagado($newData["pagada"]);
+            }
+
+            $doctirne->getManager()->persist($facObj);
+            $doctirne->getManager()->flush();
+        }
+
+        return $this->json(array('success'=>1, 'msg'=>'Invoice saved'));
+
+    }
+
+
+
+
+    /*fechafactura
+    importe
+    impuestos
+    pagada*/
+
 }

@@ -73,4 +73,20 @@ class FacturacionRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getFacturas(){
+
+        $conn = $this->_em->getConnection();
+        $sql = 'SELECT * FROM
+                (SELECT *, pagado as estapagado FROM facturacion) s1
+                INNER JOIN
+                (SELECT * FROM facturacion_datos)s2
+                ON s1.id_usu_fac = s2.id
+                INNER JOIN 
+                (SELECT * FROM login_business) s3
+                ON s2.id_usu_fac = s3.id';
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute()->fetchAll();
+
+    }
 }

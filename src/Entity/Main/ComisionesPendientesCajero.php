@@ -29,9 +29,9 @@ class ComisionesPendientesCajero
     private $idUsuario;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="fecha", type="date", nullable=false)
+     * @ORM\Column(name="fecha", type="string", nullable=false)
      */
     private $fecha;
 
@@ -80,12 +80,12 @@ class ComisionesPendientesCajero
         return $this;
     }
 
-    public function getFecha(): ?\DateTimeInterface
+    public function getFecha(): ?string
     {
         return $this->fecha;
     }
 
-    public function setFecha(\DateTimeInterface $fecha): self
+    public function setFecha(string $fecha): self
     {
         $this->fecha = $fecha;
 

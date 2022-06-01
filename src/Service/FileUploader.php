@@ -26,10 +26,9 @@ class FileUploader
 
     public function upload(UploadedFile $file, $subfolder=false)
     {
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $originalFilename = pathinfo($file->getClientOriginalName() , PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-
         try {
             $folder = !empty($subfolder) ? $this->getuploadPath().'/'.$subfolder: $this->getuploadPath();
             $file->move($folder, $fileName);
