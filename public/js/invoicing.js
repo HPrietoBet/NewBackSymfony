@@ -5,9 +5,9 @@ var countries_json =  JSON.parse(countries) ?? '';
 var dataSave;
 var commisions_json = JSON.parse(commisions_data) ?? '';
 var pending_json = JSON.parse(pending_cash) ?? '';
-var invoicing_json = JSON.parse(invoices_data) ?? '';
+var invoicinginvoice_json = JSON.parse(invoices_data) ?? '';
 let filter;
-console.log(invoicing_json);
+
 $(function() {
 
     $('body').on('click', '.clear_filter', function (e){
@@ -116,7 +116,7 @@ $(function() {
     });
 
     $("#table_invoices").dxDataGrid({
-        dataSource: invoicing_json,
+        dataSource: invoicinginvoice_json,
         keyExpr: "idfac",
         showBorders: true,
         showColumnLines: false,
@@ -360,7 +360,6 @@ $(function() {
             e.cancel = deferred.promise();
         },
     });
-
 
     $("#table_invoicing").dxDataGrid({
         dataSource: invoicing_json,
