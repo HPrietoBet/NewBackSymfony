@@ -50,7 +50,7 @@ $(function() {
         showColumnLines: false,
         showRowLines: true,
         rowAlternationEnabled: true,
-        headerFilter: { visible: true },
+        headerFilter: { visible: true, allowSearch: true },
         searchPanel: { visible: true, width:400 },
         editing: {
             allowAdding: false,
@@ -122,7 +122,7 @@ $(function() {
         showColumnLines: false,
         showRowLines: true,
         rowAlternationEnabled: true,
-        headerFilter: { visible: true },
+        headerFilter: { visible: true, allowSearch: true },
         searchPanel: { visible: true, width:400 },
         editing: {
             allowAdding: false,
@@ -277,7 +277,7 @@ $(function() {
         showColumnLines: false,
         showRowLines: true,
         rowAlternationEnabled: true,
-        headerFilter: { visible: true },
+        headerFilter: { visible: true, allowSearch: true },
         searchPanel: { visible: true, width:400 },
         editing: {
             allowAdding: (transfers == true)? false : true,
@@ -368,7 +368,7 @@ $(function() {
         showColumnLines: false,
         showRowLines: true,
         rowAlternationEnabled: true,
-        headerFilter: { visible: true },
+        headerFilter: { visible: true , allowSearch: true},
         searchPanel: { visible: true, width:400 },
         editing: {
             allowAdding: false,
@@ -616,7 +616,7 @@ $(function() {
         showColumnLines: false,
         showRowLines: true,
         rowAlternationEnabled: true,
-        headerFilter: { visible: true },
+        headerFilter: { visible: true, allowSearch: true },
         searchPanel: { visible: true, width:400 },
         editing: {
             allowAdding: false,
@@ -718,7 +718,7 @@ function fillTableValidation(data){
         showColumnLines: false,
         showRowLines: true,
         rowAlternationEnabled: true,
-        headerFilter: { visible: true },
+        headerFilter: { visible: true, allowSearch:true },
         searchPanel: { visible: true, width:400 },
         editing: {
             allowAdding: false,

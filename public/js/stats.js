@@ -171,6 +171,7 @@ function setTable(data, type){
         showRowLines: true,
         headerFilter: {
             visible: true,
+            allowSearch: true
         },
         export: {
             enabled: true

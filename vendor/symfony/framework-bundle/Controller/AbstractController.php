@@ -598,4 +598,13 @@ abstract class AbstractController implements ServiceSubscriberInterface
         return $user_selector;
     }
 
+    public function checkRoleUser($user){
+        switch($user->getRoles()){
+            case 'ROLE_SUPERADMIN':
+            case 'ROLE_ADMIN':
+                return true;
+                break;
+        }
+    }
+
 }

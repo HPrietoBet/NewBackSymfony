@@ -120,6 +120,13 @@ class LoginAdmin implements UserInterface
      */
     private $activo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="impersonate_token", type="string", nullable=true)
+     */
+    private $impersonateToken;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -301,4 +308,15 @@ class LoginAdmin implements UserInterface
 
     }
 
+    public function getImpersonateToken(): ?string
+    {
+        return $this->impersonateToken;
+    }
+
+    public function setImpersonateToken(string $impersonateToken): self
+    {
+        $this->impersonateToken = $impersonateToken;
+
+        return $this;
+    }
 }

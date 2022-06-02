@@ -17,7 +17,7 @@ $(function() {
         showColumnLines: false,
         showRowLines: true,
         rowAlternationEnabled: true,
-        headerFilter: { visible: true },
+        headerFilter: { visible: true, allowSearch:true },
         searchPanel: { visible: true, width:400 },
         editing: {
             allowAdding: false,

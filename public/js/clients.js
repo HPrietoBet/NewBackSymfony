@@ -50,7 +50,8 @@ function setTable(data){
         showColumnLines: false,
         showRowLines: true,
         headerFilter: {
-            visible:true
+            visible:true,
+            allowSearch:true
         },
         /*toolbar: {
             items:[
