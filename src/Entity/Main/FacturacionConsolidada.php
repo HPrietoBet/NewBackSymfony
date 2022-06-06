@@ -155,9 +155,9 @@ class FacturacionConsolidada
     private $cobrado = '0';
 
     /**
-     * @var \DateTime|null
+     * @var string|null
      *
-     * @ORM\Column(name="fecha_cobro", type="date", nullable=true)
+     * @ORM\Column(name="fecha_cobro", type="string", nullable=true)
      */
     private $fechaCobro;
 
@@ -176,23 +176,23 @@ class FacturacionConsolidada
     private $factura = '';
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="estado", type="boolean", nullable=false)
+     * @ORM\Column(name="estado", type="integer", nullable=false)
      */
     private $estado = '0';
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="created", type="datetime", nullable=false)
+     * @ORM\Column(name="created", type="string", nullable=false)
      */
     private $created;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="modify", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="modify", type="string", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $modify = 'CURRENT_TIMESTAMP';
 
@@ -429,12 +429,12 @@ class FacturacionConsolidada
         return $this;
     }
 
-    public function getFechaCobro(): ?\DateTimeInterface
+    public function getFechaCobro(): ?string
     {
         return $this->fechaCobro;
     }
 
-    public function setFechaCobro(?\DateTimeInterface $fechaCobro): self
+    public function setFechaCobro(?string $fechaCobro): self
     {
         $this->fechaCobro = $fechaCobro;
 
@@ -465,36 +465,36 @@ class FacturacionConsolidada
         return $this;
     }
 
-    public function getEstado(): ?bool
+    public function getEstado(): ?int
     {
         return $this->estado;
     }
 
-    public function setEstado(bool $estado): self
+    public function setEstado(int $estado): self
     {
         $this->estado = $estado;
 
         return $this;
     }
 
-    public function getCreated(): ?\DateTimeInterface
+    public function getCreated(): ?string
     {
         return $this->created;
     }
 
-    public function setCreated(\DateTimeInterface $created): self
+    public function setCreated(string $created): self
     {
         $this->created = $created;
 
         return $this;
     }
 
-    public function getModify(): ?\DateTimeInterface
+    public function getModify(): ?string
     {
         return $this->modify;
     }
 
-    public function setModify(\DateTimeInterface $modify): self
+    public function setModify(string $modify): self
     {
         $this->modify = $modify;
 

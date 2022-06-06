@@ -607,4 +607,31 @@ abstract class AbstractController implements ServiceSubscriberInterface
         }
     }
 
+    public function getMonths(){
+        return $months = [
+            1 =>'January',
+            2 =>'February',
+            3 =>'March',
+            4 =>'April',
+            5 =>'May',
+            6 =>'June',
+            7 =>'July',
+            8 =>'August',
+            9 =>'September',
+            10 =>'October',
+            11 =>'November',
+            12 =>'December'
+        ];
+    }
+
+    public function getYears(){
+        $initial_year = 2022;
+        $current_year = date('Y');
+        $years_array = array();
+        for($i = $initial_year; $i<= $current_year; $i++){
+            $years_array[$i] = $i;
+        }
+        return $years_array;
+    }
+
 }
