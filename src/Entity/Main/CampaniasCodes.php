@@ -65,9 +65,9 @@ class CampaniasCodes
     private $activo = '0';
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="project", type="boolean", nullable=false)
+     * @ORM\Column(name="project", type="integer", nullable=false)
      */
     private $project = '0';
 
@@ -148,12 +148,12 @@ class CampaniasCodes
         return $this;
     }
 
-    public function getProject(): ?bool
+    public function getProject(): ?int
     {
         return $this->project;
     }
 
-    public function setProject(bool $project): self
+    public function setProject(int $project): self
     {
         $this->project = $project;
 

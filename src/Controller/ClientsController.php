@@ -375,8 +375,8 @@ class ClientsController extends AbstractController
         return $this->render('clients/edit.html.twig',
             [
                 'title' => $client['titcasa'],
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'form' => $form->createView(),
                 'formDeal' => $formDeal->createView(),

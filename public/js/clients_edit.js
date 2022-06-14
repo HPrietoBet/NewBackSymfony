@@ -1,4 +1,5 @@
 var url_base = 'img/clients/'
+
 $(function() {
 
     $('#form_logo').on('change', function (e){

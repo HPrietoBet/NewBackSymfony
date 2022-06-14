@@ -37,7 +37,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">{% trans %}Campaigns{% endtrans %}</h6>
                                 </div>
                                 <!-- Card Body -->
-                                <div class="card-body">
+                                <div class="card-body overflow-auto">
                                     <div id="table_campaigns"></div>
                                     <script>
 
@@ -65,12 +65,27 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <div class="modal fade" tabindex="-1" id="modal_flags"  role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{% trans %}All Countries{% endtrans %}</h5>
+                    <a  data-dismiss="modal" aria-label="Close"><i class="fa fa-times-circle"></i></a>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     </body>
     <script>
-    /*    var competency = '{{competency|raw}}';
-        var comments = '{{comments|raw}}';
-        comments.escapeSpecialChars()
-        var countries = '{{countries|raw}}';*/
+        var responsables = '{{responsables|raw}}';
+        var campaigns = '{{campaigns|raw}}';
     </script>
-    {#<script src="/js/competency.js" type="application/javascript"></script>#}
+    <script src="/js/campaigns.js" type="application/javascript"></script>
 {% endblock %}

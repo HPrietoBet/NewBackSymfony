@@ -12,7 +12,10 @@
 namespace Symfony\Bundle\FrameworkBundle\Controller;
 
 use App\Entity\Main\Campanias;
+use App\Entity\Main\CasasDeApuestas;
 use App\Entity\Main\Country;
+use App\Entity\Main\Idiomas;
+use App\Entity\Main\LoginAdmin;
 use App\Entity\Main\LoginBusiness;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ManagerRegistry;
@@ -598,6 +601,15 @@ abstract class AbstractController implements ServiceSubscriberInterface
         return $user_selector;
     }
 
+    public function getResponsablesSelector(){
+        $users = $this->em->getRepository(LoginAdmin::class)->findBy(array());
+        $user_selector = array();
+        foreach($users as $user){
+            $user_selector[$user->getUser()] =  $user->getId();
+        }
+        return $user_selector;
+    }
+
     public function checkRoleUser($user){
         switch($user->getRoles()){
             case 'ROLE_SUPERADMIN':
@@ -605,6 +617,15 @@ abstract class AbstractController implements ServiceSubscriberInterface
                 return true;
                 break;
         }
+    }
+
+    public function getClientsSelector(){
+        $clients = $this->em->getRepository(CasasDeApuestas::class)->findAll();
+        $clients_selector = array();
+        foreach($clients as $client){
+            $clients_selector[$client->getTitCasa()]  = $client->getIdCasa();
+        }
+        return $clients_selector;
     }
 
     public function getMonths(){
@@ -632,6 +653,15 @@ abstract class AbstractController implements ServiceSubscriberInterface
             $years_array[$i] = $i;
         }
         return $years_array;
+    }
+
+    public function getLanguages(){
+        $arr_lang = array();
+        $langs = $this->em->getRepository(Idiomas::class)->findAll();
+        foreach($langs as $lang){
+            $arr_lang[$lang->getLang()] = $lang->getLang();
+        }
+        return$arr_lang;
     }
 
 }
