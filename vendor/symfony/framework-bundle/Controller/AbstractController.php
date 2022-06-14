@@ -13,6 +13,7 @@ namespace Symfony\Bundle\FrameworkBundle\Controller;
 
 use App\Entity\Main\Campanias;
 use App\Entity\Main\CasasDeApuestas;
+use App\Entity\Main\CategoriasCampania;
 use App\Entity\Main\Country;
 use App\Entity\Main\Idiomas;
 use App\Entity\Main\LoginAdmin;
@@ -663,5 +664,16 @@ abstract class AbstractController implements ServiceSubscriberInterface
         }
         return$arr_lang;
     }
+
+    public function getCategories(){
+        $arr_cat = array();
+        $cats = $this->em->getRepository(CategoriasCampania::class)->findAll();
+        foreach($cats as $cat){
+            $arr_cat[$cat->getTitcat()] = $cat->getTitcat();
+        }
+        return$arr_cat;
+    }
+
+
 
 }

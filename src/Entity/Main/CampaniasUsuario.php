@@ -85,9 +85,9 @@ class CampaniasUsuario
     private $clicksTotales = '0';
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="activo", type="boolean", nullable=false)
+     * @ORM\Column(name="activo", type="integer", nullable=false)
      */
     private $activo;
 
@@ -99,9 +99,9 @@ class CampaniasUsuario
     private $esPrivada = '0';
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="solicitada", type="boolean", nullable=false)
+     * @ORM\Column(name="solicitada", type="integer", nullable=false)
      */
     private $solicitada = '0';
 
@@ -246,12 +246,12 @@ class CampaniasUsuario
         return $this;
     }
 
-    public function getActivo(): ?bool
+    public function getActivo(): ?int
     {
         return $this->activo;
     }
 
-    public function setActivo(bool $activo): self
+    public function setActivo(int $activo): self
     {
         $this->activo = $activo;
 
@@ -270,12 +270,12 @@ class CampaniasUsuario
         return $this;
     }
 
-    public function getSolicitada(): ?bool
+    public function getSolicitada(): ?int
     {
         return $this->solicitada;
     }
 
-    public function setSolicitada(bool $solicitada): self
+    public function setSolicitada(int $solicitada): self
     {
         $this->solicitada = $solicitada;
 
