@@ -6,6 +6,7 @@ use App\Entity\Main\Campanias;
 use App\Entity\Main\CampaniasUsuario;
 use App\Entity\Main\CasasDeApuestas;
 use App\Entity\Main\CategoriasCampania;
+use App\Entity\Main\EstadisticasApi;
 use App\Entity\Main\LoginBusiness;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,10 +61,7 @@ class CampaignsUsersController extends AbstractController
             return $this->redirect('/login');
         }
 
-
-
         $filterform = $this->createFilterForm();
-
         $alerts = $this->getAlerts(10);
 
         return $this->render('campaigns_users/index.html.twig',
@@ -204,7 +202,7 @@ class CampaignsUsersController extends AbstractController
         }
         $campaigns_returned = array();
         foreach($campsConstructor as $key => $campaign){
-            $campaign['editUrl']  = '/campaignactive/edit/'.$key;
+            $campaign['editUrl']  = '/activecampaigns/edit/'.$key;
             if(!empty($category)){
                 if(in_array($campaign['category'], $category)){
 
@@ -216,5 +214,145 @@ class CampaignsUsersController extends AbstractController
             }
         }
         return $this->json(array('success'=> 1, 'msg'=> 'found campaigns', 'data'=> $campaigns_returned));
+    }
+
+    /**
+     * @Route("activecampaigns/edit/{campania}", name="app_campaigns_user_edit")
+     */
+    public function editCampaignUsuario(Request $request): Response{
+
+
+            $campaign_id = $request->get('campania');
+
+            $campUsuObj = $this->em->getRepository(CampaniasUsuario::class)->find($campaign_id);
+            $userObj = $this->em->getRepository(LoginBusiness::class)->find($campUsuObj->getIdUsuario());
+            $campObj= $this->em->getRepository(Campanias::class)->find($campUsuObj->getIdCampania());
+            $statsObj = $this->em->getRepository(EstadisticasApi::class)->findBy(['idCampaniaUsuario'=> $campaign_id], ['fecha'=>'desc']);
+            if(empty($campUsuObj)) die('campaña no existe');
+
+            $form = $this->createFormBuilder($campUsuObj)
+                ->add('idCampaniaUsuario', TextType::class , array( 'label'=>'Id Campaign User', 'attr' => array('class' => 'form-control' , 'disabled'=>'disabled'), ))
+                ->add('titcamp', TextType::class , array('mapped' => false, 'label'=>'Campaign Title', 'attr' => array('class' => 'form-control' , 'disabled'=>'disabled', 'value'=>$campObj->getTitcamp()), ))
+                ->add('iduser', TextType::class , array('mapped' => false, 'label'=>'Id User', 'attr' => array('class' => 'form-control' , 'disabled'=>'disabled', 'value'=>$userObj->getId()), ))
+                ->add('user', TextType::class , array('mapped' => false, 'label'=>'Username', 'attr' => array('class' => 'form-control' , 'disabled'=>'disabled', 'value'=>$userObj->getUsername()), ))
+                ->add('comisionVip', TextType::class , array( 'label'=>'Commision (€)', 'attr' => array('class' => 'form-control' , 'disabled'=>'disabled') ))
+                ->add('condicionesVip', TextType::class , array( 'label'=>'Conditions', 'attr' => array('class' => 'form-control' , 'disabled'=>'disabled', 'value'=>empty($campUsuObj->getCondicionesVip()) ? $campObj->getCondiciones() :$campUsuObj->getCondicionesVip()) ))
+                ->add('activo', ChoiceType::class , array('choices'=> array('Active'=>1, 'Not Active'=>0), 'label'=>'Active?', 'attr'=>array('class'=>'form-control mt-4 selectpicker')))
+                ->getForm();
+
+/*            var_export($statsObj);
+
+            var_export($userObj);
+
+            var_export($campUsuObj);*/
+
+            $linksInfo = $this->prepareLinksInfo($campUsuObj);
+
+            return $this->render('campaigns_users/edit.html.twig',
+                [
+                    'title' => $campObj->getTitcamp(). ' - '. $userObj->getUser(),
+                    'user' => $this->user,
+                    'usersselector' => $this->getUsersSelector(),
+                    'alerts' =>$this->getAlerts(10),
+                    'form' => $form->createView(),
+                    'linksInfo' => addslashes(json_encode($linksInfo)),
+                    'stats' => addslashes(json_encode($this->serializer->normalize($statsObj))),
+                ]
+            );
+    }
+
+    /**
+     * @Route("/activecampaigns/change/status", name="app_campaigns_user_change_status")
+     */
+    public function changeStatusCampaign(Request $request): Response{
+
+        $newStatus = $request->request->get('status');
+        $url_camp_array = explode('/', $request->headers->get('referer'));
+        $id_camp = end($url_camp_array);
+
+        $campUsuObj = $this->em->getRepository(CampaniasUsuario::class)->find($id_camp);
+        if(!empty($campUsuObj)) $campUsuObj->setActivo($newStatus);
+        $this->em->getManager()->persist($campUsuObj);
+        $this->em->getManager()->flush();
+
+        return $this->json(array('success'=>1, 'msg'=> 'Status changed', 'data'=> ''));
+    }
+
+    private function prepareLinksInfo($campUsuObj){
+        $LinksCamp  = $campUsuObj->getUrlCortas();
+        $LinksAutoCamp  = $campUsuObj->getUrlAutomaticas();
+        $linksArray = json_decode($LinksCamp, true);
+        $linksAutoArray = json_decode($LinksAutoCamp, true);
+        $links_returned = array();
+        $x = 0;
+        if(!empty($linksArray)) {
+            foreach ($linksArray as $link) {
+                $links_returned[] = array(
+                    'id' => $x + 1,
+                    'fecha' => $campUsuObj->getFechaAlta(),
+                    'urlInicial' => $campUsuObj->getUrlInicial(),
+                    'urlCorta' => $link,
+                    'urlAuto' => $linksAutoArray[$x]
+                );
+                $x++;
+            }
+        }
+        return ($links_returned);
+
+    }
+
+    /**
+     * @Route("/activecampaign/stats/save", name="app_campaigns_user_stats_save")
+     */
+    public function saveStats(Request $request): Response{
+        $newData = $request->request->get('newData');
+        $id = $request->request->get('id');
+
+        $statsObj = $this->em->getRepository(EstadisticasApi::class)->find($id);
+        if(!empty($statsObj)){
+            if(isset($newData['clicksTotales'])){
+                $statsObj->setClicksTotales($newData['clicksTotales']);
+            }
+
+            if(isset($newData['clicksUnicos'])){
+                $statsObj->setClicksUnicos($newData['clicksUnicos']);
+            }
+
+            if(isset($newData['comisionGenerada'])){
+                $statsObj->setComisionGenerada($newData['comisionGenerada']);
+            }
+
+            if(isset($newData['connectionId'])){
+                $statsObj->setConnectionId($newData['connectionId']);
+            }
+
+            if(isset($newData['cpaGenerados'])){
+                $statsObj->setCpaGenerados($newData['cpaGenerados']);
+            }
+
+            if(isset($newData['depositantesPrimeraVez'])){
+                $statsObj->setDepositantesPrimeraVez($newData['depositantesPrimeraVez']);
+            }
+
+            if(isset($newData['fecha'])){
+                $statsObj->setFecha($newData['fecha']);
+            }
+
+            if(isset($newData['fuenteMarketing'])){
+                $statsObj->setFuenteMarketing($newData['fuenteMarketing']);
+            }
+
+            if(isset($newData['idCampaniaUsuario'])){
+                $statsObj->setIdCampaniaUsuario($newData['idCampaniaUsuario']);
+            }
+
+            if(isset($newData['registros'])){
+                $statsObj->setRegistros($newData['registros']);
+            }
+            $this->em->getManager()->persist($statsObj);
+            $this->em->getManager()->flush();
+        }
+
+        return $this->json(array('success'=>1, 'msg'=>'Stats saved', 'data'=>array()));
     }
 }

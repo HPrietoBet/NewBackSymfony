@@ -1,11 +1,24 @@
 var url_base = '/img/clients/'
+let links_json = JSON.parse(links);
+let stats_json = JSON.parse(stats);
+console.log(stats_json);
+
 $(function() {
-    /*setTable(campaigns);
-    $('body').on('click', '.dx-datagrid-addrow-button', function (e){
+
+    $('#form_activo').on('change', function (e){
         e.preventDefault();
-        document.location.href= '/campaign/new';
-        return;
-    })*/
+        let _active = $(this).val();
+        $.ajax({
+            url: '/activecampaigns/change/status',
+            data: {status: _active },
+            dataType: 'json',
+            method: 'post',
+            success: function (data){
+                $('.status-msg').removeClass('text-danger').addClass('text-success').text(data.msg);
+            }
+        })
+    })
+
     $('body').on('click', '.show-flags', function (e){
         var _flags = $(this).attr('data-info');
         createModalFlags(_flags);
@@ -27,6 +40,88 @@ $(function() {
         })
 
     })
+
+    $('#table_links').dxDataGrid({
+        dataSource: links_json,
+        keyExpr: "id",
+        showBorders: true,
+        showColumnLines: false,
+        showRowLines: true,
+        rowAlternationEnabled: true,
+        editing: {
+            allowAdding: false,
+            allowUpdating: false,
+        },
+        columns: [
+            {dataField: "id", caption: "id", visible: false, },
+            {dataField: "fecha", caption: "Date", visible: true, width:150, dataType: 'date' },
+            {dataField: "urlInicial", caption: "Initial Url", visible: true,},
+            {dataField: "urlCorta", caption: "Short url", visible: true,
+                cellTemplate(container, options) {
+                    $('<div>')
+                        .append($('<a>', { href: options.value, target: '_blank', text: options.value}))
+                        .appendTo(container);
+                },
+            },
+            {dataField: "urlAuto", caption: "Auto url", visible: true,
+                cellTemplate(container, options) {
+                    $('<div>')
+                        .append($('<a>', { href: options.value, target: '_blank', text: options.value}))
+                        .appendTo(container);
+                },
+            },
+        ]
+    });
+
+    $('#table_stats').dxDataGrid({
+        dataSource: stats_json,
+        keyExpr: "id",
+        showBorders: true,
+        showColumnLines: false,
+        showRowLines: true,
+        rowAlternationEnabled: true,
+        editing: {
+            allowAdding: false,
+            allowUpdating: true,
+        },
+        columns: [
+            {dataField: "id", caption: "id", visible: false, },
+            {dataField: "fecha", caption: "Date", visible: true, },
+            {dataField: "subId", caption: "SubId", visible: true, allowEditing: false },
+            {dataField: "clicksTotales", caption: "Total Clicks", visible: true, },
+            {dataField: "registros", caption: "Regs.", visible: true, },
+            {dataField: "depositantesPrimeraVez", caption: "Player", visible: true, },
+            {dataField: "cpaGenerados", caption: "CPA", visible: true, },
+            {dataField: "comisionGenerada", caption: "Commision (€)", visible: true, },
+            {dataField: "clicksUnicos", caption: "clicksUnicos", visible: false, },
+            {dataField: "connectionId", caption: "connectionId", visible: false, },
+            {dataField: "fuenteMarketing", caption: "fuenteMarketing", visible: false, },
+            {dataField: "idCampaniaUsuario", caption: "idCampaniaUsuario", visible: false, },
+        ], onRowUpdating: function (e) {
+            const deferred = $.Deferred();
+            const promptPromise = DevExpress.ui.dialog.confirm("Are you sure?", "Save new data");
+            promptPromise.done((dialogResult) => {
+                if (dialogResult) {
+                    $.ajax({
+                        url: "/activecampaign/stats/save",
+                        dataType: "json",
+                        type: "post",
+                        data: {newData: e.newData, id: e.key, oldData: e.oldData},
+                        success: function (validationResult) {
+                            deferred.resolve(false);
+                        },
+                        error: function () {
+                            deferred.reject("Data Loading Error");
+                        },
+                        timeout: 5000
+                    });
+                } else {
+                    deferred.resolve(true);
+                }
+            });
+            e.cancel = deferred.promise();
+        },
+    });
 });
 
 function createModalFlags(flags){
