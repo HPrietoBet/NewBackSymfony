@@ -71,6 +71,8 @@ $(function() {
                                 {id: "ROLE_AFFILIATE", name:"ROLE_AFFILIATE"},
                                 {id: "ROLE_ADMIN", name:"ROLE_ADMIN"},
                                 {id: "ROLE_CONTABILITY", name:"ROLE_CONTABILITY"},
+                                {id: "ROLE_PROJECT", name:"ROLE_PROJECT"},
+                                {id: "ROLE_INTERNAL", name:"ROLE_INTERNAL"},
                             ],
                             key: "roles"
                         },

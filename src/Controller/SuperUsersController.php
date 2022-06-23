@@ -62,8 +62,8 @@ class SuperUsersController extends AbstractController
         return $this->render('super_users/index.html.twig',
             [
                 'title' => 'Super Users',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'superusers' => json_encode($superUsers_array),
                 'responsables' => $responsables,
