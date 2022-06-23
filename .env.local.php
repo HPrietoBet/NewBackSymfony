@@ -9,6 +9,6 @@ return array (
   'NUEVOBACK' => 'mysql://preuser:N_ashzob_9@185.118.57.133:33060/nuevoback?serverVersion=5.7&charset=utf8mb4',
   'PREMIUMPAY' => 'mysql://premiumpayuser:N_ashzob_9@185.118.57.133:33060/ppay_symfony?serverVersion=5.7&charset=utf8mb4',
   'GGMS' => 'mysql://proyectos_betandeal2021_user:N_ashzob_9@185.118.57.133:33060/proyectos_betandeal2021?serverVersion=5.7&charset=utf8mb4',
-  //'CUOTAS' => 'mysql://cuotas_betandeal2021:N_ashzob_9@185.118.57.133:33060/cuotas_betandeal?serverVersion=5.7&charset=utf8mb4',
   'OLDBACK' => 'mysql://srqjkfhq_betandeal2019:N_ashzob_9@185.118.57.133:33060/srqjkfhq_betandeal2019?serverVersion=5.7&charset=utf8mb4',
+  'MASTERAPI' => 'mysql://betandea_masterapiuser:!pBzl804@185.118.57.133:33060/betandea_masterapi?serverVersion=5.7&charset=utf8mb4',
 );

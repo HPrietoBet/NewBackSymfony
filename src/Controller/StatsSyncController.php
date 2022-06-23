@@ -212,20 +212,6 @@ class StatsSyncController extends AbstractController
         return $this->json(array('success'=>1, 'msg'=>'syncronized', 'data'=>$data));
     }
 
-    public function getApiToken(){
-        $request = $this->client->request(
-            'GET',
-            "https://api.betandealgroup.com/api/loginapi/".self::USER."/".self::PASS
-        );
-
-        if($request->getStatusCode() != 200) {
-            return $this->json(array('success'=>0, 'msg'=>'Connection Error', 'data'=>array()));
-        }
-
-        $token = $request->toArray()[0];
-        return array('success'=>1, 'msg'=>'token generated', 'data'=>array('token'=>$token));
-    }
-
     /**
      * @Route("/stats/syncronization/save", name="app_stats_syncronization_save")
      */
