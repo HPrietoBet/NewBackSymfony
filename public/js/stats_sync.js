@@ -35,8 +35,9 @@ function saveData(data){
         dataType: "json",
         type: "post",
         data: {newData: data},
-        success: function (validationResult) {
-            document.location.reload();
+        success: function (resp) {
+            console.log(resp);
+            return;
         },
         error: function () {
 
@@ -50,6 +51,7 @@ function setTable(data, table, options){
         dataSource:  data,
         showBorders: true,
         keyExpr: "idStat",
+        paging: { enabled: false },
         showColumnLines: false,
         showRowLines: true,
         rowAlternationEnabled: false,

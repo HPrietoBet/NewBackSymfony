@@ -229,6 +229,9 @@ class StatsSyncController extends AbstractController
 
         if(empty($oldData)){
             foreach($newData as $data){
+                if(!isset($data['idCampaniaUsuario'])) {
+                    $data['idCampaniaUsuario'] = substr($data['subdId'], 1);
+                }
                 $statsObj = new EstadisticasApi();
                 $statsObj->setFecha($data['fecha']);
                 $statsObj->setSubId($data['subdId']);
