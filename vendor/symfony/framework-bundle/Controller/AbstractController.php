@@ -674,6 +674,15 @@ abstract class AbstractController implements ServiceSubscriberInterface
         return$arr_cat;
     }
 
-
+    public  function random_str_generator ($len_of_gen_str = 5){
+        $random_str = '';
+        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        $var_size = strlen($chars);
+        for( $x = 0; $x < $len_of_gen_str; $x++ ) {
+            if($x == 2) $random_str.= '-';
+            $random_str.= $chars[ rand( 0, $var_size - 1 ) ];
+        }
+        return $random_str;
+    }
 
 }

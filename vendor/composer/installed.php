@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9868a128481caca85ff2603845378836676db5ca',
+        'reference' => 'bc3172e68f474742aaa142fc1e212fd6cf61f8fa',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9868a128481caca85ff2603845378836676db5ca',
+            'reference' => 'bc3172e68f474742aaa142fc1e212fd6cf61f8fa',
             'dev_requirement' => false,
         ),
         'cocur/slugify' => array(
@@ -570,12 +570,12 @@
             'dev_requirement' => false,
         ),
         'symfony/http-client' => array(
-            'pretty_version' => 'v5.4.7',
-            'version' => '5.4.7.0',
+            'pretty_version' => 'v5.4.9',
+            'version' => '5.4.9.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/http-client',
             'aliases' => array(),
-            'reference' => '88b6909f74fd1f2147e068411f71870a3b27ac56',
+            'reference' => 'dc0b15e42b762c040761c1eb9ce86a55d47cf672',
             'dev_requirement' => false,
         ),
         'symfony/http-client-contracts' => array(

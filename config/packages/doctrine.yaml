@@ -27,6 +27,12 @@ doctrine:
                 driver: 'pdo_mysql'
                 server_version: '5.7'
                 charset: utf8mb4
+            masterapi:
+                # configure these for your database server
+                url: '%env(resolve:MASTERAPI)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
     orm:
         default_entity_manager: default
         entity_managers:
@@ -58,7 +64,7 @@ doctrine:
                         prefix: 'App\Entity\Ggms'
                         alias: Ggms
             old:
-                connection: ggms
+                connection: old
                 mappings:
                     Old:
                         is_bundle: false
@@ -66,6 +72,15 @@ doctrine:
                         dir: '%kernel.project_dir%/src/Entity/Old'
                         prefix: 'App\Entity\Old'
                         alias: Old
+            masterapi:
+                connection: masterapi
+                mappings:
+                    Old:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity/Masterapi'
+                        prefix: 'App\Entity\Masterapi'
+                        alias: Masterapi
 when@test:
     doctrine:
         dbal:
