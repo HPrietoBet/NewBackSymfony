@@ -57,7 +57,6 @@ $(function() {
                     },
                 ],
             },
-
         },
         columns: [
             {dataField: 'logo', caption: 'logo', visible: true,
@@ -116,17 +115,17 @@ $(function() {
             {dataField: 'comentario', caption: 'New Comment',  visible: false,},
             {dataField: 'lastcomentarios', caption: 'Comments',  visible: false, allowEditing: false,
                 editCellTemplate(container, options) {
-                    var comp_comments = comments_json[options.data.id];
-                    for(i = 0; i<comp_comments.length; i++){
-                        console.log(comp_comments[i]);
-                        $('<div class="client_comment">')
-                            .append($('<small>', { text: comp_comments[i].fecha+' by '+ comp_comments[i].usuario}))
-                            .append($('<p>', {text: comp_comments[i].comentario, class: 'mt-2'}))
-                            .appendTo(container);
+                    var comp_comments = comments_json[options.data.id] ;
+                    if(comp_comments!= 'undefined' && comp_comments!= undefined){
+                        for(i = 0; i<comp_comments.length; i++){
+                            console.log(comp_comments[i]);
+                            $('<div class="client_comment">')
+                                .append($('<small>', { text: comp_comments[i].fecha+' by '+ comp_comments[i].usuario}))
+                                .append($('<p>', {text: comp_comments[i].comentario, class: 'mt-2'}))
+                                .appendTo(container);
+                        }
                     }
-
                 }
-
             }
         ], onRowUpdating: function (e) {
             const deferred = $.Deferred();
@@ -237,26 +236,4 @@ function uploadLogo(cellElement, cellInfo) {
     cellElement.append(fileUploaderElement);
     cellElement.append(buttonElement);
     cellElement.append(buttonElement);
-}
-
-function tagBoxEditorTemplate(cellElement, cellInfo) {
-
-
-    return $('<div>').dxTagBox({
-        dataSource: countries_json,
-        value: cellInfo.value,
-        valueExpr: 'iso',
-        displayExpr: 'name',
-        showSelectionControls: true,
-        maxDisplayedTags: 3,
-        showMultiTagOnly: false,
-        applyValueMode: 'useButtons',
-        searchEnabled: true,
-        onValueChanged(e) {
-            cellInfo.setValue(e.value);
-        },
-        onSelectionChanged() {
-            cellInfo.component.updateDimensions();
-        },
-    });
 }
