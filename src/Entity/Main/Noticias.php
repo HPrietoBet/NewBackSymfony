@@ -36,6 +36,13 @@ class Noticias
     private $titulo;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="plataforma", type="integer",  nullable=false)
+     */
+    private $plataforma;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="contenido", type="text", length=65535, nullable=false)
@@ -160,6 +167,18 @@ class Noticias
         $this->titulo = $titulo;
 
         return $this;
+    }
+
+    public function setPlataforma(string $plataforma): self
+    {
+        $this->plataforma = $plataforma;
+
+        return $this;
+    }
+
+    public function getPlataforma(): ?string
+    {
+        return $this->plataforma;
     }
 
     public function getContenido(): ?string

@@ -31,6 +31,7 @@ $(function() {
                         items: [
                             'fecha',
                             'actnoticia',
+                            'plataforma',
                             'titulo',
                             {
                                 dataField: 'contenido',
@@ -88,6 +89,22 @@ $(function() {
         columns: [
             {dataField: "idNoticia", caption:"News ID", visible: true, allowEditing:false, width: 100,dataType: 'number'},
             {dataField: "fecha", caption:"Date", visible: true, width:200, dataType: 'date' },
+            {dataField: "plataforma", caption:"Platform", visible: true,
+                lookup:{
+                    dataSource: {
+                        store: {
+                            type: 'array',
+                            data: [
+                                { id: 0, name: 'Betandeal' },
+                                { id: 1, name: 'Projects (Ggms)' },
+                            ],
+                            key: "plataforma"
+                        },
+                    },
+                    valueExpr: 'id',
+                    displayExpr: 'name',
+                }
+            },
             {dataField: "titleAll", caption:"Title Active", visible: true,},
             {dataField: "titulo", caption:"Title", visible: false, },
             {dataField: "contenido", caption:"Content", visible: false, },

@@ -75,6 +75,8 @@ abstract class AbstractController implements ServiceSubscriberInterface
     private $minCodes = 10;
     public $em;
     protected $container;
+    public $alerts;
+    const USERS_PROJECTS = array('ROLE_PROJECT', 'ROLE_INTERNAL');
 
 
     public function __construct( ManagerRegistry $doctrine){
@@ -82,6 +84,7 @@ abstract class AbstractController implements ServiceSubscriberInterface
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
         $this->serializer = new Serializer($normalizers, $encoders);
+
     }
 
     /**
@@ -498,13 +501,29 @@ abstract class AbstractController implements ServiceSubscriberInterface
     }
 
     public function getAlerts($minCodes){
-        // ira al controlador padre
+        $this->getCampaignsNoCode();
+        $this->getUsersProjects();
+        return $this->alerts;
+    }
+
+    public function getCampaignsNoCode($codes = 10){
         $campaigns_without_codes = $this->em->getRepository(Campanias::class)->campanias_codigos_agotados($this->minCodes);
-        $alerts = array();
         if(!empty($campaigns_without_codes)){
-            $alerts[] = array('message' => count($campaigns_without_codes). ' Without codes or close to finish them.', 'link'=> '/campaigns/no-codes', 'type' => 'ad');
+            $this->alerts[] = array('message' => count($campaigns_without_codes). ' Without codes or close to finish them.', 'link'=> '/campaigns/no-codes', 'type' => 'ad');
         }
-        return $alerts;
+    }
+
+    public function getUsersProjects(){
+        $users_projects = $this->em->getRepository(LoginAdmin::class)->findBy(['roles'=>self::USERS_PROJECTS, 'activo' => 1]);
+        if(empty($users_projects)){
+            $this->alerts[] = array('message' => ' No users ROLE_PROJECT for assing. Create the fisrt to continue.', 'link'=> '/users/admin', 'type' => 'users');
+        }else{
+            $users_projects_arr = array();
+            foreach ($users_projects as $item){
+                $users_projects_arr[] = array('id' => $item->getId(), 'show'=>$item->getUser());
+            }
+        }
+        return $users_projects_arr;
     }
 
     public function getSpecificFields($data, $fields = false ){
@@ -683,6 +702,15 @@ abstract class AbstractController implements ServiceSubscriberInterface
             $random_str.= $chars[ rand( 0, $var_size - 1 ) ];
         }
         return $random_str;
+    }
+
+    public function getCampaniasActivas(){
+        $campanias_array = array();
+        $campanias = $this->em->getRepository(Campanias::class)->findBy(['actcamp'=>1]);
+        foreach($campanias as $item){
+            $campanias_array[] = array('id' => $item->getId(), 'show' => $item->getTitcamp());
+        }
+        return $campanias_array;
     }
 
 }

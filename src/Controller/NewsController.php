@@ -112,6 +112,10 @@ class NewsController extends AbstractController
             $newsObj->setActnoticia($active);
         }
 
+        if(isset($newData['plataforma'])){
+            $newsObj->setPlataforma($newData['plataforma']);
+        }
+
         $doctrine->getManager()->persist($newsObj);
         $doctrine->getManager()->flush();
 

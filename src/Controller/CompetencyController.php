@@ -128,7 +128,8 @@ class CompetencyController extends AbstractController
             $doctrine->getManager()->flush();
         }
 
-        return $this->json(array('success'=>1, 'msg'=>'Competency saved', 'data'=>$CompetencyObj));    }
+        return $this->json(array('success'=>1, 'msg'=>'Competency saved', 'data'=>$CompetencyObj));
+    }
 
     /**
      * @param $competency_array

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Ggms;
+namespace App\Entity\Main;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Proyectos
  *
  * @ORM\Table(name="proyectos", indexes={@ORM\Index(name="id", columns={"id"})})
-  * @ORM\Entity(repositoryClass="App\Repository\Ggms\ProyectosRepository")
+  * @ORM\Entity(repositoryClass="App\Repository\Main\ProyectosRepository")
  */
 class Proyectos
 {
