@@ -77,7 +77,8 @@ abstract class AbstractController implements ServiceSubscriberInterface
     protected $container;
     public $alerts;
     const USERS_PROJECTS = array('ROLE_PROJECT', 'ROLE_INTERNAL');
-
+    const ROLE_PROJECT =array('ROLE_PROJECT');
+    const ROLE_INTERNAL =array('ROLE_INTERNAL');
 
     public function __construct( ManagerRegistry $doctrine){
         $this->em = $doctrine;
@@ -514,7 +515,7 @@ abstract class AbstractController implements ServiceSubscriberInterface
     }
 
     public function getUsersProjects(){
-        $users_projects = $this->em->getRepository(LoginAdmin::class)->findBy(['roles'=>self::USERS_PROJECTS, 'activo' => 1]);
+        $users_projects = $this->em->getRepository(LoginBusiness::class)->findBy(['roles'=>array(json_encode(self::ROLE_PROJECT), json_encode(self::ROLE_INTERNAL)), 'activo' => 1]);
         if(empty($users_projects)){
             $this->alerts[] = array('message' => ' No users ROLE_PROJECT for assing. Create the fisrt to continue.', 'link'=> '/users/admin', 'type' => 'users');
         }else{
@@ -522,8 +523,8 @@ abstract class AbstractController implements ServiceSubscriberInterface
             foreach ($users_projects as $item){
                 $users_projects_arr[] = array('id' => $item->getId(), 'show'=>$item->getUser());
             }
+            return $users_projects_arr;
         }
-        return $users_projects_arr;
     }
 
     public function getSpecificFields($data, $fields = false ){

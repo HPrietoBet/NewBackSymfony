@@ -420,6 +420,9 @@ class CampaignsController extends AbstractController
                 'isAuto' => $campObj->getTipo() == 'auto' ? 1: 0,
                 'users' => addslashes(json_encode($users)),
                 'uploadForm'=> $formUpload->createView(),
+                'iapuestas' => 0,
+                'projects' => 0,
+                'betandeal' => 1
 
             ]
         );
@@ -669,7 +672,14 @@ class CampaignsController extends AbstractController
      */
     public function saveCodesUploaded(Request  $request, ManagerRegistry $doctrine){
         $url_camp_array = explode('/', $request->headers->get('referer'));
+
+
+        $project = 0; // by default (betandeal)
+        if($url_camp_array[count($url_camp_array)-2] == 'iapuestas') $project = 1; // iapuestas
+        if($url_camp_array[count($url_camp_array)-2] == 'project') $project = 2; // projects (antiguo ggms)
+
         $id_camp = end($url_camp_array);
+
         $campObj = $this->em->getRepository(Campanias::class)->find($id_camp);
         $codes = $request->get('codes');
 
@@ -678,11 +688,121 @@ class CampaignsController extends AbstractController
             $codeObj->setCodigo($code['code']);
             $codeObj->setIdcampania($id_camp);
             $codeObj->setIdcasa($campObj->getIdcasa());
+            $codeObj->setProject($project);
             $doctrine->getManager()->persist($codeObj);
             $doctrine->getManager()->flush();
         }
         return $this->json(array('success'=> 1, 'msg'=>'Codes uploaded', 'data'=>$codes));
     }
 
+    /**
+     * @Route("/campaign/link/project/{campania}", name="app_campaigns_project_link")
+     */
+    public function campaignsProjectLink(Request $request): Response{
 
+        // $project = 0;  // = betandeal (by default)
+        // $project = 1 = iapuestas
+         $project = 2; // ggms
+
+        if(empty($this->userToken)){
+            return $this->redirect('/login');
+        }
+        $id_campania = $request->get('campania');
+        $campObj = $this->em->getRepository(Campanias::class)->find($id_campania);
+        $campArr =  $this->serializer->normalize($campObj);
+        $campEnlacesArr = $this->serializer->normalize($this->em->getRepository(CampaniasEnlace::class)->findBy(['idCampania'=>$id_campania]));
+        $codes = $this->serializer->normalize($this->getCodesByCampaign($id_campania, $project));
+        $users = $this->getUsersSelector();
+        $alerts = $this->getAlerts(10);
+
+        $form = $this->createFormBuilder($campObj)
+            ->add('id', HiddenType::class)
+            ->add('titcamp', TextType::class , array( 'label'=>'Title', 'attr'=>array('class'=>'form-control', 'disabled'=>'disabled')))
+            ->add('titcampEn', TextType::class, array( 'label'=>'Eng. Title', 'attr'=>array('class'=>'form-control','disabled'=>'disabled')))
+            ->add('tipo', TextType::class, array( 'label'=>'Type', 'attr'=>array('class'=>'form-control','disabled'=>'disabled')))
+            ->add('uri_enlaces',  TextType::class, array( 'label'=>'Links uri', 'attr'=>array('class'=>'form-control', 'pattern'=>'[A-Za-z0-9]{3,150}', 'required'=>'required')))
+            ->add('Save_url', SubmitType::class, array('attr'=> array('class' => 'btn-primary btn-block m-5')))
+            ->getForm();
+
+
+
+        $formUpload = $this->getFormUpload();
+
+
+        return $this->render('campaigns/link.html.twig',
+            [
+                'title' => 'Campaign Project Links',
+                'user' => $this->user,
+                'usersselector' => $users,
+                'alerts' =>$alerts,
+                'campaign' => $campArr,
+                'links' => addslashes(json_encode($campEnlacesArr)),
+                'form' => $form->createView(),
+                'codes' => json_encode($codes),
+                'isAuto' => $campObj->getTipo() == 'auto' ? 1: 0,
+                'users' => addslashes(json_encode($users)),
+                'uploadForm'=> $formUpload->createView(),
+                'iapuestas' => 0,
+                'projects' => 1,
+                'betandeal' => 0
+
+            ]
+        );
+    }
+
+
+    /**
+     * @Route("/campaign/link/iapuestas/{campania}", name="app_campaigns_iapuestas_link")
+     */
+    public function campaignsiApuestasLink(Request $request): Response{
+
+        // $project = 0;  // = betandeal (by default)
+        $project = 1; // = iapuestas
+        // $project = 2; // ggms
+
+        if(empty($this->userToken)){
+            return $this->redirect('/login');
+        }
+        $id_campania = $request->get('campania');
+        $campObj = $this->em->getRepository(Campanias::class)->find($id_campania);
+        $campArr =  $this->serializer->normalize($campObj);
+        $campEnlacesArr = $this->serializer->normalize($this->em->getRepository(CampaniasEnlace::class)->findBy(['idCampania'=>$id_campania]));
+        $codes = $this->serializer->normalize($this->getCodesByCampaign($id_campania, $project));
+        $users = $this->getUsersSelector();
+        $alerts = $this->getAlerts(10);
+
+        $form = $this->createFormBuilder($campObj)
+            ->add('id', HiddenType::class)
+            ->add('titcamp', TextType::class , array( 'label'=>'Title', 'attr'=>array('class'=>'form-control', 'disabled'=>'disabled')))
+            ->add('titcampEn', TextType::class, array( 'label'=>'Eng. Title', 'attr'=>array('class'=>'form-control','disabled'=>'disabled')))
+            ->add('tipo', TextType::class, array( 'label'=>'Type', 'attr'=>array('class'=>'form-control','disabled'=>'disabled')))
+            ->add('uri_enlaces',  TextType::class, array( 'label'=>'Links uri', 'attr'=>array('class'=>'form-control', 'pattern'=>'[A-Za-z0-9]{3,150}', 'required'=>'required')))
+            ->add('Save_url', SubmitType::class, array('attr'=> array('class' => 'btn-primary btn-block m-5')))
+            ->getForm();
+
+
+
+        $formUpload = $this->getFormUpload();
+
+
+        return $this->render('campaigns/link.html.twig',
+            [
+                'title' => 'Campaign Links iApuestas',
+                'user' => $this->user,
+                'usersselector' => $users,
+                'alerts' =>$alerts,
+                'campaign' => $campArr,
+                'links' => addslashes(json_encode($campEnlacesArr)),
+                'form' => $form->createView(),
+                'codes' => json_encode($codes),
+                'isAuto' => $campObj->getTipo() == 'auto' ? 1: 0,
+                'users' => addslashes(json_encode($users)),
+                'uploadForm'=> $formUpload->createView(),
+                'iapuestas' => 1,
+                'projects' => 0,
+                'betandeal' => 0
+
+            ]
+        );
+    }
 }

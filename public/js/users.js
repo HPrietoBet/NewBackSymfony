@@ -355,6 +355,8 @@ function setTable(data){
                             data: [
                                 { id: 0, name: 'Not Started' },
                                 { id: 2, name: 'User' },
+                                { id: 3, name: 'Projects' },
+                                { id: 4, name: 'Internal' },
                             ],
                             key: "nivelUser"
                         },

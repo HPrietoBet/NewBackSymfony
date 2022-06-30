@@ -247,8 +247,8 @@ class UsersController extends AbstractController
             $userObj->setPagoMin($newData['pagoMin']);
         }
 
-        if(isset($newData["passwordId"])){
-            $userObj->setPasswordId($newData['passwordId']);
+        if(isset($newData["plainpassword"])){
+            $userObj->setPasswordId(sha1($newData['plainpassword']));
         }
 
         if(isset($newData["payu"])){

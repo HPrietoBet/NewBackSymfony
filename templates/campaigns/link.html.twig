@@ -22,6 +22,21 @@
                 {% include 'header.html.twig' %}
                 <!-- End of header -->
                 <!-- Begin Page Content -->
+                <div class="container-fluid m-3">
+                    <div class="row align-items-center justify-content-center">
+
+                        <!-- Content Column -->
+                        <div class="col-lg-4  ">
+                            <a class="btn-primary btn {%  if betandeal == 1 %} btn-success{% endif %} w-100" href="/campaign/link/{{ campaign.id }}">Betandeal</a>
+                        </div>
+                        <div class="col-lg-4 tab-content">
+                            <a class="btn-primary btn {%  if projects == 1 %} btn-success{% endif %} w-100" href="/campaign/link/project/{{ campaign.id }}">Projects</a>
+                        </div>
+                        <div class="col-lg-4 justify-content-center">
+                            <a class="btn-primary btn {%  if iapuestas == 1 %} btn-success{% endif %} w-100" href="/campaign/link/iapuestas/{{ campaign.id }}">iApuestas</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Content Column -->
@@ -31,7 +46,6 @@
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">{% trans %}Links Info{% endtrans %}</h6>
-
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
