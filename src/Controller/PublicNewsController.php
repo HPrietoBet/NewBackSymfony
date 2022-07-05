@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Main\NoticiasPublicas;
+use App\Lib\Roles;
 use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +40,14 @@ class PublicNewsController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
 
         $this->serializer = new Serializer($normalizers, $encoders);
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -68,11 +77,12 @@ class PublicNewsController extends AbstractController
         return $this->render('public_news/index.html.twig',
             [
             'title' => 'Public News',
-                    'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+            'user' => $this->user,
+            'usersselector' => $this->getUsersSelector(),
             'alerts' =>$alerts,
             'news' => addslashes(json_encode($news_array)),
             'news_select' => addslashes(json_encode($news_selector)),
+            'actionsLocked' => json_encode($this->actionsLocked),
             ]
         );
     }

@@ -1,4 +1,17 @@
+let actionsLockedJson;
 $(function (){
+    actionsLockedJson = JSON.parse(actionsLocked);
+    let uniquePerms = actionsLockedJson.filter(onlyUnique);
+    console.log(uniquePerms)
+    if(uniquePerms.indexOf('save') > -1){
+        setTimeout(function(){
+            $('.dx-command-edit').find('a').remove();
+            $('.dx-datagrid-addrow-button').remove()
+        }, 500)
+
+    }
+
+
     $('.userloginadmin').on('click', function (e){
         e.preventDefault();
         let userId = $(this).parents('form').find('.dropdown-toggle').attr('title');
@@ -19,6 +32,10 @@ $(function (){
         })
     })
 })
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
 
 /* type = select,checkbox, etc
     cellInfo (from table)

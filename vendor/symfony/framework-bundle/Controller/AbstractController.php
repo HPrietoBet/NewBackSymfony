@@ -515,7 +515,7 @@ abstract class AbstractController implements ServiceSubscriberInterface
     }
 
     public function getUsersProjects(){
-        $users_projects = $this->em->getRepository(LoginBusiness::class)->findBy(['roles'=>array(json_encode(self::ROLE_PROJECT), json_encode(self::ROLE_INTERNAL)), 'activo' => 1]);
+        $users_projects = $this->em->getRepository(LoginBusiness::class)->findBy(['roles'=>self::USERS_PROJECTS, 'activo' => 1]);
         if(empty($users_projects)){
             $this->alerts[] = array('message' => ' No users ROLE_PROJECT for assing. Create the fisrt to continue.', 'link'=> '/users/admin', 'type' => 'users');
         }else{
@@ -714,4 +714,10 @@ abstract class AbstractController implements ServiceSubscriberInterface
         return $campanias_array;
     }
 
+    public function redirectToHome(){
+        header('location: /home');
+        die();
+    }
+
 }
+

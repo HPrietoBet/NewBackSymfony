@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Main\LoginAdmin;
+use App\Lib\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +37,14 @@ class PremiumpayAdminController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
         $this->user = $this->userToken->getUser();
         $this->serializer = new Serializer($normalizers, $encoders);
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -56,7 +65,8 @@ class PremiumpayAdminController extends AbstractController
                 'user' => $this->user,
                 'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
-                'iframe' => $iframe
+                'iframe' => $iframe,
+                'actionsLocked' => json_encode(array())
             ]
         );
     }

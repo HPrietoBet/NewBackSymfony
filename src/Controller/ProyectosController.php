@@ -9,6 +9,7 @@ use App\Entity\Main\CasasCompetidoresComentarios;
 use App\Entity\Main\LoginAdmin;
 use App\Entity\Main\Proyectos;
 use App\Entity\Main\UsuariosTipo;
+use App\Lib\Roles;
 use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,6 +46,14 @@ class ProyectosController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
 
         $this->serializer = new Serializer($normalizers, $encoders);
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -89,6 +98,7 @@ class ProyectosController extends AbstractController
                 'users_projects' => json_encode($users_projects),
                 'projects_type' => json_encode($projects_type),
                 'campanias'=> addslashes(json_encode($campanias)),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

@@ -38,20 +38,23 @@ class Roles
         $locks = array(
             'uri' => false,
             'actions' => array(),
-            'users' => array()
+            'users' => array(),
+            'menu' => array()
         );
         // chequeamos si la url tiene el patron de bloqueo para visualización
+        $locks['menu'] = $this->menusLocked();
         $locks['uri'] = $this->checkUri();
         // chequeamos si la url tiene el patron de bloqueo para acciones
         $locks['actions'] = $this->checkActions();
-        // chequeamos usuarios que puede visualizar
-
+        // chequeamos menus a retirar
         return $locks;
     }
 
     public function checkUri(){
         $restrictions = $this->em->getRepository(Accesos::class)->findBy(['role'=>$this->userRol, 'active' => 1, 'action'=>'view']);
+
         foreach($restrictions as $locked){
+            $locks['actions'][] = $locked->getUri();
             preg_match('/'.preg_quote($locked->getUri(), '/').'/', $this->uri, $match);
             if(!empty($match)){
                 return true;
@@ -86,5 +89,14 @@ class Roles
             $users = $this->em->getRepository(LoginBusiness::class)->findBy(['responsable' => $usersId]);
         }
         return $users;
+    }
+
+    public function menusLocked(){
+        $restrictions = $this->em->getRepository(Accesos::class)->findBy(['role'=>$this->userRol, 'active' => 1, 'action'=>'view']);
+        $locks = array();
+        foreach($restrictions as $locked){
+            $locks[] = $locked->getUri();
+        }
+        return $locks;
     }
 }

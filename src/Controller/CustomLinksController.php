@@ -6,6 +6,7 @@ use App\Entity\Main\Campanias;
 use App\Entity\Main\CampaniasEnlace;
 use App\Entity\Main\CustomLinks;
 use App\Entity\Main\LoginBusiness;
+use App\Lib\Roles;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,6 +42,15 @@ class CustomLinksController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
         $this->user = $this->userToken->getUser();
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -61,12 +71,13 @@ class CustomLinksController extends AbstractController
         return $this->render('custom_links/index.html.twig',
             [
                 'title' => 'Custom Links',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'customlinks' => addslashes(json_encode($links)),
                 'countries' => json_encode($countries),
                 'countries_selector' => addslashes(json_encode($this->getCountriesSelector())),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

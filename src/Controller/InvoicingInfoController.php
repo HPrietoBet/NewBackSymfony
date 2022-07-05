@@ -6,6 +6,7 @@ use App\Entity\Main\ComisionesPendientesCajero;
 use App\Entity\Main\Facturacion;
 use App\Entity\Main\FacturacionDatos;
 use App\Entity\Main\MetodosPagos;
+use App\Lib\Roles;
 use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use MongoDB\Driver\Manager;
@@ -35,11 +36,12 @@ class InvoicingInfoController extends AbstractController
 
     protected $tokenStorage;
 
-    public function __construct($lang = 'en',  ManagerRegistry $doctrine, TokenStorageInterface $tokenStorage) {
+    public function __construct($lang = 'en', ManagerRegistry $doctrine, TokenStorageInterface $tokenStorage)
+    {
 
         $this->lang = $lang;
         $this->em = $doctrine;
-        if(empty($tokenStorage->getToken())){
+        if (empty($tokenStorage->getToken())) {
             return $this->redirect('/login');
             die();
         }
@@ -48,6 +50,15 @@ class InvoicingInfoController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
         $this->user = $this->userToken->getUser();
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if (!empty($this->access['uri'])) {
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -57,8 +68,8 @@ class InvoicingInfoController extends AbstractController
     {
 
         // CHEQUEO LOGADO DE USUARIO //
-        if(empty($this->userToken)){
-            return  $this->redirectToRoute('login');
+        if (empty($this->userToken)) {
+            return $this->redirectToRoute('login');
         }
 
         // CHEQUEO LOGADO DE USUARIO //
@@ -69,14 +80,16 @@ class InvoicingInfoController extends AbstractController
                 'title' => 'Invoicing Info',
                 'user' => $this->user,
                 'usersselector' => $this->getUsersSelector(),
-                'alerts' =>$alerts,
+                'alerts' => $alerts,
                 'invoicinginfo' => addslashes(json_encode($this->getInvoicingInfo())),
-                'countries' => addslashes(json_encode($this->getCountriesName()))
+                'countries' => addslashes(json_encode($this->getCountriesName())),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }
 
-    public function getInvoicingInfo(){
+    public function getInvoicingInfo()
+    {
 
         $data = ($this->serializer->normalize($this->em->getRepository(FacturacionDatos::class)->findAll()));
         return $data;
@@ -86,69 +99,70 @@ class InvoicingInfoController extends AbstractController
      * @Route("/invoicing/info/save", name="app_invoicing_info_save")
      */
 
-    public function save(ManagerRegistry $doctrine, Request $request): Response{
+    public function save(ManagerRegistry $doctrine, Request $request): Response
+    {
 
         $newData = $request->get('newData');
         $id = $request->get('id');
 
         $invObj = $doctrine->getRepository(FacturacionDatos::class)->find($id);
 
-        if(isset($newData["tipo"])){
+        if (isset($newData["tipo"])) {
             $invObj->setTipo($newData["tipo"]);
         }
 
-        if(isset($newData["nombre"])){
+        if (isset($newData["nombre"])) {
             $invObj->setNombre($newData["nombre"]);
         }
 
-        if(isset($newData["nombreEmpresa"])){
+        if (isset($newData["nombreEmpresa"])) {
             $invObj->setNombreEmpresa($newData["nombreEmpresa"]);
         }
 
-        if(isset($newData["nif"])){
+        if (isset($newData["nif"])) {
             $invObj->setNif($newData["nif"]);
         }
 
-        if(isset($newData["email"])){
+        if (isset($newData["email"])) {
             $invObj->setEmail($newData["email"]);
         }
 
-        if(isset($newData["telefono"])){
+        if (isset($newData["telefono"])) {
             $invObj->setTelefono($newData["telefono"]);
         }
 
-        if(isset($newData["control"])){
+        if (isset($newData["control"])) {
             $invObj->setControl($newData["control"]);
         }
 
-        if(isset($newData["direccion"])){
+        if (isset($newData["direccion"])) {
             $invObj->setDireccion($newData["direccion"]);
         }
 
-        if(isset($newData["cpostal"])){
+        if (isset($newData["cpostal"])) {
             $invObj->setCpostal($newData["cpostal"]);
         }
 
-        if(isset($newData["poblacion"])){
+        if (isset($newData["poblacion"])) {
             $invObj->setPoblacion($newData["poblacion"]);
         }
 
-        if(isset($newData["provincia"])){
+        if (isset($newData["provincia"])) {
             $invObj->setProvincia($newData["provincia"]);
         }
 
-        if(isset($newData["pais"])){
+        if (isset($newData["pais"])) {
             $invObj->setPais($newData["pais"]);
         }
 
-        if(isset($newData["fechaCaducidad"])){
+        if (isset($newData["fechaCaducidad"])) {
             $invObj->setFechaCaducidad($newData["fechaCaducidad"]);
         }
 
         $doctrine->getManager()->persist($invObj);
         $doctrine->getManager()->flush();
 
-        return $this->json(array('success'=>1, 'msg'=>'Invoicing info saved'));
+        return $this->json(array('success' => 1, 'msg' => 'Invoicing info saved'));
     }
 
     /**
@@ -164,29 +178,30 @@ class InvoicingInfoController extends AbstractController
                 'title' => 'Payments Info',
                 'user' => $this->user,
                 'usersselector' => $this->getUsersSelector(),
-                'alerts' =>$alerts,
+                'alerts' => $alerts,
                 'infopayments' => addslashes(json_encode($payments)),
-                'countries' => addslashes(json_encode($this->getCountriesName()))
+                'countries' => addslashes(json_encode($this->getCountriesName())),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }
 
-    public function getPaymentPerUser(){
+    public function getPaymentPerUser()
+    {
         $users = $this->getInvoicingInfo();
         $payments = $this->serializer->normalize($this->em->getRepository(MetodosPagos::class)->findAll());
 
         $payment_types = array();
-        foreach($payments as $payment){
-            $payment_types[$payment['idPago']] =$payment['titulopago'];
+        foreach ($payments as $payment) {
+            $payment_types[$payment['idPago']] = $payment['titulopago'];
         }
         $users_payments_returned = array();
-        foreach($users as $user){
+        foreach ($users as $user) {
 
-            $users_payments_returned[] = array('id'=> $user['idUsuFac'], 'email' => $user['email'], 'nombre' => empty($user['nombre']) ? $user['nombreEmpresa'] : $user['nombre'], 'payment' => empty($payment_types[$user['idPago']]) ? 'Not Defined':   $payment_types[$user['idPago']]);
+            $users_payments_returned[] = array('id' => $user['idUsuFac'], 'email' => $user['email'], 'nombre' => empty($user['nombre']) ? $user['nombreEmpresa'] : $user['nombre'], 'payment' => empty($payment_types[$user['idPago']]) ? 'Not Defined' : $payment_types[$user['idPago']]);
         }
         return ($users_payments_returned);
     }
-
 
 
     /**
@@ -208,19 +223,21 @@ class InvoicingInfoController extends AbstractController
                 'title' => 'Users Commisions',
                 'user' => $this->user,
                 'usersselector' => $users_selector,
-                'alerts' =>$alerts,
+                'alerts' => $alerts,
                 'uploadForm' => $formUpload->createView(),
                 'infopayments' => addslashes(json_encode($payments)),
-                'commisions'=> addslashes(json_encode($commisions)),
+                'commisions' => addslashes(json_encode($commisions)),
                 'totalCommisions' => addslashes(json_encode($totalcommisions)),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }
 
-    public function getFormUpload(){
+    public function getFormUpload()
+    {
         $commisonsEntity = new ComisionesPendientesCajero();
         $formUpload = $this->createFormBuilder($commisonsEntity)
-            ->add('file', FileType::class, array('attr'=>array('class' => 'form-control '), 'label' => 'Commisiones (CSV file)', 'mapped'=>false, 'constraints' => [
+            ->add('file', FileType::class, array('attr' => array('class' => 'form-control '), 'label' => 'Commisiones (CSV file)', 'mapped' => false, 'constraints' => [
                 new File([
                     'maxSize' => '1024k',
                     'mimeTypes' => [
@@ -229,7 +246,7 @@ class InvoicingInfoController extends AbstractController
                     'mimeTypesMessage' => 'Please upload a valid CSV document',
                 ])
             ]))
-            ->add('upload_commisions', SubmitType::class, array('attr'=> array('class' => 'btn-primary btn-block')))
+            ->add('upload_commisions', SubmitType::class, array('attr' => array('class' => 'btn-primary btn-block')))
             ->getForm();
 
         return $formUpload;
@@ -238,30 +255,33 @@ class InvoicingInfoController extends AbstractController
     /**
      * @Route("/invoicing/commisions/upload", name="app_invoicing_commisions_upload")
      */
-    public function upload(FileUploader $file, ManagerRegistry $doctrine, Request $request):Response
+    public function upload(FileUploader $file, ManagerRegistry $doctrine, Request $request): Response
     {
-        if(!empty($request->files->get('form')['file'])){
+        if (!empty($request->files->get('form')['file'])) {
             $uploadedFile = $request->files->get('form')['file'];
             $allowed_extension = 'csv';
             $fileExtension = explode('.', $uploadedFile->getClientOriginalName());
 
-            if(!in_array($allowed_extension, $fileExtension)) {
-                return $this->json(array('success'=>0, 'msg'=>'Invalid format file'));
+            if (!in_array($allowed_extension, $fileExtension)) {
+                return $this->json(array('success' => 0, 'msg' => 'Invalid format file'));
             }
 
             $comisiones = $file->upload($uploadedFile, self::CSV_FOLDER);
-            return $this->json(array('success'=>1, 'msg'=>'File uploaded', 'file'=>$comisiones, 'data'=>$this->readFile($file->getuploadPath().'/'.self::CSV_FOLDER.'/'.$comisiones)));
+            return $this->json(array('success' => 1, 'msg' => 'File uploaded', 'file' => $comisiones, 'data' => $this->readFile($file->getuploadPath() . '/' . self::CSV_FOLDER . '/' . $comisiones)));
         }
-        return $this->json(array('success'=>0, 'msg'=>'File not uploaded'));
+        return $this->json(array('success' => 0, 'msg' => 'File not uploaded'));
     }
 
-    public function readFile($file){
+    public function readFile($file)
+    {
 
-        $csv = array_map(function($v){return str_getcsv($v, ";");}, file($file));
+        $csv = array_map(function ($v) {
+            return str_getcsv($v, ";");
+        }, file($file));
         unset($csv[0]);
         $csv_returned = array();
-        foreach($csv as $item){
-            $csv_returned[]= array('iduser'=> $item[0],  'name'=>$item[1], 'money'=>$item[3], 'description'=>$item[4] );
+        foreach ($csv as $item) {
+            $csv_returned[] = array('iduser' => $item[0], 'name' => $item[1], 'money' => $item[3], 'description' => $item[4]);
         }
         return $csv_returned;
 
@@ -273,35 +293,35 @@ class InvoicingInfoController extends AbstractController
     public function saveCommisions(ManagerRegistry $doctrine, Request $request): Response
     {
         $data = $request->request->get('data');
-        if(empty($data)){
+        if (empty($data)) {
             $data = $request->request->get('newData');
             $id = $request->request->get('id');
             $comObj = $this->em->getRepository(ComisionesPendientesCajero::class)->find($id);
-            if(empty($comObj) or !$this->checkRealId($id) ) {
-                $comObj =  ComisionesPendientesCajero();
+            if (empty($comObj) or !$this->checkRealId($id)) {
+                $comObj = ComisionesPendientesCajero();
             }
-            if(isset($data['fecha'])) {
+            if (isset($data['fecha'])) {
                 $comObj->setFecha($data['fecha']);
             }
-            if(isset($data['idUsuario'])) {
+            if (isset($data['idUsuario'])) {
                 $comObj->setIdUsuario($data['idUsuario']);
             }
 
-            if(isset($data['concepto'])) {
+            if (isset($data['concepto'])) {
                 $comObj->setConcepto($data['concepto']);
             }
-            if(isset($data['importe'])) {
+            if (isset($data['importe'])) {
                 $comObj->setImporte(str_replace(',', '.', $data['importe']));
             }
-            if(isset($data['tipoMovimiento'])){
+            if (isset($data['tipoMovimiento'])) {
                 $comObj->setTipoMovimiento($data['tipoMovimiento']);
             }
             $doctrine->getManager()->persist($comObj);
             $doctrine->getManager()->flush();
 
-        }else{
+        } else {
             $tipo = 1;
-            foreach($data as $item){
+            foreach ($data as $item) {
                 $comObj = new ComisionesPendientesCajero();
                 $comObj->setIdUsuario($item['iduser']);
                 $comObj->setFecha(date('Y-m-d'));
@@ -315,20 +335,21 @@ class InvoicingInfoController extends AbstractController
         }
 
 
-        return $this->json(array('success'=>1, 'msg'=>'Commisions Saved'));
+        return $this->json(array('success' => 1, 'msg' => 'Commisions Saved'));
     }
 
-    public function getCommisions($traspaso = false){
-        $commisions =  $this->serializer->normalize($this->em->getRepository(ComisionesPendientesCajero::class)->findBy(array(), array('fecha'=>'desc')));
+    public function getCommisions($traspaso = false)
+    {
+        $commisions = $this->serializer->normalize($this->em->getRepository(ComisionesPendientesCajero::class)->findBy(array(), array('fecha' => 'desc')));
         $commisions_returned = array();
-        foreach($commisions as $item){
+        foreach ($commisions as $item) {
             preg_match('/Traspaso/i', $item['concepto'], $matches);
 
-            if(empty($matches) && empty($traspaso)){
-                $commisions_returned[]=$item;
+            if (empty($matches) && empty($traspaso)) {
+                $commisions_returned[] = $item;
             }
-            if(!empty($matches) && !empty($traspaso)){
-                $commisions_returned[]=$item;
+            if (!empty($matches) && !empty($traspaso)) {
+                $commisions_returned[] = $item;
             }
 
         }
@@ -351,50 +372,51 @@ class InvoicingInfoController extends AbstractController
                 'title' => 'Users Movements',
                 'user' => $this->user,
                 'usersselector' => $users_selector,
-                'alerts' =>$alerts,
-                'commisions'=> addslashes(json_encode($commisions)),
+                'alerts' => $alerts,
+                'commisions' => addslashes(json_encode($commisions)),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }
 
-    public function getTotalCommisions($users_selector){
+    public function getTotalCommisions($users_selector)
+    {
         $totalcom = $this->em->getRepository(ComisionesPendientesCajero::class)->getTotalCommisions();
 
         $totalcom_return = array();
 
-        foreach ($users_selector as $user){
+        foreach ($users_selector as $user) {
             $totalcom_return[$user['id']]['username'] = $user['username'];
-            $totalcom_return[$user['id']]['id'] =  $user['id'];
+            $totalcom_return[$user['id']]['id'] = $user['id'];
         }
 
-        foreach($totalcom as $item){
+        foreach ($totalcom as $item) {
             $totalcom_return[$item['id_usuario']]['total'] = $item['total'];
             $totalcom_return[$item['id_usuario']]['generadas'] = $item['generadas'];;
             $totalcom_return[$item['id_usuario']]['pagadas'] = $item['pagadas'];
         }
 
-        foreach($this->getInvoicingInfo() as $item){
-            $totalcom_return[$item['idUsuFac']]['nombre'] = empty($item['nombre']) ?$item['nombreEmpresa']: $item['nombre'] ;
-            $totalcom_return[$item['idUsuFac']]['control'] = $item['control'] != 1 || empty($item['control']) ? 0: 1 ;
+        foreach ($this->getInvoicingInfo() as $item) {
+            $totalcom_return[$item['idUsuFac']]['nombre'] = empty($item['nombre']) ? $item['nombreEmpresa'] : $item['nombre'];
+            $totalcom_return[$item['idUsuFac']]['control'] = $item['control'] != 1 || empty($item['control']) ? 0 : 1;
         }
 
 
         $endReturn = array();
-        foreach($totalcom_return as $end){
-      $endReturn[] = array(
-                'control'=> empty($end['control'])  || $end['control'] != 1 ? 0: 1,
-                'generadas'=> empty($end['generadas']) ? 0: $end['generadas'],
-                'id'=> empty($end['id']) ? '': $end['id'],
-                'id_usuario'=> empty($end['id_usuario']) ? 0: $end['id_usuario'],
-                'nombre'=> empty($end['nombre']) ? '': $end['nombre'],
-                'pagadas'=> empty($end['pagadas']) ? 0: $end['pagadas'],
-                'total'=> empty($end['total']) ? 0: $end['total'],
-                'username'=> empty($end['username']) ? '': $end['username'],
+        foreach ($totalcom_return as $end) {
+            $endReturn[] = array(
+                'control' => empty($end['control']) || $end['control'] != 1 ? 0 : 1,
+                'generadas' => empty($end['generadas']) ? 0 : $end['generadas'],
+                'id' => empty($end['id']) ? '' : $end['id'],
+                'id_usuario' => empty($end['id_usuario']) ? 0 : $end['id_usuario'],
+                'nombre' => empty($end['nombre']) ? '' : $end['nombre'],
+                'pagadas' => empty($end['pagadas']) ? 0 : $end['pagadas'],
+                'total' => empty($end['total']) ? 0 : $end['total'],
+                'username' => empty($end['username']) ? '' : $end['username'],
             );
         }
         return $endReturn;
     }
-
 
 
     /**
@@ -412,27 +434,29 @@ class InvoicingInfoController extends AbstractController
                 'title' => 'Users Invoices',
                 'user' => $this->user,
                 'usersselector' => $users_selector,
-                'alerts' =>$alerts,
-                'invoices'=> addslashes(json_encode($invoices)),
+                'alerts' => $alerts,
+                'invoices' => addslashes(json_encode($invoices)),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }
 
-    public function getInvoices(){
+    public function getInvoices()
+    {
         $invoices = $this->serializer->normalize($this->em->getRepository(Facturacion::class)->getFacturas());
         $invoices_return = array();
-        foreach($invoices as $item){
+        foreach ($invoices as $item) {
             $invoices_return[] = array(
                 'idfac' => $item['id_fac'],
                 'iduser' => $item['id'],
                 'user' => $item['user'],
-                'reffactura' => !empty($item['numero_factura']) ? $item['numero_factura'].'/'.$item['anio_fac'] : $item['numero_factura_internacional'].'/'.$item['anio_fac'],
-                'nombre' => !empty($item['nombre']) ?$item['nombre']: $item['nombre_empresa'],
+                'reffactura' => !empty($item['numero_factura']) ? $item['numero_factura'] . '/' . $item['anio_fac'] : $item['numero_factura_internacional'] . '/' . $item['anio_fac'],
+                'nombre' => !empty($item['nombre']) ? $item['nombre'] : $item['nombre_empresa'],
                 'email' => $item['username'],
-                'fechafactura'=> $item['fecha_fac'],
-                'importe'=> $item['importe'],
-                'impuestos'=> $item['impuesto'].'%',
-                'factura' =>$item['archivo_fac'],
+                'fechafactura' => $item['fecha_fac'],
+                'importe' => $item['importe'],
+                'impuestos' => $item['impuesto'] . '%',
+                'factura' => $item['archivo_fac'],
                 'pagada' => $item['estapagado']
             );
         }
@@ -445,21 +469,22 @@ class InvoicingInfoController extends AbstractController
      * @Route("/invoicing/invoice/save", name="app_invoicing_invoices_save")
      */
 
-    public function saveInvoice(ManagerRegistry $doctirne, Request $request){
+    public function saveInvoice(ManagerRegistry $doctirne, Request $request)
+    {
         $newData = $request->request->get('newData');
         $id = $request->request->get('id');
 
         $facObj = $this->em->getRepository(Facturacion::class)->find($id);
-        if(!empty($facObj)){
-            if(isset($newData["fechafactura"])){
+        if (!empty($facObj)) {
+            if (isset($newData["fechafactura"])) {
                 $facObj->setFechaFac($newData["fechafactura"]);
             }
 
-            if(isset($newData["importe"])){
+            if (isset($newData["importe"])) {
                 $facObj->setImporte($newData["importe"]);
             }
 
-            if(isset($newData["pagada"])){
+            if (isset($newData["pagada"])) {
                 $facObj->setPagado($newData["pagada"]);
             }
 
@@ -467,16 +492,7 @@ class InvoicingInfoController extends AbstractController
             $doctirne->getManager()->flush();
         }
 
-        return $this->json(array('success'=>1, 'msg'=>'Invoice saved'));
+        return $this->json(array('success' => 1, 'msg' => 'Invoice saved'));
 
     }
-
-
-
-
-    /*fechafactura
-    importe
-    impuestos
-    pagada*/
-
 }

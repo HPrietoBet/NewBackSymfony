@@ -7,6 +7,7 @@ use App\Entity\Main\CasasDeApuestasAcuerdos;
 use App\Entity\Main\CategoriasCampania;
 use App\Entity\Main\LoginAdmin;
 use App\Entity\Main\CasasDeApuestasComentarios;
+use App\Lib\Roles;
 use Container7R2JuWG\get_VarDumper_Command_ServerDump_LazyService;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Service\FileUploader;
@@ -53,6 +54,15 @@ class ClientsController extends AbstractController
             $this->user = $this->userToken->getUser();
         }
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -84,12 +94,13 @@ class ClientsController extends AbstractController
         return $this->render('clients/index.html.twig',
             [
                 'title' => 'Clients',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'clients' => json_encode($clients),
                 'responsables' => json_encode($this->getResponsables()),
                 'categories' => json_encode($this->getCategories()),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }
@@ -386,7 +397,8 @@ class ClientsController extends AbstractController
                 'responsables' => $this->getResponsables(),
                 'categories' => $this->getCategories(),
                 'comments' => $clientComments,
-                'isNew' => 0
+                'isNew' => 0,
+                'actionsLocked' => json_encode($this->actionsLocked)
 
             ]
         );

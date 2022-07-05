@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Main\Campanias;
 use App\Entity\Main\LoginBookies;
 use App\Entity\Main\LoginBusiness;
+use App\Lib\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,6 +43,14 @@ class UsersBookiesController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
 
         $this->serializer = new Serializer($normalizers, $encoders);
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -70,11 +79,12 @@ class UsersBookiesController extends AbstractController
         return $this->render('users_bookies/index.html.twig',
             [
                 'title' => 'Users Bookies',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'bookies' => json_encode($users_bookies_array),
                 'campaigns' => $campaigns_json,
+                'actionsLocked' => json_encode($this->actionsLocked)
 
             ]
         );
@@ -163,6 +173,3 @@ class UsersBookiesController extends AbstractController
 
 }
 
-
-
-//$pass = password_hash($params['password'], PASSWORD_BCRYPT);

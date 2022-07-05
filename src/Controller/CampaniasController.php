@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Main\LoginBookies;
 use App\Entity\Old\Campanias;
+use App\Lib\Roles;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,17 +36,18 @@ class CampaniasController extends AbstractController
         $this->userToken = $tokenStorage->getToken();        $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
+
     }
 
-    /**
-     * @Route("/campanias", name="app_campanias")
-     */
-    public function index(): Response
-    {
-        return $this->render('campanias/index.html.twig', [
-            'controller_name' => 'CampaniasController',
-        ]);
-    }
 
     /**
      * @Route("/campanias/get", name="app_campanias_get")

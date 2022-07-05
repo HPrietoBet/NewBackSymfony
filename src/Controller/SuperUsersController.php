@@ -31,6 +31,7 @@ class SuperUsersController extends AbstractController
     public $em;
     private $userToken;
     private $serializer;
+    private $perms;
 
     protected $tokenStorage;
 
@@ -43,21 +44,30 @@ class SuperUsersController extends AbstractController
             die();
         }
         $this->userToken = $tokenStorage->getToken();
-        $perms = new Roles($this->userToken, $doctrine);
+
+
+
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
 
         $this->serializer = new Serializer($normalizers, $encoders);
-    }
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        if(!empty($this->perms->checkAccess()['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */    }
 
     /**
      * @Route("/users/admin", name="app_super_users")
      */
     public function index(): Response
     {
+
         // CHEQUEO LOGADO DE USUARIO //
         if(empty($this->userToken)){
-            return  $this->redirectToRoute('login');
+            return  $this->redirectToRoute('/login');
         }
         $this->user = $this->userToken->getUser();
         // CHEQUEO LOGADO DE USUARIO //

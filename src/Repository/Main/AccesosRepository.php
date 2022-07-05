@@ -2,30 +2,30 @@
 
 namespace App\Repository\Main;
 
-use App\Entity\Main\Ayuda;
+use App\Entity\Main\Accesos;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Ayuda|null find($id, $lockMode = null, $lockVersion = null)
- * @method Ayuda|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ayuda[]    findAll()
- * @method Ayuda[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Accesos|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Accesos|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Accesos[]    findAll()
+ * @method Accesos[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AyudaRepository extends ServiceEntityRepository
+class AccesosRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Ayuda::class);
+        parent::__construct($registry, Accesos::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Ayuda $entity, bool $flush = true): void
+    public function add(Accesos $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class AyudaRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Ayuda $entity, bool $flush = true): void
+    public function remove(Accesos $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Main\FacturacionConsolidada;
 use App\Entity\Main\FacturacionEstados;
+use App\Lib\Roles;
 use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use MongoDB\Driver\Manager;
@@ -43,6 +44,15 @@ class AccountingController extends AbstractController
             $normalizers = [new ObjectNormalizer()];
             $this->user = $this->userToken->getUser();
             $this->serializer = new Serializer($normalizers, $encoders);
+
+            /* control de accesos (view)*/
+            $this->perms = new Roles($this->userToken, $doctrine);
+            $this->access = $this->perms->checkAccess();
+            $this->actionsLocked = $this->access['actions'];
+            if(!empty($this->access['uri'])){
+                $this->redirectToHome();
+            }
+            /* fin control de accesos */
         }
     }
 
@@ -77,7 +87,8 @@ class AccountingController extends AbstractController
                 'current_year' => date('Y'),
                 'form' => $filterform->createView(),
                 'accounting' => addslashes(json_encode($accounting)),
-                'status' => json_encode($status)
+                'status' => json_encode($status),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

@@ -8,6 +8,7 @@ use App\Entity\Main\LoginBusiness;
 use App\Entity\Main\UsuarioComentarios;
 use App\Entity\Main\UsuariosAceptarterminos;
 use App\Entity\Main\UsuariosFuentes;
+use App\Lib\Roles;
 use App\Repository\Main\UsuariosTerminosRepository;
 use App\Repository\Premiumpay\PasarelasBetanDealPaymentdataRepository;
 use App\Repository\Premiumpay\PasarelasBetanDealRepository;
@@ -55,6 +56,15 @@ class UsersController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
         $this->user = $this->userToken->getUser();
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -105,12 +115,13 @@ class UsersController extends AbstractController
         return $this->render('users/index.html.twig',
             [
                 'title' => 'Affiliates',
-                        'user' => $this->user,
+                'user' => $this->user,
                 'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'users' => $users,
                 'formfilter' => $filterform->createView(),
-                'responsables' => json_encode($this->getResponsables())
+                'responsables' => json_encode($this->getResponsables()),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }
@@ -427,10 +438,11 @@ class UsersController extends AbstractController
         return $this->render('users/terms.html.twig',
             [
                 'title' => 'Affiliates Terms and Conditions',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'users' => json_encode($usersTerms),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

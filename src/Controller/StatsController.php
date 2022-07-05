@@ -11,6 +11,7 @@ use App\Entity\Main\LoginAdmin;
 use App\Entity\Main\LoginBusiness;
 use App\Entity\Main\Campanias;
 use App\Entity\Premiumpay\PasarelaBetandealPaymentdata;
+use App\Lib\Roles;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -36,7 +37,8 @@ class StatsController extends AbstractController
     public $em;
     private $userToken;
     private $serializer;
-
+    private $access;
+    private $actionsLocked;
     protected $tokenStorage;
 
     public function __construct($lang = 'en',  ManagerRegistry $doctrine, TokenStorageInterface $tokenStorage) {
@@ -51,6 +53,15 @@ class StatsController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
         $this->user = $this->userToken->getUser();
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -80,6 +91,7 @@ class StatsController extends AbstractController
         foreach ($usernames as $user) {
             $users_search[$user] = $user;
         }
+
 
         $filterform = $this->createFormBuilder($statsEntity)
             ->add('fecha',  DateType::class, [
@@ -113,12 +125,13 @@ class StatsController extends AbstractController
         return $this->render('stats/index.html.twig',
             [
                 'title' => 'Affiliates Stats',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'data' => json_encode($data),
                 'formfilter' => $filterform->createView(),
-                'responsables' => json_encode($this->getResponsables())
+                'responsables' => json_encode($this->getResponsables()),
+                'actionsLocked' => json_encode($this->actionsLocked)
 
             ]
         );
@@ -291,12 +304,13 @@ class StatsController extends AbstractController
         return $this->render('stats/index.html.twig',
             [
                 'title' => 'Clients Stats',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'data' => json_encode($data),
                 'formfilter' => $filterform->createView(),
-                'responsables' => json_encode($this->getResponsables())
+                'responsables' => json_encode($this->getResponsables()),
+                'actionsLocked' => json_encode($this->actionsLocked)
 
             ]
         );
@@ -435,12 +449,13 @@ class StatsController extends AbstractController
         return $this->render('stats/index.html.twig',
             [
                 'title' => 'Countries Stats',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'data' => json_encode($data),
                 'formfilter' => $filterform->createView(),
-                'responsables' => json_encode($this->getResponsables())
+                'responsables' => json_encode($this->getResponsables()),
+                'actionsLocked' => json_encode($this->actionsLocked)
 
             ]
         );
@@ -576,13 +591,13 @@ class StatsController extends AbstractController
         return $this->render('stats/index.html.twig',
             [
                 'title' => 'Clicks Stats',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
                 'data' => json_encode($data),
                 'formfilter' => $filterform->createView(),
-                'responsables' => json_encode($this->getResponsables())
-
+                'responsables' => json_encode($this->getResponsables()),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

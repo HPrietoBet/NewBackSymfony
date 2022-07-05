@@ -9,6 +9,7 @@ use App\Entity\Main\EstadisticasApi;
 use App\Entity\Masterapi\StatsAllOk;
 use App\Entity\Main\CampaniasCodes;
 use App\Entity\Main\CampaniasUsuario;
+use App\Lib\Roles;
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,6 +53,13 @@ class StatsSyncController extends AbstractController
             $this->user = $this->userToken->getUser();
             $this->serializer = new Serializer($normalizers, $encoders);
             $this->client = $client;
+
+            /* control de accesos (view)*/
+            $this->perms = new Roles($this->userToken, $doctrine);
+            if(!empty($this->perms->checkAccess()['uri'])){
+                $this->redirectToHome();
+            }
+            /* fin control de accesos */
         }
     }
 

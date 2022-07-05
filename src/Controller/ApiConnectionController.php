@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Main\ConexionesApi;
 use App\Entity\Main\LoginBookies;
+use App\Lib\Roles;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,8 +36,16 @@ class ApiConnectionController extends AbstractController
         }
         $this->userToken = $tokenStorage->getToken();        $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
-
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -62,6 +71,7 @@ class ApiConnectionController extends AbstractController
                 'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'connections' => json_encode($apiConnections_array),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

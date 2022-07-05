@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Main\Ayuda;
 use App\Entity\Main\CasasDeApuestas;
+use App\Lib\Roles;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,6 +39,15 @@ class FaqController extends AbstractController
             $this->user = $this->userToken->getUser();
         }
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -56,10 +66,11 @@ class FaqController extends AbstractController
         return $this->render('faq/index.html.twig',
             [
                 'title' => 'Faqs',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' => $alerts,
-                'faqs' => addslashes(json_encode($faqs))
+                'faqs' => addslashes(json_encode($faqs)),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

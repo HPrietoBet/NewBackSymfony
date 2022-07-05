@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Main\CategoriasCampania;
 use App\Entity\Main\LoginAdmin;
+use App\Lib\Roles;
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,6 +39,16 @@ class CategoriesController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
 
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
+
     }
 
     /**
@@ -59,10 +70,11 @@ class CategoriesController extends AbstractController
         return $this->render('categories/index.html.twig',
             [
                 'title' => 'Categories',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'categories' => json_encode($categories_array),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

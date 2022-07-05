@@ -35,6 +35,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\File;
+use App\Lib\Roles;
 
 class CampaignsController extends AbstractController
 {
@@ -58,6 +59,15 @@ class CampaignsController extends AbstractController
             $normalizers = [new ObjectNormalizer()];
             $this->user = $this->userToken->getUser();
             $this->serializer = new Serializer($normalizers, $encoders);
+
+            /* control de accesos (view)*/
+            $this->perms = new Roles($this->userToken, $doctrine);
+            $this->access = $this->perms->checkAccess();
+            $this->actionsLocked = $this->access['actions'];
+            if(!empty($this->access['uri'])){
+                $this->redirectToHome();
+            }
+            /* fin control de accesos */
         }
     }
 
@@ -80,7 +90,8 @@ class CampaignsController extends AbstractController
                 'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'campaigns' => addslashes(json_encode($array_camps)),
-                'responsables' => addslashes(json_encode($this->getResponsablesAll()))
+                'responsables' => addslashes(json_encode($this->getResponsablesAll())),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }
@@ -216,11 +227,12 @@ class CampaignsController extends AbstractController
                     'categories' => $this->getCategories(),
                     'campaign' => $campaign,
                     'improvingConditions' => addslashes(json_encode($condiciones_mejoradas)),
-                    'isNew' => 0
-
+                    'isNew' => 0,
+                    'actionsLocked' => json_encode($this->actionsLocked)
                 ]
             );
-
+        }else{
+            return false;
         }
     }
 
@@ -422,7 +434,8 @@ class CampaignsController extends AbstractController
                 'uploadForm'=> $formUpload->createView(),
                 'iapuestas' => 0,
                 'projects' => 0,
-                'betandeal' => 1
+                'betandeal' => 1,
+                'actionsLocked' => json_encode($this->actionsLocked)
 
             ]
         );
@@ -742,7 +755,8 @@ class CampaignsController extends AbstractController
                 'uploadForm'=> $formUpload->createView(),
                 'iapuestas' => 0,
                 'projects' => 1,
-                'betandeal' => 0
+                'betandeal' => 0,
+                'actionsLocked' => json_encode($this->actionsLocked)
 
             ]
         );
@@ -798,7 +812,8 @@ class CampaignsController extends AbstractController
                 'uploadForm'=> $formUpload->createView(),
                 'iapuestas' => 1,
                 'projects' => 0,
-                'betandeal' => 0
+                'betandeal' => 0,
+                'actionsLocked' => json_encode($this->actionsLocked)
 
             ]
         );

@@ -13,6 +13,7 @@ use App\Entity\Main\UsuariosFuentes;
 use App\Entity\Premiumpay\PasarelaBetandealPaymentdata;
 use App\Entity\Premiumpay\User;
 
+use App\Lib\Roles;
 use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,6 +53,15 @@ class HomeController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
 
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
     /**
      * @Route("/home", name="app_home")
@@ -87,8 +97,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig',
             [
                 'title' => 'Home',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'lastusers' => $last_user_json,
                 'totalplayers' => $total_players,
                 'countercampaigns' => $active_campaigns_counter,
@@ -99,8 +109,8 @@ class HomeController extends AbstractController
                 'comisionesgraph' => $comisionesChart,
                 'eurppaygraph' => $ppayEurChart,
                 'copppaygraph' => $ppayCopChart,
-                'alerts' =>$alerts
-
+                'alerts' =>$alerts,
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

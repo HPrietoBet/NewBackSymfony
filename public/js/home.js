@@ -3,6 +3,7 @@ $(function() {
     // carga de usuarios
     var users_json = JSON.parse(users_str);
 
+
     $("#table_users").dxDataGrid({
         dataSource: users_json,
         keyExpr: "id",
@@ -11,7 +12,7 @@ $(function() {
         showRowLines: true,
         rowAlternationEnabled: true,
         editing: {
-            allowUpdating: true,
+            allowUpdating: (actions_locked.indexOf('save') > -1) ? false: true,
             mode: 'popup',
             popup: {
                 title: 'Afilliate Info',
@@ -343,7 +344,7 @@ $(function() {
         showRowLines: true,
         rowAlternationEnabled: true,
         editing: {
-            allowUpdating: true,
+            allowUpdating: (actions_locked.indexOf('save') > -1) ? false: true,
             mode: 'popup',
             popup: {
                 title: 'Last Cash Actions',

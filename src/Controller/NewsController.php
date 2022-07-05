@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Main\CasasCompetidores;
 use App\Entity\Main\CasasCompetidoresComentarios;
 use App\Entity\Main\Noticias;
+use App\Lib\Roles;
 use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,6 +42,14 @@ class NewsController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
 
         $this->serializer = new Serializer($normalizers, $encoders);
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -62,10 +71,11 @@ class NewsController extends AbstractController
         return $this->render('news/index.html.twig',
             [
                 'title' => 'News',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'news' => addslashes(json_encode($news_array)),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

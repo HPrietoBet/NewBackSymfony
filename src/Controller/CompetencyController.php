@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Main\CasasCompetidores;
 use App\Entity\Main\CasasCompetidoresComentarios;
 use App\Entity\Main\CategoriasCampania;
+use App\Lib\Roles;
 use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,6 +42,15 @@ class CompetencyController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
 
         $this->serializer = new Serializer($normalizers, $encoders);
+
+        /* control de accesos (view)*/
+        $this->perms = new Roles($this->userToken, $doctrine);
+        $this->access = $this->perms->checkAccess();
+        $this->actionsLocked = $this->access['actions'];
+        if(!empty($this->access['uri'])){
+            $this->redirectToHome();
+        }
+        /* fin control de accesos */
     }
 
     /**
@@ -65,12 +75,13 @@ class CompetencyController extends AbstractController
         return $this->render('competency/index.html.twig',
             [
                 'title' => 'Competency',
-                        'user' => $this->user,
-        'usersselector' => $this->getUsersSelector(),
+                'user' => $this->user,
+                'usersselector' => $this->getUsersSelector(),
                 'alerts' =>$alerts,
                 'competency' => json_encode($competency_array),
                 'comments' => json_encode($competency_comments),
                 'countries' => json_encode($countries),
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }

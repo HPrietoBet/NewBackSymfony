@@ -8,6 +8,7 @@ use App\Entity\Main\CasasDeApuestas;
 use App\Entity\Main\CategoriasCampania;
 use App\Entity\Main\EstadisticasApi;
 use App\Entity\Main\LoginBusiness;
+use App\Lib\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,6 +50,16 @@ class CampaignsUsersController extends AbstractController
             $normalizers = [new ObjectNormalizer()];
             $this->user = $this->userToken->getUser();
             $this->serializer = new Serializer($normalizers, $encoders);
+
+            /* control de accesos (view)*/
+            $this->perms = new Roles($this->userToken, $doctrine);
+            $this->access = $this->perms->checkAccess();
+            $this->actionsLocked = $this->access['actions'];
+            if(!empty($this->access['uri'])){
+                $this->redirectToHome();
+            }
+            /* fin control de accesos */
+
         }
     }
 
@@ -73,6 +84,7 @@ class CampaignsUsersController extends AbstractController
                 'formfilter'=>$filterform->createView(),
                 /*'campaigns' => addslashes(json_encode($array_camps)),
                 'responsables' => addslashes(json_encode($this->getResponsablesAll()))*/
+                'actionsLocked' => json_encode($this->actionsLocked)
             ]
         );
     }
