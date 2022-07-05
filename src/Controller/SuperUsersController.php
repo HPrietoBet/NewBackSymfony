@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
+use App\Lib\Roles;
 
 
 
@@ -42,6 +43,7 @@ class SuperUsersController extends AbstractController
             die();
         }
         $this->userToken = $tokenStorage->getToken();
+        $perms = new Roles($this->userToken, $doctrine);
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
 
@@ -192,8 +194,8 @@ class SuperUsersController extends AbstractController
                 $userObj->setMyip($newData['myip']);
             }
 
-            if (isset($newData["es_responsable"])) {
-                $userObj->setEsResponsable($newData['es_responsable']);
+            if (isset($newData["esResponsable"])) {
+                $userObj->setEsResponsable($newData['esResponsable']);
             }
 
             if (isset($newData["activo"])) {

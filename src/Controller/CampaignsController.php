@@ -594,11 +594,16 @@ class CampaignsController extends AbstractController
 
         $url_camp_array = explode('/', $request->headers->get('referer'));
         $id_camp = end($url_camp_array);
+        $campObj = $this->em->getRepository(Campanias::class)->find($id_camp);
+        $idCasa = $campObj->getIdCasa();
+
+        $project = $this->getProject($url_camp_array[count($url_camp_array) - 2]);
 
         $newData = $request->request->get('newData');
         $id = $request->request->get('id');
 
         $campCodeObj= $this->em->getRepository(CampaniasCodes::class)->find($id);
+
         if(!$this->checkRealId($id)){
             $campCodeObj = new CampaniasCodes();
         }
@@ -607,13 +612,9 @@ class CampaignsController extends AbstractController
             $campCodeObj->setActivo($active);
         }
 
-        if(isset($newData['idcasa'])){
-            $campCodeObj->setIdcasa($newData['idcasa']);
-        }
+        $campCodeObj->setIdcasa($idCasa);
+        $campCodeObj->setIdcampania($id_camp);
 
-        if(isset($newData['idcampania'])){
-            $campCodeObj->setIdcampania($newData['idcampania']);
-        }
 
         if(isset($newData['codigo'])){
             $campCodeObj->setCodigo($newData['codigo']);
@@ -627,9 +628,8 @@ class CampaignsController extends AbstractController
             $campCodeObj->setUsername($newData['username']);
         }
 
-        if(isset($newData['project'])){
-            $campCodeObj->setProject($newData['project']);
-        }
+        $campCodeObj->setProject($project);
+
 
         $doctrine->getManager()->persist($campCodeObj);
         $doctrine->getManager()->flush();
@@ -674,9 +674,7 @@ class CampaignsController extends AbstractController
         $url_camp_array = explode('/', $request->headers->get('referer'));
 
 
-        $project = 0; // by default (betandeal)
-        if($url_camp_array[count($url_camp_array)-2] == 'iapuestas') $project = 1; // iapuestas
-        if($url_camp_array[count($url_camp_array)-2] == 'project') $project = 2; // projects (antiguo ggms)
+        $project = $this->getProject($url_camp_array[count($url_camp_array) - 2]);
 
         $id_camp = end($url_camp_array);
 
@@ -804,5 +802,17 @@ class CampaignsController extends AbstractController
 
             ]
         );
+    }
+
+    /**
+     * @param $url_camp_array
+     * @return void
+     */
+    public function getProject($url_camp_array)
+    {
+        $project = 0; // by default (betandeal)
+        if ($url_camp_array == 'iapuestas') $project = 1; // iapuestas
+        if ($url_camp_array == 'project') $project = 2; // projects (antiguo ggms)
+        return $project;
     }
 }
