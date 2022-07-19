@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'bc3172e68f474742aaa142fc1e212fd6cf61f8fa',
+        'reference' => 'c4a2525323aa4a00b8b6e9a1c077c17f286f5265',
         'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'bc3172e68f474742aaa142fc1e212fd6cf61f8fa',
+            'reference' => 'c4a2525323aa4a00b8b6e9a1c077c17f286f5265',
             'dev_requirement' => false,
         ),
         'cocur/slugify' => array(
@@ -375,6 +375,15 @@
             'install_path' => __DIR__ . '/../symfony/amqp-messenger',
             'aliases' => array(),
             'reference' => '4175a0a98507e7ec575dca9b36e6c0a5a072d3fd',
+            'dev_requirement' => false,
+        ),
+        'symfony/apache-pack' => array(
+            'pretty_version' => 'v1.0.1',
+            'version' => '1.0.1.0',
+            'type' => 'symfony-pack',
+            'install_path' => __DIR__ . '/../symfony/apache-pack',
+            'aliases' => array(),
+            'reference' => '3aa5818d73ad2551281fc58a75afd9ca82622e6c',
             'dev_requirement' => false,
         ),
         'symfony/asset' => array(
